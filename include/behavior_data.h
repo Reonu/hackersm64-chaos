@@ -544,7 +544,7 @@ extern const BehaviorScript bhvUnusedFakeStar[];
 extern const BehaviorScript bhvChao[];
 extern const BehaviorScript bhvKoopaPenguin[];
 extern const BehaviorScript bhvKoopaMother[];
-
+extern const BehaviorScript bhvSpring[];
 #endif // BEHAVIOR_DATA_H
 
 extern const BehaviorScript bhvKartController[];

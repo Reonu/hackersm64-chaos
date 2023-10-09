@@ -25,7 +25,7 @@
 #define MODEL_THWOMP                           0x10F        // thwomp_geo
 #define MODEL_SHADOW_MARIO                     0x110        // shadow_mario_geo
 #define MODEL_TREE                             0x111
-
+#define MODEL_SPRING                           0x112
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
 #define MODEL_LEVEL_GEOMETRY_03                0x03

@@ -27,3 +27,4 @@
 #include "chain_ball/geo.inc.c"
 #include "thwomp/geo.inc.c"
 #include "shadow_mario/geo.inc.c"
+#include "spring/geo.inc.c"

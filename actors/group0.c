@@ -59,3 +59,4 @@
 #include "thwomp/model.inc.c"
 #include "thwomp/collision.inc.c"
 #include "shadow_mario/model.inc.c"
+#include "spring/model.inc.c"

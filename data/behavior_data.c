@@ -6274,3 +6274,18 @@ const BehaviorScript bhvMovementGhost[] = {
         CALL_NATIVE(bhv_mirrorghost_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvSpring[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    SET_INTERACT_TYPE(INTERACT_SPRING),
+    SET_HITBOX(/*Radius*/ 100, /*Height*/ 120),
+    CALL_NATIVE(bhv_spring_init),
+    CALL_NATIVE(bhv_init_room),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_spring_loop),
+        SET_INT(oInteractStatus, 0),
+    END_LOOP(),
+};
