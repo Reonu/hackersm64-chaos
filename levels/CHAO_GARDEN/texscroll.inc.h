@@ -1,5 +1,5 @@
+extern void scroll_CHAO_GARDEN_dl_a_water_visual_mesh_layer_5_vtx_0();
 extern void scroll_CHAO_GARDEN_dl_Chao_garden_mesh_layer_1_vtx_7();
-extern void scroll_CHAO_GARDEN_dl_Chao_garden_mesh_layer_1_vtx_8();
-extern void scroll_CHAO_GARDEN_dl_Chao_garden_mesh_layer_1_vtx_11();
-extern void scroll_CHAO_GARDEN_dl_water_visual_mesh_layer_5_vtx_0();
+extern void scroll_CHAO_GARDEN_dl_Chao_garden_mesh_layer_5_vtx_0();
+extern void scroll_CHAO_GARDEN_dl_Chao_garden_mesh_layer_5_vtx_1();
 extern void scroll_CHAO_GARDEN();
