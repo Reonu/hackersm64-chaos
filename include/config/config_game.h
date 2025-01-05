@@ -8,12 +8,12 @@
  * Enables some mechanics that change behavior depending on hardcoded level numbers.
  * TODO: separate this into separate defines, behavior params, or make these mechanics otherwise dynamic.
 */
-// #define ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
+ #define ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
 
 /**
  * Enable lives and the lives counter. The number next to the define is the number of lives you start with.
  */
-// #define ENABLE_LIVES 4
+#define ENABLE_LIVES 0
 
 /**
  * This can be 0..127.

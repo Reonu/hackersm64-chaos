@@ -1184,7 +1184,8 @@ s32 act_death_exit(struct MarioState *m) {
         queue_rumble_data(5, 80);
 #endif
 #ifdef ENABLE_LIVES
-        m->numLives--;
+        m->numLives++;
+        save_file_update_deaths(gCurrSaveFileNum - 1);
 #endif
         // restore 7.75 units of health
         m->healCounter = 31;
@@ -1201,7 +1202,8 @@ s32 act_unused_death_exit(struct MarioState *m) {
     if (launch_mario_until_land(m, ACT_FREEFALL_LAND_STOP, MARIO_ANIM_GENERAL_FALL, 0.0f)) {
         play_sound(SOUND_MARIO_OOOF2, m->marioObj->header.gfx.cameraToObject);
 #ifdef ENABLE_LIVES
-        m->numLives--;
+        m->numLives++;
+        save_file_update_deaths(gCurrSaveFileNum - 1);
 #endif
         // restore 7.75 units of health
         m->healCounter = 31;
@@ -1221,7 +1223,8 @@ s32 act_falling_death_exit(struct MarioState *m) {
         queue_rumble_data(5, 80);
 #endif
 #ifdef ENABLE_LIVES
-        m->numLives--;
+        m->numLives++;
+        save_file_update_deaths(gCurrSaveFileNum - 1);
 #endif
         // restore 7.75 units of health
         m->healCounter = 31;
@@ -1276,7 +1279,8 @@ s32 act_special_death_exit(struct MarioState *m) {
         queue_rumble_data(5, 80);
 #endif
 #ifdef ENABLE_LIVES
-        m->numLives--;
+        m->numLives++;
+        save_file_update_deaths(gCurrSaveFileNum - 1);
 #endif
         m->healCounter = 31;
     }

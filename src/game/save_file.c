@@ -321,6 +321,12 @@ void save_file_do_save(s32 fileIndex) {
     save_main_menu_data();
 }
 
+void save_file_update_deaths(s32 fileIndex) {
+    gSaveBuffer.files[fileIndex]->lives = gMarioState->numLives;
+    gSaveFileModified = TRUE;
+    save_file_do_save(fileIndex);
+}
+
 void save_file_erase(s32 fileIndex) {
     touch_high_score_ages(fileIndex);
     bzero(&gSaveBuffer.files[fileIndex][0], sizeof(gSaveBuffer.files[fileIndex][0]));

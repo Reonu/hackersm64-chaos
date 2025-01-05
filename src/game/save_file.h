@@ -42,6 +42,7 @@ struct SaveFile {
     u8 courseStars[COURSE_COUNT]; // 200 bits
 
     u8 courseCoinScores[COURSE_STAGES_COUNT]; // 120 bits
+    u8 lives;
 
     struct SaveBlockSignature signature; // 32 bits
 };
@@ -187,6 +188,7 @@ void save_file_set_cap_pos(s16 x, s16 y, s16 z);
 s32 save_file_get_cap_pos(Vec3s capPos);
 void save_file_set_sound_mode(u16 mode);
 u32 save_file_get_sound_mode(void);
+void save_file_update_deaths(s32 fileIndex);
 #ifdef WIDE
 u32 save_file_get_widescreen_mode(void);
 void save_file_set_widescreen_mode(u8 mode);
