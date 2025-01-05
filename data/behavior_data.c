@@ -6076,8 +6076,9 @@ const BehaviorScript bhvIntroScene[] = {
 
 const BehaviorScript bhvChao[] = {
     BEGIN(OBJ_LIST_DEFAULT),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_ANIMATIONS(oAnimations, chao_anims),
+    SET_INT(oIntangibleTimer, 0),
     SCALE(/*Unused*/ 0, /*Field*/ 27),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_chao_loop),
