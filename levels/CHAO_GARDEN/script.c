@@ -28,6 +28,7 @@ const LevelScript level_CHAO_GARDEN_entry[] = {
 
 	AREA(1, CHAO_GARDEN_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF1, LEVEL_CHAO_GARDEN, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		MARIO_POS(0x01, 0, -373, 1689, -1762),
 		OBJECT(MODEL_NONE, -1204, 1649, -2459, 0, 0, 0, (0x0A << 16), bhvInstantActiveWarp),
 		TERRAIN(CHAO_GARDEN_area_1_collision),

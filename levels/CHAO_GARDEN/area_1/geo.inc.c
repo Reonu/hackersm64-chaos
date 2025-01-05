@@ -4,10 +4,7 @@ const GeoLayout CHAO_GARDEN_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, CHAO_GARDEN_dl_Chao_garden_mesh_layer_1),
-		GEO_OPEN_NODE(),
-			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, CHAO_GARDEN_dl_Chao_garden_mesh_layer_5),
-		GEO_CLOSE_NODE(),
-		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, CHAO_GARDEN_dl_Visual_only_mesh_layer_1),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, CHAO_GARDEN_dl_water_visual_mesh_layer_5),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
