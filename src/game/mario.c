@@ -32,6 +32,7 @@
 #include "save_file.h"
 #include "sound_init.h"
 #include "rumble_init.h"
+#include "src/game/chaos_codes.h"
 
 
 /**************************************************
@@ -1704,6 +1705,8 @@ void queue_rumble_particles(struct MarioState *m) {
  */
 s32 execute_mario_action(UNUSED struct Object *obj) {
     s32 inLoop = TRUE;
+
+    global_chaos_code_handler();
 
     // Updates once per frame:
     vec3f_get_dist_and_angle(gMarioState->prevPos, gMarioState->pos, &gMarioState->moveSpeed, &gMarioState->movePitch, &gMarioState->moveYaw);

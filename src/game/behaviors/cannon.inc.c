@@ -125,10 +125,20 @@ void bhv_cannon_base_loop(void) {
     }
 
     o->oInteractStatus = INT_STATUS_NONE;
+
+    if (GET_BPARAM1(o->oBehParams) == CHAOS_CODE_BPARAM) {
+        if (o->oTimer > 30 && o->oAction == 0) {
+            obj_mark_for_deletion(o);
+        }
+    }
 }
 
 void bhv_cannon_barrel_loop(void) {
     struct Object *parent = o->parentObj;
+
+    if (GET_BPARAM1(parent->oBehParams) == CHAOS_CODE_BPARAM) {
+        SET_BPARAM1(o->oBehParams, CHAOS_CODE_BPARAM);
+    }
 
     if (parent->header.gfx.node.flags & GRAPH_RENDER_ACTIVE) {
         cur_obj_enable_rendering();
@@ -137,5 +147,9 @@ void bhv_cannon_barrel_loop(void) {
         o->oFaceAnglePitch = o->parentObj->oMoveAnglePitch;
     } else {
         cur_obj_disable_rendering();
+    }
+
+    if (GET_BPARAM1(o->oBehParams) == CHAOS_CODE_BPARAM && o->oTimer > 30 && o->oDistanceToMario > 600) {
+        obj_mark_for_deletion(o);
     }
 }

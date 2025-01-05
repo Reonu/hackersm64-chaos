@@ -13,6 +13,8 @@
 #define MARIO_ANIMS_POOL_SIZE 0x4000
 #define DEMO_INPUTS_POOL_SIZE 0x800
 
+#define CHAOS_CODE_BPARAM   61
+
 struct GfxPool {
     Gfx buffer[GFX_POOL_SIZE];
     struct SPTask spTask;
