@@ -333,4 +333,6 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "chao/geo_header.h"
 
+
+#include "chao/anim_header.h"
 #endif

@@ -1,0 +1,8 @@
+#include "anim_idle.inc.c"
+#include "anim_idle_look_right.inc.c"
+#include "anim_sit.inc.c"
+#include "anim_sit_idle.inc.c"
+#include "anim_get_up_from_sitting.inc.c"
+#include "anim_lay_down.inc.c"
+#include "anim_crawl.inc.c"
+#include "anim_get_up_from_crawl.inc.c"

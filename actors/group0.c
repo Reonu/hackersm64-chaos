@@ -32,3 +32,5 @@
 #endif
 
 #include "chao/model.inc.c"
+#include "chao/anims/data.inc.c"
+#include "chao/anims/table.inc.c"
