@@ -73,7 +73,7 @@ static const u16 chao_anim_sit_indices[] = {
 };
 
 static const struct Animation chao_anim_sit = {
-	0,
+	1,
 	0,
 	0,
 	1,

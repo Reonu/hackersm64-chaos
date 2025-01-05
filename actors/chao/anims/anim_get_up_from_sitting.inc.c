@@ -43,7 +43,7 @@ static const u16 chao_anim_get_up_from_sitting_indices[] = {
 };
 
 static const struct Animation chao_anim_get_up_from_sitting = {
-	0,
+	1,
 	0,
 	0,
 	1,

@@ -90,6 +90,7 @@ void bhv_chao_act_crawling_get_up(void) {
 }
 
 void bhv_chao_loop(void) {
+    cur_obj_init_animation(o->oAnimationIndex);
     switch (o->oAction) {
         case CHAO_ACT_IDLE:
             bhv_chao_act_idle();
@@ -113,5 +114,5 @@ void bhv_chao_loop(void) {
             bhv_chao_act_crawling_get_up();
             break;
     }
-    cur_obj_init_animation(o->oAnimationIndex);
+    
 }

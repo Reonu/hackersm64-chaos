@@ -41,7 +41,7 @@ static const u16 chao_anim_lay_down_indices[] = {
 };
 
 static const struct Animation chao_anim_lay_down = {
-	0,
+	1,
 	0,
 	0,
 	1,
