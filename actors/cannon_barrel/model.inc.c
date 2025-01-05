@@ -146,5 +146,6 @@ const Gfx cannon_barrel_seg8_dl_08006660[] = {
     gsDPPipeSync(),
     gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
     gsSPDisplayList(cannon_barrel_seg8_dl_080064C0),
+    gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
