@@ -33,6 +33,7 @@
 #include "sound_init.h"
 #include "rumble_init.h"
 #include "src/game/chaos_codes.h"
+#include "buffers/buffers.h"
 
 
 /**************************************************
@@ -1887,7 +1888,7 @@ void init_mario_from_save_file(void) {
     gMarioState->numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
     gMarioState->numKeys = 0;
 #ifdef ENABLE_LIVES
-    gMarioState->numLives = ENABLE_LIVES;
+    gMarioState->numLives = gSaveBuffer.files[gCurrSaveFileNum - 1]->lives;
 #else
     gMarioState->numLives = 0;
 #endif

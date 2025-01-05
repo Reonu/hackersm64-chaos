@@ -14,7 +14,7 @@ enum PrintfGlyphs {
     GLYPH_EXCLAMATION_PNT = 36,
     GLYPH_TWO_EXCLAMATION = 37,
     GLYPH_QUESTION_MARK   = 38,
-    GLYPH_AMPERSAND       = 39,
+    GLYPH_AMPERSAND       = 0x2E,
     GLYPH_PERCENT         = 40,
     GLYPH_MINUS           = 47,
     GLYPH_MULTIPLY        = 48,
