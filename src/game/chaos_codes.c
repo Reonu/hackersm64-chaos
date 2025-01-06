@@ -37,11 +37,16 @@ void chaos_upside_down_camera(void) {
     sFOVState.fovFunc = CAM_FOV_SET_315;
 }
 
+void chaos_no_model_is_mario(void) {
+    //also stub until timer
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon},
     {"Fall Damage", chaos_fall_damage},
     {"Trip", chaos_trip},
-    {"Upside Down Camera", chaos_upside_down_camera}
+    {"Upside Down Camera", chaos_upside_down_camera},
+    {"Model None Mario", chaos_no_model_is_mario}
 };
 
 void add_global_chaos_code(void) {

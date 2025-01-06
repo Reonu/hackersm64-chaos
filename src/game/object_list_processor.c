@@ -22,6 +22,8 @@
 #include "puppyprint.h"
 #include "profiling.h"
 
+#include "src/game/chaos_codes.h"
+
 
 /**
  * Flags controlling what debug info is displayed.
