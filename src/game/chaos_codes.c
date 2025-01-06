@@ -77,21 +77,31 @@ void chaos_no_model_is_mario(void) {
 }
 
 ChaosCode gChaosCodeTable[] = {
-    {"Cannon", chaos_cannon, 0, 0},
-    {"Fall Damage", chaos_fall_damage, 0, 0},
-    {"Trip", chaos_trip, 0, 0},
-    {"Upside Down Camera", chaos_upside_down_camera, 0, 0},
-    {"Model None Mario", chaos_no_model_is_mario, 0, 0},
-    {"Retro Vision", chaos_retro, 15, 30},
-    {"Blur Vision", chaos_blur, 15, 30},
+    {"Cannon", chaos_cannon, 0, 0, 0},
+    {"Fall Damage", chaos_fall_damage, 0, 0, 0},
+    {"Trip", chaos_trip, 0, 0, 0},
+    {"Upside Down Camera", chaos_upside_down_camera, 0, 0, 0},
+    {"Model None Mario", chaos_no_model_is_mario, 0, 0, 0},
+    {"Retro Vision", chaos_retro, 15, 30, CODEFLAG_SCREEN},
+    {"Blur Vision", chaos_blur, 15, 30, CODEFLAG_SCREEN},
 };
 
 s32 gChaosCodeTimers[sizeof(gChaosCodeTable) / sizeof(ChaosCode)];
 
 void chaos_enable(s32 codeID) {
     globalChaosFlags |= 1 << codeID;
-    int rand = random_u16() % (gChaosCodeTable[codeID].timerHigh - gChaosCodeTable[codeID].timerLow);
-    gChaosCodeTimers[codeID] = (gChaosCodeTable[codeID].timerLow + rand) * 30;
+    if (gChaosCodeTable[codeID].flags) {
+        for (u32 i = 0; i < sizeof(gChaosCodeTable) / sizeof(ChaosCode); i++) {
+            if (gChaosCodeTimers[i] && gChaosCodeTable[i].flags == gChaosCodeTable[codeID].flags) {
+                gChaosCodeTimers[i] = 0;
+                //globalChaosFlags &= ~(1 << i);
+            }
+        }
+    }
+    if (gChaosCodeTable[codeID].timerLow + gChaosCodeTable[codeID].timerHigh) {
+        int rand = random_u16() % (gChaosCodeTable[codeID].timerHigh - gChaosCodeTable[codeID].timerLow);
+        gChaosCodeTimers[codeID] = (gChaosCodeTable[codeID].timerLow + rand) * 30;
+    }
     append_puppyprint_log("Chaos effect added: %s", gChaosCodeTable[codeID].name);
 }
 

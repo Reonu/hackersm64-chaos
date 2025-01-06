@@ -8,7 +8,13 @@ enum GlobalChaosFlags {
     GLOBAL_CHAOS_FLAG_UPSIDE_DOWN_CAMERA = (1 << 3),
     GLOBAL_CHAOS_FLAG_NO_MODEL_IS_MARIO = (1 << 4),
     GLOBAL_CHAOS_FLAG_RETRO = (1 << 5),
-    GLOBAL_CHAOS_FLAG_BLUE = (1 << 6),
+    GLOBAL_CHAOS_FLAG_BLUR = (1 << 6),
+};
+
+// A mark for exclusivity. Can only have one of thse effects active at a time.
+enum CodeFlags {
+    CODEFLAG_NONE,
+    CODEFLAG_SCREEN,    
 };
 
 typedef struct ChaosCode {
@@ -16,6 +22,7 @@ typedef struct ChaosCode {
     void (*func)();
     unsigned short timerLow;
     unsigned short timerHigh;
+    unsigned int flags;
 } ChaosCode;
 
 extern ChaosCode gChaosCodeTable[7];
