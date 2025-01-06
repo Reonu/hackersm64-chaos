@@ -81,7 +81,11 @@ void bhv_chao_act_lay_down(void) {
     // Decide a random direction, rotate towards it
     if (o->oTimer < 15) {
         if (o->oTimer == 0) {
-            o->oMoveAngleYaw = random_u16();
+            if (cur_obj_lateral_dist_to_home() > 900.0f) {
+                o->oMoveAngleYaw = o->oAngleToHome;
+            } else {
+                o->oMoveAngleYaw = random_u16();
+            }
         }
         o->oFaceAngleYaw = (approach_s16_symmetric(o->oFaceAngleYaw, o->oMoveAngleYaw, 0x800));
     }
@@ -95,16 +99,17 @@ void bhv_chao_act_lay_down(void) {
 void bhv_chao_act_crawing(void) {
     o->oAnimationIndex = CHAO_ANIM_CRAWL;
     // Move towards the direction it's facing
-    o->oForwardVel = -5.0f;
+    o->oForwardVel = 5.0f;
     // If 2000 units away from home, rotate towards home
-    if (cur_obj_lateral_dist_to_home() > 1500.0f || (o->oPosX > 1400)) {
+    if (cur_obj_lateral_dist_to_home() > 1000.0f || (o->oPosX > 1400)) {
+        // Compute the angle to home manually
         o->oMoveAngleYaw = o->oAngleToHome;
-        o->oFaceAngleYaw = (approach_s16_symmetric(o->oFaceAngleYaw, o->oAngleToHome, 0x800));
     }
+    o->oFaceAngleYaw = (approach_s16_symmetric(o->oFaceAngleYaw, o->oMoveAngleYaw, 0x800));
 
     if ((o->oTimer != 0) && cur_obj_check_if_at_animation_end()) {
-        // 25% chance to do something else
-        if (random_u16() % 4 == 0) {
+        // 10% chance to get up
+        if (random_u16() % 10 == 0) {
             o->oAction = CHAO_ACT_CRAWLING_GET_UP;
         }
     }
@@ -189,4 +194,5 @@ void bhv_chao_loop(void) {
     cur_obj_move_standard(-78);
     cur_obj_update_floor_and_walls();
     o->oDrawingDistance = 32000.0f;
+    o->oAngleToHome = cur_obj_angle_to_home();
 }

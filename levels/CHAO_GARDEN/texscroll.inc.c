@@ -29,7 +29,7 @@ void scroll_CHAO_GARDEN_dl_a_water_visual_mesh_layer_5_vtx_0() {
 
 void scroll_CHAO_GARDEN_dl_Chao_garden_mesh_layer_1_vtx_7() {
 	int i = 0;
-	int count = 86;
+	int count = 91;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
