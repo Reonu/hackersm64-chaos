@@ -12,6 +12,8 @@
 #include "engine/math_util.h"
 #include "game/main.h"
 #include "src/game/camera.h"
+#include "fb_effects.h"
+#include "print.h"
 
 
 u64 globalChaosFlags = GLOBAL_CHAOS_FLAG_NONE;
@@ -19,8 +21,9 @@ s32 nextGlobalCodeTimer = 150;
 u32 gCurrentChaosID;
 u8 gDisableChaos = TRUE;
 u8 gRetroVision = FALSE;
+u8 gBlurVision = FALSE;
 
-extern u32 gChaosCodeTimers[];
+extern s32 gChaosCodeTimers[];
 extern OSViMode VI;
 
 void chaos_cannon(void) {
@@ -52,6 +55,19 @@ void chaos_retro(void) {
     }
 }
 
+void chaos_blur(void) {
+    if (gBlurVision == FALSE) {
+        set_fb_effect_type(FBE_EFFECT_MULT);
+        gBlurVision = TRUE;
+    }
+    set_motion_blur(32);
+    gChaosCodeTimers[gCurrentChaosID]--;
+    if (gChaosCodeTimers[gCurrentChaosID] <= 0) {
+        gBlurVision = FALSE;
+        globalChaosFlags &= ~(1 << gCurrentChaosID);
+    }
+}
+
 void chaos_upside_down_camera(void) {
     sFOVState.fovFunc = CAM_FOV_SET_315;
 }
@@ -61,15 +77,16 @@ void chaos_no_model_is_mario(void) {
 }
 
 ChaosCode gChaosCodeTable[] = {
-    {"Cannon", chaos_cannon},
-    {"Fall Damage", chaos_fall_damage},
-    {"Trip", chaos_trip},
-    {"Upside Down Camera", chaos_upside_down_camera},
-    {"Model None Mario", chaos_no_model_is_mario},
-    {"Retro Vision", chaos_retro, 10, 20},
+    {"Cannon", chaos_cannon, 0, 0},
+    {"Fall Damage", chaos_fall_damage, 0, 0},
+    {"Trip", chaos_trip, 0, 0},
+    {"Upside Down Camera", chaos_upside_down_camera, 0, 0},
+    {"Model None Mario", chaos_no_model_is_mario, 0, 0},
+    {"Retro Vision", chaos_retro, 15, 30},
+    {"Blur Vision", chaos_blur, 15, 30},
 };
 
-u32 gChaosCodeTimers[sizeof(gChaosCodeTable) / sizeof(ChaosCode)];
+s32 gChaosCodeTimers[sizeof(gChaosCodeTable) / sizeof(ChaosCode)];
 
 void chaos_enable(s32 codeID) {
     globalChaosFlags |= 1 << codeID;
