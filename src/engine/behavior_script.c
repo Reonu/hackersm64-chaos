@@ -14,6 +14,7 @@
 #include "math_util.h"
 #include "graph_node.h"
 #include "surface_collision.h"
+#include "src/game/chaos_codes.h"
 
 // Macros for retrieving arguments from behavior scripts.
 #define BHV_CMD_GET_1ST_U8(index)     (u8)((gCurBhvCommand[index] >> 24) & 0xFF) // unused
@@ -818,6 +819,10 @@ void cur_obj_update(void) {
     f32 distanceFromMario;
     BhvCommandProc bhvCmdProc;
     s32 bhvProcResult;
+
+    if ((globalChaosFlags & GLOBAL_CHAOS_FLAG_NO_MODEL_IS_MARIO) && cur_obj_has_model(MODEL_NONE)) {
+        cur_obj_set_model(MODEL_MARIO);
+    }
 
     s32 inRoom = cur_obj_is_mario_in_room();
 

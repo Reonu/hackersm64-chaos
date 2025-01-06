@@ -10930,6 +10930,10 @@ void zoom_fov_30(UNUSED struct MarioState *m) {
     camera_approach_f32_symmetric_bool(&sFOVState.fov, 30.f, (30.f - sFOVState.fov) / 60.f);
 }
 
+void set_fov_315(UNUSED struct MarioState *m) {
+    sFOVState.fov = 315.f;
+}
+
 /**
  * This is the default fov function. It makes fov approach 45 degrees, and it handles zooming in when
  * Mario falls a sleep.
@@ -11031,6 +11035,9 @@ Gfx *geo_camera_fov(s32 callContext, struct GraphNode *g, UNUSED void *context) 
                 break;
             case CAM_FOV_APP_60:
                 approach_fov_60(marioState);
+                break;
+            case CAM_FOV_SET_315:
+                set_fov_315(marioState);
                 break;
             default:
                 set_fov_45(marioState);

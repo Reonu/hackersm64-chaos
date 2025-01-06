@@ -326,7 +326,8 @@ enum CameraFov {
     CAM_FOV_APP_30,
     CAM_FOV_APP_60,
     CAM_FOV_ZOOM_30,
-    CAM_FOV_SET_29
+    CAM_FOV_SET_29,
+    CAM_FOV_SET_315
 };
 
 enum CameraEvent {
@@ -713,6 +714,7 @@ extern struct Camera *gCamera;
 extern struct Object *gCutsceneFocus;
 extern struct Object *gSecondCameraFocus;
 extern u8 gRecentCutscene;
+extern struct CameraFOVStatus sFOVState;
 
 // TODO: sort all of this extremely messy shit out after the split
 
