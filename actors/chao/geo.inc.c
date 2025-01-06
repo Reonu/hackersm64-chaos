@@ -39,6 +39,7 @@ const GeoLayout chao_geo[] = {
 						GEO_ANIMATED_PART(LAYER_OPAQUE, 0, 0, 0, chao_tail_mesh_layer_1),
 					GEO_CLOSE_NODE(),
 				GEO_CLOSE_NODE(),
+				GEO_SHADOW(1, 178, 300),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
