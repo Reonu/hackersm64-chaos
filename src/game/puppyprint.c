@@ -51,6 +51,7 @@ a modern game engine's developer's console.
 #include "buffers/buffers.h"
 #include "profiling.h"
 #include "segment_symbols.h"
+#include "chaos_codes.h"
 
 #ifdef PUPPYPRINT
 
@@ -1028,11 +1029,82 @@ void puppyprint_render_general_vars(void) {
 #endif
 }
 
+u8 gPuppyPrintChaosSelect = 0;
+u8 gPuppyprintChaosScroll = 0;
+
+void puppyprint_chaos(void) {
+    prepare_blank_box();
+    render_blank_box_rounded((SCREEN_WIDTH / 2) - 80, (SCREEN_HEIGHT / 2) - 80, (SCREEN_WIDTH / 2) + 80, (SCREEN_HEIGHT / 2) + 40, 0, 0, 0, 192);
+    finish_blank_box();
+    char *okay1 = "true";
+    char *okay2 = "false";
+    char *useOkay;
+
+    if (gPlayer1Controller->buttonPressed & D_JPAD) {
+        gPuppyPrintChaosSelect++;
+        if (gPuppyPrintChaosSelect >= CHAOSCOUNT) {
+            gPuppyPrintChaosSelect = 0;
+            gPuppyprintChaosScroll = 0;
+        }
+    } else if (gPlayer1Controller->buttonPressed & U_JPAD) {
+        if (gPuppyPrintChaosSelect - 1 >= 0) {
+            gPuppyPrintChaosSelect--;
+        } else {
+            gPuppyPrintChaosSelect = CHAOSCOUNT - 1;
+        }
+    }
+    if (gPlayer1Controller->buttonPressed & (R_JPAD)) {
+        globalChaosFlags |= (1 << gPuppyPrintChaosSelect);
+    }
+
+    if (gPlayer1Controller->buttonPressed & (L_JPAD)) {
+        gDisableChaos ^= 1;
+    }
+
+    s32 yOffset = gPuppyPrintChaosSelect > 6 ? gPuppyPrintChaosSelect-6 : 0;
+
+    s32 y = ((SCREEN_HEIGHT / 2) - 76) - (yOffset * 12);
+    for (u32 i = 0; i < CHAOSCOUNT; i++) {
+        if (y < ((SCREEN_HEIGHT / 2) - 76)) {
+            y += 12;
+            continue;
+        }
+        if (y > (SCREEN_HEIGHT / 2) + 24) {
+            break;
+        }
+        if (i == gPuppyPrintChaosSelect) {
+            print_set_envcolour(255, 0, 0, 255);
+        } else {
+            print_set_envcolour(255, 255, 255, 255);
+        }
+        print_small_text_light((SCREEN_WIDTH / 2) - 76, y, gChaosCodeTable[i].name, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_DEFAULT);
+        if (globalChaosFlags & (1 << i)) {
+            useOkay = okay1;
+        } else {
+            useOkay = okay2;
+        }
+        print_small_text_light((SCREEN_WIDTH / 2) + 76, y, useOkay, PRINT_TEXT_ALIGN_RIGHT, PRINT_ALL, FONT_DEFAULT);
+        y += 12;
+    }
+
+    char textBytes[32];
+    sprintf(textBytes, "Active Flags: %08X", (u32) (globalChaosFlags << 32));
+    sprintf(textBytes, "%s%08X", textBytes, (u32) (globalChaosFlags));
+    print_small_text_light(16, SCREEN_HEIGHT - 24, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+
+    if (gDisableChaos) {
+        print_small_text_light(SCREEN_WIDTH - 16, SCREEN_HEIGHT - 24, "Chaos off", PRINT_TEXT_ALIGN_RIGHT, PRINT_ALL, FONT_OUTLINE);
+    } else {
+        print_small_text_light(SCREEN_WIDTH - 16, SCREEN_HEIGHT - 24, "Chaos on", PRINT_TEXT_ALIGN_RIGHT, PRINT_ALL, FONT_OUTLINE);
+    }
+}
+
 struct PuppyPrintPage ppPages[] = {
 #ifdef USE_PROFILER
     [PUPPYPRINT_PAGE_PROFILER]      = {&puppyprint_render_standard,     "Profiler"},
     [PUPPYPRINT_PAGE_MINIMAL]       = {&puppyprint_render_minimal,      "Minimal"},
 #endif
+    [PUPPYPRINT_PAGE_CHAOS]       =   {&puppyprint_chaos,               "Chaos"},
     [PUPPYPRINT_PAGE_GENERAL]       = {&puppyprint_render_general_vars, "General"},
     [PUPPYPRINT_PAGE_AUDIO]         = {&print_audio_overview,           "Audio"},
     [PUPPYPRINT_PAGE_RAM]           = {&print_ram_overview,             "Segments"},

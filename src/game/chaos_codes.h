@@ -9,4 +9,15 @@ enum GlobalChaosFlags {
 
 #define NUM_GLOBAL_CHAOS_FLAGS  4
 
+typedef struct ChaosCode {
+    char *name;
+    void (*func)();
+} ChaosCode;
+
+extern ChaosCode gChaosCodeTable[3];
+extern u64 globalChaosFlags;
+extern u8 gDisableChaos;
+
+#define CHAOSCOUNT (sizeof(gChaosCodeTable) / sizeof(ChaosCode))
+
 extern void global_chaos_code_handler();

@@ -1707,9 +1707,7 @@ void queue_rumble_particles(struct MarioState *m) {
 s32 execute_mario_action(UNUSED struct Object *obj) {
     s32 inLoop = TRUE;
 
-    #ifndef DISABLE_CHAOS
     global_chaos_code_handler();
-    #endif
 
     // Updates once per frame:
     vec3f_get_dist_and_angle(gMarioState->prevPos, gMarioState->pos, &gMarioState->moveSpeed, &gMarioState->movePitch, &gMarioState->moveYaw);
@@ -1721,7 +1719,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         if (
             (gMarioState->controller->buttonDown & U_JPAD) &&
             !(gMarioState->controller->buttonDown & L_TRIG)
-        ) {
+         && sPPDebugPage != PUPPYPRINT_PAGE_CHAOS) {
             set_camera_mode(gMarioState->area->camera, CAMERA_MODE_8_DIRECTIONS, 1);
             set_mario_action(gMarioState, ACT_DEBUG_FREE_MOVE, 0);
         }

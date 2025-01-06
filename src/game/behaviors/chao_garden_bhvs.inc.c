@@ -145,6 +145,9 @@ void bhv_chao_loop(void) {
         cur_obj_disable_rendering();
         cur_obj_become_intangible();
     }
+    if(o->oHeldState == HELD_DROPPED) {
+        o->oHeldState = HELD_FREE;
+    }
     obj_set_hitbox(o, &sChaoHitbox);
     o->oInteractStatus = INT_STATUS_NONE;
     o->oInteractType = INTERACT_GRABBABLE;

@@ -6,47 +6,56 @@
 #include "include/behavior_data.h"
 #include "include/object_fields.h"
 #include "include/object_constants.h"
+#include "puppyprint.h"
+#include "sm64.h"
 
 
 u64 globalChaosFlags = GLOBAL_CHAOS_FLAG_NONE;
 s32 nextGlobalCodeTimer = 150;
+u8 gDisableChaos = TRUE;
+
+void chaos_cannon(void) {
+    struct Object *cannon = spawn_object_relative(0, 0, 300, 0, gMarioState->marioObj, MODEL_NONE, bhvCannon);
+    SET_BPARAM1(cannon->oBehParams, CHAOS_CODE_BPARAM);
+    globalChaosFlags &= ~GLOBAL_CHAOS_FLAG_ENTER_CANNON;
+}
+
+// Not final, just there to have a different func
+void chaos_trip(void) {
+    gMarioState->action = ACT_HARD_BACKWARD_GROUND_KB;
+    globalChaosFlags &= ~GLOBAL_CHAOS_FLAG_TRIPPING;
+}
+
+ChaosCode gChaosCodeTable[] = {
+    {"Cannon", chaos_cannon},
+    {"Fall Damage", chaos_trip},
+    {"Trip", chaos_trip},
+};
 
 void add_global_chaos_code(void) {
     u16 chosenCode;
-    u8 searchingForCode = TRUE;
-    while (searchingForCode) {
-        chosenCode = random_u16() % NUM_GLOBAL_CHAOS_FLAGS;
-        if (!(globalChaosFlags & (1 << chosenCode))) {
-            globalChaosFlags |= GLOBAL_CHAOS_FLAG_ENTER_CANNON;//(1 << chosenCode);
-            searchingForCode = FALSE;
-        }
-    }
-
-
-}
-
-void trigger_chaos_code(u64 codeFlag) {
-    switch (codeFlag) {
-        case GLOBAL_CHAOS_FLAG_ENTER_CANNON:;
-            struct Object *cannon = spawn_object_relative(0, 0, 300, 0, gMarioState->marioObj, MODEL_NONE, bhvCannon);
-            SET_BPARAM1(cannon->oBehParams, CHAOS_CODE_BPARAM);
-            globalChaosFlags &= ~GLOBAL_CHAOS_FLAG_ENTER_CANNON;
-        break;
-    }
+    chosenCode = random_u16() % (sizeof(gChaosCodeTable) / sizeof(ChaosCode));
+    globalChaosFlags |= 1 << chosenCode;
+    append_puppyprint_log("Chaos effect added: %s", gChaosCodeTable[chosenCode].name);
 }
 
 void update_chaos_code_effects(void) {
-    for (int i = 0; i < NUM_GLOBAL_CHAOS_FLAGS; i++) {
+    for (u32 i = 0; i < sizeof(gChaosCodeTable) / sizeof(ChaosCode); i++) {
         u64 codeFlag = (1 << i);
         if (globalChaosFlags & codeFlag) {
-            trigger_chaos_code(codeFlag);
+            (gChaosCodeTable[i].func)();
         }
     }
 }
 
 void global_chaos_code_handler(void) {
 
+
     update_chaos_code_effects();
+
+    if (gDisableChaos) {
+        return;
+    }
 
     nextGlobalCodeTimer--;
     if (nextGlobalCodeTimer <= 0) {
