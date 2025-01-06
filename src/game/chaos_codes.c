@@ -10,6 +10,7 @@
 #include "sm64.h"
 #include "object_helpers.h"
 #include "engine/math_util.h"
+#include "src/game/camera.h"
 
 
 u64 globalChaosFlags = GLOBAL_CHAOS_FLAG_NONE;
@@ -32,10 +33,15 @@ void chaos_trip(void) {
     globalChaosFlags &= ~GLOBAL_CHAOS_FLAG_TRIPPING;
 }
 
+void chaos_upside_down_camera(void) {
+    sFOVState.fovFunc = CAM_FOV_SET_315;
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon},
     {"Fall Damage", chaos_fall_damage},
     {"Trip", chaos_trip},
+    {"Upside Down Camera", chaos_upside_down_camera}
 };
 
 void add_global_chaos_code(void) {
