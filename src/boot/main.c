@@ -485,6 +485,9 @@ void turn_off_audio(void) {
     }
 }
 
+s32 gScreenWidth;
+s32 gScreenHeight;
+
 void change_vi(OSViMode *mode, int width, int height) {
     mode->comRegs.width  = width;
     mode->comRegs.xScale = ((width * 512) / 320);
@@ -501,6 +504,8 @@ void change_vi(OSViMode *mode, int width, int height) {
         mode->fldRegs[0].yScale = ((height * 1024) / 240);
         mode->fldRegs[1].yScale = ((height * 1024) / 240);
     }
+    gScreenWidth = width;
+    gScreenHeight = height;
 }
 
 void get_audio_frequency(void) {

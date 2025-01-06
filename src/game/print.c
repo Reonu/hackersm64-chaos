@@ -5,6 +5,7 @@
 #include "memory.h"
 #include "print.h"
 #include "segment2.h"
+#include "chaos_codes.h"
 
 /**
  * This file handles printing and formatting the colorful text that
@@ -397,7 +398,8 @@ void clip_to_bounds(s32 *x, s32 *y) {
  * Renders the glyph that's set at the given position.
  */
 void render_textrect(s32 x, s32 y, s32 pos) {
-    s32 rectBaseX = x + pos * 12;
+    int shift = gRetroVision;
+    s32 rectBaseX = x + pos * (12 >> shift);
     s32 rectBaseY = 224 - y;
     s32 rectX;
     s32 rectY;
@@ -408,8 +410,8 @@ void render_textrect(s32 x, s32 y, s32 pos) {
 #endif
     rectX = rectBaseX;
     rectY = rectBaseY;
-    gSPTextureRectangle(gDisplayListHead++, rectX << 2, rectY << 2, (rectX + 15) << 2,
-                        (rectY + 15) << 2, G_TX_RENDERTILE, 0, 0, 4 << 10, 1 << 10);
+    gSPTextureRectangle(gDisplayListHead++, rectX << 2, rectY << 2, (rectX + (15 >> shift)) << 2,
+                        (rectY + (15 >> shift)) << 2, G_TX_RENDERTILE, 0, 0, (4 << shift) << 10, (1 << shift) << 10);
 }
 
 /**

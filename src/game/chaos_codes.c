@@ -10,16 +10,22 @@
 #include "sm64.h"
 #include "object_helpers.h"
 #include "engine/math_util.h"
+#include "game/main.h"
 
 
 u64 globalChaosFlags = GLOBAL_CHAOS_FLAG_NONE;
 s32 nextGlobalCodeTimer = 150;
+u32 gCurrentChaosID;
 u8 gDisableChaos = TRUE;
+u8 gRetroVision = FALSE;
+
+extern u32 gChaosCodeTimers[];
+extern OSViMode VI;
 
 void chaos_cannon(void) {
     struct Object *cannon = spawn_object_relative(0, 0, 300, 0, gMarioState->marioObj, MODEL_NONE, bhvCannon);
     SET_BPARAM1(cannon->oBehParams, CHAOS_CODE_BPARAM);
-    globalChaosFlags &= ~GLOBAL_CHAOS_FLAG_ENTER_CANNON;
+    globalChaosFlags &= ~(1 << gCurrentChaosID);
 }
 
 void chaos_fall_damage(void) {
@@ -29,26 +35,48 @@ void chaos_fall_damage(void) {
 // Not final, just there to have a different func
 void chaos_trip(void) {
     gMarioState->action = ACT_HARD_BACKWARD_GROUND_KB;
-    globalChaosFlags &= ~GLOBAL_CHAOS_FLAG_TRIPPING;
+    globalChaosFlags &= ~(1 << gCurrentChaosID);
+}
+
+void chaos_retro(void) {
+    if (gRetroVision == FALSE) {
+        change_vi(&VI, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+        gRetroVision = TRUE;
+    }
+    gChaosCodeTimers[gCurrentChaosID]--;
+    if (gChaosCodeTimers[gCurrentChaosID] <= 0) {
+        gRetroVision = FALSE;
+        change_vi(&VI, SCREEN_WIDTH, SCREEN_HEIGHT);
+        globalChaosFlags &= ~(1 << gCurrentChaosID);
+    }
 }
 
 ChaosCode gChaosCodeTable[] = {
-    {"Cannon", chaos_cannon},
-    {"Fall Damage", chaos_fall_damage},
-    {"Trip", chaos_trip},
+    {"Cannon", chaos_cannon, 0, 0},
+    {"Fall Damage", chaos_fall_damage, 0, 0},
+    {"Trip", chaos_trip, 0, 0},
+    {"Retro Vision", chaos_retro, 10, 20},
 };
 
+u32 gChaosCodeTimers[sizeof(gChaosCodeTable) / sizeof(ChaosCode)];
+
+void chaos_enable(s32 codeID) {
+    globalChaosFlags |= 1 << codeID;
+    int rand = random_u16() % (gChaosCodeTable[codeID].timerHigh - gChaosCodeTable[codeID].timerLow);
+    gChaosCodeTimers[codeID] = (gChaosCodeTable[codeID].timerLow + rand) * 30;
+    append_puppyprint_log("Chaos effect added: %s", gChaosCodeTable[codeID].name);
+}
+
 void add_global_chaos_code(void) {
-    u16 chosenCode;
-    chosenCode = random_u16() % (sizeof(gChaosCodeTable) / sizeof(ChaosCode));
-    globalChaosFlags |= 1 << chosenCode;
-    append_puppyprint_log("Chaos effect added: %s", gChaosCodeTable[chosenCode].name);
+    u16 chosenCode = random_u16() % (sizeof(gChaosCodeTable) / sizeof(ChaosCode));
+    chaos_enable(chosenCode);
 }
 
 void update_chaos_code_effects(void) {
     for (u32 i = 0; i < sizeof(gChaosCodeTable) / sizeof(ChaosCode); i++) {
         u64 codeFlag = (1 << i);
         if (globalChaosFlags & codeFlag) {
+            gCurrentChaosID = i;
             (gChaosCodeTable[i].func)();
         }
     }

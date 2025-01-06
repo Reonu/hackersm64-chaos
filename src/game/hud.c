@@ -17,6 +17,7 @@
 #include "engine/math_util.h"
 #include "puppycam2.h"
 #include "puppyprint.h"
+#include "chaos_codes.h"
 
 #include "config.h"
 
@@ -404,9 +405,13 @@ void render_hud_breath_meter(void) {
  * Renders the amount of lives Mario has.
  */
 void render_hud_mario_lives(void) {
-    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), HUD_TOP_Y, "&"); // 'Mario Head' glyph
-    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(38), HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(54), HUD_TOP_Y, "%d", gHudDisplay.lives);
+    s32 yOffset = gRetroVision * 8;
+    s32 x =GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22 >> gRetroVision); 
+    print_text(x, HUD_TOP_Y + yOffset, "&"); // 'Mario Head' glyph
+    x += 16 >> gRetroVision;
+    print_text(x, HUD_TOP_Y + yOffset, "*"); // 'X' glyph
+    x += 16 >> gRetroVision;
+    print_text_fmt_int(x, HUD_TOP_Y + yOffset, "%d", gHudDisplay.lives);
 }
 
 #ifdef VANILLA_STYLE_CUSTOM_DEBUG
@@ -425,9 +430,13 @@ void render_debug_mode(void) {
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) {
-    print_text(HUD_COINS_X, HUD_TOP_Y, "$"); // 'Coin' glyph
-    print_text((HUD_COINS_X + 16), HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int((HUD_COINS_X + 30), HUD_TOP_Y, "%d", gHudDisplay.coins);
+    s32 x = HUD_COINS_X >> gRetroVision;
+    s32 yOffset = gRetroVision * 8;
+    print_text(x, HUD_TOP_Y + yOffset, "$"); // 'Coin' glyph
+    x += 16 >> gRetroVision;
+    print_text(x, HUD_TOP_Y + yOffset, "*"); // 'X' glyph
+    x += 14 >> gRetroVision;
+    print_text_fmt_int(x, HUD_TOP_Y + yOffset, "%d", gHudDisplay.coins);
 }
 
 /**
@@ -435,12 +444,17 @@ void render_hud_coins(void) {
  * Disables "X" glyph when Mario has 100 stars or more.
  */
 void render_hud_stars(void) {
+    s32 x = GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) >> gRetroVision;
+    s32 yOffset = gRetroVision * 8;
     if (gHudFlash == HUD_FLASH_STARS && gGlobalTimer & 0x8) return;
     s8 showX = (gHudDisplay.stars < 100);
-    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X), HUD_TOP_Y, "^"); // 'Star' glyph
-    if (showX) print_text((GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) + 16), HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int((showX * 14) + GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X - 16),
-                       HUD_TOP_Y, "%d", gHudDisplay.stars);
+    print_text(x, HUD_TOP_Y + yOffset, "^"); // 'Star' glyph
+    x += 16 >> gRetroVision;
+    if (showX) {
+        print_text(x, HUD_TOP_Y + yOffset, "*"); // 'X' glyph
+        x += 16 >> gRetroVision;
+    }
+    print_text_fmt_int(((showX * 14) >> gRetroVision) + x, HUD_TOP_Y + yOffset, "%d", gHudDisplay.stars);
 }
 
 /**

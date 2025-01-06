@@ -26,6 +26,7 @@
 #include "config.h"
 #include "puppycam2.h"
 #include "main.h"
+#include "chaos_codes.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
@@ -216,12 +217,13 @@ void create_dl_ortho_matrix(void) {
 
     create_dl_identity_matrix();
 
-    guOrtho(matrix, 0.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT, -10.0f, 10.0f, 1.0f);
+    guOrtho(matrix, 0.0f, 320 << gRetroVision, 0, 240 << gRetroVision, -10.0f, 10.0f, 1.0f);
 
     // Should produce G_RDPHALF_1 in Fast3D
     gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
 
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(matrix), G_MTX_PROJECTION | G_MTX_MUL | G_MTX_NOPUSH);
+    create_dl_translation_matrix(MENU_MTX_NOPUSH, 0, 240 * gRetroVision, 0);
 }
 
 // Unused
@@ -467,21 +469,21 @@ void print_hud_lut_string(s8 hudLUT, s16 x, s16 y, const u8 *str) {
     s32 strPos = 0;
     void **hudLUT1 = segmented_to_virtual(menu_hud_lut); // Japanese Menu HUD Color font
     void **hudLUT2 = segmented_to_virtual(main_hud_lut); // 0-9 A-Z HUD Color Font
-    u32 curX = x;
-    u32 curY = y;
+    u32 curX = x >> gRetroVision;
+    u32 curY = y >> gRetroVision;
 
     u32 xStride; // X separation
 
     if (hudLUT == HUD_LUT_JPMENU) {
-        xStride = 16;
+        xStride = 16 >> gRetroVision;
     } else { // HUD_LUT_GLOBAL
-        xStride = 12; //? Shindou uses this.
+        xStride = 12 >> gRetroVision; //? Shindou uses this.
     }
 
     while (str[strPos] != GLOBAR_CHAR_TERMINATOR) {
         switch (str[strPos]) {
             case GLOBAL_CHAR_SPACE:
-                curX += 8;
+                curX += 8 >> gRetroVision;
                 break;
             default:
                 gDPPipeSync(gDisplayListHead++);
@@ -495,8 +497,8 @@ void print_hud_lut_string(s8 hudLUT, s16 x, s16 y, const u8 *str) {
                 }
 
                 gSPDisplayList(gDisplayListHead++, dl_rgba16_load_tex_block);
-                gSPTextureRectangle(gDisplayListHead++, curX << 2, curY << 2, (curX + 16) << 2,
-                                    (curY + 16) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
+                gSPTextureRectangle(gDisplayListHead++, curX << 2, curY << 2, (curX + (16 >> gRetroVision)) << 2,
+                                    (curY + (16 >> gRetroVision)) << 2, G_TX_RENDERTILE, 0, 0, (1 << gRetroVision) << 10, (1 << gRetroVision) << 10);
 
                 curX += xStride;
         }
@@ -1525,8 +1527,10 @@ void render_pause_red_coins(void) {
         if (mtx == NULL) {
             return;
         }
-        guOrtho(mtx, 0.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT, -10.0f, 10.0f, 1.0f);
-        gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx), G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
+        guOrtho(mtx, 0.0f, 320 << gRetroVision, 0, 240 << gRetroVision, -10.0f, 10.0f, 1.0f);
+
+        gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx), G_MTX_PROJECTION | G_MTX_MUL | G_MTX_NOPUSH);
+        create_dl_translation_matrix(MENU_MTX_NOPUSH, 0, 240 * gRetroVision, 0);
         gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
 
         s8 redCoinCount = gRedCoinsCollected;

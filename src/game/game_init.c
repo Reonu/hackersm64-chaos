@@ -163,14 +163,14 @@ void init_z_buffer(s32 resetZB) {
     gDPSetDepthSource(tempGfxHead++, G_ZS_PIXEL);
     gDPSetDepthImage(tempGfxHead++, gPhysicalZBuffer);
 
-    gDPSetColorImage(tempGfxHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, gPhysicalZBuffer);
+    gDPSetColorImage(tempGfxHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, gScreenWidth, gPhysicalZBuffer);
     if (!resetZB)
         return;
     gDPSetFillColor(tempGfxHead++,
                     GPACK_ZDZ(G_MAXFBZ, 0) << 16 | GPACK_ZDZ(G_MAXFBZ, 0));
 
-    gDPFillRectangle(tempGfxHead++, 0, gBorderHeight, SCREEN_WIDTH - 1,
-                     SCREEN_HEIGHT - 1 - gBorderHeight);
+    gDPFillRectangle(tempGfxHead++, 0, gBorderHeight, gScreenWidth - 1,
+                     gScreenHeight - 1 - gBorderHeight);
 
     gDisplayListHead = tempGfxHead;
 }
@@ -184,10 +184,10 @@ void select_framebuffer(void) {
     gDPPipeSync(tempGfxHead++);
 
     gDPSetCycleType(tempGfxHead++, G_CYC_1CYCLE);
-    gDPSetColorImage(tempGfxHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+    gDPSetColorImage(tempGfxHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, gScreenWidth,
                      gPhysicalFramebuffers[sRenderingFramebuffer]);
-    gDPSetScissor(tempGfxHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
-                  SCREEN_HEIGHT - gBorderHeight);
+    gDPSetScissor(tempGfxHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, gScreenWidth,
+                  gScreenHeight - gBorderHeight);
 
     gDisplayListHead = tempGfxHead;
 }
@@ -207,7 +207,7 @@ void clear_framebuffer(s32 color) {
     gDPSetFillColor(tempGfxHead++, color);
     gDPFillRectangle(tempGfxHead++,
                      GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(0), gBorderHeight,
-                     GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(0) - 1, SCREEN_HEIGHT - gBorderHeight - 1);
+                     gScreenWidth - 1, gScreenHeight - gBorderHeight - 1);
 
     gDPPipeSync(tempGfxHead++);
 

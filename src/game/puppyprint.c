@@ -1054,7 +1054,7 @@ void puppyprint_chaos(void) {
         }
     }
     if (gPlayer1Controller->buttonPressed & (R_JPAD)) {
-        globalChaosFlags |= (1 << gPuppyPrintChaosSelect);
+        chaos_enable(gPuppyPrintChaosSelect);
     }
 
     if (gPlayer1Controller->buttonPressed & (L_JPAD)) {

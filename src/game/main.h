@@ -97,6 +97,9 @@ extern s8 gDebugLevelSelect;
 extern s8 gShowDebugText;
 #endif
 
+extern s32 gScreenWidth;
+extern s32 gScreenHeight;
+
 // Special struct that keeps track of whether its timer has been set.
 //  Without this check, there is a bug at high CPU loads in which
 //  the RCP timer gets set twice and the game tries to
