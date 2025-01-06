@@ -18,6 +18,8 @@
 #include "string.h"
 #include "color_presets.h"
 #include "emutest.h"
+#include "chaos_codes.h"
+#include "fb_effects.h"
 
 #include "config.h"
 #include "config/config_world.h"
@@ -1282,6 +1284,10 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
             print_text_fmt_int(180, 36, "MEM %d", gDisplayListHeap->totalSpace - gDisplayListHeap->usedSpace);
         }
 #endif
+
+        if (gBlurVision) {
+            render_fb_effects();
+        }
         main_pool_free(gDisplayListHeap);
     }
 }

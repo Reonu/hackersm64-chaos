@@ -1039,6 +1039,7 @@ void puppyprint_chaos(void) {
     char *okay1 = "true";
     char *okay2 = "false";
     char *useOkay;
+    char textBytes[32];
 
     if (gPlayer1Controller->buttonPressed & D_JPAD) {
         gPuppyPrintChaosSelect++;
@@ -1084,10 +1085,11 @@ void puppyprint_chaos(void) {
             useOkay = okay2;
         }
         print_small_text_light((SCREEN_WIDTH / 2) + 76, y, useOkay, PRINT_TEXT_ALIGN_RIGHT, PRINT_ALL, FONT_DEFAULT);
+        sprintf(textBytes, "%d", gChaosCodeTimers[i]);
+        print_small_text_light((SCREEN_WIDTH / 2) + 80, y, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_DEFAULT);
         y += 12;
     }
 
-    char textBytes[32];
     sprintf(textBytes, "Active Flags: %08X", (u32) (globalChaosFlags << 32));
     sprintf(textBytes, "%s%08X", textBytes, (u32) (globalChaosFlags));
     print_small_text_light(16, SCREEN_HEIGHT - 24, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
