@@ -8,6 +8,8 @@
 #include "include/object_constants.h"
 #include "puppyprint.h"
 #include "sm64.h"
+#include "object_helpers.h"
+#include "engine/math_util.h"
 
 
 u64 globalChaosFlags = GLOBAL_CHAOS_FLAG_NONE;
