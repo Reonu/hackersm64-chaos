@@ -22,6 +22,10 @@ void chaos_cannon(void) {
     globalChaosFlags &= ~GLOBAL_CHAOS_FLAG_ENTER_CANNON;
 }
 
+void chaos_fall_damage(void) {
+    //stub until we figure out timers :)
+}
+
 // Not final, just there to have a different func
 void chaos_trip(void) {
     gMarioState->action = ACT_HARD_BACKWARD_GROUND_KB;
@@ -30,7 +34,7 @@ void chaos_trip(void) {
 
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon},
-    {"Fall Damage", chaos_trip},
+    {"Fall Damage", chaos_fall_damage},
     {"Trip", chaos_trip},
 };
 

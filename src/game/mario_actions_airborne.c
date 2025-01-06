@@ -16,6 +16,7 @@
 #include "rumble_init.h"
 
 #include "config.h"
+#include "src/game/chaos_codes.h"
 
 void play_flip_sounds(struct MarioState *m, s16 frame1, s16 frame2, s16 frame3) {
     s32 animFrame = m->marioObj->header.gfx.animInfo.animFrame;
@@ -68,9 +69,15 @@ s32 check_fall_damage(struct MarioState *m, u32 hardFallAction) {
 
     f32 damageHeight = FALL_DAMAGE_HEIGHT_SMALL;
 
+    f32 chaosLargeDamageHeight = 200;
+    if (globalChaosFlags & GLOBAL_CHAOS_FLAG_FALL_DAMAGE_THRESHOLD) {
+        damageHeight = 100;
+    }
+
     if (m->action != ACT_TWIRLING && m->floor->type != SURFACE_BURNING) {
-        if (m->vel[1] < -55.0f) {
-            if (fallHeight > FALL_DAMAGE_HEIGHT_LARGE) {
+        if ((m->vel[1] < -55.0f) || (globalChaosFlags & GLOBAL_CHAOS_FLAG_FALL_DAMAGE_THRESHOLD)) {
+            if ((fallHeight > FALL_DAMAGE_HEIGHT_LARGE) || 
+            ((globalChaosFlags & GLOBAL_CHAOS_FLAG_FALL_DAMAGE_THRESHOLD) && fallHeight > chaosLargeDamageHeight)) {
                 m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 16 : 24;
 #if ENABLE_RUMBLE
                 queue_rumble_data(5, 80);
