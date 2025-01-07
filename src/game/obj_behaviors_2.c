@@ -463,6 +463,8 @@ static s32 obj_resolve_collisions_and_turn(s16 targetYaw, s16 turnSpeed) {
     }
 }
 
+#include "chaos_codes.h"
+
 static void obj_die_if_health_non_positive(void) {
     if (o->oHealth <= 0) {
         if (o->oDeathSound == 0) {
@@ -486,6 +488,7 @@ static void obj_die_if_health_non_positive(void) {
             cur_obj_become_intangible();
         } else {
             obj_mark_for_deletion(o);
+            gCrimes += 80.0f;
         }
     }
 }

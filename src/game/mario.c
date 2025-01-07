@@ -96,7 +96,7 @@ s16 set_custom_mario_animation(struct MarioState *m, s32 targetAnimID) {
     struct Object *o = m->marioObj;
 
     if (o->header.gfx.animInfo.animID != targetAnimID) {
-        struct Animation **animPtrAddr = &mario_anims[targetAnimID];
+        struct Animation **animPtrAddr = (struct Animation **) &mario_anims[targetAnimID];
         struct Animation **animSegmented = segmented_to_virtual(animPtrAddr);
         struct Animation *targetAnim = segmented_to_virtual(*animSegmented);
 

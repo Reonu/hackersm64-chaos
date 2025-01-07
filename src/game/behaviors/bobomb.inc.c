@@ -34,8 +34,10 @@ void bobomb_act_explode(void) {
         struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
         explosion->oGraphYOffset += 100.0f;
 
-        bobomb_spawn_coin();
-        create_respawner(MODEL_BLACK_BOBOMB, bhvBobomb, 3000);
+        if (o->oBehParams2ndByte != 0x20) {
+            bobomb_spawn_coin();
+            create_respawner(MODEL_BLACK_BOBOMB, bhvBobomb, 3000);
+        }
 
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
@@ -165,7 +167,7 @@ void stationary_bobomb_free_loop(void) {
 }
 
 void bobomb_free_loop(void) {
-    if (o->oBehParams2ndByte == BOBOMB_BP_STYPE_GENERIC) {
+    if (o->oBehParams2ndByte == BOBOMB_BP_STYPE_GENERIC || o->oBehParams2ndByte == 0x20) {
         generic_bobomb_free_loop();
     } else {
         stationary_bobomb_free_loop();

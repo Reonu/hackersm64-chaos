@@ -2,6 +2,8 @@
 
 #define SPAWN_CASTLE_BOO_STAR_REQUIREMENT 12
 
+#include "game/chaos_codes.h"
+
 static struct ObjectHitbox sBooGivingStarHitbox = {
     /* interactType:      */ 0,
     /* downOffset:        */ 0,
@@ -85,6 +87,7 @@ void bhv_courtyard_boo_triplet_init(void) {
 #ifndef UNLOCK_ALL
     if (gHudDisplay.stars < SPAWN_CASTLE_BOO_STAR_REQUIREMENT) {
         obj_mark_for_deletion(o);
+        gCrimes += 80.0f;
     } else
 #endif
     {
@@ -439,6 +442,7 @@ static void boo_act_2(void) {
 static void boo_act_3(void) {
     if (boo_update_during_death()) {
         if (o->oBehParams2ndByte != 0) {
+            gCrimes += 80.0f;
             obj_mark_for_deletion(o);
         } else {
             o->oAction = 4;
@@ -461,6 +465,7 @@ static void boo_act_4(void) {
     if (cur_obj_update_dialog(MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_TEXT_DEFAULT, dialogID, 0)) {
         create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
         obj_mark_for_deletion(o);
+        gCrimes += 80.0f;
 
         if (dialogID == DIALOG_108) { // If the Big Boo should spawn, play the jingle
             play_puzzle_jingle();
@@ -632,9 +637,11 @@ static void big_boo_act_4(void) {
             spawn_object_relative(2, 0, 0,  200, o, MODEL_BBH_STAIRCASE_STEP, bhvBooStaircase);
 
             obj_mark_for_deletion(o);
+            gCrimes += 80.0f;
         }
     } else {
         obj_mark_for_deletion(o);
+        gCrimes += 80.0f;
     }
 }
 
@@ -703,6 +710,7 @@ static void boo_with_cage_act_2(void) {
 static void boo_with_cage_act_3(void) {
     if (boo_update_during_death()) {
         obj_mark_for_deletion(o);
+        gCrimes += 80.0f;
     }
 }
 
@@ -710,6 +718,7 @@ void bhv_boo_with_cage_init(void) {
 #ifndef UNLOCK_ALL
     if (gHudDisplay.stars < SPAWN_CASTLE_BOO_STAR_REQUIREMENT) {
         obj_mark_for_deletion(o);
+        gCrimes += 80.0f;
     } else
 #endif
     {
@@ -794,6 +803,7 @@ void bhv_boo_in_castle_loop(void) {
 #ifndef UNLOCK_ALL
         if (gHudDisplay.stars < SPAWN_CASTLE_BOO_STAR_REQUIREMENT) {
             obj_mark_for_deletion(o);
+            gCrimes += 80.0f;
         }
 #endif
         if (gMarioCurrentRoom == 1) {

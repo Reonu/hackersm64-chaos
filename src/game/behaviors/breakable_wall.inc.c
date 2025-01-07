@@ -1,5 +1,7 @@
 // breakable_wall.inc.c
 
+#include "game/chaos_codes.h"
+
 void bhv_wf_breakable_wall_loop(void) {
     if (gMarioState->action == ACT_SHOT_FROM_CANNON) {
         cur_obj_become_tangible();
@@ -15,6 +17,7 @@ void bhv_wf_breakable_wall_loop(void) {
             o->oDamageOrCoinValue = 1;
 
             obj_explode_and_spawn_coins(80.0f, COIN_TYPE_NONE);
+            gCrimes += 200.0f;
         }
     } else {
         cur_obj_become_intangible();

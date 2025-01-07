@@ -12,6 +12,8 @@ struct ObjectHitbox sBreakableBoxHitbox = {
     /* hurtboxHeight:     */ 200,
 };
 
+#include "game/chaos_codes.h"
+
 void breakable_box_init(void) {
     o->oHiddenObjectSwitchObj = NULL;
     o->oAnimState = BREAKABLE_BOX_ANIM_STATE_CORK_BOX;
@@ -51,6 +53,7 @@ void hidden_breakable_box_actions(void) {
                 spawn_mist_particles();
                 spawn_triangle_break_particles(30, MODEL_DIRT_ANIMATION, 3.0f, TINY_DIRT_PARTICLE_ANIM_STATE_YELLOW);
                 o->oAction = BREAKABLE_BOX_ACT_BROKEN;
+                gCrimes += 50.0f;
                 cur_obj_play_sound_2(SOUND_GENERAL_BREAK_BOX);
             }
             load_object_collision_model();

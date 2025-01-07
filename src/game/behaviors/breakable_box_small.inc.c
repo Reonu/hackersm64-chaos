@@ -12,6 +12,8 @@ struct ObjectHitbox sBreakableBoxSmallHitbox = {
     /* hurtboxHeight:     */ 250,
 };
 
+#include "game/chaos_codes.h"
+
 void bhv_breakable_box_small_init(void) {
     o->oGravity = 2.5f;
     o->oFriction = 0.99f;
@@ -49,6 +51,7 @@ void small_breakable_box_act_move(void) {
         spawn_triangle_break_particles(20, MODEL_DIRT_ANIMATION, 0.7f, 3);
         obj_spawn_yellow_coins(o, 3);
         create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
+        gCrimes += 50.0f;
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
 

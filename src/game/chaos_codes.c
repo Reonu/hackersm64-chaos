@@ -20,6 +20,8 @@
 u64 globalChaosFlags = GLOBAL_CHAOS_FLAG_NONE;
 s32 nextGlobalCodeTimer = 150;
 u32 gCurrentChaosID;
+float gCrimes = 0;
+s32 gCrimeSpawnTimer;
 u8 gDisableChaos = TRUE;
 u8 gRetroVision = FALSE;
 u8 gBlurVision = FALSE;
@@ -27,6 +29,7 @@ u8 gLowFPS = FALSE;
 u8 gTankControls = FALSE;
 u8 gFlipInputs = FALSE;
 u8 gDimLights = FALSE;
+u8 gLawMetre = FALSE;
 
 extern s32 gChaosCodeTimers[];
 extern OSViMode VI;
@@ -150,6 +153,29 @@ void chaos_tank_controls(void) {
     }
 }
 
+void chaos_lawmetre(void) {
+    if (gLawMetre == FALSE) {
+        gLawMetre = TRUE;
+        gCrimes = 0.0f;
+        gCrimeSpawnTimer = 0;
+    }
+    
+    s32 repeat = gCrimes / 100.0f;
+
+    if (gCrimes > 100.0f) {
+        gCrimeSpawnTimer--;
+        if (gCrimeSpawnTimer <= 0) {
+            struct Object *bombOmb = spawn_object_relative(0x20, 0, 300, 0, gMarioState->marioObj, MODEL_BLACK_BOBOMB, bhvBobomb);
+            gCrimeSpawnTimer = 150 / repeat;
+        }
+    }
+    gChaosCodeTimers[gCurrentChaosID]--;
+    if (gChaosCodeTimers[gCurrentChaosID] <= 0) {
+        gLawMetre = FALSE;
+        globalChaosFlags &= ~(1 << gCurrentChaosID);
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0},
     {"Fall Damage", chaos_fall_damage, 15, 30, 0},
@@ -164,6 +190,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Tank Controls", chaos_tank_controls, 15, 30, 0},
     {"Invert Controls", chaos_flipinput, 20, 30, 0},
     {"Dim Lights", chaos_dimlights, 30, 60, 0},
+    {"Law Metre", chaos_lawmetre, 45, 80, 0},
 };
 
 s32 gChaosCodeTimers[sizeof(gChaosCodeTable) / sizeof(ChaosCode)];

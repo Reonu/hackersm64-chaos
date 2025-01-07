@@ -1,3 +1,4 @@
+#pragma once
 #include "include/types.h"
 
 enum GlobalChaosFlags {
@@ -28,8 +29,8 @@ typedef struct ChaosCode {
     unsigned int flags;
 } ChaosCode;
 
-extern ChaosCode gChaosCodeTable[11];
-extern s32 gChaosCodeTimers[11];
+extern ChaosCode gChaosCodeTable[14];
+extern s32 gChaosCodeTimers[14];
 extern u64 globalChaosFlags;
 extern u8 gDisableChaos;
 extern u8 gRetroVision;
@@ -38,6 +39,8 @@ extern u8 gLowFPS;
 extern u8 gTankControls;
 extern u8 gFlipInputs;
 extern u8 gDimLights;
+extern u8 gLawMetre;
+extern float gCrimes;
 
 #define CHAOSCOUNT (sizeof(gChaosCodeTable) / sizeof(ChaosCode))
 

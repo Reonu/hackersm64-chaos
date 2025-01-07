@@ -52,6 +52,8 @@ s16 bhv_falling_pillar_calculate_angle_in_front_of_mario(void) {
     return atan2s(targetZ - o->oPosZ, targetX - o->oPosX);
 }
 
+#include "game/chaos_codes.h"
+
 /**
  * Falling pillar main logic loop.
  */
@@ -107,6 +109,7 @@ void bhv_falling_pillar_loop(void) {
                 // Make the camera shake and spawn dust clouds.
                 set_camera_shake_from_point(SHAKE_POS_MEDIUM, o->oPosX, o->oPosY, o->oPosZ);
                 spawn_mist_particles_variable(0, 0, 92.0f);
+                gCrimes += 50.0f;
 
                 // Go invisible.
                 o->activeFlags = ACTIVE_FLAG_DEACTIVATED;

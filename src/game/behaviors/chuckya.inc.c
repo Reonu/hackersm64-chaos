@@ -1,5 +1,7 @@
 // chuckya.inc.c
 
+#include "game/chaos_codes.h"
+
 void common_anchor_mario_behavior(f32 forwardVel, f32 yVel, s32 flag) {
     switch (o->parentObj->oCommonAnchorAction) {
         case 0:
@@ -150,6 +152,7 @@ void chuckya_act_3(void) {
 
 void chuckya_act_2(void) {
     if (o->oMoveFlags & (OBJ_MOVE_HIT_WALL | OBJ_MOVE_MASK_IN_WATER | OBJ_MOVE_LANDED)) {
+        gCrimes += 100.0f;
         obj_mark_for_deletion(o);
         obj_spawn_loot_yellow_coins(o, 5, 20.0f);
         spawn_mist_particles_with_sound(SOUND_OBJ_CHUCKYA_DEATH);

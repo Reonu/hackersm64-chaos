@@ -306,8 +306,11 @@ static void eyerok_hand_act_close(void) {
     }
 }
 
+#include "game/chaos_codes.h"
+
 static void eyerok_hand_act_attacked(void) {
     if (cur_obj_init_anim_and_check_if_end(3)) {
+        gCrimes += 50.0f;
         o->oAction = EYEROK_HAND_ACT_RECOVER;
         o->collisionData = segmented_to_virtual(ssl_seg7_collision_07028274);
     }

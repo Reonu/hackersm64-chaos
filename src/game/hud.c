@@ -547,6 +547,30 @@ void render_hud_camera_status(void) {
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
 
+void render_law_metre(void) {
+    gCrimes -= 0.3f;
+
+    if (gCrimes < 0.0f) {
+        gCrimes = 0.0f;
+    }
+
+    if (gCrimes > 599.9f) {
+        gCrimes = 599.9f;
+    }
+
+    s32 repeat = gCrimes / 100.0f;
+    s32 x = (SCREEN_WIDTH / 2) - 48;
+
+    for (int i = 0; i < 5; i++) {
+        if (i >= repeat) {
+            print_text(x >> gRetroVision, (240 - 48) >> gRetroVision, "*");
+        } else {
+            print_text(x >> gRetroVision, (240 - 48) >> gRetroVision, "^");
+        }
+        x += 16;
+    }
+}
+
 /**
  * Render HUD strings using hudDisplayFlags with it's render functions,
  * excluding the cannon reticle which detects a camera preset for it.
@@ -601,6 +625,10 @@ void render_hud(void) {
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
             render_hud_keys();
+        }
+
+        if (gLawMetre) {
+            render_law_metre();
         }
 
 #ifdef BREATH_METER

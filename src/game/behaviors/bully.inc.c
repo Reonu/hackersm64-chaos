@@ -24,6 +24,8 @@ static struct ObjectHitbox sBigBullyHitbox = {
     /* hurtboxHeight:     */ 225,
 };
 
+#include "game/chaos_codes.h"
+
 void bhv_small_bully_init(void) {
     cur_obj_init_animation(0);
     vec3f_copy(&o->oHomeVec, &o->oPosVec);
@@ -205,6 +207,7 @@ void bully_act_level_death(void) {
                 spawn_object_abs_with_rot(o, 0, MODEL_NONE, bhvLllTumblingBridge,
                                           0, 154, -5631, 0, 0, 0);
             }
+            gCrimes += 80.0f;
         }
     }
 }

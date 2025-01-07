@@ -16,6 +16,8 @@ void dorrie_raise_head(void) {
     );
 }
 
+#include "game/chaos_codes.h"
+
 void dorrie_act_move(void) {
     s16 startYaw = o->oMoveAngleYaw;
     s16 targetYaw;
@@ -30,6 +32,7 @@ void dorrie_act_move(void) {
         o->oAction = DORRIE_ACT_LOWER_HEAD;
         o->oForwardVel = 0.0f;
         o->oDorrieYawVel = 0;
+        gCrimes += 50.0f;
     } else {
         if (gMarioObject->platform == o) {
             targetYaw = gMarioObject->oFaceAngleYaw;
