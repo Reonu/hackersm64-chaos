@@ -1250,27 +1250,51 @@ void debug_print_speed_action_normal(struct MarioState *m) {
  * Update the button inputs for Mario.
  */
 void update_mario_button_inputs(struct MarioState *m) {
-    if (m->controller->buttonPressed & A_BUTTON) m->input |= INPUT_A_PRESSED;
-    if (m->controller->buttonDown    & A_BUTTON) m->input |= INPUT_A_DOWN;
+    if (gFlipInputs) {
+        if (m->controller->buttonPressed & B_BUTTON) m->input |= INPUT_A_PRESSED;
+        if (m->controller->buttonDown    & B_BUTTON) m->input |= INPUT_A_DOWN;
+    } else {
+        if (m->controller->buttonPressed & A_BUTTON) m->input |= INPUT_A_PRESSED;
+        if (m->controller->buttonDown    & A_BUTTON) m->input |= INPUT_A_DOWN;
+    }
 
     // Don't update for these buttons if squished.
     if (m->squishTimer == 0) {
-        if (m->controller->buttonDown    & B_BUTTON) m->input |= INPUT_B_DOWN;
-        if (m->controller->buttonPressed & B_BUTTON) m->input |= INPUT_B_PRESSED;
+        if (gFlipInputs) {
+            if (m->controller->buttonDown    & A_BUTTON) m->input |= INPUT_B_DOWN;
+            if (m->controller->buttonPressed & A_BUTTON) m->input |= INPUT_B_PRESSED;
+        } else {
+            if (m->controller->buttonDown    & B_BUTTON) m->input |= INPUT_B_DOWN;
+            if (m->controller->buttonPressed & B_BUTTON) m->input |= INPUT_B_PRESSED;
+        }
         if (m->controller->buttonDown    & Z_TRIG  ) m->input |= INPUT_Z_DOWN;
         if (m->controller->buttonPressed & Z_TRIG  ) m->input |= INPUT_Z_PRESSED;
     }
 
-    if (m->input & INPUT_A_PRESSED) {
-        m->framesSinceA = 0;
-    } else if (m->framesSinceA < 0xFF) {
-        m->framesSinceA++;
-    }
+    if (gFlipInputs) {
+        if (m->input & INPUT_A_PRESSED) {
+            m->framesSinceB = 0;
+        } else if (m->framesSinceB < 0xFF) {
+            m->framesSinceB++;
+        }
 
-    if (m->input & INPUT_B_PRESSED) {
-        m->framesSinceB = 0;
-    } else if (m->framesSinceB < 0xFF) {
-        m->framesSinceB++;
+        if (m->input & INPUT_B_PRESSED) {
+            m->framesSinceA = 0;
+        } else if (m->framesSinceA < 0xFF) {
+            m->framesSinceA++;
+        }
+    } else {
+        if (m->input & INPUT_A_PRESSED) {
+            m->framesSinceA = 0;
+        } else if (m->framesSinceA < 0xFF) {
+            m->framesSinceA++;
+        }
+
+        if (m->input & INPUT_B_PRESSED) {
+            m->framesSinceB = 0;
+        } else if (m->framesSinceB < 0xFF) {
+            m->framesSinceB++;
+        }
     }
 }
 
@@ -1306,11 +1330,6 @@ void update_mario_joystick_inputs(struct MarioState *m) {
             m->intendedYaw = m->faceAngle[1];
         }
     }
-
-    print_text_fmt_int(32, 32, "%d", (s32) controller->rawStickX);
-    print_text_fmt_int(32, 48, "%d", (s32) controller->rawStickY);
-    print_text_fmt_int(32, 64, "%d", (s32) m->intendedMag);
-
 }
 
 /**
