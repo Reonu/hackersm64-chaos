@@ -374,6 +374,49 @@ void update_shell_speed(struct MarioState *m) {
     apply_slope_accel(m);
 }
 
+void update_kart_speed(struct MarioState *m) {
+    f32 maxTargetSpeed;
+    f32 targetSpeed;
+
+    if (m->floorHeight < m->waterLevel) {
+        set_mario_floor(m, &gWaterSurfacePseudoFloor, m->waterLevel);
+        m->floor->originOffset = -m->waterLevel;
+        // m->floor->originOffset = m->waterLevel; //! (Original code) Negative origin offset
+    }
+
+    if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
+        maxTargetSpeed = 48.0f;
+    } else {
+        maxTargetSpeed = 64.0f;
+    }
+
+    targetSpeed = m->intendedMag * 2.0f;
+    if (targetSpeed > maxTargetSpeed) {
+        targetSpeed = maxTargetSpeed;
+    }
+    if (targetSpeed < 24.0f) {
+        targetSpeed = 24.0f;
+    }
+
+    if (m->forwardVel <= 0.0f) {
+        m->forwardVel += 0.4f;
+    } else if (m->forwardVel <= targetSpeed) {
+        m->forwardVel += 1.1f - m->forwardVel / 58.0f;
+    } else if (m->floor->normal.y >= 0.95f) {
+        m->forwardVel -= 0.6f;
+    }
+
+    //! No backward speed cap (shell hyperspeed)
+    if (m->forwardVel > 64.0f) {
+        m->forwardVel = 64.0f;
+    }
+
+    m->faceAngle[1] =
+        m->intendedYaw - approach_s32((s16)(m->intendedYaw - m->faceAngle[1]), 0, 0x200, 0x200);
+
+    apply_slope_accel(m);
+}
+
 s32 apply_slope_decel(struct MarioState *m, f32 decelCoef) {
     f32 decel;
     s32 stopped = FALSE;
@@ -1245,6 +1288,52 @@ s32 act_riding_shell_ground(struct MarioState *m) {
     return FALSE;
 }
 
+s32 act_riding_kart(struct MarioState *m) {
+    if (m->actionTimer++ > 90) {
+    s16 startYaw = m->faceAngle[1];
+
+    //if (m->input & INPUT_A_PRESSED) {
+    //    return set_mario_action(m, ACT_RIDING_SHELL_JUMP, 0);
+    //}
+
+    if (m->input & INPUT_Z_PRESSED) {
+        mario_stop_riding_object(m);
+        if (m->forwardVel < 24.0f) {
+            mario_set_forward_vel(m, 24.0f);
+        }
+        return set_mario_action(m, ACT_CROUCH_SLIDE, 0);
+    }
+
+    update_kart_speed(m);
+    //set_mario_animation(m, m->actionArg == 0 ? MARIO_ANIM_START_RIDING_SHELL : MARIO_ANIM_RIDING_SHELL);
+
+    switch (perform_ground_step(m)) {
+        case GROUND_STEP_LEFT_GROUND:
+            set_mario_action(m, ACT_RIDING_SHELL_FALL, 0);
+            break;
+
+        case GROUND_STEP_HIT_WALL:
+            mario_stop_riding_object(m);
+            play_sound(m->flags & MARIO_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
+                       m->marioObj->header.gfx.cameraToObject);
+            m->particleFlags |= PARTICLE_VERTICAL_STAR;
+            set_mario_action(m, ACT_BACKWARD_GROUND_KB, 0);
+            break;
+    }
+    
+    if (m->forwardVel > 10.0f) {
+        if (m->floor->type == SURFACE_BURNING) {
+            play_sound(SOUND_MOVING_RIDING_SHELL_LAVA, m->marioObj->header.gfx.cameraToObject);
+        } else {
+            play_sound(SOUND_MOVING_TERRAIN_RIDING_SHELL + m->terrainSoundAddend,
+                    m->marioObj->header.gfx.cameraToObject);
+        }
+    }
+    }
+
+    return FALSE;
+}
+
 s32 act_crawling(struct MarioState *m) {
     if (should_begin_sliding(m)) {
         return set_mario_action(m, ACT_BEGIN_SLIDING, 0);
@@ -1984,6 +2073,7 @@ s32 mario_execute_moving_action(struct MarioState *m) {
         case ACT_FINISH_TURNING_AROUND:    cancel = act_finish_turning_around(m);    break;
         case ACT_BRAKING:                  cancel = act_braking(m);                  break;
         case ACT_RIDING_SHELL_GROUND:      cancel = act_riding_shell_ground(m);      break;
+        case ACT_RIDING_KART:      cancel = act_riding_kart(m);      break;
         case ACT_CRAWLING:                 cancel = act_crawling(m);                 break;
         case ACT_BURNING_GROUND:           cancel = act_burning_ground(m);           break;
         case ACT_DECELERATING:             cancel = act_decelerating(m);             break;

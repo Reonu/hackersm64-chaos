@@ -314,7 +314,7 @@ enum MarioActionFlags {
 
 // group 0x040: moving (ground) actions
 #define ACT_WALKING                    0x04000440 // (0x040 | ACT_FLAG_MOVING | ACT_FLAG_ALLOW_FIRST_PERSON)
-#define ACT_UNUSED_041                 0x00000041 // (0x041)
+#define ACT_RIDING_KART                (0x041 | ACT_FLAG_MOVING | ACT_FLAG_RIDING_SHELL | ACT_FLAG_ATTACKING | ACT_FLAG_WATER_OR_TEXT)
 #define ACT_HOLD_WALKING               0x00000442 // (0x042 | ACT_FLAG_MOVING)
 #define ACT_TURNING_AROUND             0x00000443 // (0x043 | ACT_FLAG_MOVING)
 #define ACT_FINISH_TURNING_AROUND      0x00000444 // (0x044 | ACT_FLAG_MOVING)

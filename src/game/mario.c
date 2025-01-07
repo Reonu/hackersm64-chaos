@@ -90,6 +90,36 @@ s16 set_mario_animation(struct MarioState *m, s32 targetAnimID) {
     return marioObj->header.gfx.animInfo.animFrame;
 }
 
+extern const struct Animation *const mario_anims[];
+
+s16 set_custom_mario_animation(struct MarioState *m, s32 targetAnimID) {
+    struct Object *o = m->marioObj;
+
+    if (o->header.gfx.animInfo.animID != targetAnimID) {
+        struct Animation **animPtrAddr = &mario_anims[targetAnimID];
+        struct Animation **animSegmented = segmented_to_virtual(animPtrAddr);
+        struct Animation *targetAnim = segmented_to_virtual(*animSegmented);
+
+        o->header.gfx.animInfo.animID = targetAnimID;
+        o->header.gfx.animInfo.curAnim = targetAnim;
+        o->header.gfx.animInfo.animAccel = 0;
+        o->header.gfx.animInfo.animYTrans = m->animYTrans;
+
+        if (targetAnim->flags & ANIM_FLAG_NO_ACCEL) {
+            o->header.gfx.animInfo.animFrame = targetAnim->startFrame;
+        } else {
+            if (targetAnim->flags & ANIM_FLAG_FORWARD) {
+                o->header.gfx.animInfo.animFrame = targetAnim->startFrame + 1;
+            } else {
+                o->header.gfx.animInfo.animFrame = targetAnim->startFrame - 1;
+            }
+        }
+    }
+
+    return o->header.gfx.animInfo.animFrame;
+}
+
+
 /**
  * Sets Mario's animation where the animation is sped up or
  * slowed down via acceleration.
@@ -1708,6 +1738,10 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     s32 inLoop = TRUE;
 
     global_chaos_code_handler();
+
+    if (gPlayer1Controller->buttonPressed & D_JPAD) {
+        spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
+    }
 
     // Updates once per frame:
     vec3f_get_dist_and_angle(gMarioState->prevPos, gMarioState->pos, &gMarioState->moveSpeed, &gMarioState->movePitch, &gMarioState->moveYaw);
