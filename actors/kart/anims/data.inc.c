@@ -4,3 +4,4 @@
 #include "anim_kart_left_idle.inc.c"
 #include "anim_kart_turn_right.inc.c"
 #include "anim_kart_right_idle.inc.c"
+#include "anim_kart_leave.inc.c"
