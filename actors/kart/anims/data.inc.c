@@ -1,0 +1,6 @@
+#include "anim_kart_spawn.inc.c"
+#include "anim_kart_idle.inc.c"
+#include "anim_kart_turn_left.inc.c"
+#include "anim_kart_left_idle.inc.c"
+#include "anim_kart_turn_right.inc.c"
+#include "anim_kart_right_idle.inc.c"

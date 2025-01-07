@@ -35,3 +35,7 @@
 #include "chao/anims/data.inc.c"
 #include "chao/anims/table.inc.c"
 #include "kart/model.inc.c"
+#include "kart/anims/data.inc.c"
+#include "kart/anims/table.inc.c"
+#include "mario/anims/data.inc.c"
+#include "mario/anims/table.inc.c"

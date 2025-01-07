@@ -337,4 +337,8 @@ extern const Gfx white_particle_small_unused_dl[];
 #include "chao/anim_header.h"
 #include "kart/geo_header.h"
 
+
+#include "kart/anim_header.h"
+
+#include "mario/anim_header.h"
 #endif
