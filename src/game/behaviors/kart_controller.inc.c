@@ -1,7 +1,7 @@
 #include "src/game/mario.h"
 
 void bhv_kart_controller_init(void) {
-    cur_obj_scale(0.4f);
+    cur_obj_scale(0.3f);
 }
 
 void bhv_kart_controller_loop(void) {
