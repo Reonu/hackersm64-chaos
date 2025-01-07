@@ -1783,6 +1783,10 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     vec3f_get_lateral_dist(gMarioState->prevPos, gMarioState->pos, &gMarioState->lateralSpeed);
     vec3f_copy(gMarioState->prevPos, gMarioState->pos);
 
+    if (globalChaosFlags & GLOBAL_CHAOS_FLAG_PAY_TO_MOVE) {
+        return 0;
+    }
+
     if (gMarioState->action) {
 #ifdef ENABLE_DEBUG_FREE_MOVE
         if (

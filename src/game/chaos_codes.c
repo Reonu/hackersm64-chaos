@@ -14,6 +14,7 @@
 #include "src/game/camera.h"
 #include "fb_effects.h"
 #include "print.h"
+#include "src/audio/external.h"
 
 
 u64 globalChaosFlags = GLOBAL_CHAOS_FLAG_NONE;
@@ -125,6 +126,21 @@ void chaos_mario_kart(void) {
     globalChaosFlags &= ~(1 << gCurrentChaosID);
 }
 
+void chaos_pay_to_move(void) {
+    if (gMarioState->numCoins >= 20) {
+        print_text(SCREEN_CENTER_X - 150, 180, "PAY 20 COINS TO MOVE");
+        if (gPlayer1Controller->buttonPressed & A_BUTTON) {
+            gMarioState->numCoins -= 20;
+            gHudDisplay.coins -= 20;
+            play_sound(SOUND_GENERAL_COIN, gGlobalSoundSource);
+            globalChaosFlags &= ~(1 << gCurrentChaosID);
+        }
+    }
+    else {
+        globalChaosFlags &= ~(1 << gCurrentChaosID);
+    }
+}
+
 void chaos_tank_controls(void) {
     gTankControls = TRUE;
     gChaosCodeTimers[gCurrentChaosID]--;
@@ -144,6 +160,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Blur Vision", chaos_blur, 15, 30, CODEFLAG_SCREEN},
     {"Low FPS", chaos_lowfps, 15, 30, 0},
     {"Mario Kart", chaos_mario_kart, 0, 0, 0},
+    {"Pay to Move", chaos_pay_to_move, 0, 0, 0},
     {"Tank Controls", chaos_tank_controls, 15, 30, 0},
     {"Invert Controls", chaos_flipinput, 20, 30, 0},
     {"Dim Lights", chaos_dimlights, 30, 60, 0},
