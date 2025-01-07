@@ -820,13 +820,18 @@ void cur_obj_update(void) {
     BhvCommandProc bhvCmdProc;
     s32 bhvProcResult;
 
-    if ((globalChaosFlags & GLOBAL_CHAOS_FLAG_NO_MODEL_IS_MARIO) && cur_obj_has_model(MODEL_NONE)) {
-        if (gBillboardMario) {
-            cur_obj_set_model(MODEL_MARIO_BILLBOARD);
-        } else {
-            cur_obj_set_model(MODEL_MARIO);
+    if (globalChaosFlags & GLOBAL_CHAOS_FLAG_NO_MODEL_IS_MARIO) {
+        if (!cur_obj_has_behavior(segmented_to_virtual(bhvMario))) {
+            if (cur_obj_has_model(MODEL_NONE) || cur_obj_has_model(MODEL_MARIO) || (cur_obj_has_model(MODEL_MARIO_BILLBOARD))) {
+                if (gBillboardMario) {
+                    cur_obj_set_model(MODEL_MARIO_BILLBOARD);
+                } else {
+                    cur_obj_set_model(MODEL_MARIO);
+                }
+            }
         }
-        
+    } else if ((cur_obj_has_model(MODEL_MARIO_BILLBOARD) || cur_obj_has_model(MODEL_MARIO)) && (!cur_obj_has_behavior(segmented_to_virtual(bhvMario)))) {
+        cur_obj_set_model(MODEL_NONE);
     }
 
     s32 inRoom = cur_obj_is_mario_in_room();
