@@ -1800,6 +1800,12 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         return 0;
     }
 
+    if (gBillboardMario) {
+        obj_set_model(gMarioObject, MODEL_MARIO_BILLBOARD);
+    } else {
+        obj_set_model(gMarioObject, MODEL_MARIO);
+    }
+
     if (gMarioState->action) {
 #ifdef ENABLE_DEBUG_FREE_MOVE
         if (

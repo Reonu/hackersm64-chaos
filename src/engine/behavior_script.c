@@ -821,7 +821,12 @@ void cur_obj_update(void) {
     s32 bhvProcResult;
 
     if ((globalChaosFlags & GLOBAL_CHAOS_FLAG_NO_MODEL_IS_MARIO) && cur_obj_has_model(MODEL_NONE)) {
-        cur_obj_set_model(MODEL_MARIO);
+        if (gBillboardMario) {
+            cur_obj_set_model(MODEL_MARIO_BILLBOARD);
+        } else {
+            cur_obj_set_model(MODEL_MARIO);
+        }
+        
     }
 
     s32 inRoom = cur_obj_is_mario_in_room();

@@ -19,3 +19,4 @@
 
 #include "chao/geo.inc.c"
 #include "kart/geo.inc.c"
+#include "mario_billboard/geo.inc.c"

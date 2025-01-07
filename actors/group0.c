@@ -39,3 +39,4 @@
 #include "kart/anims/table.inc.c"
 #include "mario/anims/data.inc.c"
 #include "mario/anims/table.inc.c"
+#include "mario_billboard/model.inc.c"

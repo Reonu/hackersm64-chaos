@@ -31,6 +31,7 @@ u8 gFlipInputs = FALSE;
 u8 gDimLights = FALSE;
 u8 gLawMetre = FALSE;
 u8 gTinyMario = FALSE;
+u8 gBillboardMario = FALSE;
 
 extern s32 gChaosCodeTimers[];
 extern OSViMode VI;
@@ -188,6 +189,17 @@ void chaos_tinymario(void) {
     }
 }
 
+void chaos_billboardmario(void) {
+    if (gBillboardMario == FALSE) {
+        gBillboardMario = TRUE;
+    }
+    gChaosCodeTimers[gCurrentChaosID]--;
+    if (gChaosCodeTimers[gCurrentChaosID] <= 0) {
+        gBillboardMario = FALSE;
+        globalChaosFlags &= ~(1 << gCurrentChaosID);
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0},
     {"Fall Damage", chaos_fall_damage, 15, 30, 0},
@@ -204,6 +216,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Dim Lights", chaos_dimlights, 30, 60, 0},
     {"Law Metre", chaos_lawmetre, 60, 90, 0},
     {"Tiny Mario", chaos_tinymario, 20, 35, 0},
+    {"Billboard Mario", chaos_billboardmario, 20, 35, 0},
 };
 
 s32 gChaosCodeTimers[sizeof(gChaosCodeTable) / sizeof(ChaosCode)];
