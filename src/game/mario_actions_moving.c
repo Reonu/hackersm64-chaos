@@ -462,11 +462,18 @@ s32 update_decelerating_speed(struct MarioState *m) {
 void update_walking_speed(struct MarioState *m) {
     f32 maxTargetSpeed;
     f32 targetSpeed;
+    f32 mul;
+
+    if (gTinyMario) {
+        mul = 0.33;
+    } else {
+        mul = 1.0f;
+    }
 
     if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
-        maxTargetSpeed = 24.0f;
+        maxTargetSpeed = 24.0f * mul;
     } else {
-        maxTargetSpeed = 32.0f;
+        maxTargetSpeed = 32.0f * mul;
     }
 
     targetSpeed = m->intendedMag < maxTargetSpeed ? m->intendedMag : maxTargetSpeed;
@@ -478,31 +485,31 @@ void update_walking_speed(struct MarioState *m) {
     if (gTankControls && m->controller->rawStickY < 0) {
         if (m->forwardVel >= 0.0f) {
             // Slow down if moving backwards
-            m->forwardVel -= 1.1f;
+            m->forwardVel -= 1.1f * mul;
         } else if (m->forwardVel <= -targetSpeed / 8) {
             // If accelerating
             m->forwardVel -= 1.1f - m->forwardVel / 43.0f;
         } else if (m->floor->normal.y >= 0.95f) {
-            m->forwardVel += 1.0f;
+            m->forwardVel += 1.0f * mul;
         }
-        if (m->forwardVel < -16.0f) {
-            m->forwardVel = -16.0f;
+        if (m->forwardVel < -16.0f * mul) {
+            m->forwardVel = -16.0f * mul;
         }
     } else {
         if (m->forwardVel <= 0.0f) {
             // Slow down if moving backwards
-            m->forwardVel += 1.1f;
+            m->forwardVel += 1.1f * mul;
         } else if (m->forwardVel <= targetSpeed) {
             // If accelerating
             m->forwardVel += 1.1f - m->forwardVel / 43.0f;
         } else if (m->floor->normal.y >= 0.95f) {
-            m->forwardVel -= 1.0f;
+            m->forwardVel -= 1.0f * mul;
         }
     }
 
 
-    if (m->forwardVel > 48.0f) {
-        m->forwardVel = 48.0f;
+    if (m->forwardVel > 48.0f * mul) {
+        m->forwardVel = 48.0f * mul;
     }
 
 #ifdef VELOCITY_BASED_TURN_SPEED
@@ -546,9 +553,16 @@ s32 should_begin_sliding(struct MarioState *m) {
 
 s32 check_ground_dive_or_punch(struct MarioState *m) {
     if (m->input & INPUT_B_PRESSED) {
+        f32 mul;
+
+        if (gTinyMario) {
+            mul = 0.33;
+        } else {
+            mul = 1.0f;
+        }
         //! Speed kick (shoutouts to SimpleFlips)
-        if (m->forwardVel >= 29.0f && m->controller->stickMag > 48.0f) {
-            m->vel[1] = 20.0f;
+        if (m->forwardVel >= 29.0f * mul && m->controller->stickMag > 48.0f) {
+            m->vel[1] = 20.0f * mul;
             return set_mario_action(m, ACT_DIVE, 1);
         }
 
@@ -566,7 +580,14 @@ s32 begin_braking_action(struct MarioState *m) {
         return set_mario_action(m, ACT_STANDING_AGAINST_WALL, 0);
     }
 
-    if (m->forwardVel >= 16.0f && m->floor->normal.y >= COS80) {
+    f32 mul;
+
+    if (gTinyMario) {
+        mul = 0.33;
+    } else {
+        mul = 1.0f;
+    }
+    if (m->forwardVel >= 16.0f * mul && m->floor->normal.y >= COS80) {
         return set_mario_action(m, ACT_BRAKING, 0);
     }
 
@@ -815,6 +836,13 @@ s32 act_walking(struct MarioState *m) {
     Vec3f startPos;
     s16 startYaw = m->faceAngle[1];
 
+    f32 mul;
+
+    if (gTinyMario) {
+        mul = 0.33;
+    } else {
+        mul = 1.0f;
+    }
     mario_drop_held_object(m);
 
     if (should_begin_sliding(m)) {
@@ -845,7 +873,7 @@ s32 act_walking(struct MarioState *m) {
 #ifdef SIDE_FLIP_AT_LOW_SPEEDS
     if (analog_stick_held_back(m) && m->forwardVel >= 0.0f) {
 #else
-    if (analog_stick_held_back(m) && m->forwardVel >= 16.0f) {
+    if (analog_stick_held_back(m) && m->forwardVel >= 16.0f * mul) {
 #endif
         return set_mario_action(m, ACT_TURNING_AROUND, 0);
     }
@@ -867,7 +895,7 @@ s32 act_walking(struct MarioState *m) {
 
         case GROUND_STEP_NONE:
             anim_and_audio_for_walk(m);
-            if (m->intendedMag - m->forwardVel > 16.0f) {
+            if (m->intendedMag - m->forwardVel > 16.0f * mul) {
                 m->particleFlags |= PARTICLE_DUST;
             }
             break;
@@ -1696,6 +1724,12 @@ s32 common_ground_knockback_action(struct MarioState *m, s32 animation, s32 chec
     if (playLandingSound) {
         play_mario_heavy_landing_sound_once(m, SOUND_ACTION_TERRAIN_BODY_HIT_GROUND);
     }
+    f32 mul;
+    if (gTinyMario) {
+        mul = 0.33;
+    } else {
+        mul = 1.0f;
+    }
 
     if (actionArg > 0) {
         play_sound_if_no_flag(m, SOUND_MARIO_ATTACKED, MARIO_MARIO_SOUND_PLAYED);
@@ -1703,11 +1737,11 @@ s32 common_ground_knockback_action(struct MarioState *m, s32 animation, s32 chec
         play_sound_if_no_flag(m, SOUND_MARIO_OOOF2, MARIO_MARIO_SOUND_PLAYED);
     }
 
-    if (m->forwardVel > 32.0f) {
-        m->forwardVel = 32.0f;
+    if (m->forwardVel > 32.0f * mul) {
+        m->forwardVel = 32.0f * mul;
     }
-    if (m->forwardVel < -32.0f) {
-        m->forwardVel = -32.0f;
+    if (m->forwardVel < -32.0f * mul) {
+        m->forwardVel = -32.0f * mul;
     }
 
     s32 animFrame = set_mario_animation(m, animation);

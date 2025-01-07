@@ -18,6 +18,7 @@
 #include "behavior_data.h"
 #include "level_table.h"
 #include "rumble_init.h"
+#include "chaos_codes.h"
 
 #define MIN_SWIM_STRENGTH 160
 #define MIN_SWIM_SPEED 16.0f
@@ -226,10 +227,17 @@ static void stationary_slow_down(struct MarioState *m) {
 
 static void update_swimming_speed(struct MarioState *m, f32 decelThreshold) {
     f32 buoyancy = get_buoyancy(m);
-    f32 maxSpeed = 28.0f;
+    f32 mul;
+
+    if (gTinyMario) {
+        mul = 0.33;
+    } else {
+        mul = 1.0f;
+    }
+    f32 maxSpeed = 28.0f * mul;
 
     if (m->action & ACT_FLAG_STATIONARY) {
-        m->forwardVel -= 2.0f;
+        m->forwardVel -= 2.0f * mul;
     }
 
     if (m->forwardVel < 0.0f) {
@@ -241,7 +249,7 @@ static void update_swimming_speed(struct MarioState *m, f32 decelThreshold) {
     }
 
     if (m->forwardVel > decelThreshold) {
-        m->forwardVel -= 0.5f;
+        m->forwardVel -= 0.5f * mul;
     }
 
     m->vel[0] = m->forwardVel * coss(m->faceAngle[0]) * sins(m->faceAngle[1]);

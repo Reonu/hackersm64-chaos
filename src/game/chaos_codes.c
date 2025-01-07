@@ -30,6 +30,7 @@ u8 gTankControls = FALSE;
 u8 gFlipInputs = FALSE;
 u8 gDimLights = FALSE;
 u8 gLawMetre = FALSE;
+u8 gTinyMario = FALSE;
 
 extern s32 gChaosCodeTimers[];
 extern OSViMode VI;
@@ -176,6 +177,17 @@ void chaos_lawmetre(void) {
     }
 }
 
+void chaos_tinymario(void) {
+    if (gTinyMario == FALSE) {
+        gTinyMario = TRUE;
+    }
+    gChaosCodeTimers[gCurrentChaosID]--;
+    if (gChaosCodeTimers[gCurrentChaosID] <= 0) {
+        gTinyMario = FALSE;
+        globalChaosFlags &= ~(1 << gCurrentChaosID);
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0},
     {"Fall Damage", chaos_fall_damage, 15, 30, 0},
@@ -183,14 +195,15 @@ ChaosCode gChaosCodeTable[] = {
     {"Upside Down Camera", chaos_upside_down_camera, 10, 20, 0},
     {"Model None Mario", chaos_no_model_is_mario, 10, 20, 0},
     {"Retro Vision", chaos_retro, 15, 30, CODEFLAG_SCREEN},
-    {"Blur Vision", chaos_blur, 15, 30, CODEFLAG_SCREEN},
+    {"Blur Vision", chaos_blur, 20, 30, CODEFLAG_SCREEN},
     {"Low FPS", chaos_lowfps, 15, 30, 0},
     {"Mario Kart", chaos_mario_kart, 0, 0, 0},
     {"Pay to Move", chaos_pay_to_move, 0, 0, 0},
     {"Tank Controls", chaos_tank_controls, 15, 30, 0},
     {"Invert Controls", chaos_flipinput, 20, 30, 0},
     {"Dim Lights", chaos_dimlights, 30, 60, 0},
-    {"Law Metre", chaos_lawmetre, 45, 80, 0},
+    {"Law Metre", chaos_lawmetre, 60, 90, 0},
+    {"Tiny Mario", chaos_tinymario, 20, 35, 0},
 };
 
 s32 gChaosCodeTimers[sizeof(gChaosCodeTable) / sizeof(ChaosCode)];
