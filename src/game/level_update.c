@@ -33,6 +33,7 @@
 #include "puppyprint.h"
 #include "level_commands.h"
 #include "debug.h"
+#include "chaos_codes.h"
 
 #include "config.h"
 
@@ -1203,7 +1204,10 @@ UNUSED static s32 play_mode_unused(void) {
 
 s32 update_level(void) {
     s32 changeLevel = FALSE;
+    s32 repeat = FALSE;
+    s32 prevButtons = 0;
 
+    againBitch:
     switch (sCurrPlayMode) {
         case PLAY_MODE_NORMAL:
             changeLevel = play_mode_normal(); scroll_textures();
@@ -1220,6 +1224,16 @@ s32 update_level(void) {
         case PLAY_MODE_FRAME_ADVANCE:
             changeLevel = play_mode_frame_advance();
             break;
+    }
+    if (gLowFPS && repeat == FALSE) {
+        prevButtons = gPlayer1Controller->buttonPressed;
+        gPlayer1Controller->buttonPressed = 0;
+        repeat = TRUE;
+        goto againBitch;
+    }
+
+    if (gLowFPS) {
+        gPlayer1Controller->buttonPressed = prevButtons;
     }
 
     if (changeLevel) {

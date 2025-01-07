@@ -22,6 +22,7 @@ u32 gCurrentChaosID;
 u8 gDisableChaos = TRUE;
 u8 gRetroVision = FALSE;
 u8 gBlurVision = FALSE;
+u8 gLowFPS = FALSE;
 
 extern s32 gChaosCodeTimers[];
 extern OSViMode VI;
@@ -68,6 +69,15 @@ void chaos_blur(void) {
     }
 }
 
+void chaos_lowfps(void) {
+    gLowFPS = TRUE;
+    gChaosCodeTimers[gCurrentChaosID]--;
+    if (gChaosCodeTimers[gCurrentChaosID] <= 0) {
+        gLowFPS = FALSE;
+        globalChaosFlags &= ~(1 << gCurrentChaosID);
+    }
+}
+
 void chaos_upside_down_camera(void) {
     sFOVState.fovFunc = CAM_FOV_SET_315;
 }
@@ -84,6 +94,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Model None Mario", chaos_no_model_is_mario, 0, 0, 0},
     {"Retro Vision", chaos_retro, 15, 30, CODEFLAG_SCREEN},
     {"Blur Vision", chaos_blur, 15, 30, CODEFLAG_SCREEN},
+    {"Low FPS", chaos_lowfps, 15, 30, CODEFLAG_SCREEN},
 };
 
 s32 gChaosCodeTimers[sizeof(gChaosCodeTable) / sizeof(ChaosCode)];

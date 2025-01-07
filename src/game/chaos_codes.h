@@ -9,6 +9,7 @@ enum GlobalChaosFlags {
     GLOBAL_CHAOS_FLAG_NO_MODEL_IS_MARIO = (1 << 4),
     GLOBAL_CHAOS_FLAG_RETRO = (1 << 5),
     GLOBAL_CHAOS_FLAG_BLUR = (1 << 6),
+    GLOBAL_CHAOS_FLAG_LOWFPS = (1 << 6),
 };
 
 // A mark for exclusivity. Can only have one of thse effects active at a time.
@@ -25,12 +26,13 @@ typedef struct ChaosCode {
     unsigned int flags;
 } ChaosCode;
 
-extern ChaosCode gChaosCodeTable[7];
-extern s32 gChaosCodeTimers[7];
+extern ChaosCode gChaosCodeTable[8];
+extern s32 gChaosCodeTimers[8];
 extern u64 globalChaosFlags;
 extern u8 gDisableChaos;
 extern u8 gRetroVision;
 extern u8 gBlurVision;
+extern u8 gLowFPS;
 
 #define CHAOSCOUNT (sizeof(gChaosCodeTable) / sizeof(ChaosCode))
 

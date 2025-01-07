@@ -1731,6 +1731,8 @@ void queue_rumble_particles(struct MarioState *m) {
 }
 #endif
 
+extern u8 fDebug;
+
 /**
  * Main function for executing Mario's behavior. Returns particleFlags.
  */
@@ -1739,7 +1741,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
 
     global_chaos_code_handler();
 
-    if (gPlayer1Controller->buttonPressed & D_JPAD) {
+    if (gPlayer1Controller->buttonPressed & D_JPAD && fDebug == FALSE) {
         spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
     }
 
