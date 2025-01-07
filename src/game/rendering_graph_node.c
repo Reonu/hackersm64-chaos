@@ -1285,6 +1285,12 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
         }
 #endif
 
+        if (gDimLights) {
+            prepare_blank_box();
+            render_blank_box(0, 0, gScreenWidth, gScreenHeight, 0, 0, 0, 192);
+            finish_blank_box();
+        }
+
         if (gBlurVision) {
             render_fb_effects();
         }

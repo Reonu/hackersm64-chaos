@@ -26,8 +26,8 @@ typedef struct ChaosCode {
     unsigned int flags;
 } ChaosCode;
 
-extern ChaosCode gChaosCodeTable[10];
-extern s32 gChaosCodeTimers[10];
+extern ChaosCode gChaosCodeTable[11];
+extern s32 gChaosCodeTimers[11];
 extern u64 globalChaosFlags;
 extern u8 gDisableChaos;
 extern u8 gRetroVision;
@@ -35,6 +35,7 @@ extern u8 gBlurVision;
 extern u8 gLowFPS;
 extern u8 gTankControls;
 extern u8 gFlipInputs;
+extern u8 gDimLights;
 
 #define CHAOSCOUNT (sizeof(gChaosCodeTable) / sizeof(ChaosCode))
 

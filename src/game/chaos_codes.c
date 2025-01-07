@@ -25,6 +25,7 @@ u8 gBlurVision = FALSE;
 u8 gLowFPS = FALSE;
 u8 gTankControls = FALSE;
 u8 gFlipInputs = FALSE;
+u8 gDimLights = FALSE;
 
 extern s32 gChaosCodeTimers[];
 extern OSViMode VI;
@@ -89,6 +90,15 @@ void chaos_flipinput(void) {
     }
 }
 
+void chaos_dimlights(void) {
+    gDimLights = TRUE;
+    gChaosCodeTimers[gCurrentChaosID]--;
+    if (gChaosCodeTimers[gCurrentChaosID] <= 0) {
+        gDimLights = FALSE;
+        globalChaosFlags &= ~(1 << gCurrentChaosID);
+    }
+}
+
 void chaos_upside_down_camera(void) {
     sFOVState.fovFunc = CAM_FOV_SET_315;
 }
@@ -117,6 +127,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Low FPS", chaos_lowfps, 15, 30, 0},
     {"Tank Controls", chaos_tank_controls, 15, 30, 0},
     {"Invert Controls", chaos_flipinput, 20, 30, 0},
+    {"Dim Lights", chaos_dimlights, 30, 60, 0},
 };
 
 s32 gChaosCodeTimers[sizeof(gChaosCodeTable) / sizeof(ChaosCode)];
