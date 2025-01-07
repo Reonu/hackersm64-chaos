@@ -23,6 +23,7 @@ u8 gDisableChaos = TRUE;
 u8 gRetroVision = FALSE;
 u8 gBlurVision = FALSE;
 u8 gLowFPS = FALSE;
+u8 gTankControls = FALSE;
 
 extern s32 gChaosCodeTimers[];
 extern OSViMode VI;
@@ -86,6 +87,15 @@ void chaos_no_model_is_mario(void) {
     //also stub until timer
 }
 
+void chaos_tank_controls(void) {
+    gTankControls = TRUE;
+    gChaosCodeTimers[gCurrentChaosID]--;
+    if (gChaosCodeTimers[gCurrentChaosID] <= 0) {
+        gTankControls = FALSE;
+        globalChaosFlags &= ~(1 << gCurrentChaosID);
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0},
     {"Fall Damage", chaos_fall_damage, 0, 0, 0},
@@ -94,7 +104,8 @@ ChaosCode gChaosCodeTable[] = {
     {"Model None Mario", chaos_no_model_is_mario, 0, 0, 0},
     {"Retro Vision", chaos_retro, 15, 30, CODEFLAG_SCREEN},
     {"Blur Vision", chaos_blur, 15, 30, CODEFLAG_SCREEN},
-    {"Low FPS", chaos_lowfps, 15, 30, CODEFLAG_SCREEN},
+    {"Low FPS", chaos_lowfps, 15, 30, 0},
+    {"Tank Controls", chaos_tank_controls, 15, 30, 0},
 };
 
 s32 gChaosCodeTimers[sizeof(gChaosCodeTable) / sizeof(ChaosCode)];

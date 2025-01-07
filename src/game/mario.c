@@ -1287,12 +1287,30 @@ void update_mario_joystick_inputs(struct MarioState *m) {
         m->intendedMag = mag / 8.0f;
     }
 
-    if (m->intendedMag > 0.0f) {
-        m->intendedYaw = atan2s(-controller->stickY, controller->stickX) + m->area->camera->yaw;
-        m->input |= INPUT_NONZERO_ANALOG;
+    if (gTankControls) {
+        if (ABS(controller->rawStickX) > 8) {
+            m->intendedYaw -= controller->stickX * 16.0f;
+            m->faceAngle[1] = m->intendedYaw;
+        }
+        if (ABS(controller->rawStickY) > 8) {
+            m->intendedMag = (controller->stickY / 2.0f);
+            if (controller->rawStickX > 0) {
+            }
+            m->input |= INPUT_NONZERO_ANALOG;
+        }
     } else {
-        m->intendedYaw = m->faceAngle[1];
+        if (m->intendedMag > 0.0f) {
+            m->intendedYaw = atan2s(-controller->stickY, controller->stickX) + m->area->camera->yaw;
+            m->input |= INPUT_NONZERO_ANALOG;
+        } else {
+            m->intendedYaw = m->faceAngle[1];
+        }
     }
+
+    print_text_fmt_int(32, 32, "%d", (s32) controller->rawStickX);
+    print_text_fmt_int(32, 48, "%d", (s32) controller->rawStickY);
+    print_text_fmt_int(32, 64, "%d", (s32) m->intendedMag);
+
 }
 
 /**

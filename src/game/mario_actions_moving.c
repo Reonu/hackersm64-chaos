@@ -14,6 +14,7 @@
 #include "memory.h"
 #include "behavior_data.h"
 #include "rumble_init.h"
+#include "chaos_codes.h"
 
 #include "config.h"
 
@@ -474,15 +475,31 @@ void update_walking_speed(struct MarioState *m) {
         targetSpeed *= 6.25f / m->quicksandDepth;
     }
 
-    if (m->forwardVel <= 0.0f) {
-        // Slow down if moving backwards
-        m->forwardVel += 1.1f;
-    } else if (m->forwardVel <= targetSpeed) {
-        // If accelerating
-        m->forwardVel += 1.1f - m->forwardVel / 43.0f;
-    } else if (m->floor->normal.y >= 0.95f) {
-        m->forwardVel -= 1.0f;
+    if (gTankControls && m->controller->rawStickY < 0) {
+        if (m->forwardVel >= 0.0f) {
+            // Slow down if moving backwards
+            m->forwardVel -= 1.1f;
+        } else if (m->forwardVel <= -targetSpeed / 8) {
+            // If accelerating
+            m->forwardVel -= 1.1f - m->forwardVel / 43.0f;
+        } else if (m->floor->normal.y >= 0.95f) {
+            m->forwardVel += 1.0f;
+        }
+        if (m->forwardVel < -16.0f) {
+            m->forwardVel = -16.0f;
+        }
+    } else {
+        if (m->forwardVel <= 0.0f) {
+            // Slow down if moving backwards
+            m->forwardVel += 1.1f;
+        } else if (m->forwardVel <= targetSpeed) {
+            // If accelerating
+            m->forwardVel += 1.1f - m->forwardVel / 43.0f;
+        } else if (m->floor->normal.y >= 0.95f) {
+            m->forwardVel -= 1.0f;
+        }
     }
+
 
     if (m->forwardVel > 48.0f) {
         m->forwardVel = 48.0f;
