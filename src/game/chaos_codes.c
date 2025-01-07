@@ -37,7 +37,10 @@ void chaos_cannon(void) {
 }
 
 void chaos_fall_damage(void) {
-    //stub until we figure out timers :)
+    gChaosCodeTimers[gCurrentChaosID]--;
+    if (gChaosCodeTimers[gCurrentChaosID] <= 0) {
+        globalChaosFlags &= ~(1 << gCurrentChaosID);
+    }
 }
 
 // Not final, just there to have a different func
@@ -101,10 +104,25 @@ void chaos_dimlights(void) {
 
 void chaos_upside_down_camera(void) {
     sFOVState.fovFunc = CAM_FOV_SET_315;
+    gChaosCodeTimers[gCurrentChaosID]--;
+    if (gChaosCodeTimers[gCurrentChaosID] <= 0) {
+        sFOVState.fovFunc = CAM_FOV_DEFAULT;
+        globalChaosFlags &= ~(1 << gCurrentChaosID);
+    }
 }
 
 void chaos_no_model_is_mario(void) {
-    //also stub until timer
+    gChaosCodeTimers[gCurrentChaosID]--;
+    if (gChaosCodeTimers[gCurrentChaosID] <= 0) {
+        globalChaosFlags &= ~(1 << gCurrentChaosID);
+    }
+}
+
+void chaos_mario_kart(void) {
+    if (gMarioState->action != ACT_RIDING_KART) {
+        spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
+    }
+    globalChaosFlags &= ~(1 << gCurrentChaosID);
 }
 
 void chaos_tank_controls(void) {
@@ -118,13 +136,14 @@ void chaos_tank_controls(void) {
 
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0},
-    {"Fall Damage", chaos_fall_damage, 0, 0, 0},
+    {"Fall Damage", chaos_fall_damage, 15, 30, 0},
     {"Trip", chaos_trip, 0, 0, 0},
-    {"Upside Down Camera", chaos_upside_down_camera, 0, 0, 0},
-    {"Model None Mario", chaos_no_model_is_mario, 0, 0, 0},
+    {"Upside Down Camera", chaos_upside_down_camera, 10, 20, 0},
+    {"Model None Mario", chaos_no_model_is_mario, 10, 20, 0},
     {"Retro Vision", chaos_retro, 15, 30, CODEFLAG_SCREEN},
     {"Blur Vision", chaos_blur, 15, 30, CODEFLAG_SCREEN},
     {"Low FPS", chaos_lowfps, 15, 30, 0},
+    {"Mario Kart", chaos_mario_kart, 0, 0, 0},
     {"Tank Controls", chaos_tank_controls, 15, 30, 0},
     {"Invert Controls", chaos_flipinput, 20, 30, 0},
     {"Dim Lights", chaos_dimlights, 30, 60, 0},

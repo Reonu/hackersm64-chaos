@@ -1778,10 +1778,6 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
 
     global_chaos_code_handler();
 
-    if (gPlayer1Controller->buttonPressed & D_JPAD && fDebug == FALSE) {
-        spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
-    }
-
     // Updates once per frame:
     vec3f_get_dist_and_angle(gMarioState->prevPos, gMarioState->pos, &gMarioState->moveSpeed, &gMarioState->movePitch, &gMarioState->moveYaw);
     vec3f_get_lateral_dist(gMarioState->prevPos, gMarioState->pos, &gMarioState->lateralSpeed);

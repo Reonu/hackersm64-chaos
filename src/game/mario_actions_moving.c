@@ -386,9 +386,9 @@ void update_kart_speed(struct MarioState *m) {
     }
 
     if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
-        maxTargetSpeed = 48.0f;
+        maxTargetSpeed = 350.0f;
     } else {
-        maxTargetSpeed = 64.0f;
+        maxTargetSpeed = 350.0f;
     }
 
     targetSpeed = m->intendedMag * 2.0f;
@@ -402,14 +402,14 @@ void update_kart_speed(struct MarioState *m) {
     if (m->forwardVel <= 0.0f) {
         m->forwardVel += 0.4f;
     } else if (m->forwardVel <= targetSpeed) {
-        m->forwardVel += 1.1f - m->forwardVel / 58.0f;
+        m->forwardVel += 1.1f - m->forwardVel / 300.0f;
     } else if (m->floor->normal.y >= 0.95f) {
         m->forwardVel -= 0.6f;
     }
 
     //! No backward speed cap (shell hyperspeed)
-    if (m->forwardVel > 64.0f) {
-        m->forwardVel = 64.0f;
+    if (m->forwardVel > 350.0f) {
+        m->forwardVel = 350.0f;
     }
 
     m->faceAngle[1] =
@@ -1326,15 +1326,17 @@ s32 act_riding_kart(struct MarioState *m) {
 
     switch (perform_ground_step(m)) {
         case GROUND_STEP_LEFT_GROUND:
-            set_mario_action(m, ACT_RIDING_SHELL_FALL, 0);
+            set_mario_action(m, ACT_JUMP, 0);
+            m->vel[1] = 20.0f;
             break;
 
         case GROUND_STEP_HIT_WALL:
-            mario_stop_riding_object(m);
+            if (m->wall) {
+                m->faceAngle[1] += m->faceAngle[1] - (atan2s(m->wall->normal.z, m->wall->normal.x) + DEGREES(90));
+            }
             play_sound(m->flags & MARIO_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
                        m->marioObj->header.gfx.cameraToObject);
             m->particleFlags |= PARTICLE_VERTICAL_STAR;
-            set_mario_action(m, ACT_BACKWARD_GROUND_KB, 0);
             break;
     }
     

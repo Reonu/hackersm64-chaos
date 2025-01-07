@@ -9,7 +9,8 @@ enum GlobalChaosFlags {
     GLOBAL_CHAOS_FLAG_NO_MODEL_IS_MARIO = (1 << 4),
     GLOBAL_CHAOS_FLAG_RETRO = (1 << 5),
     GLOBAL_CHAOS_FLAG_BLUR = (1 << 6),
-    GLOBAL_CHAOS_FLAG_LOWFPS = (1 << 6),
+    GLOBAL_CHAOS_FLAG_LOWFPS = (1 << 7),
+    GLOBAL_CHAOS_FLAG_MARIO_KART = (1 << 8),
 };
 
 // A mark for exclusivity. Can only have one of thse effects active at a time.
