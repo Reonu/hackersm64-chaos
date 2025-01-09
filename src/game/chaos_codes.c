@@ -247,7 +247,6 @@ void global_chaos_code_handler(void) {
         ChaosCode *table;
         s32 size;
         int rand = random_u16() % 100;
-        print_text_fmt_int(32, 32, "%d", rand);
         if (rand >= 66) {
             table = chaos_level_table(&size);
         } else {
