@@ -820,10 +820,10 @@ void cur_obj_update(void) {
     BhvCommandProc bhvCmdProc;
     s32 bhvProcResult;
 
-    if (globalChaosFlags & GLOBAL_CHAOS_FLAG_NO_MODEL_IS_MARIO) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_NO_MODEL_IS_MARIO].active) {
         if (!cur_obj_has_behavior(segmented_to_virtual(bhvMario))) {
             if (cur_obj_has_model(MODEL_NONE) || cur_obj_has_model(MODEL_MARIO) || (cur_obj_has_model(MODEL_MARIO_BILLBOARD))) {
-                if (gBillboardMario) {
+                if (gChaosCodeTable[GLOBAL_CHAOS_BILLBOARD_MARIO].active) {
                     cur_obj_set_model(MODEL_MARIO_BILLBOARD);
                 } else {
                     cur_obj_set_model(MODEL_MARIO);

@@ -25,3 +25,4 @@
 #include "levels/ccm/areas/2/geo.inc.c"
 
 #include "levels/ccm/geo.inc.c"
+#include "levels/ccm/rock_volcano/geo.inc.c"

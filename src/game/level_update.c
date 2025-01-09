@@ -1225,14 +1225,14 @@ s32 update_level(void) {
             changeLevel = play_mode_frame_advance();
             break;
     }
-    if (gLowFPS && repeat == FALSE) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_LOWFPS].active && repeat == FALSE) {
         prevButtons = gPlayer1Controller->buttonPressed;
         gPlayer1Controller->buttonPressed = 0;
         repeat = TRUE;
         goto againBitch;
     }
 
-    if (gLowFPS) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_LOWFPS].active) {
         gPlayer1Controller->buttonPressed = prevButtons;
     }
 

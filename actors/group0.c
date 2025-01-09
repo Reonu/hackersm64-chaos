@@ -40,3 +40,4 @@
 #include "mario/anims/data.inc.c"
 #include "mario/anims/table.inc.c"
 #include "mario_billboard/model.inc.c"
+#include "bobomb_cop/model.inc.c"

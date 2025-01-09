@@ -464,7 +464,7 @@ void update_walking_speed(struct MarioState *m) {
     f32 targetSpeed;
     f32 mul;
 
-    if (gTinyMario) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active) {
         mul = 0.33;
     } else {
         mul = 1.0f;
@@ -482,7 +482,7 @@ void update_walking_speed(struct MarioState *m) {
         targetSpeed *= 6.25f / m->quicksandDepth;
     }
 
-    if (gTankControls && m->controller->rawStickY < 0) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_TANK_CONTROLS].active && m->controller->rawStickY < 0) {
         if (m->forwardVel >= 0.0f) {
             // Slow down if moving backwards
             m->forwardVel -= 1.1f * mul;
@@ -555,7 +555,7 @@ s32 check_ground_dive_or_punch(struct MarioState *m) {
     if (m->input & INPUT_B_PRESSED) {
         f32 mul;
 
-        if (gTinyMario) {
+        if (gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active) {
             mul = 0.33;
         } else {
             mul = 1.0f;
@@ -582,7 +582,7 @@ s32 begin_braking_action(struct MarioState *m) {
 
     f32 mul;
 
-    if (gTinyMario) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active) {
         mul = 0.33;
     } else {
         mul = 1.0f;
@@ -838,7 +838,7 @@ s32 act_walking(struct MarioState *m) {
 
     f32 mul;
 
-    if (gTinyMario) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active) {
         mul = 0.33;
     } else {
         mul = 1.0f;
@@ -1725,7 +1725,7 @@ s32 common_ground_knockback_action(struct MarioState *m, s32 animation, s32 chec
         play_mario_heavy_landing_sound_once(m, SOUND_ACTION_TERRAIN_BODY_HIT_GROUND);
     }
     f32 mul;
-    if (gTinyMario) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active) {
         mul = 0.33;
     } else {
         mul = 1.0f;

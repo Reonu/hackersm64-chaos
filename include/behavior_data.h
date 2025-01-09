@@ -545,3 +545,4 @@ extern const BehaviorScript bhvChao[];
 #endif // BEHAVIOR_DATA_H
 
 extern const BehaviorScript bhvKartController[];
+extern const BehaviorScript bhvRockVolcano[];

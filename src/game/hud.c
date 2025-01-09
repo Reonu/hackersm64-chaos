@@ -405,12 +405,12 @@ void render_hud_breath_meter(void) {
  * Renders the amount of lives Mario has.
  */
 void render_hud_mario_lives(void) {
-    s32 yOffset = gRetroVision * 8;
-    s32 x =GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22 >> gRetroVision); 
+    s32 yOffset = gChaosCodeTable[GLOBAL_CHAOS_RETRO].active * 8;
+    s32 x =GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22 >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active); 
     print_text(x, HUD_TOP_Y + yOffset, "&"); // 'Mario Head' glyph
-    x += 16 >> gRetroVision;
+    x += 16 >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
     print_text(x, HUD_TOP_Y + yOffset, "*"); // 'X' glyph
-    x += 16 >> gRetroVision;
+    x += 16 >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
     print_text_fmt_int(x, HUD_TOP_Y + yOffset, "%d", gHudDisplay.lives);
 }
 
@@ -430,12 +430,12 @@ void render_debug_mode(void) {
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) {
-    s32 x = HUD_COINS_X >> gRetroVision;
-    s32 yOffset = gRetroVision * 8;
+    s32 x = HUD_COINS_X >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
+    s32 yOffset = gChaosCodeTable[GLOBAL_CHAOS_RETRO].active * 8;
     print_text(x, HUD_TOP_Y + yOffset, "$"); // 'Coin' glyph
-    x += 16 >> gRetroVision;
+    x += 16 >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
     print_text(x, HUD_TOP_Y + yOffset, "*"); // 'X' glyph
-    x += 14 >> gRetroVision;
+    x += 14 >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
     print_text_fmt_int(x, HUD_TOP_Y + yOffset, "%d", gHudDisplay.coins);
 }
 
@@ -444,17 +444,17 @@ void render_hud_coins(void) {
  * Disables "X" glyph when Mario has 100 stars or more.
  */
 void render_hud_stars(void) {
-    s32 x = GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) >> gRetroVision;
-    s32 yOffset = gRetroVision * 8;
+    s32 x = GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
+    s32 yOffset = gChaosCodeTable[GLOBAL_CHAOS_RETRO].active * 8;
     if (gHudFlash == HUD_FLASH_STARS && gGlobalTimer & 0x8) return;
     s8 showX = (gHudDisplay.stars < 100);
     print_text(x, HUD_TOP_Y + yOffset, "^"); // 'Star' glyph
-    x += 16 >> gRetroVision;
+    x += 16 >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
     if (showX) {
         print_text(x, HUD_TOP_Y + yOffset, "*"); // 'X' glyph
-        x += 16 >> gRetroVision;
+        x += 16 >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
     }
-    print_text_fmt_int(((showX * 14) >> gRetroVision) + x, HUD_TOP_Y + yOffset, "%d", gHudDisplay.stars);
+    print_text_fmt_int(((showX * 14) >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active) + x, HUD_TOP_Y + yOffset, "%d", gHudDisplay.stars);
 }
 
 /**
@@ -563,9 +563,9 @@ void render_law_metre(void) {
 
     for (int i = 0; i < 5; i++) {
         if (i >= repeat) {
-            print_text(x >> gRetroVision, (240 - 48) >> gRetroVision, "*");
+            print_text(x >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active, (240 - 48) >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active, "*");
         } else {
-            print_text(x >> gRetroVision, (240 - 48) >> gRetroVision, "^");
+            print_text(x >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active, (240 - 48) >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active, "^");
         }
         x += 16;
     }
@@ -627,7 +627,7 @@ void render_hud(void) {
             render_hud_keys();
         }
 
-        if (gLawMetre) {
+        if (gChaosCodeTable[GLOBAL_CHAOS_LAW_METRE].active) {
             render_law_metre();
         }
 

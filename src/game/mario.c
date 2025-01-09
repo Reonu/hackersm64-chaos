@@ -449,6 +449,10 @@ s32 mario_get_floor_class(struct MarioState *m) {
         }
     }
 
+    if (gChaosCodeTable[GLOBAL_CHAOS_VERY_SLIPPERY].active) {
+        floorClass = SURFACE_CLASS_VERY_SLIPPERY;
+    }
+
     // Crawling allows Mario to not slide on certain steeper surfaces.
     if (m->action == ACT_CRAWLING && m->floor->normal.y > 0.5f && floorClass == SURFACE_CLASS_DEFAULT) {
         floorClass = SURFACE_CLASS_NOT_SLIPPERY;
@@ -777,7 +781,7 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
     f32 forwardVel;
     f32 mul;
 
-    if (gTinyMario) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active) {
         mul = 0.33;
     } else {
         mul = 1.0f;
@@ -1230,7 +1234,7 @@ void squish_mario_model(struct MarioState *m) {
         }
     }
 
-    if (gTinyMario) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active) {
         m->marioObj->header.gfx.scale[0] *= 0.33f;
         m->marioObj->header.gfx.scale[1] *= 0.33f;
         m->marioObj->header.gfx.scale[2] *= 0.33f;
@@ -1263,7 +1267,7 @@ void debug_print_speed_action_normal(struct MarioState *m) {
  * Update the button inputs for Mario.
  */
 void update_mario_button_inputs(struct MarioState *m) {
-    if (gFlipInputs) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_INVERT_CONTROLS].active) {
         if (m->controller->buttonPressed & B_BUTTON) m->input |= INPUT_A_PRESSED;
         if (m->controller->buttonDown    & B_BUTTON) m->input |= INPUT_A_DOWN;
     } else {
@@ -1273,7 +1277,7 @@ void update_mario_button_inputs(struct MarioState *m) {
 
     // Don't update for these buttons if squished.
     if (m->squishTimer == 0) {
-        if (gFlipInputs) {
+        if (gChaosCodeTable[GLOBAL_CHAOS_INVERT_CONTROLS].active) {
             if (m->controller->buttonDown    & A_BUTTON) m->input |= INPUT_B_DOWN;
             if (m->controller->buttonPressed & A_BUTTON) m->input |= INPUT_B_PRESSED;
         } else {
@@ -1284,7 +1288,7 @@ void update_mario_button_inputs(struct MarioState *m) {
         if (m->controller->buttonPressed & Z_TRIG  ) m->input |= INPUT_Z_PRESSED;
     }
 
-    if (gFlipInputs) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_INVERT_CONTROLS].active) {
         if (m->input & INPUT_A_PRESSED) {
             m->framesSinceB = 0;
         } else if (m->framesSinceB < 0xFF) {
@@ -1324,7 +1328,7 @@ void update_mario_joystick_inputs(struct MarioState *m) {
         m->intendedMag = mag / 8.0f;
     }
 
-    if (gTankControls) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_TANK_CONTROLS].active) {
         if (ABS(controller->rawStickX) > 8) {
             m->intendedYaw -= controller->stickX * 16.0f;
             m->faceAngle[1] = m->intendedYaw;
@@ -1796,11 +1800,11 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     vec3f_get_lateral_dist(gMarioState->prevPos, gMarioState->pos, &gMarioState->lateralSpeed);
     vec3f_copy(gMarioState->prevPos, gMarioState->pos);
 
-    if (globalChaosFlags & GLOBAL_CHAOS_FLAG_PAY_TO_MOVE) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_PAY_TO_MOVE].active) {
         return 0;
     }
 
-    if (gBillboardMario) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_BILLBOARD_MARIO].active) {
         obj_set_model(gMarioObject, MODEL_MARIO_BILLBOARD);
     } else {
         obj_set_model(gMarioObject, MODEL_MARIO);

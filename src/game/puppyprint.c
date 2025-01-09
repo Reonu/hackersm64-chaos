@@ -1055,7 +1055,7 @@ void puppyprint_chaos(void) {
         }
     }
     if (gPlayer1Controller->buttonPressed & (R_JPAD)) {
-        chaos_enable(gPuppyPrintChaosSelect);
+        chaos_enable(gChaosCodeTable, gPuppyPrintChaosSelect, CHAOSCOUNT);
     }
 
     if (gPlayer1Controller->buttonPressed & (L_JPAD)) {
@@ -1079,20 +1079,16 @@ void puppyprint_chaos(void) {
             print_set_envcolour(255, 255, 255, 255);
         }
         print_small_text_light((SCREEN_WIDTH / 2) - 76, y, gChaosCodeTable[i].name, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_DEFAULT);
-        if (globalChaosFlags & (1 << i)) {
+        if (gChaosCodeTable[i].active) {
             useOkay = okay1;
         } else {
             useOkay = okay2;
         }
         print_small_text_light((SCREEN_WIDTH / 2) + 76, y, useOkay, PRINT_TEXT_ALIGN_RIGHT, PRINT_ALL, FONT_DEFAULT);
-        sprintf(textBytes, "%d", gChaosCodeTimers[i]);
+        sprintf(textBytes, "%d", gChaosCodeTable[i].timer);
         print_small_text_light((SCREEN_WIDTH / 2) + 80, y, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_DEFAULT);
         y += 12;
     }
-
-    sprintf(textBytes, "Active Flags: %08X", (u32) (globalChaosFlags << 32));
-    sprintf(textBytes, "%s%08X", textBytes, (u32) (globalChaosFlags));
-    print_small_text_light(16, SCREEN_HEIGHT - 24, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
 
     if (gDisableChaos) {
         print_small_text_light(SCREEN_WIDTH - 16, SCREEN_HEIGHT - 24, "Chaos off", PRINT_TEXT_ALIGN_RIGHT, PRINT_ALL, FONT_OUTLINE);
