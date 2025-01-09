@@ -11,6 +11,8 @@ const GeoLayout ccm_area_1_geo[] = {
 		GEO_ASM(0, geo_movtex_pause_control),
 		GEO_ASM(CCM_MOVTEX_PENGUIN_PUDDLE_WATER, geo_movtex_draw_water_regions),
 		GEO_ASM(0, geo_cannon_circle_base),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_wallkicks_will_work_mesh_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, ccm_dl_wallkicks_will_work_mesh_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
