@@ -32,6 +32,7 @@ u8 gDimLights = FALSE;
 u8 gLawMetre = FALSE;
 u8 gTinyMario = FALSE;
 u8 gBillboardMario = FALSE;
+u8 gCCMVolcanoRocks = FALSE;
 
 extern s32 gChaosCodeTimers[];
 extern OSViMode VI;
@@ -200,6 +201,21 @@ void chaos_billboardmario(void) {
     }
 }
 
+void chaos_ccm_rocks_from_volcano(void) {
+    if (gCCMVolcanoRocks == FALSE) {
+        gCCMVolcanoRocks = TRUE;
+    }
+
+    s16 x = (random_u16() % 500) - 250;
+    // biased in favour of spawning the rocks in front of mario rather than behind
+    s16 z = (random_u16() % 1100) - 250;
+
+    // 9% chance
+    if (random_u16() % 100 < 9) {
+        spawn_object_relative(0, x, 1000, z + 250, gMarioState->marioObj, MODEL_CCM_ROCK_VOLCANO, bhvRockVolcano);
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0},
     {"Fall Damage", chaos_fall_damage, 15, 30, 0},
@@ -217,6 +233,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Law Metre", chaos_lawmetre, 60, 90, 0},
     {"Tiny Mario", chaos_tinymario, 20, 35, 0},
     {"Billboard Mario", chaos_billboardmario, 20, 35, 0},
+    {"CCM Volcano Rocks", chaos_ccm_rocks_from_volcano, 20, 35, 0},
 };
 
 s32 gChaosCodeTimers[sizeof(gChaosCodeTable) / sizeof(ChaosCode)];

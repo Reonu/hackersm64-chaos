@@ -580,3 +580,5 @@ extern struct WaterDropletParams gShallowWaterWaveDropletParams;
 
 void bhv_kart_controller_init(void);
 void bhv_kart_controller_loop(void);
+void bhv_rock_volcano_init(void);
+void bhv_rock_volcano_loop(void);

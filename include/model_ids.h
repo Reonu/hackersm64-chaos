@@ -10,6 +10,7 @@
 #define MODEL_CHAO                             0x100
 #define MODEL_KART                             0x101
 #define MODEL_MARIO_BILLBOARD                  0x102
+#define MODEL_CCM_ROCK_VOLCANO                 0x103 // CCM leveldaa
 
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 

@@ -6099,3 +6099,16 @@ const BehaviorScript bhvKartController[] = {
         CALL_NATIVE(bhv_kart_controller_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvRockVolcano[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_INTERACT_TYPE(INTERACT_DAMAGE),
+    SET_FLOAT(oDrawingDistance, 30000),
+    SET_INT(oIntangibleTimer, 0),
+    SET_INT(oDamageOrCoinValue, 3),
+    CALL_NATIVE(bhv_rock_volcano_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_rock_volcano_loop),
+    END_LOOP(),
+};
