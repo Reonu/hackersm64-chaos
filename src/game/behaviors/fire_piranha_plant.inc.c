@@ -29,6 +29,9 @@ s32 sNumKilledFirePiranhaPlants;
 
 void bhv_fire_piranha_plant_init(void) {
     o->oFirePiranhaPlantNeutralScale = GET_BPARAM2(o->oBehParams) ? 2.0f : 0.5f;
+    if (gCurrLevelNum == LEVEL_THI) {
+        o->oFirePiranhaPlantNeutralScale = 1.0f;
+    }
     obj_set_hitbox(o, &sFirePiranhaPlantHitbox);
 
     if (GET_BPARAM2(o->oBehParams) != FIRE_PIRANHA_PLANT_BP_NORMAL) {
@@ -64,7 +67,7 @@ static void fire_piranha_plant_act_hide(void) {
 
             if (GET_BPARAM2(o->oBehParams) != FIRE_PIRANHA_PLANT_BP_NORMAL && o->oHealth == 0) {
                 if (++sNumKilledFirePiranhaPlants == 5) {
-                    spawn_default_star(-6300.0f, -1850.0f, -6300.0f);
+                    spawn_default_star(-3780.0f, -1110.0f, -3780.0f);
                 }
 
                 obj_die_if_health_non_positive();

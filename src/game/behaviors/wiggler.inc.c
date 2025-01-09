@@ -196,6 +196,9 @@ void wiggler_init_segments(void) {
  * If attacked by mario, enter either the jumped on or knockback action.
  */
 static void wiggler_act_walk(void) {
+
+    cur_obj_scale(2.0f);
+
     o->oWigglerWalkAnimSpeed = 0.06f * o->oForwardVel;
 
     // Update text if necessary
@@ -207,10 +210,15 @@ static void wiggler_act_walk(void) {
 
         // If Mario is positioned below the wiggler, assume he entered through the
         // lower cave entrance, so don't display text.
-        if (gMarioObject->oPosY < o->oPosY || cur_obj_update_dialog_with_cutscene(
-            MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_NONE, CUTSCENE_DIALOG, DIALOG_150)) {
+        if (gMarioObject->oPosY < o->oPosY) {
             o->oWigglerTextStatus = WIGGLER_TEXT_STATUS_COMPLETED_DIALOG;
         }
+
+        else if (cur_obj_update_dialog_with_cutscene(
+            MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_NONE, CUTSCENE_DIALOG, DIALOG_150)) {
+            spawn_default_star(0.0f, 1228.0f, 0.0f);
+            o->oWigglerTextStatus = WIGGLER_TEXT_STATUS_COMPLETED_DIALOG;
+            }
     } else {
         obj_forward_vel_approach(sWigglerSpeeds[o->oHealth - 1], 1.0f);
 
@@ -246,18 +254,6 @@ static void wiggler_act_walk(void) {
         obj_face_yaw_approach(o->oMoveAngleYaw, 2 * yawTurnSpeed);
 
         obj_face_pitch_approach(0, 0x320);
-
-        // For the first two seconds of walking, stay invulnerable
-        if (o->oTimer < 60) {
-            obj_check_attacks(&sWigglerHitbox, o->oAction);
-        } else if (obj_handle_attacks(&sWigglerHitbox, o->oAction, sWigglerAttackHandlers)) {
-            if (o->oAction != WIGGLER_ACT_JUMPED_ON) {
-                o->oAction = WIGGLER_ACT_KNOCKBACK;
-            }
-
-            o->oWigglerWalkAwayFromWallTimer = 0;
-            o->oWigglerWalkAnimSpeed = 0.0f;
-        }
     }
 }
 /**

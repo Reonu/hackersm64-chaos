@@ -617,6 +617,9 @@ Gfx *geo_movtex_draw_water_regions(s32 callContext, struct GraphNode *node, UNUS
         gMovetexLastTextureId = -1;
         for (i = 0; i < numWaterBoxes; i++) {
             waterId = gEnvironmentRegions[i * 6 + 1];
+            if (gCurrLevelNum == LEVEL_THI) {
+                waterId = i;
+            }
             waterY = gEnvironmentRegions[i * 6 + 6];
             subList = movtex_gen_quads_id(waterId, waterY, quadCollection);
             if (subList != NULL)

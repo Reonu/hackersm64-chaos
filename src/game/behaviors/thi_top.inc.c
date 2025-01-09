@@ -18,7 +18,7 @@ static struct SpawnParticlesInfo sThiTopPuffs = {
 void bhv_thi_huge_island_top_loop(void) {
     if (gTHIWaterDrained & 1) {
         if (o->oTimer == 0) {
-            gEnvironmentRegions[18] = 3000;
+            gEnvironmentRegions[18] = 1800;
         }
         cur_obj_hide();
     } else {
@@ -48,7 +48,7 @@ void bhv_thi_tiny_island_top_loop(void) {
         }
     } else {
         if (o->oTimer == 0) {
-            gEnvironmentRegions[18] = 700;
+            gEnvironmentRegions[18] = 1800;
         }
         cur_obj_hide();
     }

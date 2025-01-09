@@ -62,7 +62,7 @@ struct KoopaTheQuickProperties {
  */
 static struct KoopaTheQuickProperties sKoopaTheQuickProperties[] = {
     { DIALOG_005, DIALOG_007, bob_seg7_trajectory_koopa, { 3030, 4500, -4600 } },
-    { DIALOG_009, DIALOG_031, thi_seg7_trajectory_koopa, { 7100, -1300, -6000 } },
+    { DIALOG_009, DIALOG_031, thi_seg7_trajectory_koopa, { 4260, -780, -3600 } },
 };
 
 /**
@@ -80,7 +80,9 @@ void bhv_koopa_init(void) {
         // Koopa the Quick. Race index is 0 for BoB and 1 for THI
         o->oKoopaTheQuickRaceIndex = o->oKoopaMovementType - KOOPA_BP_KOOPA_THE_QUICK_BASE;
         o->oKoopaAgility = 4.0f;
-        cur_obj_scale(3.0f);
+        if (gCurrLevelNum != LEVEL_THI) {
+            cur_obj_scale(3.0f);
+        }
     } else {
         o->oKoopaAgility = 1.0f;
     }
@@ -490,7 +492,12 @@ static void koopa_the_quick_act_wait_before_race(void) {
         //  frame where he can jump, and thus no longer be ready to speak.
         //  (On J, he has two frames and doing this enables time stop - see
         //  cur_obj_update_dialog_with_cutscene for that glitch)
-        o->oAction = KOOPA_THE_QUICK_ACT_SHOW_INIT_TEXT;
+        if (gCurrLevelNum == LEVEL_THI) {
+            o->oAction = KOOPA_THE_AVERAGE_ACT_SHOW_INIT_TEXT;
+        }
+        else {
+            o->oAction = KOOPA_THE_QUICK_ACT_SHOW_INIT_TEXT;
+        }
         o->oForwardVel = 0.0f;
         cur_obj_init_animation_with_sound(KOOPA_ANIM_STOPPED);
     }
@@ -519,6 +526,18 @@ static void koopa_the_quick_act_show_init_text(void) {
         o->oAction = KOOPA_THE_QUICK_ACT_WAIT_BEFORE_RACE;
         o->oKoopaTheQuickInitTextboxCooldown = 60;
     }
+}
+
+static void koopa_the_average_act_show_init_text(void) {
+    if (set_mario_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
+                if (cutscene_object_with_dialog(CUTSCENE_DIALOG, o, DIALOG_KOOPA_THE_AVERAGE)) {
+                    spawn_default_star(sKoopaTheQuickProperties[o->oKoopaTheQuickRaceIndex].starPos[0],
+                           sKoopaTheQuickProperties[o->oKoopaTheQuickRaceIndex].starPos[1],
+                           sKoopaTheQuickProperties[o->oKoopaTheQuickRaceIndex].starPos[2]);
+                    o->oAction = KOOPA_THE_AVERAGE_ACT_IDLE_AFTER_STAR_SPAWN;
+                    set_mario_npc_dialog(MARIO_DIALOG_STOP);
+                }
+            }
 }
 
 /**
@@ -743,6 +762,12 @@ static void koopa_the_quick_update(void) {
             break;
         case KOOPA_THE_QUICK_ACT_SHOW_INIT_TEXT:
             koopa_the_quick_act_show_init_text();
+            break;
+        case KOOPA_THE_AVERAGE_ACT_SHOW_INIT_TEXT:
+            koopa_the_average_act_show_init_text();
+            break;
+        case KOOPA_THE_AVERAGE_ACT_IDLE_AFTER_STAR_SPAWN:
+            cur_obj_init_animation_with_sound(KOOPA_ANIM_STOPPED);
             break;
         case KOOPA_THE_QUICK_ACT_RACE:
             koopa_the_quick_act_race();

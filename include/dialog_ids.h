@@ -173,6 +173,7 @@ enum DialogId {
     DIALOG_167,
     DIALOG_168,
     DIALOG_169,
+    DIALOG_KOOPA_THE_AVERAGE,
     DIALOG_COUNT
 };
 

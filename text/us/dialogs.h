@@ -1836,21 +1836,10 @@ If you slide really\n\
 fast, you'll win the Star!"))
 
 DEFINE_DIALOG(DIALOG_150, 1, 5, 30, 200, _("\
-Waaaa! You've flooded my\n\
-house! Wh-why?? Look at\n\
-this mess! What am I\n\
-going to do now?\n\
-\n\
-The ceiling's ruined, the\n\
-floor is soaked...what to\n\
-do, what to do? Huff...\n\
-huff...it makes me so...\n\
-MAD!!!\n\
-Everything's been going\n\
-wrong ever since I got\n\
-this Star...It's so shiny,\n\
-but it makes me feel...\n\
-strange..."))
+Hey, welcome to my house.\n\
+I found this cool thing\n\
+if you want it.\n\
+Good job."))
 
 DEFINE_DIALOG(DIALOG_151, 1, 4, 30, 200, _("\
 I can't take this\n\
@@ -2068,7 +2057,7 @@ DEFINE_DIALOG(DIALOG_166, 1, 4, 30, 200, _("\
 I'll be back soon.\n\
 I'm out training now,\n\
 so come back later.\n\
-//--Koopa the Quick"))
+//--Koopa the Average"))
 
 DEFINE_DIALOG(DIALOG_167, 1, 4, 30, 200, _("\
 Princess Toadstool's\n\
@@ -2097,3 +2086,6 @@ Arrgghh!\n\
 Anyone entering this cave\n\
 without permission will\n\
 meet certain disaster."))
+
+DEFINE_DIALOG(DIALOG_KOOPA_THE_AVERAGE, 1, 4, 30, 200, _("\
+Hi, I'm Koopa the Average."))

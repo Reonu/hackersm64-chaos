@@ -480,6 +480,7 @@ const BehaviorScript bhvPoleGrabbing[] = {
 
 const BehaviorScript bhvThiHugeIslandTop[] = {
     BEGIN(OBJ_LIST_SURFACE),
+    SCALE(0, 60),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(thi_seg7_collision_top_trap),
     BEGIN_LOOP(),

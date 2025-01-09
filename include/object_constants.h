@@ -1484,6 +1484,8 @@ enum oKoopaRaceEndpointRaceStatuses {
     #define KOOPA_THE_QUICK_ACT_DECELERATE                  0x4
     #define KOOPA_THE_QUICK_ACT_STOP                        0x5
     #define KOOPA_THE_QUICK_ACT_AFTER_RACE                  0x6
+    #define KOOPA_THE_AVERAGE_ACT_SHOW_INIT_TEXT            0x7
+    #define KOOPA_THE_AVERAGE_ACT_IDLE_AFTER_STAR_SPAWN            0x8
     /* oSubAction */
         /* KOOPA_THE_QUICK_ACT_RACE */
     #define KOOPA_THE_QUICK_SUB_ACT_START_RUN               0x0
