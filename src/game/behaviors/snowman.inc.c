@@ -59,7 +59,7 @@ void snowmans_bottom_act_follow_path(void) { // axt 1
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oSnowmansBottomTargetYaw, 0x400);
     
     if (o->oTimer == 0) {
-        //cur_obj_play_sound_2(SOUND_SNOWBALL_LETS_DO_THIS); 
+        cur_obj_play_sound_2(SOUND_NEW_SNOWBALL_LETS_DO_THIS); 
     }
 
     if (o->oForwardVel > 70.0f) {
@@ -125,7 +125,7 @@ void snowmans_bottom_act_reach_end(void) { // act 3
 
 void snowmans_bottom_act_fucking_die(void) {
     if (o->oTimer == 0) {
-        //cur_obj_play_sound_2(SOUND_SNOWBALL_SCREAM);
+        cur_obj_play_sound_2(SOUND_NEW_SNOWBALL_SCREAM);
     }
 
     o->oSnowmansBottomScale = approach_f32_asymptotic(o->oSnowmansBottomScale, 0.0f, 0.1f);

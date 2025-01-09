@@ -12,7 +12,7 @@ seq_setmutescale 0
   seq_setvol 127
 #endif
 seq_settempo 120
-seq_initchannels 0xffff
+seq_initchannels 0x1fff
 seq_startchannel 0, .channel0
 seq_startchannel 1, .channel1
 seq_startchannel 2, .channel2
@@ -23,12 +23,7 @@ seq_startchannel 6, .channel6
 seq_startchannel 7, .channel7
 seq_startchannel 8, .channel38
 seq_startchannel 9, .channel59
-seq_startchannel 10, .channelA
-seq_startchannel 11, .channelB
-seq_startchannel 12, .channelC
-seq_startchannel 13, .channelD
-seq_startchannel 14, .channelE
-seq_startchannel 15, .channelF
+seq_startchannel 10, .channel_NEW
 .seq_loop:
 seq_delay 20000
 seq_jump .seq_loop
@@ -7999,6 +7994,42 @@ layer_jump .layer_32B7
 .channelF_table:
 // Add custom sounds for Channel F here!
 
+
+
+.channel_NEW:
+chan_largenoteson
+chan_setinstr 0
+chan_setpanmix 127
+chan_setnotepriority 14
+chan_setval 0
+chan_iowriteval 5
+chan_stereoheadseteffects 1
+chan_setdyntable .channel_NEW_table
+chan_jump .main_loop_023589
+
+.channel_NEW_table:
+sound_ref .sound_snowball_lets_do_this
+sound_ref .sound_snowball_scream
+
+.sound_snowball_scream:
+chan_setbank 11
+chan_setinstr 1
+chan_setlayer 0, .layer_snowball_scream
+chan_end
+
+.layer_snowball_scream:
+layer_note1 39, 0xa6, 127
+layer_end
+
+.sound_snowball_lets_do_this:
+chan_setbank 11
+chan_setinstr 0
+chan_setlayer 0, .layer_snowball_lets_do_this
+chan_end
+
+.layer_snowball_lets_do_this:
+layer_note1 39, 0x8d, 127
+layer_end
 
 .align 2, 0
 .envelope_32C4:
