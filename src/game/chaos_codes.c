@@ -33,6 +33,7 @@ u8 gLawMetre = FALSE;
 u8 gTinyMario = FALSE;
 u8 gBillboardMario = FALSE;
 u8 gCCMVolcanoRocks = FALSE;
+u8 gVerySlippery = FALSE;
 
 extern s32 gChaosCodeTimers[];
 extern OSViMode VI;
@@ -201,6 +202,17 @@ void chaos_billboardmario(void) {
     }
 }
 
+void chaos_veryslippery(void) {
+    if (gVerySlippery == FALSE) {
+        gVerySlippery = TRUE;
+    }
+    gChaosCodeTimers[gCurrentChaosID]--;
+    if (gChaosCodeTimers[gCurrentChaosID] <= 0) {
+        gVerySlippery = FALSE;
+        globalChaosFlags &= ~(1 << gCurrentChaosID);
+    }
+}
+
 void chaos_ccm_rocks_from_volcano(void) {
     if (gCCMVolcanoRocks == FALSE) {
         gCCMVolcanoRocks = TRUE;
@@ -234,6 +246,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Tiny Mario", chaos_tinymario, 20, 35, 0},
     {"Billboard Mario", chaos_billboardmario, 20, 35, 0},
     {"CCM Volcano Rocks", chaos_ccm_rocks_from_volcano, 20, 35, 0},
+    {"Very Slippery", chaos_veryslippery, 30, 45, 0},
 };
 
 s32 gChaosCodeTimers[sizeof(gChaosCodeTable) / sizeof(ChaosCode)];
