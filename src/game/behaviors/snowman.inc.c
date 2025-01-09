@@ -76,7 +76,7 @@ void snowmans_bottom_act_follow_path(void) { // axt 1
         o->oAction = SNOWMANS_BOTTOM_ACT_FINAL_STRETCH;
     }
 
-    if (o->oTimer > 30) {
+    if (o->oTimer > 33) {
         o->oAction = SNOWMANS_BOTTOM_ACT_FUCKING_DIE;
     }
 }

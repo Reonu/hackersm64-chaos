@@ -5,7 +5,6 @@ const GeoLayout ccm_area_1_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, ccm_dl_15_GeoRoot_ccm_1_ccm_seg7_dl_0700B090_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, ccm_dl_16_GeoRoot_ccm_1_ccm_seg7_dl_0700B1D8_mesh_layer_1),
-		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, ccm_dl_17_GeoRoot_ccm_1_ccm_seg7_dl_0700C380_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_ALPHA, 90, 0, 0, ccm_dl_18_GeoRoot_ccm_1_ccm_seg7_dl_0700D578_mesh_layer_4),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, 90, 0, 0, ccm_dl_19_GeoRoot_ccm_1_ccm_seg7_dl_0700DDF0_mesh_layer_6),
 		GEO_ASM(0, geo_movtex_pause_control),
