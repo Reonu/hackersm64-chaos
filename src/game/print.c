@@ -398,7 +398,7 @@ void clip_to_bounds(s32 *x, s32 *y) {
  * Renders the glyph that's set at the given position.
  */
 void render_textrect(s32 x, s32 y, s32 pos) {
-    int shift = gRetroVision;
+    int shift = gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
     s32 rectBaseX = x + pos * (12 >> shift);
     s32 rectBaseY = 224 - y;
     s32 rectX;

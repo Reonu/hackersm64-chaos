@@ -611,7 +611,7 @@ u32 should_strengthen_gravity_for_jump_ascent(struct MarioState *m) {
 
 void apply_gravity(struct MarioState *m) {
     f32 mul;
-    if (gTinyMario) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active) {
         mul = 0.33;
     } else {
         mul = 1.0f;

@@ -70,14 +70,14 @@ s32 check_fall_damage(struct MarioState *m, u32 hardFallAction) {
     f32 damageHeight = FALL_DAMAGE_HEIGHT_SMALL;
 
     f32 chaosLargeDamageHeight = 200;
-    if (globalChaosFlags & GLOBAL_CHAOS_FLAG_FALL_DAMAGE_THRESHOLD) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_FALL_DAMAGE].active) {
         damageHeight = 100;
     }
 
     if (m->action != ACT_TWIRLING && m->floor->type != SURFACE_BURNING) {
-        if ((m->vel[1] < -55.0f) || (globalChaosFlags & GLOBAL_CHAOS_FLAG_FALL_DAMAGE_THRESHOLD)) {
+        if ((m->vel[1] < -55.0f) || (gChaosCodeTable[GLOBAL_CHAOS_FALL_DAMAGE].active)) {
             if ((fallHeight > FALL_DAMAGE_HEIGHT_LARGE) || 
-            ((globalChaosFlags & GLOBAL_CHAOS_FLAG_FALL_DAMAGE_THRESHOLD) && fallHeight > chaosLargeDamageHeight)) {
+            ((gChaosCodeTable[GLOBAL_CHAOS_FALL_DAMAGE].active) && fallHeight > chaosLargeDamageHeight)) {
                 m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 16 : 24;
 #if ENABLE_RUMBLE
                 queue_rumble_data(5, 80);
@@ -180,7 +180,7 @@ void update_air_with_turn(struct MarioState *m) {
     s16 intendedDYaw;
     f32 intendedMag;
     f32 mul;
-    if (gTinyMario) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active) {
         mul = 0.33;
     } else {
         mul = 1.0f;
@@ -217,7 +217,7 @@ void update_air_without_turn(struct MarioState *m) {
     s16 intendedDYaw;
     f32 intendedMag;
     f32 mul;
-    if (gTinyMario) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active) {
         mul = 0.33;
     } else {
         mul = 1.0f;
@@ -258,7 +258,7 @@ void update_lava_boost_or_twirling(struct MarioState *m) {
     s16 intendedDYaw;
     f32 intendedMag;
     f32 mul;
-    if (gTinyMario) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active) {
         mul = 0.33;
     } else {
         mul = 1.0f;

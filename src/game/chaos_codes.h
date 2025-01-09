@@ -1,18 +1,24 @@
 #pragma once
 #include "include/types.h"
 
-enum GlobalChaosFlags {
-    GLOBAL_CHAOS_FLAG_NONE = 0,
-    GLOBAL_CHAOS_FLAG_ENTER_CANNON = (1 << 0),
-    GLOBAL_CHAOS_FLAG_FALL_DAMAGE_THRESHOLD = (1 << 1),
-    GLOBAL_CHAOS_FLAG_TRIPPING = (1 << 2),
-    GLOBAL_CHAOS_FLAG_UPSIDE_DOWN_CAMERA = (1 << 3),
-    GLOBAL_CHAOS_FLAG_NO_MODEL_IS_MARIO = (1 << 4),
-    GLOBAL_CHAOS_FLAG_RETRO = (1 << 5),
-    GLOBAL_CHAOS_FLAG_BLUR = (1 << 6),
-    GLOBAL_CHAOS_FLAG_LOWFPS = (1 << 7),
-    GLOBAL_CHAOS_FLAG_MARIO_KART = (1 << 8),
-    GLOBAL_CHAOS_FLAG_PAY_TO_MOVE = (1 << 9),
+enum GlobalChaosNames {
+    GLOBAL_CHAOS_ENTER_CANNON,
+    GLOBAL_CHAOS_FALL_DAMAGE,
+    GLOBAL_CHAOS_TRIPPING,
+    GLOBAL_CHAOS_UPSIDE_DOWN_CAMERA,
+    GLOBAL_CHAOS_NO_MODEL_IS_MARIO,
+    GLOBAL_CHAOS_RETRO,
+    GLOBAL_CHAOS_BLUR,
+    GLOBAL_CHAOS_LOWFPS,
+    GLOBAL_CHAOS_MARIO_KART,
+    GLOBAL_CHAOS_PAY_TO_MOVE,
+    GLOBAL_CHAOS_TANK_CONTROLS,
+    GLOBAL_CHAOS_INVERT_CONTROLS,
+    GLOBAL_CHAOS_DIM_LIGHTS,
+    GLOBAL_CHAOS_LAW_METRE,
+    GLOBAL_CHAOS_TINY_MARIO,
+    GBLOAL_CHAOS_BILLBOARD_MARIO,
+    GLOBAL_CHAOS_VERY_SLIPPERY,
 };
 
 // A mark for exclusivity. Can only have one of thse effects active at a time.
@@ -27,23 +33,13 @@ typedef struct ChaosCode {
     unsigned short timerLow;
     unsigned short timerHigh;
     unsigned int flags;
+
+    short timer;
+    char active;
 } ChaosCode;
 
 extern ChaosCode gChaosCodeTable[18];
-extern s32 gChaosCodeTimers[18];
-extern u64 globalChaosFlags;
 extern u8 gDisableChaos;
-extern u8 gRetroVision;
-extern u8 gBlurVision;
-extern u8 gLowFPS;
-extern u8 gTankControls;
-extern u8 gFlipInputs;
-extern u8 gDimLights;
-extern u8 gLawMetre;
-extern u8 gTinyMario;
-extern u8 gBillboardMario;
-extern u8 gCCMVolcanoRocks;
-extern u8 gVerySlippery;
 extern float gCrimes;
 
 #define CHAOSCOUNT (sizeof(gChaosCodeTable) / sizeof(ChaosCode))

@@ -229,7 +229,7 @@ static void update_swimming_speed(struct MarioState *m, f32 decelThreshold) {
     f32 buoyancy = get_buoyancy(m);
     f32 mul;
 
-    if (gTinyMario) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active) {
         mul = 0.33;
     } else {
         mul = 1.0f;
