@@ -1,5 +1,7 @@
-// snowman.inc.c
 
+#include "engine/math_util.h"
+#include "game/object_helpers.h"
+// snowman.inc.c
 static struct ObjectHitbox sRollingSphereHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
@@ -55,6 +57,10 @@ void snowmans_bottom_act_follow_path(void) { // axt 1
     s32 followStatus = cur_obj_follow_path();
     o->oSnowmansBottomTargetYaw = o->oPathedTargetYaw;
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oSnowmansBottomTargetYaw, 0x400);
+    
+    if (o->oTimer == 0) {
+        //cur_obj_play_sound_2(SOUND_SNOWBALL_LETS_DO_THIS); 
+    }
 
     if (o->oForwardVel > 70.0f) {
         o->oForwardVel = 70.0f;
@@ -68,6 +74,10 @@ void snowmans_bottom_act_follow_path(void) { // axt 1
             o->oSnowmansBottomTargetYaw = o->oMoveAngleYaw;
         }
         o->oAction = SNOWMANS_BOTTOM_ACT_FINAL_STRETCH;
+    }
+
+    if (o->oTimer > 30) {
+        o->oAction = SNOWMANS_BOTTOM_ACT_FUCKING_DIE;
     }
 }
 
@@ -113,6 +123,29 @@ void snowmans_bottom_act_reach_end(void) { // act 3
     }
 }
 
+void snowmans_bottom_act_fucking_die(void) {
+    if (o->oTimer == 0) {
+        //cur_obj_play_sound_2(SOUND_SNOWBALL_SCREAM);
+    }
+
+    o->oSnowmansBottomScale = approach_f32_asymptotic(o->oSnowmansBottomScale, 0.0f, 0.1f);
+    if (o->oSnowmansBottomScale < 0.1f) {
+        o->oAction = SNOWMANS_BOTTOM_ACT_SPAWN_STAR_AFTER_DEATH;
+    }
+}
+
+void snowmans_bottom_spawn_star_after_death(void) {
+    cur_obj_disable_rendering();
+    if (o->oTimer == 0) {
+        spawn_mist_particles();
+        spawn_default_star(o->oPosX, o->oPosY + 400, o->oPosZ);
+    }
+
+    if (o->oTimer > 200) {
+        o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+    }
+}
+
 void bhv_snowmans_bottom_loop(void) {
     switch (o->oAction) {
         case SNOWMANS_BOTTOM_ACT_WAITING:
@@ -145,6 +178,13 @@ void bhv_snowmans_bottom_loop(void) {
         case SNOWMANS_BOTTOM_ACT_COLLISION:
             cur_obj_push_mario_away_from_cylinder(o->hitboxRadius, 550);
             break;
+        case SNOWMANS_BOTTOM_ACT_FUCKING_DIE:
+            snowmans_bottom_act_fucking_die();
+            break;
+        case SNOWMANS_BOTTOM_ACT_SPAWN_STAR_AFTER_DEATH:
+            snowmans_bottom_spawn_star_after_death();
+            break;
+
     }
 
     set_rolling_sphere_hitbox();
