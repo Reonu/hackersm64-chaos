@@ -1804,7 +1804,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         return 0;
     }
 
-    if (gChaosCodeTable[GBLOAL_CHAOS_BILLBOARD_MARIO].active) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_BILLBOARD_MARIO].active) {
         obj_set_model(gMarioObject, MODEL_MARIO_BILLBOARD);
     } else {
         obj_set_model(gMarioObject, MODEL_MARIO);

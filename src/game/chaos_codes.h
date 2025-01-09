@@ -17,8 +17,12 @@ enum GlobalChaosNames {
     GLOBAL_CHAOS_DIM_LIGHTS,
     GLOBAL_CHAOS_LAW_METRE,
     GLOBAL_CHAOS_TINY_MARIO,
-    GBLOAL_CHAOS_BILLBOARD_MARIO,
+    GLOBAL_CHAOS_BILLBOARD_MARIO,
     GLOBAL_CHAOS_VERY_SLIPPERY,
+};
+
+enum CCMChaosNames {
+    CCM_CHAOS_VOLCANIC_ROCKS,
 };
 
 // A mark for exclusivity. Can only have one of thse effects active at a time.

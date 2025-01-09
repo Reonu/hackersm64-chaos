@@ -174,8 +174,11 @@ ChaosCode gChaosCodeTable[] = {
     {"Law Metre", chaos_lawmetre, 60, 90, 0,   /*ignore these*/ 0, 0},
     {"Tiny Mario", chaos_generic, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"Billboard Mario", chaos_generic, 20, 35, 0,   /*ignore these*/ 0, 0},
-    {"CCM Volcano Rocks", chaos_ccm_rocks_from_volcano, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"Very Slippery", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
+};
+
+ChaosCode gCCMChaosTable[] = {
+    {"CCM Volcano Rocks", chaos_ccm_rocks_from_volcano, 20, 35, 0,   /*ignore these*/ 0, 0},
 };
 
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
@@ -200,7 +203,30 @@ void add_global_chaos_code(ChaosCode *table, s32 tableSize) {
     chaos_enable(table, chosenCode, tableSize);
 }
 
+ChaosCode *chaos_level_table(s32 *size) {
+    switch (gCurrLevelNum) {
+    case LEVEL_CCM:
+        *size = sizeof(gCCMChaosTable) / sizeof(ChaosCode);
+        return gCCMChaosTable;
+    default:
+        *size = sizeof(gChaosCodeTable) / sizeof(ChaosCode);
+        return gChaosCodeTable;
+    }
+}
+
 void update_chaos_code_effects(void) {
+    s32 size;
+    ChaosCode *table = chaos_level_table(&size);
+
+    if (table != gChaosCodeTable) {
+        
+        for (s32 i = 0; i < size; i++) {
+            if (table[i].timer) {
+                gCurrentChaosID = i;
+                (table[i].func)();
+            }
+        }
+    }
     for (u32 i = 0; i < sizeof(gChaosCodeTable) / sizeof(ChaosCode); i++) {
         if (gChaosCodeTable[i].timer) {
             gCurrentChaosID = i;
@@ -218,7 +244,17 @@ void global_chaos_code_handler(void) {
 
     nextGlobalCodeTimer--;
     if (nextGlobalCodeTimer <= 0) {
-        add_global_chaos_code(gChaosCodeTable, sizeof(gChaosCodeTable) / sizeof(ChaosCode));
+        ChaosCode *table;
+        s32 size;
+        int rand = random_u16() % 100;
+        print_text_fmt_int(32, 32, "%d", rand);
+        if (rand >= 66) {
+            table = chaos_level_table(&size);
+        } else {
+            table = gChaosCodeTable;
+            size = sizeof(gChaosCodeTable) / sizeof(ChaosCode);
+        }
+        add_global_chaos_code(table, size);
         nextGlobalCodeTimer = 150 + (random_u16() % 600);
     }
 }
