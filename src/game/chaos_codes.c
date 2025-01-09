@@ -28,12 +28,14 @@ extern OSViMode VI;
 void chaos_cannon(void) {
     struct Object *cannon = spawn_object_relative(0, 0, 300, 0, gMarioState->marioObj, MODEL_NONE, bhvCannon);
     SET_BPARAM1(cannon->oBehParams, CHAOS_CODE_BPARAM);
+    gChaosCodeTable[gCurrentChaosID].timer = 0;
     gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
 
 // Not final, just there to have a different func
 void chaos_trip(void) {
     gMarioState->action = ACT_HARD_BACKWARD_GROUND_KB;
+    gChaosCodeTable[gCurrentChaosID].timer = 0;
     gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
 
@@ -45,6 +47,7 @@ void chaos_retro(void) {
     gChaosCodeTable[gCurrentChaosID].timer--;
     if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
         change_vi(&VI, SCREEN_WIDTH, SCREEN_HEIGHT);
+        gChaosCodeTable[gCurrentChaosID].timer = 0;
         gChaosCodeTable[gCurrentChaosID].active = FALSE;
     }
 }
@@ -57,6 +60,7 @@ void chaos_blur(void) {
     set_motion_blur(32);
     gChaosCodeTable[gCurrentChaosID].timer--;
     if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
+        gChaosCodeTable[gCurrentChaosID].timer = 0;
         gChaosCodeTable[gCurrentChaosID].active = FALSE;
     }
 }
@@ -69,6 +73,7 @@ void chaos_upside_down_camera(void) {
     gChaosCodeTable[gCurrentChaosID].timer--;
     if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
         sFOVState.fovFunc = CAM_FOV_DEFAULT;
+        gChaosCodeTable[gCurrentChaosID].timer = 0;
         gChaosCodeTable[gCurrentChaosID].active = FALSE;
     }
 }
@@ -77,6 +82,7 @@ void chaos_mario_kart(void) {
     if (gMarioState->action != ACT_RIDING_KART) {
         spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
     }
+    gChaosCodeTable[gCurrentChaosID].timer = 0;
     gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
 
@@ -87,10 +93,12 @@ void chaos_pay_to_move(void) {
             gMarioState->numCoins -= 20;
             gHudDisplay.coins -= 20;
             play_sound(SOUND_GENERAL_COIN, gGlobalSoundSource);
+            gChaosCodeTable[gCurrentChaosID].timer = 0;
             gChaosCodeTable[gCurrentChaosID].active = FALSE;
         }
     }
     else {
+        gChaosCodeTable[gCurrentChaosID].timer = 0;
         gChaosCodeTable[gCurrentChaosID].active = FALSE;
     }
 }
@@ -113,6 +121,7 @@ void chaos_lawmetre(void) {
     }
     gChaosCodeTable[gCurrentChaosID].timer--;
     if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
+        gChaosCodeTable[gCurrentChaosID].timer = 0;
         gChaosCodeTable[gCurrentChaosID].active = FALSE;
     }
 }
@@ -123,6 +132,7 @@ void chaos_generic(void) {
     }
     gChaosCodeTable[gCurrentChaosID].timer--;
     if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
+        gChaosCodeTable[gCurrentChaosID].timer = 0;
         gChaosCodeTable[gCurrentChaosID].active = FALSE;
     }
 }
@@ -142,6 +152,7 @@ void chaos_ccm_rocks_from_volcano(void) {
     }
     gChaosCodeTable[gCurrentChaosID].timer--;
     if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
+        gChaosCodeTable[gCurrentChaosID].timer = 0;
         gChaosCodeTable[gCurrentChaosID].active = FALSE;
     }
 }
@@ -167,30 +178,31 @@ ChaosCode gChaosCodeTable[] = {
     {"Very Slippery", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
 };
 
-void chaos_enable(s32 codeID) {
-    if (gChaosCodeTable[codeID].flags) {
-        for (u32 i = 0; i < sizeof(gChaosCodeTable) / sizeof(ChaosCode); i++) {
-            if (gChaosCodeTable[i].timer && gChaosCodeTable[i].flags == gChaosCodeTable[codeID].flags) {
-                gChaosCodeTable[i].timer = 0;
+void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
+    if (table[codeID].flags) {
+        for (s32 i = 0; i < tableSize; i++) {
+            if (table[i].timer && table[i].flags == table[codeID].flags) {
+                table[i].timer = 0;
             }
         }
     }
-    if (gChaosCodeTable[codeID].timerLow + gChaosCodeTable[codeID].timerHigh) {
-        int rand = random_u16() % (gChaosCodeTable[codeID].timerHigh - gChaosCodeTable[codeID].timerLow);
-        gChaosCodeTable[codeID].active = TRUE;
-        gChaosCodeTable[codeID].timer = (gChaosCodeTable[codeID].timerLow + rand) * 30;
+    if (table[codeID].timerLow + table[codeID].timerHigh) {
+        int rand = random_u16() % (table[codeID].timerHigh - table[codeID].timerLow);
+        table[codeID].timer = (table[codeID].timerLow + rand) * 30;
+    } else {
+        table[codeID].timer = 1;
     }
-    append_puppyprint_log("Chaos effect added: %s", gChaosCodeTable[codeID].name);
+    append_puppyprint_log("Chaos effect added: %s", table[codeID].name);
 }
 
-void add_global_chaos_code(void) {
-    u16 chosenCode = random_u16() % (sizeof(gChaosCodeTable) / sizeof(ChaosCode));
-    chaos_enable(chosenCode);
+void add_global_chaos_code(ChaosCode *table, s32 tableSize) {
+    u16 chosenCode = random_u16() % tableSize;
+    chaos_enable(table, chosenCode, tableSize);
 }
 
 void update_chaos_code_effects(void) {
     for (u32 i = 0; i < sizeof(gChaosCodeTable) / sizeof(ChaosCode); i++) {
-        if (gChaosCodeTable[i].active) {
+        if (gChaosCodeTable[i].timer) {
             gCurrentChaosID = i;
             (gChaosCodeTable[i].func)();
         }
@@ -206,7 +218,7 @@ void global_chaos_code_handler(void) {
 
     nextGlobalCodeTimer--;
     if (nextGlobalCodeTimer <= 0) {
-        add_global_chaos_code();
+        add_global_chaos_code(gChaosCodeTable, sizeof(gChaosCodeTable) / sizeof(ChaosCode));
         nextGlobalCodeTimer = 150 + (random_u16() % 600);
     }
 }

@@ -44,5 +44,5 @@ extern float gCrimes;
 
 #define CHAOSCOUNT (sizeof(gChaosCodeTable) / sizeof(ChaosCode))
 
-extern void global_chaos_code_handler();
-void chaos_enable(s32 codeID);
+void global_chaos_code_handler(void);
+void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize);

@@ -1055,7 +1055,7 @@ void puppyprint_chaos(void) {
         }
     }
     if (gPlayer1Controller->buttonPressed & (R_JPAD)) {
-        chaos_enable(gPuppyPrintChaosSelect);
+        chaos_enable(gChaosCodeTable, gPuppyPrintChaosSelect, CHAOSCOUNT);
     }
 
     if (gPlayer1Controller->buttonPressed & (L_JPAD)) {
