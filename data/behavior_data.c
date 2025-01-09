@@ -6113,3 +6113,19 @@ const BehaviorScript bhvRockVolcano[] = {
         CALL_NATIVE(bhv_rock_volcano_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvKoopaNpc[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE)),
+    SET_HITBOX(/*Radius*/ 100, /*Height*/ 60),
+    DROP_TO_FLOOR(),
+    SET_HOME(),
+    LOAD_ANIMATIONS(oAnimations, koopa_seg6_anims_06011364),
+    ANIMATE(KOOPA_ANIM_STOPPED),
+    SCALE(0, 250),
+    SET_INTERACT_TYPE(INTERACT_TEXT),
+    CALL_NATIVE(bhv_bobomb_buddy_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bobomb_buddy_loop),
+    END_LOOP(),
+};

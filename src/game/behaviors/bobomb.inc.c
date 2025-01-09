@@ -299,7 +299,9 @@ void bobomb_buddy_act_idle(void) {
     object_step();
 
     if (animFrame == 5 || animFrame == 16) {
-        cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
+        if (cur_obj_has_model(MODEL_BOBOMB_BUDDY)) {
+            cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
+        }
     }
 
     if (o->oDistanceToMario < 1000.0f) {
@@ -396,9 +398,10 @@ void bobomb_buddy_act_turn_to_talk(void) {
     s16 animFrame = o->header.gfx.animInfo.animFrame;
 
     if (animFrame == 5 || animFrame == 16) {
-        cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
+        if (cur_obj_has_model(MODEL_BOBOMB_BUDDY)) {
+            cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
+        }
     }
-
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
 
     if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
