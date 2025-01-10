@@ -132,6 +132,11 @@ u32 mario_update_quicksand(struct MarioState *m, f32 sinkingSpeed) {
             m->quicksandDepth = 1.1f;
         }
 
+        if (gChaosCodeTable[GLOBAL_CHAOS_ALL_QUICKSAND].active) {
+            m->quicksandDepth += sinkingSpeed;
+            return FALSE;
+        }
+
         switch (m->floor->type) {
             case SURFACE_SHALLOW_QUICKSAND:
                 if ((m->quicksandDepth += sinkingSpeed) >= 10.0f) {

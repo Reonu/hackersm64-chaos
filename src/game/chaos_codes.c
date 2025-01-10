@@ -175,6 +175,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Tiny Mario", chaos_generic, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"Billboard Mario", chaos_generic, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"Very Slippery", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"All Quicksand", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
