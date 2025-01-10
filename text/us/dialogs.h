@@ -2089,3 +2089,11 @@ meet certain disaster."))
 
 DEFINE_DIALOG(DIALOG_KOOPA_THE_AVERAGE, 1, 4, 30, 200, _("\
 Hi, I'm Koopa the Average."))
+
+DEFINE_DIALOG(DIALOG_KOOPA_THE_FATHER, 1, 4, 30, 200, _("\
+My baby jumped over\n\
+to the other side of\n\
+that cliff and now\n\
+can't get back!\n\
+Could you bring\n\
+my baby to me?"))
