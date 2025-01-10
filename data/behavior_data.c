@@ -6126,6 +6126,7 @@ const BehaviorScript bhvKoopaNpc[] = {
     SET_INTERACT_TYPE(INTERACT_TEXT),
     CALL_NATIVE(bhv_bobomb_buddy_init),
     BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
         CALL_NATIVE(bhv_bobomb_buddy_loop),
     END_LOOP(),
 };

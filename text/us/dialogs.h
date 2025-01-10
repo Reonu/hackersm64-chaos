@@ -2097,3 +2097,9 @@ that cliff and now\n\
 can't get back!\n\
 Could you bring\n\
 my baby to me?"))
+
+DEFINE_DIALOG(DIALOG_KOOPA_NPC_1, 1, 4, 30, 200, _("\
+We've been hiding here\n\
+for 28 years and you\n\
+are the first one to\n\
+find us!"))

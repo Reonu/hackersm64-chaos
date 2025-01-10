@@ -25,7 +25,7 @@ extern u8 bob_dl_koopa_shell_bw_i8[];
 extern u8 bob_dl_door2_ci4[];
 extern u8 bob_dl_door2_pal_rgba16[];
 extern Vtx bob_dl_15_GeoRoot_bob_1_bob_seg7_dl_07004390_mesh_layer_1_vtx_cull[8];
-extern Vtx bob_dl_15_GeoRoot_bob_1_bob_seg7_dl_07004390_mesh_layer_1_vtx_0[217];
+extern Vtx bob_dl_15_GeoRoot_bob_1_bob_seg7_dl_07004390_mesh_layer_1_vtx_0[230];
 extern Gfx bob_dl_15_GeoRoot_bob_1_bob_seg7_dl_07004390_mesh_layer_1_tri_0[];
 extern Vtx bob_dl_15_GeoRoot_bob_1_bob_seg7_dl_07004390_mesh_layer_1_vtx_1[40];
 extern Gfx bob_dl_15_GeoRoot_bob_1_bob_seg7_dl_07004390_mesh_layer_1_tri_1[];
