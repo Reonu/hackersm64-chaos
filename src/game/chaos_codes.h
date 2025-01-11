@@ -20,6 +20,7 @@ enum GlobalChaosNames {
     GLOBAL_CHAOS_BILLBOARD_MARIO,
     GLOBAL_CHAOS_VERY_SLIPPERY,
     GLOBAL_CHAOS_ALL_QUICKSAND,
+    GLOBAL_CHAOS_MARIO_SOUNDS_SCREAM,
 };
 
 enum CCMChaosNames {
@@ -43,7 +44,7 @@ typedef struct ChaosCode {
     char active;
 } ChaosCode;
 
-extern ChaosCode gChaosCodeTable[18];
+extern ChaosCode gChaosCodeTable[19];
 extern u8 gDisableChaos;
 extern float gCrimes;
 
