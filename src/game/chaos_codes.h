@@ -44,7 +44,7 @@ typedef struct ChaosCode {
     char active;
 } ChaosCode;
 
-extern ChaosCode gChaosCodeTable[20];
+extern ChaosCode gChaosCodeTable[19];
 extern u8 gDisableChaos;
 extern float gCrimes;
 extern u8 gChaosOffOverride;
