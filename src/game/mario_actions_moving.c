@@ -135,7 +135,7 @@ void slide_bonk(struct MarioState *m, u32 fastAction, u32 slowAction) {
 s32 set_triple_jump_action(struct MarioState *m, UNUSED u32 action, UNUSED u32 actionArg) {
     if (m->flags & MARIO_WING_CAP) {
         return set_mario_action(m, ACT_FLYING_TRIPLE_JUMP, 0);
-    } else if (m->forwardVel > 20.0f) {
+    } else if ((m->forwardVel > 20.0f) || gChaosCodeTable[GLOBAL_CHAOS_ALL_JUMPS_TRIPLE].active) {
         return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
     } else {
         return set_mario_action(m, ACT_JUMP, 0);
@@ -1912,7 +1912,12 @@ s32 common_landing_cancels(struct MarioState *m, struct LandingAction *landingAc
     }
 
     if (m->input & INPUT_A_PRESSED) {
-        return setAPressAction(m, landingAction->aPressedAction, 0);
+        if (gChaosCodeTable[GLOBAL_CHAOS_ALL_JUMPS_TRIPLE].active) {
+            return setAPressAction(m, ACT_TRIPLE_JUMP, 0);
+        }
+        else {
+            return setAPressAction(m, landingAction->aPressedAction, 0);
+        }
     }
 
     if (m->input & INPUT_OFF_FLOOR) {
