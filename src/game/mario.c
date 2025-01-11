@@ -377,15 +377,30 @@ void play_mario_sound(struct MarioState *m, s32 actionSound, s32 marioSound) {
         play_mario_action_sound(m, (m->flags & MARIO_METAL_CAP) ? (s32) SOUND_ACTION_METAL_JUMP
                                                                 : (s32) SOUND_ACTION_TERRAIN_JUMP, 1);
     } else {
-        play_sound_if_no_flag(m, actionSound, MARIO_ACTION_SOUND_PLAYED);
+        if (gChaosCodeTable[GLOBAL_CHAOS_MARIO_SOUNDS_SCREAM].active) {
+            play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_ACTION_SOUND_PLAYED);
+        }
+        else {
+            play_sound_if_no_flag(m, actionSound, MARIO_ACTION_SOUND_PLAYED);
+        }
     }
 
     if (marioSound == 0) {
-        play_mario_jump_sound(m);
+        if (gChaosCodeTable[GLOBAL_CHAOS_MARIO_SOUNDS_SCREAM].active) {
+            play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
+        }
+        else {
+            play_mario_jump_sound(m);
+        }
     }
 
     if (marioSound != -1) {
-        play_sound_if_no_flag(m, marioSound, MARIO_MARIO_SOUND_PLAYED);
+        if (gChaosCodeTable[GLOBAL_CHAOS_MARIO_SOUNDS_SCREAM].active) {
+            play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_MARIO_SOUND_PLAYED);
+        }
+        else {
+            play_sound_if_no_flag(m, marioSound, MARIO_MARIO_SOUND_PLAYED);
+        }
     }
 }
 

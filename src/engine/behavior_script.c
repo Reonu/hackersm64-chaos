@@ -834,6 +834,34 @@ void cur_obj_update(void) {
         cur_obj_set_model(MODEL_NONE);
     }
 
+    if (gChaosCodeTable[GLOBAL_CHAOS_RANDOMIZE_COIN_COLORS].active) {
+        if (cur_obj_has_model(MODEL_YELLOW_COIN) || 
+        cur_obj_has_model(MODEL_RED_COIN) || 
+        cur_obj_has_model(MODEL_BLUE_COIN) || 
+        cur_obj_has_model(MODEL_YELLOW_COIN_NO_SHADOW) || 
+        cur_obj_has_model(MODEL_RED_COIN_NO_SHADOW) || 
+        cur_obj_has_model(MODEL_BLUE_COIN_NO_SHADOW)) {
+            if (o->oldSharedChild == NULL) {
+                o->oldSharedChild = o->header.gfx.sharedChild;
+                u8 model = (random_u16() % 3) + 1;
+                switch (model) {
+                    case 1:
+                        o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_YELLOW_COIN];
+                        break;
+                    case 2:
+                        o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_RED_COIN];
+                        break;
+                    case 3:
+                        o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_BLUE_COIN];
+                        break;
+                }
+            } 
+        }
+    } else if (o->oldSharedChild != NULL) {
+        o->header.gfx.sharedChild = o->oldSharedChild;
+        o->oldSharedChild = NULL;
+    }
+
     s32 inRoom = cur_obj_is_mario_in_room();
 
     if (inRoom == MARIO_OUTSIDE_ROOM && (objFlags & OBJ_FLAG_ONLY_PROCESS_INSIDE_ROOM)) {

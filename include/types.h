@@ -247,7 +247,7 @@ struct GraphNodeObject {
     /*0x38*/ struct AnimInfo animInfo;
     /*0x4C*/ struct SpawnInfo *spawnInfo;
     /*0x50*/ Mat4 *throwMatrix; // matrix ptr
-    /*0x54*/ Vec3f cameraToObject;
+    /*0x54*/ Vec3f cameraToObject; 
 };
 
 struct ObjectNode {
@@ -317,6 +317,7 @@ struct Object {
     /*0x218*/ void *collisionData;
     /*0x21C*/ Mat4 transform;
     /*0x25C*/ void *respawnInfo;
+              struct GraphNode *oldSharedChild;
 };
 
 struct ObjectHitbox {

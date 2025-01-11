@@ -158,6 +158,18 @@ void chaos_ccm_rocks_from_volcano(void) {
     }
 }
 
+void chaos_randomize_coin_colors(void) {
+    if (gChaosCodeTable[gCurrentChaosID].active == FALSE) {
+        gChaosCodeTable[gCurrentChaosID].active = TRUE;
+    }
+    
+    gChaosCodeTable[gCurrentChaosID].timer--;
+    if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
+        gChaosCodeTable[gCurrentChaosID].timer = 0;
+        gChaosCodeTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -176,6 +188,8 @@ ChaosCode gChaosCodeTable[] = {
     {"Billboard Mario", chaos_generic, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"Very Slippery", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
     {"All Quicksand", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"Mario Sounds Scream", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Randomize Coin Colors", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
