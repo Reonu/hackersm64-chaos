@@ -463,7 +463,7 @@ void display_and_vsync(void) {
 #ifndef UNLOCK_FPS
     osRecvMesg(&gGameVblankQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
 #endif
-    if (gChaosCodeTable[GLOBAL_CHAOS_LOWFPS].active) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_RETRO].active) {
         osRecvMesg(&gGameVblankQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
         osRecvMesg(&gGameVblankQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
     }

@@ -24,6 +24,10 @@ ALIGNED8 static const Texture small_font_vanilla[] = {
 #include "textures/segment2/custom_text4.i4.inc.c"
 };
 
+ALIGNED8 const Texture retro_watermark[] = {
+#include "textures/segment2/custom_watermark.i4.inc.c"
+};
+
 const u8 small_font_kerning_default[] = {
     /*!*/ 4, /*"*/ 5, /*#*/ 0, /*$*/ 0, /*%*/ 8, /*&*/ 8, /*'*/ 2, /*(*/ 5, /*)*/ 5, /***/ 0, /*+*/ 8, /*,*/ 3, /*-*/ 8, /*.*/ 3, /*/*/ 8, /*0*/ 6,
     /*1*/ 5, /*2*/ 7, /*3*/ 7, /*4*/ 7, /*5*/ 7, /*6*/ 8, /*7*/ 7, /*8*/ 7, /*9*/ 6, /*:*/ 3, /*;*/ 3, /*<*/ 0, /*=*/ 0, /*>*/ 0, /*?*/ 6, /*@*/ 0,

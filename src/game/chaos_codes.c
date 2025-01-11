@@ -19,7 +19,8 @@
 
 s32 nextGlobalCodeTimer = 150;
 u32 gCurrentChaosID;
-u8 gDisableChaos = FALSE;
+u8 gDisableChaos = TRUE; // Debug only
+u8 gChaosOffOverride = FALSE; // Use this one for non debug overrides.
 float gCrimes = 0;
 s32 gCrimeSpawnTimer;
 
@@ -165,7 +166,6 @@ ChaosCode gChaosCodeTable[] = {
     {"Model None Mario", chaos_generic, 10, 20, 0,   /*ignore these*/ 0, 0},
     {"Retro Vision", chaos_retro, 15, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
     {"Blur Vision", chaos_blur, 20, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
-    {"Low FPS", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Mario Kart", chaos_mario_kart, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Pay to Move", chaos_pay_to_move, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Tank Controls", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -239,7 +239,7 @@ void update_chaos_code_effects(void) {
 void global_chaos_code_handler(void) {
     update_chaos_code_effects();
 
-    if (gDisableChaos) {
+    if (gDisableChaos || gChaosOffOverride) {
         return;
     }
 

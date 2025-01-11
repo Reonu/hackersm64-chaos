@@ -9,7 +9,6 @@ enum GlobalChaosNames {
     GLOBAL_CHAOS_NO_MODEL_IS_MARIO,
     GLOBAL_CHAOS_RETRO,
     GLOBAL_CHAOS_BLUR,
-    GLOBAL_CHAOS_LOWFPS,
     GLOBAL_CHAOS_MARIO_KART,
     GLOBAL_CHAOS_PAY_TO_MOVE,
     GLOBAL_CHAOS_TANK_CONTROLS,
@@ -46,6 +45,7 @@ typedef struct ChaosCode {
 extern ChaosCode gChaosCodeTable[18];
 extern u8 gDisableChaos;
 extern float gCrimes;
+extern u8 gChaosOffOverride;
 
 #define CHAOSCOUNT (sizeof(gChaosCodeTable) / sizeof(ChaosCode))
 

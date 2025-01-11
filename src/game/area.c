@@ -461,6 +461,20 @@ void render_game(void) {
         }
     }
 
+    if (gChaosCodeTable[GLOBAL_CHAOS_RETRO].active) {
+        gDPPipeSync(gDisplayListHead++);
+        gDPLoadTextureBlock_4b(gDisplayListHead++, segmented_to_virtual(retro_watermark), G_IM_FMT_I, 128, 12, 0, 0, 0, 0, 0, 0, 0);
+        gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
+        gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
+        gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+        gDPSetCombineMode(gDisplayListHead++, G_CC_BLENDRGBA, G_CC_BLENDRGBA);
+        gDPSetTextureFilter(gDisplayListHead++, G_TF_POINT);
+        gSPScisTextureRectangle(gDisplayListHead++, (0) << 2, (0) << 2, (128) << 2, (12) << 2, G_TX_RENDERTILE, 0, 0, 1024, 1024);
+        gDPPipeSync(gDisplayListHead++);
+        gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
+        gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
+    }
+
     gViewportOverride = NULL;
     gViewportClip     = NULL;
 

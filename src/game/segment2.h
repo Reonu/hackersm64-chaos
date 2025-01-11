@@ -9,6 +9,7 @@ extern void *puppyprint_kerning_lut[][82];
 extern const struct PPTextFont *const gPuppyPrintFontTable[];
 
 extern u8 seg2_course_name_table[];
+extern u8 seg2_course_name_table[];
 extern u8 seg2_act_name_table[];
 extern Gfx dl_rgba16_text_begin[];
 extern Gfx dl_rgba16_text_end[];
@@ -24,6 +25,7 @@ extern Texture texture_waterbox_mist[];
 extern Texture texture_waterbox_jrb_water[];
 extern Texture texture_waterbox_unknown_water[];
 extern Texture texture_waterbox_lava[];
+extern Texture retro_watermark[];
 extern Gfx dl_proj_mtx_fullscreen[];
 extern Gfx dl_draw_quad_verts_0123[];
 extern Gfx dl_screen_transition_end[];
