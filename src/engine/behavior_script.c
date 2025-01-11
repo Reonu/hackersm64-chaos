@@ -835,7 +835,12 @@ void cur_obj_update(void) {
     }
 
     if (gChaosCodeTable[GLOBAL_CHAOS_RANDOMIZE_COIN_COLORS].active) {
-        if (cur_obj_has_model(MODEL_YELLOW_COIN) || cur_obj_has_model(MODEL_RED_COIN) || cur_obj_has_model(MODEL_BLUE_COIN) || cur_obj_has_model(MODEL_YELLOW_COIN_NO_SHADOW) || cur_obj_has_model(MODEL_RED_COIN_NO_SHADOW) || cur_obj_has_model(MODEL_BLUE_COIN_NO_SHADOW)) {
+        if (cur_obj_has_model(MODEL_YELLOW_COIN) || 
+        cur_obj_has_model(MODEL_RED_COIN) || 
+        cur_obj_has_model(MODEL_BLUE_COIN) || 
+        cur_obj_has_model(MODEL_YELLOW_COIN_NO_SHADOW) || 
+        cur_obj_has_model(MODEL_RED_COIN_NO_SHADOW) || 
+        cur_obj_has_model(MODEL_BLUE_COIN_NO_SHADOW)) {
             if (o->oldSharedChild == NULL) {
                 o->oldSharedChild = o->header.gfx.sharedChild;
                 u8 model = (random_u16() % 3) + 1;
