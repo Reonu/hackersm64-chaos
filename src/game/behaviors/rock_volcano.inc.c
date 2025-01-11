@@ -51,12 +51,12 @@ void bhv_rock_volcano_fall_down(void) {
 
 void bhv_rock_volcano_disappear(void) {
     if (o->oTimer == 0) {
-        cur_obj_play_sound_2(SOUND_GENERAL_EXPLOSION6);
         spawn_mist_particles();
         cur_obj_disable_rendering();
     } else if (o->oTimer >= 30) {
         obj_mark_for_deletion(o);
     }
+    cur_obj_play_sound_2(SOUND_GENERAL_EXPLOSION6);
 }
 
 void bhv_rock_volcano_loop(void) {
