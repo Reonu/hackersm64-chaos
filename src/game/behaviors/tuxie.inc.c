@@ -94,7 +94,12 @@ void tuxies_mother_act_receiving_baby(void) {
             if (o->prevObj->oHeldState == HELD_FREE) {
                 o->prevObj->oInteractionSubtype &= ~INT_SUBTYPE_DROP_IMMEDIATELY;
                 obj_set_behavior(o->prevObj, bhvSmallPenguinReturned);
-                cur_obj_spawn_star_at_y_offset(3167.0f, -4300.0f, 5108.0f, 200.0f);
+                if (gCurrLevelNum == LEVEL_BOB) {
+                    cur_obj_spawn_star_at_y_offset(o->oPosX + 250, o->oPosY + 200, o->oPosZ, 200.0f);
+                } else {
+                    cur_obj_spawn_star_at_y_offset(3167.0f, -4300.0f, 5108.0f, 200.0f);
+                }
+                
                 o->oAction = MOTHER_PENGUIN_SUB_ACT_WRONG_BABY;
             }
             break;
