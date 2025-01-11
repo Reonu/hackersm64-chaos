@@ -1857,6 +1857,17 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         obj_set_model(gMarioObject, MODEL_MARIO);
     }
 
+    if (gChaosCodeTable[GLOBAL_CHAOS_DELETE_NEARBY_OBJECTS].active) {
+        f32 dist;
+        struct Object *deletusObjectus = cur_obj_find_nearest_object(&dist);
+        if (deletusObjectus && dist < 500) {
+            struct Object *explosion = spawn_object(deletusObjectus, MODEL_EXPLOSION, bhvExplosion);
+            explosion->oGraphYOffset += 100.0f;
+            explosion->parentObj = gMarioObject;
+            obj_mark_for_deletion(deletusObjectus);
+        }
+    }
+
     if (gMarioState->action) {
 #ifdef ENABLE_DEBUG_FREE_MOVE
         if (
