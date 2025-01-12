@@ -751,7 +751,9 @@ u32 interact_coin(struct MarioState *m, UNUSED u32 interactType, struct Object *
         queue_rumble_data(5, 80);
     }
 #endif
-
+    if (gChaosCodeTable[GLOBAL_CHAOS_COIN_CUTSCENES].active) {
+        drop_and_set_mario_action(m, ACT_GET_COIN, obj->oDamageOrCoinValue);
+    }
     return FALSE;
 }
 

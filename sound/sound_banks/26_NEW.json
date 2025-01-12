@@ -20,10 +20,16 @@
       "release_rate": 208,
       "envelope": "envelope0",
       "sound": "snowball_scream"
+    },
+    "inst_fiverupees": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "fiverupees"
     }
   },
   "instrument_list": [
     "inst_snowball_lets_do_this",
-    "inst_snowball_scream"
+    "inst_snowball_scream",
+    "inst_fiverupees"
   ]
 }

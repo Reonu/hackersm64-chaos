@@ -427,7 +427,7 @@ s32 act_reading_automatic_dialog(struct MarioState *m) {
     }
     if (m->actionState < 9) {
         set_mario_animation(m, m->prevAction == ACT_STAR_DANCE_WATER ? MARIO_ANIM_WATER_IDLE
-                                                                     : MARIO_ANIM_FIRST_PERSON);
+                                                                        : MARIO_ANIM_FIRST_PERSON);
         // always look up for automatic dialogs
         m->actionTimer -= 1024;
     } else {
@@ -2646,6 +2646,59 @@ static s32 check_for_instant_quicksand(struct MarioState *m) {
     return FALSE;
 }
 
+#define YELLOW_COIN 1
+#define RED_COIN 2
+#define BLUE_COIN 5
+s32 act_coin_celebration(struct MarioState *m) {
+    u16 dialogId = 0;
+    u16 modelId = 0;
+    switch (m->actionArg) {
+        case YELLOW_COIN:
+        default:
+            dialogId = DIALOG_GET_YELLOW_COIN + 1; // idk why I need to add 1, please fix
+            modelId = MODEL_YELLOW_COIN;
+            break;
+        case RED_COIN:
+            dialogId = DIALOG_GET_RED_COIN + 1;
+            modelId = MODEL_RED_COIN;
+            break;
+        case BLUE_COIN:
+            dialogId = DIALOG_GET_BLUE_COIN + 1;
+            modelId = MODEL_BLUE_COIN;
+            break;
+
+    }
+
+    // Make Mario face the camera
+    m->marioObj->header.gfx.angle[1] = gCamera->yaw;
+
+    set_custom_mario_animation(m, MARIO_ANIM_CUSTOM_GET_COIN);
+    
+    if (m->actionTimer == 0) {
+        play_sound(SOUND_NEW_FIVERUPEES, gGlobalSoundSource);
+    }
+    
+
+    if (m->actionTimer++ == 34) {
+        spawn_object_relative(0, m->pos[0], m->pos[1] + 170.f, m->pos[2], m->marioObj, modelId, bhvCelebratoryCoin);
+        create_dialog_box(dialogId);
+    }
+
+    if (m->actionTimer == 36) {
+        if (get_dialog_id() >= 0) {
+            m->actionTimer = 35;
+        }
+    }
+
+    if (m->actionTimer > 36) {
+        drop_and_set_mario_action(m, ACT_IDLE, 0);
+    }
+
+
+
+    return FALSE;
+}
+
 s32 mario_execute_cutscene_action(struct MarioState *m) {
     s32 cancel;
 
@@ -2706,6 +2759,7 @@ s32 mario_execute_cutscene_action(struct MarioState *m) {
         case ACT_BUTT_STUCK_IN_GROUND:       cancel = act_butt_stuck_in_ground(m);       break;
         case ACT_FEET_STUCK_IN_GROUND:       cancel = act_feet_stuck_in_ground(m);       break;
         case ACT_PUTTING_ON_CAP:             cancel = act_putting_on_cap(m);             break;
+        case ACT_GET_COIN:                   cancel = act_coin_celebration(m);           break;
     }
     /* clang-format on */
 

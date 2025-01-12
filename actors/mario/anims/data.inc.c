@@ -4,3 +4,4 @@
 #include "anim_on_kart_left_idle.inc.c"
 #include "anim_on_kart_turn_right.inc.c"
 #include "anim_on_kart_right_idle.inc.c"
+#include "anim_get_coin.inc.c"

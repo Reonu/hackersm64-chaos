@@ -2102,4 +2102,13 @@ DEFINE_DIALOG(DIALOG_KOOPA_NPC_1, 1, 4, 30, 200, _("\
 We've been hiding here\n\
 for 28 years and you\n\
 are the first one to\n\
-find us!"))
+find us!."))
+
+DEFINE_DIALOG(DIALOG_GET_YELLOW_COIN, 1, 1, 30, 200, _("\
+You got a Yellow Coin!"))
+
+DEFINE_DIALOG(DIALOG_GET_RED_COIN, 1, 1, 30, 200, _("\
+You got a Red Coin!"))
+
+DEFINE_DIALOG(DIALOG_GET_BLUE_COIN, 1, 1, 30, 200, _("\
+You got a Blue Coin!"))

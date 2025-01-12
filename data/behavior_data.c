@@ -6162,3 +6162,12 @@ const BehaviorScript bhvKoopaMother[] = {
         CALL_NATIVE(bhv_tuxies_mother_loop),
     END_LOOP(),
 };
+const BehaviorScript bhvCelebratoryCoin[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BILLBOARD(),
+    CALL_NATIVE(bhv_celebratory_coin_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_celebratory_coin_loop),
+    END_LOOP(),
+};
