@@ -586,3 +586,5 @@ void bhv_koopa_npc_init(void);
 void bhv_koopa_npc_loop(void);
 void bhv_gear_walls_init(void);
 void bhv_gear_walls_loop(void);
+void bhv_celebratory_coin_init(void);
+void bhv_celebratory_coin_loop(void);

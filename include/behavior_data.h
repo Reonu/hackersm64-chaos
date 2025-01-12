@@ -550,3 +550,4 @@ extern const BehaviorScript bhvKartController[];
 extern const BehaviorScript bhvRockVolcano[];
 extern const BehaviorScript bhvKoopaNpc[];
 extern const BehaviorScript bhvGearWalls[];
+extern const BehaviorScript bhvCelebratoryCoin[];

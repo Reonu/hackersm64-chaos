@@ -597,4 +597,5 @@ enum SoundBank {
 
 #define SOUND_NEW_SNOWBALL_LETS_DO_THIS                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x00, 0xFF, SOUND_DISCRETE)
 #define SOUND_NEW_SNOWBALL_SCREAM                                 SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x01, 0xFF, SOUND_DISCRETE)
+#define SOUND_NEW_FIVERUPEES                                      SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x02, 0xFF, SOUND_DISCRETE)
 #endif // SOUNDS_H

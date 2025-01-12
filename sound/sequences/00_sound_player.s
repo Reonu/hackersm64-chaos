@@ -8010,6 +8010,17 @@ chan_jump .main_loop_023589
 .channel_NEW_table:
 sound_ref .sound_snowball_lets_do_this
 sound_ref .sound_snowball_scream
+sound_ref .sound_fiverupees
+
+.sound_fiverupees:
+chan_setbank 11
+chan_setinstr 2
+chan_setlayer 0, .layer_fiverupees
+chan_end
+
+.layer_fiverupees:
+layer_note1 39, 0x7b, 127
+layer_end
 
 .sound_snowball_scream:
 chan_setbank 11

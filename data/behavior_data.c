@@ -6171,3 +6171,13 @@ const BehaviorScript bhvGearWalls[] = {
         CALL_NATIVE(bhv_gear_walls_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvCelebratoryCoin[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BILLBOARD(),
+    CALL_NATIVE(bhv_celebratory_coin_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_celebratory_coin_loop),
+    END_LOOP(),
+};
