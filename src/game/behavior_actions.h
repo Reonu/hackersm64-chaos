@@ -584,3 +584,5 @@ void bhv_rock_volcano_init(void);
 void bhv_rock_volcano_loop(void);
 void bhv_koopa_npc_init(void);
 void bhv_koopa_npc_loop(void);
+void bhv_gear_walls_init(void);
+void bhv_gear_walls_loop(void);

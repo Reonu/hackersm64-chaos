@@ -182,6 +182,10 @@
 #define MODEL_RR_TRICKY_TRIANGLES_FRAME2          0x43        // rr_geo_000988
 #define MODEL_RR_TRICKY_TRIANGLES_FRAME3          0x44        // rr_geo_0009A0
 #define MODEL_RR_TRICKY_TRIANGLES_FRAME4          0x45        // rr_geo_0009B8
+#define MODEL_TTC_GEAR_WALLS_1                  0x46
+#define MODEL_TTC_GEAR_WALLS_2                  0x47
+#define MODEL_TTC_GEAR_WALLS_3                  0x48
+
 
 // castle grounds
 

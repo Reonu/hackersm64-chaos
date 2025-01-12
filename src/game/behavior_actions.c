@@ -235,3 +235,4 @@ void set_obj_anim_with_accel_and_sound(s16 frame1, s16 frame2, s32 sound) {
 #include "behaviors/kart_controller.inc.c"
 #include "behaviors/rock_volcano.inc.c"
 #include "behaviors/koopa_npc.inc.c"
+#include "behaviors/gear_walls.inc.c"

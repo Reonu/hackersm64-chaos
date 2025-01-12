@@ -1,0 +1,8 @@
+extern const GeoLayout gear_walls_1_geo[];
+extern u8 gear_walls_1_gears1_rgba16[];
+extern Vtx gear_walls_1_18_GeoRoot_ttc_1_ttc_seg7_dl_0700AD38_004_mesh_layer_1_vtx_cull[8];
+extern Vtx gear_walls_1_18_GeoRoot_ttc_1_ttc_seg7_dl_0700AD38_004_mesh_layer_1_vtx_0[1578];
+extern Gfx gear_walls_1_18_GeoRoot_ttc_1_ttc_seg7_dl_0700AD38_004_mesh_layer_1_tri_0[];
+extern Gfx mat_gear_walls_1_f3dlite_material_003[];
+extern Gfx mat_revert_gear_walls_1_f3dlite_material_003[];
+extern Gfx gear_walls_1_18_GeoRoot_ttc_1_ttc_seg7_dl_0700AD38_004_mesh_layer_1[];

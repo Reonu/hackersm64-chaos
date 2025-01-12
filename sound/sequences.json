@@ -126,5 +126,8 @@
     },
     "23_chaogarden": [
         "chaogarden"
+    ],
+    "24_clock_tower": [
+        "streamed_audio"
     ]
 }

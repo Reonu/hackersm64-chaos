@@ -6162,3 +6162,12 @@ const BehaviorScript bhvKoopaMother[] = {
         CALL_NATIVE(bhv_tuxies_mother_loop),
     END_LOOP(),
 };
+const BehaviorScript bhvGearWalls[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(32000),
+    CALL_NATIVE(bhv_gear_walls_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_gear_walls_loop),
+    END_LOOP(),
+};
