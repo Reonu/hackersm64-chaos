@@ -622,6 +622,45 @@ struct Object *cur_obj_find_nearest_object_with_behavior(const BehaviorScript *b
     return closestObj;
 }
 
+struct Object *cur_obj_find_nearest_object(f32 *dist) {
+    
+    f32 minDist = 0x20000;
+    struct Object *closestObj = NULL;
+    for (int i = 1; i < OBJ_LIST_UNIMPORTANT; i++) {
+    struct ObjectNode *listHead = &gObjectLists[i];
+    struct Object *obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj != o && obj != gMarioObject && obj->parentObj != gMarioObject 
+            && !obj_has_behavior(obj, bhvExplosion) 
+            && !obj_has_behavior(obj, bhvBobombBullyDeathSmoke) 
+            && !obj_has_behavior(obj, bhvMistParticleSpawner)
+            && !obj_has_behavior(obj, bhvSparkleParticleSpawner)
+            && !obj_has_behavior(obj, bhvDirtParticleSpawner)
+            && !obj_has_behavior(obj, bhvFireParticleSpawner)
+            && !obj_has_behavior(obj, bhvHorStarParticleSpawner)
+            && !obj_has_behavior(obj, bhvMistCircParticleSpawner)
+            && !obj_has_behavior(obj, bhvTriangleParticleSpawner)
+            && !obj_has_behavior(obj, bhvVertStarParticleSpawner)
+            && !obj_has_model(obj, MODEL_WHITE_PARTICLE)
+            && !obj_has_model(obj, MODEL_SMOKE)
+            && !obj_has_model(obj, MODEL_MIST)
+            && !obj_has_model(obj, MODEL_CARTOON_STAR)
+            && obj->activeFlags != ACTIVE_FLAG_DEACTIVATED) {
+            f32 objDist = dist_between_objects(o, obj);
+            if (objDist < minDist) {
+                closestObj = obj;
+                minDist = objDist;
+            }
+        }
+
+        obj = (struct Object *) obj->header.next;
+    }
+    }
+    *dist = minDist;
+    return closestObj;
+}
+
 struct Object *find_unimportant_object(void) {
     struct ObjectNode *listHead = &gObjectLists[OBJ_LIST_UNIMPORTANT];
     struct ObjectNode *obj = listHead->next;

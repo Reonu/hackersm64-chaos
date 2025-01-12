@@ -36,6 +36,7 @@
 #include "buffers/buffers.h"
 
 
+
 /**************************************************
  *                    ANIMATIONS                  *
  **************************************************/
@@ -773,7 +774,13 @@ void set_steep_jump_action(struct MarioState *m) {
         m->faceAngle[1] = atan2s(x, y) + angleTemp;
     }
 
-    drop_and_set_mario_action(m, ACT_STEEP_JUMP, 0);
+    if (gChaosCodeTable[GLOBAL_CHAOS_ALL_JUMPS_TRIPLE].active) {
+            
+            drop_and_set_mario_action(m, ACT_TRIPLE_JUMP, 0);
+        }
+    else {
+        drop_and_set_mario_action(m, ACT_STEEP_JUMP, 0);
+    }
 }
 
 /**
@@ -1043,7 +1050,12 @@ s32 set_jump_from_landing(struct MarioState *m) {
         set_steep_jump_action(m);
     } else {
         if ((m->doubleJumpTimer == 0) || (m->squishTimer != 0)) {
-            set_mario_action(m, ACT_JUMP, 0);
+            if (gChaosCodeTable[GLOBAL_CHAOS_ALL_JUMPS_TRIPLE].active) {
+                set_mario_action(m, ACT_TRIPLE_JUMP, 0);
+            }
+            else {
+                set_mario_action(m, ACT_JUMP, 0);
+            }
         } else {
             switch (m->prevAction) {
                 case ACT_JUMP_LAND:
@@ -1066,12 +1078,22 @@ s32 set_jump_from_landing(struct MarioState *m) {
                     } else if (m->forwardVel > 20.0f) {
                         set_mario_action(m, ACT_TRIPLE_JUMP, 0);
                     } else {
-                        set_mario_action(m, ACT_JUMP, 0);
+                        if (gChaosCodeTable[GLOBAL_CHAOS_ALL_JUMPS_TRIPLE].active) {
+                            set_mario_action(m, ACT_TRIPLE_JUMP, 0);
+                        }
+                        else {
+                            set_mario_action(m, ACT_JUMP, 0);
+                        }
                     }
                     break;
 
                 default:
-                    set_mario_action(m, ACT_JUMP, 0);
+                    if (gChaosCodeTable[GLOBAL_CHAOS_ALL_JUMPS_TRIPLE].active) {
+                        set_mario_action(m, ACT_TRIPLE_JUMP, 0);
+                    }
+                    else {
+                        set_mario_action(m, ACT_JUMP, 0);
+                    }
                     break;
             }
         }
@@ -1099,6 +1121,11 @@ s32 set_jumping_action(struct MarioState *m, u32 action, u32 actionArg) {
     if (mario_floor_is_steep(m)) {
         set_steep_jump_action(m);
     } else {
+        if (gChaosCodeTable[GLOBAL_CHAOS_ALL_JUMPS_TRIPLE].active) {
+            if (action == ACT_JUMP || action == ACT_DOUBLE_JUMP) {
+                action = ACT_TRIPLE_JUMP;
+            }
+        }
         set_mario_action(m, action, actionArg);
     }
 
@@ -1129,7 +1156,12 @@ s32 hurt_and_set_mario_action(struct MarioState *m, u32 action, u32 actionArg, s
  */
 s32 check_common_action_exits(struct MarioState *m) {
     if (m->input & INPUT_A_PRESSED) {
-        return set_mario_action(m, ACT_JUMP, 0);
+        if (gChaosCodeTable[GLOBAL_CHAOS_ALL_JUMPS_TRIPLE].active) {
+                return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
+            }
+            else {
+                return set_mario_action(m, ACT_JUMP, 0);
+            }
     }
     if (m->input & INPUT_OFF_FLOOR) {
         return set_mario_action(m, ACT_FREEFALL, 0);
@@ -1823,6 +1855,17 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         obj_set_model(gMarioObject, MODEL_MARIO_BILLBOARD);
     } else {
         obj_set_model(gMarioObject, MODEL_MARIO);
+    }
+
+    if (gChaosCodeTable[GLOBAL_CHAOS_DELETE_NEARBY_OBJECTS].active) {
+        f32 dist;
+        struct Object *deletusObjectus = cur_obj_find_nearest_object(&dist);
+        if (deletusObjectus && dist < 500) {
+            struct Object *explosion = spawn_object(deletusObjectus, MODEL_EXPLOSION, bhvExplosion);
+            explosion->oGraphYOffset += 100.0f;
+            explosion->parentObj = gMarioObject;
+            obj_mark_for_deletion(deletusObjectus);
+        }
     }
 
     if (gMarioState->action) {

@@ -251,6 +251,7 @@ void cur_obj_if_hit_wall_bounce_away(void);
 s32 cur_obj_hide_if_mario_far_away_y(f32 distY);
 Gfx *geo_offset_klepto_held_object(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtx);
 s32 obj_is_hidden(struct Object *obj);
+struct Object *cur_obj_find_nearest_object(f32 *dist);
 void enable_time_stop(void);
 void disable_time_stop(void);
 void set_time_stop_flags(s32 flags);

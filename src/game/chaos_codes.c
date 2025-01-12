@@ -191,6 +191,8 @@ ChaosCode gChaosCodeTable[] = {
     {"Mario Sounds Scream", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Randomize Coin Colors", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
     {"Coin Cutscenes", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"All jumps are triple", chaos_generic, 15, 45, 0,   /*ignore these*/ 0, 0},
+    {"Delete Nearby Objects", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
