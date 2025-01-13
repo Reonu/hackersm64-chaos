@@ -196,7 +196,13 @@ static void platform_on_track_act_init(void) {
 static void platform_on_track_act_wait_for_mario(void) {
     if (gMarioObject->platform == o) {
         if (o->oTimer > 20) {
-            o->oAction = PLATFORM_ON_TRACK_ACT_MOVE_ALONG_TRACK;
+            if (gCurrLevelNum == LEVEL_RR) {
+                o->oAction = PLATFORM_RISE_FOREVER;
+                o->oTimer = 0;
+                o->oPlatformOnTrackPrevWaypointFlags = 0;
+            } else {
+                o->oAction = PLATFORM_ON_TRACK_ACT_MOVE_ALONG_TRACK;
+            }
         }
     } else {
         if (o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM) {
@@ -358,6 +364,63 @@ static void platform_on_track_rock_ski_lift(void) {
     clamp_f32(&o->oPlatformOnTrackSkiLiftRollVel, -100.0f, 100.0f);
 }
 
+void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 warpFlags);
+
+void platform_rise_forever(void) {
+    gChaosOffOverride = TRUE;
+    switch (gCurrActNum) {
+    case 2:
+        if (o->oPosY < 0) {
+            o->oTimer = 0;
+            o->oPosY += 5.0f;
+        } else {
+            o->oTimer++;
+            if (o->oTimer > 120) {
+                o->oPosY += 75.0f;
+            }
+        }
+        if (o->oPosY > 15200 && o->oPlatformOnTrackPrevWaypointFlags == 0) {
+            o->oPlatformOnTrackPrevWaypointFlags = 1;
+            play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 60, 255, 255, 255);
+        }
+        if (o->oPosY > 15500) {
+            gChaosOffOverride = FALSE;
+            initiate_warp(LEVEL_RR2, 0x01, 0x0A, 0x0);
+            // Warp to next level
+        }
+        break;
+    case 3:
+        if (o->oPosY > -3000) {
+            o->oPosY -= 7.5f;
+        } else {
+            o->oPosX -= 50.0f;
+        }
+        if (o->oPosX < -4000 && o->oPlatformOnTrackPrevWaypointFlags == 0) {
+            o->oPlatformOnTrackPrevWaypointFlags = 1;
+            play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 60, 255, 255, 255);
+        }
+        if (o->oPosX < -4300) {
+            gChaosOffOverride = FALSE;
+            initiate_warp(LEVEL_RR2, 0x01, 0x0A, 0x0);
+            // Warp to next level
+        }
+        break;
+    default: 
+        o->oPosY += 50.0f;
+        if (o->oPosY > 19200 && o->oPlatformOnTrackPrevWaypointFlags == 0) {
+            o->oPlatformOnTrackPrevWaypointFlags = 1;
+            play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 60, 255, 255, 255);
+        }
+        if (o->oPosY > 19500) {
+            gChaosOffOverride = FALSE;
+            initiate_warp(LEVEL_RR2, 0x01, 0x0A, 0x0);
+            // Warp to next level
+        }
+        break;
+    };
+
+}
+
 /**
  * Update function for bhvPlatformOnTrack.
  */
@@ -377,6 +440,9 @@ void bhv_platform_on_track_update(void) {
             break;
         case PLATFORM_ON_TRACK_ACT_FALL:
             platform_on_track_act_fall();
+            break;
+        case PLATFORM_RISE_FOREVER:
+            platform_rise_forever();
             break;
     }
 
