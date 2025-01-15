@@ -182,6 +182,17 @@ void chaos_ad(void) {
     }
 }
 
+void chaos_generic_bob(void) {
+    if (gBoBChaosTable[gCurrentChaosID].active == FALSE) {
+        gBoBChaosTable[gCurrentChaosID].active = TRUE;
+    }
+    gBoBChaosTable[gCurrentChaosID].timer--;
+    if (gBoBChaosTable[gCurrentChaosID].timer <= 0) {
+        gBoBChaosTable[gCurrentChaosID].timer = 0;
+        gBoBChaosTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -214,6 +225,10 @@ ChaosCode gCCMChaosTable[] = {
     {"CCM Volcano Rocks", chaos_ccm_rocks_from_volcano, 20, 35, 0,   /*ignore these*/ 0, 0},
 };
 
+ChaosCode gBoBChaosTable[] = {
+    {"BoB Water Bombs", chaos_generic_bob, 20, 35, 0,   /*ignore these*/ 0, 0},
+};
+
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
     if (table[codeID].flags) {
         for (s32 i = 0; i < tableSize; i++) {
@@ -241,6 +256,9 @@ ChaosCode *chaos_level_table(s32 *size) {
     case LEVEL_CCM:
         *size = sizeof(gCCMChaosTable) / sizeof(ChaosCode);
         return gCCMChaosTable;
+    case LEVEL_BOB:
+        *size = sizeof(gBoBChaosTable) / sizeof(ChaosCode);
+        return gBoBChaosTable;
     default:
         *size = sizeof(gChaosCodeTable) / sizeof(ChaosCode);
         return gChaosCodeTable;

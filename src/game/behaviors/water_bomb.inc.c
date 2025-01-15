@@ -24,6 +24,8 @@ static struct ObjectHitbox sWaterBombHitbox = {
     /* hurtboxHeight:     */ 50,
 };
 
+#include "game/chaos_codes.h"
+
 /**
  * Update function for bhvWaterBombSpawner.
  * Spawn water bombs targeting mario when he comes in range.
@@ -54,8 +56,14 @@ void bhv_water_bomb_spawner_update(void) {
 
                 spawn_object(waterBomb, MODEL_WATER_BOMB_SHADOW, bhvWaterBombShadow);
 
-                o->oWaterBombSpawnerBombActive = TRUE;
-                o->oWaterBombSpawnerTimeToSpawn = random_linear_offset(0, 50);
+
+                if (gBoBChaosTable[BOB_CHAOS_WATER_BOMB_SPAM].active) {
+                    o->oWaterBombSpawnerBombActive = FALSE;
+                    o->oWaterBombSpawnerTimeToSpawn = random_linear_offset(0, 20);
+                } else {
+                    o->oWaterBombSpawnerBombActive = TRUE;
+                    o->oWaterBombSpawnerTimeToSpawn = random_linear_offset(0, 50);
+                }
             }
         }
     }
