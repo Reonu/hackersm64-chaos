@@ -1869,7 +1869,9 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             explosion->oGraphYOffset += 100.0f;
             explosion->parentObj = gMarioObject;
             if (deletusObjectus->behavior == segmented_to_virtual(bhvPiranhaPlant)) {
-                obj_mark_for_deletion(cur_obj_find_nearest_object_with_behavior(bhvPiranhaPlantBubble,&dist));
+                if ((cur_obj_find_nearest_object_with_behavior(bhvPiranhaPlantBubble,&dist) != NULL)) {
+                    obj_mark_for_deletion(cur_obj_find_nearest_object_with_behavior(bhvPiranhaPlantBubble,&dist));
+                }
             }
             obj_mark_for_deletion(deletusObjectus);
         }
