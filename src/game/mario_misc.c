@@ -403,6 +403,10 @@ Gfx *geo_mario_tilt_torso(s32 callContext, struct GraphNode *node, UNUSED Mat4 *
     return NULL;
 }
 
+extern Vec3f gMarioHeadPos;
+extern s16 gMatStackIndex;
+extern Mat4 gMatStack[32];
+
 /**
  * Makes Mario's head rotate with the camera angle when in C-up mode
  */
@@ -426,6 +430,9 @@ Gfx *geo_mario_head_rotation(s32 callContext, struct GraphNode *node, UNUSED Mat
             vec3_zero(bodyState->headAngle);
             vec3_zero(rotNode->rotation);
         }
+        gMarioHeadPos[0] = gMatStack[gMatStackIndex][3][0];
+        gMarioHeadPos[1] = gMatStack[gMatStackIndex][3][1];
+        gMarioHeadPos[2] = gMatStack[gMatStackIndex][3][2];
     }
     return NULL;
 }

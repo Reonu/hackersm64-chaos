@@ -55,6 +55,7 @@ ALIGNED16 Mat4 gMatStack[32];
 ALIGNED16 Mtx *gMatStackFixed[32];
 f32 sAspectRatio;
 s32 sRenderPass;
+Vec3f gMarioHeadPos;
 
 /**
  * Animation nodes have state in global variables, so this struct captures
@@ -585,12 +586,12 @@ void geo_process_camera(struct GraphNodeCamera *node) {
         } else {
             flipdir = 0;
         }
-        pos[0] = gMarioState->pos[0] + (150.0f * sins(gMarioState->faceAngle[1] + flipdir));
-        pos[2] = gMarioState->pos[2] + (150.0f * coss(gMarioState->faceAngle[1] + flipdir));
-        pos[1] = gMarioState->pos[1] + 110.0f;
-        focus[0] = gMarioState->pos[0];
-        focus[1] = gMarioState->pos[1] + 110.0f;
-        focus[2] = gMarioState->pos[2];
+        pos[0] = gMarioHeadPos[0] + (150.0f * sins(gMarioState->faceAngle[1] + flipdir));
+        pos[2] = gMarioHeadPos[2] + (150.0f * coss(gMarioState->faceAngle[1] + flipdir));
+        pos[1] = gMarioHeadPos[1] + 25.0f;
+        focus[0] = gMarioHeadPos[0];
+        focus[1] = gMarioHeadPos[1] + 25.0f;
+        focus[2] = gMarioHeadPos[2];
         mtxf_lookat(gCameraTransform, pos, focus, 0);
     }
 
