@@ -404,6 +404,7 @@ Gfx *geo_mario_tilt_torso(s32 callContext, struct GraphNode *node, UNUSED Mat4 *
 }
 
 extern Vec3f gMarioHeadPos;
+extern Vec3s gMarioHeadRot;
 extern s16 gMatStackIndex;
 extern Mat4 gMatStack[32];
 
@@ -422,13 +423,18 @@ Gfx *geo_mario_head_rotation(s32 callContext, struct GraphNode *node, UNUSED Mat
         if (camera->mode == CAMERA_MODE_C_UP) {
             rotNode->rotation[0] = gPlayerCameraState->headRotation[1];
             rotNode->rotation[2] = gPlayerCameraState->headRotation[0];
+            gMarioHeadRot[1] = gPlayerCameraState->headRotation[1];
+            gMarioHeadRot[2] = gPlayerCameraState->headRotation[0];
+            gMarioHeadRot[0] = 0;
         } else if (action & ACT_FLAG_WATER_OR_TEXT) {
             rotNode->rotation[0] = bodyState->headAngle[1];
             rotNode->rotation[1] = bodyState->headAngle[2];
             rotNode->rotation[2] = bodyState->headAngle[0];
+            vec3s_copy(gMarioHeadRot, bodyState->headAngle);
         } else {
             vec3_zero(bodyState->headAngle);
             vec3_zero(rotNode->rotation);
+            vec3_zero(gMarioHeadRot);
         }
         gMarioHeadPos[0] = gMatStack[gMatStackIndex][3][0];
         gMarioHeadPos[1] = gMatStack[gMatStackIndex][3][1];
