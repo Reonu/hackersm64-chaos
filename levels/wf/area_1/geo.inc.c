@@ -8,7 +8,7 @@ const GeoLayout wf_area_1_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_ALPHA, wf_dl_15_GeoRoot_wf_1_wf_seg7_dl_070050C8_mesh_layer_4),
 		GEO_CLOSE_NODE(),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, 90, 0, 0, wf_dl_17_GeoRoot_wf_1_wf_seg7_dl_07005538_mesh_layer_6),
-		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, wf_dl_18_GeoRoot_wf_1_wf_seg7_dl_07005690_mesh_layer_5),
+		GEO_ROTATION_NODE(LAYER_TRANSPARENT, 90, 0, 0),
 		GEO_ASM(0, geo_movtex_pause_control),
 		GEO_ASM(WF_MOVTEX_WATER, geo_movtex_draw_water_regions),
 		GEO_ASM(0, geo_cannon_circle_base),
