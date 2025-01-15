@@ -21,6 +21,9 @@ s32 nextGlobalCodeTimer = 150;
 u32 gCurrentChaosID;
 u8 gDisableChaos = TRUE; // Debug only
 u8 gChaosOffOverride = FALSE; // Use this one for non debug overrides.
+u8 gSpamAd;
+s16 gSpamCursorX;
+s16 gSpamCursorY;
 float gCrimes = 0;
 s32 gCrimeSpawnTimer;
 
@@ -170,6 +173,15 @@ void chaos_randomize_coin_colors(void) {
     }
 }
 
+void chaos_ad(void) {
+    if (gChaosCodeTable[gCurrentChaosID].active == FALSE) {
+        gChaosCodeTable[gCurrentChaosID].active = TRUE;
+        gSpamAd = random_u16() % 5;
+        gSpamCursorX = 48;
+        gSpamCursorY = 48;
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -195,6 +207,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Delete Nearby Objects", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Invert Dive and Kick", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Live Mario Reaction", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"Ad Spam", chaos_ad, 0, 0, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

@@ -30,6 +30,7 @@
 #include "s2d_engine/init.h"
 #endif
 #include "chaos_codes.h"
+#include "main.h"
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *gGraphNodePointers[MODEL_ID_COUNT];
@@ -392,7 +393,7 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
 
 void render_game(void) {
     PROFILER_GET_SNAPSHOT_TYPE(PROFILER_DELTA_COLLISION);
-    if (gCurrentArea != NULL && !gWarpTransition.pauseRendering) {
+    if (gCurrentArea != NULL && !gWarpTransition.pauseRendering && gChaosCodeTable[GLOBAL_CHAOS_AD_SPAM].active == FALSE) {
         if (gCurrentArea->graphNode) {
             geo_process_root(gCurrentArea->graphNode, gViewportOverride, gViewportClip, gFBSetColor);
         }
@@ -474,6 +475,72 @@ void render_game(void) {
         gDPPipeSync(gDisplayListHead++);
         gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
         gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
+    }
+
+    if (gChaosCodeTable[GLOBAL_CHAOS_AD_SPAM].active) {
+        Texture *ad;
+        switch (gSpamAd) {
+        default: 
+            ad = ad1;
+            break;
+        case 1: 
+            ad = ad2;
+            break;
+        case 2: 
+            ad = ad3;
+            break;
+        case 3: 
+            ad = ad4;
+            break;
+        case 4: 
+            ad = ad5;
+            break;
+        }
+        gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
+        gDPSetTextureFilter(gDisplayListHead++, G_TF_POINT);
+        render_multi_image(segmented_to_virtual(ad), 0, 0, 320, 240, 1, 1, G_CYC_COPY);
+        gDPLoadSync(gDisplayListHead++);
+        gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
+        gDPSetRenderMode(gDisplayListHead++, G_RM_AA_TEX_EDGE, G_RM_AA_TEX_EDGE2);
+        gDPSetCombineMode(gDisplayListHead++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+
+        s32 sineCol = 160 + ABS(95 * sins(gGlobalTimer * 0x400));
+        gDPSetPrimColor(gDisplayListHead++, 0, 0, sineCol, sineCol, sineCol, 255);
+        gDPLoadTextureBlock(gDisplayListHead++, segmented_to_virtual(ad_close), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, 0, 0, 0, 0, 0, 0);
+        gSPScisTextureRectangle(gDisplayListHead++, (gScreenWidth - 24) << 2, 8 << 2, (gScreenWidth - 8) << 2, 24 << 2, G_TX_RENDERTILE, 0, 0, 1024, 1024);
+        gDPLoadSync(gDisplayListHead++);
+        gDPLoadTextureBlock_4b(gDisplayListHead++, segmented_to_virtual(ad_cursor), G_IM_FMT_IA, 32, 32, 0, 0, 0, 0, 0, 0, 0);
+        gSPScisTextureRectangle(gDisplayListHead++, (gSpamCursorX) << 2, (gSpamCursorY) << 2, (gSpamCursorX + 32) << 2, (gSpamCursorY + 32) << 2, G_TX_RENDERTILE, 0, 0, 1024, 1024);
+
+        gDPPipeSync(gDisplayListHead++);
+        gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
+        gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
+
+        if (ABS(gPlayer1Controller->rawStickX) > 8) {
+            gSpamCursorX += gPlayer1Controller->rawStickX / 8;
+            if (gSpamCursorX < 0) {
+                gSpamCursorX = 0;
+            }
+            if (gSpamCursorX > gScreenWidth - 16) {
+                gSpamCursorX = gScreenWidth - 16;
+            }
+        }
+        if (ABS(gPlayer1Controller->rawStickY) > 8) {
+            gSpamCursorY -= gPlayer1Controller->rawStickY / 8;
+            if (gSpamCursorY < 0) {
+                gSpamCursorY = 0;
+            }
+            if (gSpamCursorY > gScreenHeight - 16) {
+                gSpamCursorY = gScreenHeight - 16;
+            }
+        }
+
+        if (gPlayer1Controller->buttonPressed & A_BUTTON) {
+            if (gSpamCursorX > gScreenWidth - 32 && gSpamCursorY < 32) {
+                gChaosCodeTable[GLOBAL_CHAOS_AD_SPAM].active = FALSE;
+                gChaosCodeTable[GLOBAL_CHAOS_AD_SPAM].timer = 0;
+            }
+        }
     }
 
     gViewportOverride = NULL;

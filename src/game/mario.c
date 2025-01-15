@@ -1464,6 +1464,10 @@ void update_mario_inputs(struct MarioState *m) {
     m->collidedObjInteractTypes = m->marioObj->collidedObjInteractTypes;
     m->flags &= 0xFFFFFF;
 
+    if (gChaosCodeTable[GLOBAL_CHAOS_AD_SPAM].active) {
+        return;
+    }
+
 #ifdef PUPPYCAM
     if (gPuppyCam.mode3Flags & PUPPYCAM_MODE3_ENTER_FIRST_PERSON || (gPuppyCam.flags & PUPPYCAM_BEHAVIOUR_FREE && gPuppyCam.debugFlags & PUPPYDEBUG_LOCK_CONTROLS)) {
         m->input = INPUT_FIRST_PERSON;

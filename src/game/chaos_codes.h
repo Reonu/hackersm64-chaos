@@ -26,6 +26,7 @@ enum GlobalChaosNames {
     GLOBAL_CHAOS_DELETE_NEARBY_OBJECTS,
     GLOBAL_CHAOS_INVERT_DIVE_AND_KICK,
     GLOBAL_CHAOS_LIVE_MARIO_REACTION,
+    GLOBAL_CHAOS_AD_SPAM,
 };
 
 enum CCMChaosNames {
@@ -49,10 +50,13 @@ typedef struct ChaosCode {
     char active;
 } ChaosCode;
 
-extern ChaosCode gChaosCodeTable[24];
+extern ChaosCode gChaosCodeTable[25];
 extern u8 gDisableChaos;
 extern float gCrimes;
 extern u8 gChaosOffOverride;
+extern u8 gSpamAd;
+extern s16 gSpamCursorX;
+extern s16 gSpamCursorY;
 
 #define CHAOSCOUNT (sizeof(gChaosCodeTable) / sizeof(ChaosCode))
 
