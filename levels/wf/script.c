@@ -74,6 +74,7 @@ const LevelScript level_wf_entry[] = {
 		WARP_NODE(0x0C, LEVEL_WF, 0x01, 0x0B, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0B, LEVEL_WF, 0x01, 0x0C, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0A, LEVEL_WF, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		MARIO_POS(0x01, -45, 3790, 256, 4818),
 		OBJECT_WITH_ACTS(MODEL_1UP, -384, 3584, 6, 0, 0, 0, 0x00000000, bhv1Up, ACT_3 | ACT_4 | ACT_5 | ACT_6),
 		OBJECT(MODEL_NONE, -856, 922, 3819, 0, 0, 0, 0x00000000, bhvBetaFishSplashSpawner),
 		OBJECT(MODEL_BLUE_COIN_SWITCH, -2500, 384, -250, 0, 0, 0, 0x00000000, bhvBlueCoinSwitch),
@@ -183,7 +184,7 @@ const LevelScript level_wf_entry[] = {
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 	FREE_LEVEL_POOL(),
-	MARIO_POS(1, 0, 0, 0, 0),
+	MARIO_POS(0x01, -45, 3790, 256, 4818),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),
