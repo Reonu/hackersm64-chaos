@@ -458,6 +458,7 @@ extern const BehaviorScript bhvFloombaStartup[];
 extern const BehaviorScript bhvFloombaTripletSpawner[];
 #endif
 extern const BehaviorScript bhvChainChomp[];
+extern const BehaviorScript bhvChainChomp2[];
 extern const BehaviorScript bhvChainChompChainPart[];
 extern const BehaviorScript bhvWoodenPost[];
 extern const BehaviorScript bhvChainChompGate[];

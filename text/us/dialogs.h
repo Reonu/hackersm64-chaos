@@ -2112,3 +2112,18 @@ You got a Red Coin!"))
 
 DEFINE_DIALOG(DIALOG_GET_BLUE_COIN, 1, 1, 30, 200, _("\
 You got a Blue Coin!"))
+
+DEFINE_DIALOG(DIALOGUE_175, 1, 4, 30, 200, _("\
+This is a war man.\n\
+If you're on our side,\n\
+go get the 8 red coins."))
+
+DEFINE_DIALOG(DIALOGUE_176, 1, 1, 30, 200, _("\
+0"))
+
+DEFINE_DIALOG(DIALOGUE_177, 1, 2, 30, 200, _("\
+What??? am not scared...\n\
+I'm cold!"))
+
+DEFINE_DIALOG(DIALOGUE_178, 1, 1, 30, 200, _("\
+im hiding :o)"))
