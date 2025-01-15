@@ -16,7 +16,7 @@ extern u8 sa_dl_castle_grounds_textures_0B400_rgba16_pal_rgba16[];
 extern u8 sa_dl_wf_textures_0A000_rgba16_ci8[];
 extern u8 sa_dl_wf_textures_0A000_rgba16_pal_rgba16[];
 extern Vtx sa_dl_Plane_mesh_layer_1_vtx_cull[8];
-extern Vtx sa_dl_Plane_mesh_layer_1_vtx_0[257];
+extern Vtx sa_dl_Plane_mesh_layer_1_vtx_0[258];
 extern Gfx sa_dl_Plane_mesh_layer_1_tri_0[];
 extern Vtx sa_dl_Plane_mesh_layer_1_vtx_1[5];
 extern Gfx sa_dl_Plane_mesh_layer_1_tri_1[];
