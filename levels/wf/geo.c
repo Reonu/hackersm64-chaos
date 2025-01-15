@@ -43,3 +43,5 @@
 #include "levels/wf/areas/1/geo.inc.c"
 
 #include "levels/wf/geo.inc.c"
+#include "levels/wf/beta_corner_wall_1/geo.inc.c"
+#include "levels/wf/beta_corner_wall_2/geo.inc.c"
