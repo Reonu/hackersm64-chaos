@@ -581,13 +581,13 @@ void geo_process_camera(struct GraphNodeCamera *node) {
         Vec3f pos;
         Vec3f focus;
         s32 flipdir;
-        if (gMarioState->action == ACT_PULLING_DOOR || gMarioState->action == ACT_PUSHING_DOOR) {
+        if (gMarioState->action == ACT_PUSHING_DOOR) {
             flipdir = 0x8000;
         } else {
             flipdir = 0;
         }
-        pos[0] = gMarioHeadPos[0] + (150.0f * sins(gMarioState->faceAngle[1] + flipdir));
-        pos[2] = gMarioHeadPos[2] + (150.0f * coss(gMarioState->faceAngle[1] + flipdir));
+        pos[0] = gMarioHeadPos[0] + (150.0f * sins(gMarioState->marioObj->header.gfx.angle[1] + flipdir));
+        pos[2] = gMarioHeadPos[2] + (150.0f * coss(gMarioState->marioObj->header.gfx.angle[1] + flipdir));
         pos[1] = gMarioHeadPos[1] + 25.0f;
         focus[0] = gMarioHeadPos[0];
         focus[1] = gMarioHeadPos[1] + 25.0f;
