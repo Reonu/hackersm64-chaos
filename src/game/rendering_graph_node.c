@@ -20,6 +20,7 @@
 #include "emutest.h"
 #include "chaos_codes.h"
 #include "fb_effects.h"
+#include "segment2.h"
 
 #include "config.h"
 #include "config/config_world.h"
@@ -53,6 +54,7 @@ s16 gMatStackIndex = 0;
 ALIGNED16 Mat4 gMatStack[32];
 ALIGNED16 Mtx *gMatStackFixed[32];
 f32 sAspectRatio;
+s32 sRenderPass;
 
 /**
  * Animation nodes have state in global variables, so this struct captures
@@ -78,6 +80,7 @@ s16 gCurrAnimFrame;
 f32 gCurrAnimTranslationMultiplier;
 u16 *gCurrAnimAttribute;
 s16 *gCurrAnimData;
+Vp *gCurrentVP;
 
 struct AllocOnlyPool *gDisplayListHeap;
 
@@ -571,7 +574,25 @@ void geo_process_camera(struct GraphNodeCamera *node) {
 
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(rollMtx), G_MTX_PROJECTION | G_MTX_MUL | G_MTX_NOPUSH);
 
-    mtxf_lookat(gCameraTransform, node->pos, node->focus, node->roll);
+    if (sRenderPass == 0) {
+        mtxf_lookat(gCameraTransform, node->pos, node->focus, node->roll);
+    } else {
+        Vec3f pos;
+        Vec3f focus;
+        s32 flipdir;
+        if (gMarioState->action == ACT_PULLING_DOOR || gMarioState->action == ACT_PUSHING_DOOR) {
+            flipdir = 0x8000;
+        } else {
+            flipdir = 0;
+        }
+        pos[0] = gMarioState->pos[0] + (150.0f * sins(gMarioState->faceAngle[1] + flipdir));
+        pos[2] = gMarioState->pos[2] + (150.0f * coss(gMarioState->faceAngle[1] + flipdir));
+        pos[1] = gMarioState->pos[1] + 110.0f;
+        focus[0] = gMarioState->pos[0];
+        focus[1] = gMarioState->pos[1] + 110.0f;
+        focus[2] = gMarioState->pos[2];
+        mtxf_lookat(gCameraTransform, pos, focus, 0);
+    }
 
     // Calculate the lookAt
 #ifdef F3DEX_GBI_2
@@ -748,11 +769,15 @@ void geo_process_background(struct GraphNodeBackground *node) {
 #endif
         Gfx *gfx = gfxStart;
 
+        s32 vpUlx = (gCurrentVP->vp.vtrans[0] - gCurrentVP->vp.vscale[0]) / 4 + 1;
+        s32 vpPly = (gCurrentVP->vp.vtrans[1] - gCurrentVP->vp.vscale[1]) / 4 + 1;
+        s32 vpLrx = (gCurrentVP->vp.vtrans[0] + gCurrentVP->vp.vscale[0]) / 4 - 1;
+        s32 vpLry = (gCurrentVP->vp.vtrans[1] + gCurrentVP->vp.vscale[1]) / 4 - 1;
         gDPPipeSync(gfx++);
         gDPSetCycleType(gfx++, G_CYC_FILL);
         gDPSetFillColor(gfx++, node->background);
-        gDPFillRectangle(gfx++, GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(0), gBorderHeight,
-        GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(0) - 1, SCREEN_HEIGHT - gBorderHeight - 1);
+        gDPFillRectangle(gfx++, vpUlx, vpPly + gBorderHeight,
+        vpLrx - 1, vpLry - gBorderHeight - 1);
         gDPPipeSync(gfx++);
         gDPSetCycleType(gfx++, G_CYC_1CYCLE);
         gSPEndDisplayList(gfx++);
@@ -1237,6 +1262,23 @@ void geo_process_node_and_siblings(struct GraphNode *firstNode) {
     } while (iterateChildren && (curGraphNode = curGraphNode->next) != firstNode);
 }
 
+void react_clear_zb(void) {
+    Gfx *tempGfxHead = gDisplayListHead;
+
+    gDPPipeSync(tempGfxHead++);
+
+    gDPSetDepthSource(tempGfxHead++, G_ZS_PIXEL);
+    gDPSetDepthImage(tempGfxHead++, gPhysicalZBuffer);
+
+    gDPSetColorImage(tempGfxHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, gScreenWidth, gPhysicalZBuffer);
+    gDPSetCycleType(tempGfxHead++, G_CYC_FILL);
+    gDPSetRenderMode(tempGfxHead++, G_RM_NOOP, G_RM_NOOP2);
+    gDPSetFillColor(tempGfxHead++, GPACK_ZDZ(G_MAXFBZ, 0) << 16 | GPACK_ZDZ(G_MAXFBZ, 0));
+    gDPFillRectangle(tempGfxHead++, 0, gScreenHeight - 80, 88 - 1, gScreenHeight - 1);
+
+    gDisplayListHead = tempGfxHead;
+}
+
 /**
  * Process a root node. This is the entry point for processing the scene graph.
  * The root node itself sets up the viewport, then all its children are processed
@@ -1245,46 +1287,82 @@ void geo_process_node_and_siblings(struct GraphNode *firstNode) {
 void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) {
     if (node->node.flags & GRAPH_RENDER_ACTIVE) {
         Mtx *initialMatrix;
-        Vp *viewport = alloc_display_list(sizeof(*viewport));
+        Vp *viewport[2];
+        s32 repeat;
+
+        if (gChaosCodeTable[GLOBAL_CHAOS_LIVE_MARIO_REACTION].active && gMarioState->marioObj != NULL) {
+            repeat = 1;
+        } else {
+            repeat = 0;
+        }
 
         gDisplayListHeap = alloc_only_pool_init(main_pool_available() - sizeof(struct AllocOnlyPool), MEMORY_POOL_LEFT);
-        initialMatrix = alloc_display_list(sizeof(*initialMatrix));
-        gCurLookAt = (LookAt*)alloc_display_list(sizeof(LookAt));
-        bzero(gCurLookAt, sizeof(LookAt));
+        for (int i = 0; i <= repeat; i++) {
+            viewport[i] = alloc_display_list(sizeof(Vp));
+            sRenderPass = i;
+            initialMatrix = alloc_display_list(sizeof(*initialMatrix));
+            gCurLookAt = (LookAt*)alloc_display_list(sizeof(LookAt));
+            bzero(gCurLookAt, sizeof(LookAt));
+            gCurrentVP = viewport[i];
 
-        gMatStackIndex = 0;
-        gCurrAnimType = ANIM_TYPE_NONE;
-        vec3s_set(viewport->vp.vtrans, gScreenWidth * 2, gScreenHeight * 2, 511);
-        vec3s_set(viewport->vp.vscale, gScreenWidth * 2, gScreenHeight * 2, 511);
+            gMatStackIndex = 0;
+            gCurrAnimType = ANIM_TYPE_NONE;
+            if (i == 0) {
+                vec3s_set(viewport[i]->vp.vtrans, gScreenWidth * 2, gScreenHeight * 2, 511);
+                vec3s_set(viewport[i]->vp.vscale, gScreenWidth * 2, gScreenHeight * 2, 511);
+            } else {
+                s32 soRetro = gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
+                react_clear_zb();
+                select_framebuffer();
+                prepare_blank_box();
+                render_blank_box(4 >> soRetro, gScreenHeight - (80 >> soRetro), 87 >> soRetro, gScreenHeight, 255, 255, 255, 255);
+                gDPPipeSync(gDisplayListHead++);
+                gDPLoadTextureTile(gDisplayListHead++, segmented_to_virtual(mario_react), G_IM_FMT_I, G_IM_SIZ_8b, 79, 16, 0, 0, 79-1, 16-1, 0, 0, 0, 0, 0, 0, 0);
+                gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
+                gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
+                gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+                gDPSetPrimColor(gDisplayListHead++, 0, 0, 255, 0, 0, 255);
+                gDPSetCombineLERP(gDisplayListHead++, TEXEL0, PRIMITIVE, TEXEL0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 
+                                                          TEXEL0, PRIMITIVE, TEXEL0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+                gDPSetTextureFilter(gDisplayListHead++, G_TF_POINT);
+                gSPTextureRectangle(gDisplayListHead++, (6 >> soRetro) << 2, (gScreenHeight - (78 >> soRetro)) << 2,  ((6 + 79) >> soRetro) << 2, (gScreenHeight - (62 >> soRetro)) << 2, G_TX_RENDERTILE, 0, 0, 1024 << soRetro, 1024 << soRetro);
+                gDPPipeSync(gDisplayListHead++);
+                gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
+                gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
+                vec3s_set(viewport[i]->vp.vtrans, (gScreenWidth / 3.5f) * 2, ((float) gScreenHeight * 1.75f) * 2.0f, 511);
+                vec3s_set(viewport[i]->vp.vscale, (gScreenWidth / 4) * 2, (gScreenHeight / 4) * 2, 511);
+            }
 
-        if (b != NULL) {
-            clear_framebuffer(clearColor);
-            make_viewport_clip_rect(b);
-            *viewport = *b;
+            if (b != NULL) {
+                clear_framebuffer(clearColor);
+                make_viewport_clip_rect(b);
+                *viewport[i] = *b;
+            }
+
+            else if (c != NULL) {
+                clear_framebuffer(clearColor);
+                make_viewport_clip_rect(c);
+            }
+
+            mtxf_identity(gMatStack[gMatStackIndex]);
+            mtxf_to_mtx(initialMatrix, gMatStack[gMatStackIndex]);
+            gMatStackFixed[gMatStackIndex] = initialMatrix;
+            gSPViewport(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(viewport[i]));
+            gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(gMatStackFixed[gMatStackIndex]),
+                    G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+            gCurGraphNodeRoot = node;
+            if (node->node.children != NULL) {
+                geo_process_node_and_siblings(node->node.children);
+            }
+            gCurGraphNodeRoot = NULL;
+    #ifdef VANILLA_DEBUG
+            if (gShowDebugText) {
+                print_text_fmt_int(180, 36, "MEM %d", gDisplayListHeap->totalSpace - gDisplayListHeap->usedSpace);
+            }
+    #endif
+
         }
-
-        else if (c != NULL) {
-            clear_framebuffer(clearColor);
-            make_viewport_clip_rect(c);
-        }
-
-        mtxf_identity(gMatStack[gMatStackIndex]);
-        mtxf_to_mtx(initialMatrix, gMatStack[gMatStackIndex]);
-        gMatStackFixed[gMatStackIndex] = initialMatrix;
-        gSPViewport(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(viewport));
-        gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(gMatStackFixed[gMatStackIndex]),
-                  G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-        gCurGraphNodeRoot = node;
-        if (node->node.children != NULL) {
-            geo_process_node_and_siblings(node->node.children);
-        }
-        gCurGraphNodeRoot = NULL;
-#ifdef VANILLA_DEBUG
-        if (gShowDebugText) {
-            print_text_fmt_int(180, 36, "MEM %d", gDisplayListHeap->totalSpace - gDisplayListHeap->usedSpace);
-        }
-#endif
-
+        main_pool_free(gDisplayListHeap);
         if (gChaosCodeTable[GLOBAL_CHAOS_DIM_LIGHTS].active) {
             prepare_blank_box();
             render_blank_box(0, 0, gScreenWidth, gScreenHeight, 0, 0, 0, 192);
@@ -1294,6 +1372,5 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
         if (gChaosCodeTable[GLOBAL_CHAOS_BLUR].active) {
             render_fb_effects();
         }
-        main_pool_free(gDisplayListHeap);
     }
 }

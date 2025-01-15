@@ -26,6 +26,7 @@ extern Texture texture_waterbox_jrb_water[];
 extern Texture texture_waterbox_unknown_water[];
 extern Texture texture_waterbox_lava[];
 extern Texture retro_watermark[];
+extern Texture mario_react[];
 extern Gfx dl_proj_mtx_fullscreen[];
 extern Gfx dl_draw_quad_verts_0123[];
 extern Gfx dl_screen_transition_end[];

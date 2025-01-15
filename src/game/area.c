@@ -259,6 +259,7 @@ void unload_area(void) {
         gCurrentArea->flags = AREA_FLAG_UNLOAD;
         gCurrentArea = NULL;
         gWarpTransition.isActive = FALSE;
+        gMarioState->marioObj = NULL;
     }
 }
 

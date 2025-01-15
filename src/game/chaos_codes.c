@@ -194,6 +194,7 @@ ChaosCode gChaosCodeTable[] = {
     {"All jumps are triple", chaos_generic, 15, 45, 0,   /*ignore these*/ 0, 0},
     {"Delete Nearby Objects", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Invert Dive and Kick", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Live Mario Reaction", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
