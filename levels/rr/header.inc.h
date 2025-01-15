@@ -1,0 +1,11 @@
+extern const GeoLayout rr_area_1_geo[];
+extern const GeoLayout rr_area_1[];
+extern const Collision rr_area_1_collision[];
+extern const MacroObject rr_area_1_macro_objs[];
+extern u8 rr_dl_metal_hole_rgba16_rgba16[];
+extern Vtx rr_dl_16_GeoRoot_rr_1_dl_cruiser_metal_holes_mesh_layer_4_vtx_0[16];
+extern Gfx rr_dl_16_GeoRoot_rr_1_dl_cruiser_metal_holes_mesh_layer_4_tri_0[];
+extern Gfx mat_rr_dl_sm64_F3D_Mat_16_GeoRoot_rr_1_dl_cruiser_metal_holes_0[];
+extern Gfx mat_revert_rr_dl_sm64_F3D_Mat_16_GeoRoot_rr_1_dl_cruiser_metal_holes_0[];
+extern Gfx rr_dl_16_GeoRoot_rr_1_dl_cruiser_metal_holes_mesh_layer_4[];
+extern Gfx rr_dl_material_revert_render_settings[];
