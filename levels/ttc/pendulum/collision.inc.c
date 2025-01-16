@@ -38,7 +38,7 @@ const Collision ttc_seg7_collision_clock_pendulum[] = {
     COL_VERTEX(15, 0, 15),
     COL_VERTEX(15, 0, -14),
     COL_VERTEX(-14, 0, -14),
-    COL_TRI_INIT(SURFACE_NO_CAM_COLLISION, 54),
+    COL_TRI_INIT(SURFACE_NOT_SLIPPERY, 54),
     COL_TRI(0, 1, 2),
     COL_TRI(0, 2, 3),
     COL_TRI(2, 4, 5),

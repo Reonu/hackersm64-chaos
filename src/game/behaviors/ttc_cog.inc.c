@@ -29,6 +29,10 @@ void bhv_ttc_cog_init(void) {
     o->collisionData = segmented_to_virtual(
         sTTCCogCollisionModels[(o->oBehParams2ndByte & TTC_COG_BP_SHAPE_MASK) >> 1]);
     o->oTTCCogDir = sTTCCogDirections[o->oBehParams2ndByte & TTC_COG_BP_DIR_MASK];
+
+    if (GET_BPARAM1(o->oBehParams) == 1) {
+        obj_scale_xyz(o, 2.0f, 1.0f, 2.0f);
+    }
 }
 
 /**
@@ -48,6 +52,10 @@ void bhv_ttc_cog_update(void) {
 
         case TTC_SPEED_STOPPED:
             break;
+    }
+
+    if (GET_BPARAM1(o->oBehParams) == 1) {
+        o->oTTCCogSpeed = 1200;
     }
 
     o->oAngleVelYaw = (s32)(o->oTTCCogSpeed * o->oTTCCogDir);

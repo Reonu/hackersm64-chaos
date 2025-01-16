@@ -19,10 +19,14 @@ static f32 sTTCPendulumInitialAccels[] = {
  */
 void bhv_ttc_pendulum_init(void) {
     if (gTTCSpeedSetting != TTC_SPEED_STOPPED) {
-        o->oTTCPendulumAngleAccel = sTTCPendulumInitialAccels[gTTCSpeedSetting];
+        o->oTTCPendulumAngleAccel = 13.0f;//sTTCPendulumInitialAccels[gTTCSpeedSetting];
         o->oTTCPendulumAngle = 6500.0f;
     } else {
         o->oTTCPendulumAngle = 6371.5557f;
+    }
+
+    if (o->oBehParams2ndByte == 1) {
+        obj_scale_xyz(o, 1.2f, 1.0f, 2.0f);
     }
 }
 
