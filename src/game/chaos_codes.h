@@ -56,6 +56,7 @@ typedef struct ChaosCode {
 
 extern ChaosCode gChaosCodeTable[25];
 extern ChaosCode gBoBChaosTable[];
+extern ChaosCode gTTCChaosTable[];
 extern u8 gDisableChaos;
 extern float gCrimes;
 extern u8 gChaosOffOverride;

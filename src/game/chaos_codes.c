@@ -193,6 +193,25 @@ void chaos_generic_bob(void) {
     }
 }
 
+void chaos_ttc_upwarp(void) {
+    int upwarpPos = gMarioState->pos[1];
+    upwarpPos ^= 0b100000000000;
+    gMarioState->pos[1] = upwarpPos;
+    gTTCChaosTable[gCurrentChaosID].timer = 0;
+    gTTCChaosTable[gCurrentChaosID].active = FALSE;
+}
+
+void chaos_generic_ttc(void) {
+    if (gTTCChaosTable[gCurrentChaosID].active == FALSE) {
+        gTTCChaosTable[gCurrentChaosID].active = TRUE;
+    }
+    gTTCChaosTable[gCurrentChaosID].timer--;
+    if (gTTCChaosTable[gCurrentChaosID].timer <= 0) {
+        gTTCChaosTable[gCurrentChaosID].timer = 0;
+        gTTCChaosTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -229,6 +248,10 @@ ChaosCode gBoBChaosTable[] = {
     {"BoB Water Bombs", chaos_generic_bob, 20, 35, 0,   /*ignore these*/ 0, 0},
 };
 
+ChaosCode gTTCChaosTable[] = {
+    {"TTC Upwarp", chaos_ttc_upwarp, 20, 35, 0,   /*ignore these*/ 0, 0},
+};
+
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
     if (table[codeID].flags) {
         for (s32 i = 0; i < tableSize; i++) {
@@ -259,6 +282,9 @@ ChaosCode *chaos_level_table(s32 *size) {
     case LEVEL_BOB:
         *size = sizeof(gBoBChaosTable) / sizeof(ChaosCode);
         return gBoBChaosTable;
+    case LEVEL_TTC:
+        *size = sizeof(gTTCChaosTable) / sizeof(ChaosCode);
+        return gTTCChaosTable;
     default:
         *size = sizeof(gChaosCodeTable) / sizeof(ChaosCode);
         return gChaosCodeTable;
