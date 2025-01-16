@@ -1041,9 +1041,17 @@ void puppyprint_chaos(void) {
     char *useOkay;
     char textBytes[32];
 
+    s32 size;
+    ChaosCode *table = chaos_level_table(-1, &size);
+    s32 levelSize;
+    ChaosCode *levelTable = chaos_level_table(gCurrLevelNum, &levelSize);
+    if (levelTable == gChaosCodeTable) {
+        levelSize = 0;
+    }
+
     if (gPlayer1Controller->buttonPressed & D_JPAD) {
         gPuppyPrintChaosSelect++;
-        if (gPuppyPrintChaosSelect >= CHAOSCOUNT) {
+        if (gPuppyPrintChaosSelect >= size + levelSize) {
             gPuppyPrintChaosSelect = 0;
             gPuppyprintChaosScroll = 0;
         }
@@ -1051,21 +1059,31 @@ void puppyprint_chaos(void) {
         if (gPuppyPrintChaosSelect - 1 >= 0) {
             gPuppyPrintChaosSelect--;
         } else {
-            gPuppyPrintChaosSelect = CHAOSCOUNT - 1;
+            gPuppyPrintChaosSelect = size + levelSize - 1;
         }
     }
     if (gPlayer1Controller->buttonPressed & (R_JPAD)) {
-        chaos_enable(gChaosCodeTable, gPuppyPrintChaosSelect, CHAOSCOUNT);
+        ChaosCode *selectedTable = table;
+        s32 adjustedSelect = gPuppyPrintChaosSelect;
+        s32 adjustedSize = size;
+        if (gPuppyPrintChaosSelect >= size) {
+            adjustedSelect -= size;
+            adjustedSize = levelSize;
+            selectedTable = levelTable;
+        }
+        chaos_enable(selectedTable, adjustedSelect, adjustedSize);
     }
 
     if (gPlayer1Controller->buttonPressed & (L_JPAD)) {
         gDisableChaos ^= 1;
     }
 
+    
+
     s32 yOffset = gPuppyPrintChaosSelect > 6 ? gPuppyPrintChaosSelect-6 : 0;
 
     s32 y = ((SCREEN_HEIGHT / 2) - 76) - (yOffset * 12);
-    for (u32 i = 0; i < CHAOSCOUNT; i++) {
+    for (s32 i = 0; i < size; i++) {
         if (y < ((SCREEN_HEIGHT / 2) - 76)) {
             y += 12;
             continue;
@@ -1078,14 +1096,39 @@ void puppyprint_chaos(void) {
         } else {
             print_set_envcolour(255, 255, 255, 255);
         }
-        print_small_text_light((SCREEN_WIDTH / 2) - 76, y, gChaosCodeTable[i].name, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_DEFAULT);
-        if (gChaosCodeTable[i].active) {
+        print_small_text_light((SCREEN_WIDTH / 2) - 76, y, table[i].name, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_DEFAULT);
+        if (table[i].active) {
             useOkay = okay1;
         } else {
             useOkay = okay2;
         }
         print_small_text_light((SCREEN_WIDTH / 2) + 76, y, useOkay, PRINT_TEXT_ALIGN_RIGHT, PRINT_ALL, FONT_DEFAULT);
-        sprintf(textBytes, "%d", gChaosCodeTable[i].timer);
+        sprintf(textBytes, "%d", table[i].timer);
+        print_small_text_light((SCREEN_WIDTH / 2) + 80, y, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_DEFAULT);
+        y += 12;
+    }
+
+    for (s32 i = 0; i < levelSize; i++) {
+        if (y < ((SCREEN_HEIGHT / 2) - 76)) {
+            y += 12;
+            continue;
+        }
+        if (y > (SCREEN_HEIGHT / 2) + 24) {
+            break;
+        }
+        if (i == gPuppyPrintChaosSelect - size) {
+            print_set_envcolour(255, 0, 0, 255);
+        } else {
+            print_set_envcolour(255, 255, 255, 255);
+        }
+        print_small_text_light((SCREEN_WIDTH / 2) - 76, y, levelTable[i].name, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_DEFAULT);
+        if (levelTable[i].active) {
+            useOkay = okay1;
+        } else {
+            useOkay = okay2;
+        }
+        print_small_text_light((SCREEN_WIDTH / 2) + 76, y, useOkay, PRINT_TEXT_ALIGN_RIGHT, PRINT_ALL, FONT_DEFAULT);
+        sprintf(textBytes, "%d", levelTable[i].timer);
         print_small_text_light((SCREEN_WIDTH / 2) + 80, y, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_DEFAULT);
         y += 12;
     }

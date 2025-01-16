@@ -54,7 +54,7 @@ typedef struct ChaosCode {
     char active;
 } ChaosCode;
 
-extern ChaosCode gChaosCodeTable[25];
+extern ChaosCode gChaosCodeTable[];
 extern ChaosCode gBoBChaosTable[];
 extern ChaosCode gTTCChaosTable[];
 extern u8 gDisableChaos;
@@ -64,7 +64,6 @@ extern u8 gSpamAd;
 extern s16 gSpamCursorX;
 extern s16 gSpamCursorY;
 
-#define CHAOSCOUNT (sizeof(gChaosCodeTable) / sizeof(ChaosCode))
-
 void global_chaos_code_handler(void);
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize);
+ChaosCode *chaos_level_table(s32 levelID, s32 *size);

@@ -274,8 +274,8 @@ void add_global_chaos_code(ChaosCode *table, s32 tableSize) {
     chaos_enable(table, chosenCode, tableSize);
 }
 
-ChaosCode *chaos_level_table(s32 *size) {
-    switch (gCurrLevelNum) {
+ChaosCode *chaos_level_table(s32 levelID, s32 *size) {
+    switch (levelID) {
     case LEVEL_CCM:
         *size = sizeof(gCCMChaosTable) / sizeof(ChaosCode);
         return gCCMChaosTable;
@@ -293,7 +293,7 @@ ChaosCode *chaos_level_table(s32 *size) {
 
 void update_chaos_code_effects(void) {
     s32 size;
-    ChaosCode *table = chaos_level_table(&size);
+    ChaosCode *table = chaos_level_table(gCurrLevelNum, &size);
 
     if (table != gChaosCodeTable) {
         
@@ -326,7 +326,7 @@ void global_chaos_code_handler(void) {
         s32 size;
         int rand = random_u16() % 100;
         if (rand >= 66) {
-            table = chaos_level_table(&size);
+            table = chaos_level_table(gCurrLevelNum, &size);
         } else {
             table = gChaosCodeTable;
             size = sizeof(gChaosCodeTable) / sizeof(ChaosCode);
