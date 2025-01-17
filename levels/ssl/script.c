@@ -32,7 +32,7 @@ const LevelScript level_ssl_entry[] = {
 	MARIO(MODEL_MARIO, 0x00000001, bhvMario), 
 	JUMP_LINK(script_func_global_1), 
 	JUMP_LINK(script_func_global_6), 
-	LOAD_MODEL_FROM_GEO(MODEL_SSL_PALM_TREE, palm_tree_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SSL_PALM_TREE, snow_tree_fog_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_03, ssl_snow_pit_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_04, ssl_geo_0005D8), 
 	LOAD_MODEL_FROM_GEO(MODEL_SSL_PYRAMID_TOP, ssl_geo_000618), 
@@ -42,7 +42,9 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SSL_PYRAMID_ELEVATOR, ssl_geo_0007AC), 
 	LOAD_MODEL_FROM_GEO(MODEL_SSL_TOX_BOX, ssl_tox_box_fog_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SSL_PYRAMID_TOP_CUSTOM, ssl_pyramid_top_custom_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_SSL_SNOW_PIT, ssl_snow_pit_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SSL_SNOW_PIT, ssl_snow_pit_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_POKEY_WITH_FOG, pokey_with_fog_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_POKEY_HEAD_WITH_FOG, pokey_head_with_fog_geo), 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
 
@@ -100,7 +102,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_RED_COIN, 500, 1500, -3500, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, 500, 1500, 1500, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, 3380, 10, -4900, 0, 0, 0, 0x00000000, bhvRedCoin),
-		OBJECT(MODEL_RED_COIN, -5270, -170, -6780, 0, 0, 0, 0x00000000, bhvRedCoin),
+		OBJECT(MODEL_RED_COIN, -5270, 78, -6780, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -7450, 10, 7560, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, 5900, 70, 2311, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_NONE, 653, 1038, 6566, 0, 90, 0, 0x000A0000, bhvSpinAirborneWarp),
@@ -131,7 +133,7 @@ const LevelScript level_ssl_entry[] = {
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 	AREA(2, ssl_area_2),
-		WARP_NODE(3, LEVEL_BOB, 3, 0x0A, WARP_NO_CHECKPOINT),
+		INSTANT_WARP(3, 3, 0, 0, 0),
 		WARP_NODE(0xF1, LEVEL_CASTLE, 0x03, 0x65, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF0, LEVEL_CASTLE, 0x03, 0x33, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x16, LEVEL_SSL, 0x02, 0x15, WARP_NO_CHECKPOINT),
@@ -219,7 +221,7 @@ const LevelScript level_ssl_entry[] = {
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 	AREA(3, ssl_area_3),
-		WARP_NODE(2, LEVEL_BOB, 2, 0x0A, WARP_NO_CHECKPOINT),
+		INSTANT_WARP(2, 2, 0, 0, 0),
 		WARP_NODE(0xF1, LEVEL_CASTLE, 0x03, 0x65, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF0, LEVEL_CASTLE, 0x03, 0x33, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 0, -1534, -3693, 0, 0, 0, 0x03000000, bhvEyerokBoss),

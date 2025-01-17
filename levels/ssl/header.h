@@ -93,4 +93,10 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/ssl_tox_box_fog/geo_header.h"
 
+#include "levels/ssl/snow_tree_fog/geo_header.h"
+
+#include "levels/ssl/pokey_with_fog/geo_header.h"
+
+#include "levels/ssl/pokey_head_with_fog/geo_header.h"
+
 #endif

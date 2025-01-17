@@ -16,7 +16,9 @@
 #define MODEL_BETA_BREAKABLE_WALL_2                 0x106   
 #define MODEL_SSL_PYRAMID_TOP_CUSTOM           0x107
 #define MODEL_SSL_SNOW_PIT                     0x108
-#define MODEL_HEAVE_HO                    0x109
+#define MODEL_HEAVE_HO                         0x109
+#define MODEL_POKEY_WITH_FOG                   0x10A
+#define MODEL_POKEY_HEAD_WITH_FOG              0x10B
 
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 

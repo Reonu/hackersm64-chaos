@@ -29,3 +29,6 @@
 #include "levels/ssl/ssl_pyramid_top_custom/geo.inc.c"
 #include "levels/ssl/ssl_snow_pit/geo.inc.c"
 #include "levels/ssl/ssl_tox_box_fog/geo.inc.c"
+#include "levels/ssl/snow_tree_fog/geo.inc.c"
+#include "levels/ssl/pokey_with_fog/geo.inc.c"
+#include "levels/ssl/pokey_head_with_fog/geo.inc.c"

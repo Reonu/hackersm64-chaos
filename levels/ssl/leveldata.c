@@ -53,3 +53,6 @@
 #include "levels/ssl/ssl_pyramid_top_custom/model.inc.c"
 #include "levels/ssl/ssl_snow_pit/model.inc.c"
 #include "levels/ssl/ssl_tox_box_fog/model.inc.c"
+#include "levels/ssl/snow_tree_fog/model.inc.c"
+#include "levels/ssl/pokey_with_fog/model.inc.c"
+#include "levels/ssl/pokey_head_with_fog/model.inc.c"
