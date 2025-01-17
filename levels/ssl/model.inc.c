@@ -5690,10 +5690,10 @@ Vtx ssl_dl_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_mesh_layer_6_vtx_cull[8] = {
 };
 
 Vtx ssl_dl_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_mesh_layer_6_vtx_0[4] = {
-	{{ {-6143, -4697, 0}, 0, {974, -16}, {255, 255, 255, 255} }},
-	{{ {-5836, -4697, 0}, 0, {-16, -16}, {255, 255, 255, 255} }},
-	{{ {-5836, -5004, 0}, 0, {-16, 974}, {255, 255, 255, 255} }},
-	{{ {-6143, -5004, 0}, 0, {974, 974}, {255, 255, 255, 255} }},
+	{{ {-6143, -4697, 0}, 0, {974, -16}, {0, 0, 129, 255} }},
+	{{ {-5836, -4697, 0}, 0, {-16, -16}, {0, 0, 129, 255} }},
+	{{ {-5836, -5004, 0}, 0, {-16, 974}, {0, 0, 129, 255} }},
+	{{ {-6143, -5004, 0}, 0, {974, 974}, {0, 0, 129, 255} }},
 };
 
 Gfx ssl_dl_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_mesh_layer_6_tri_0[] = {
@@ -9467,14 +9467,12 @@ Gfx ssl_dl_16_GeoRoot_ssl_3_ssl_seg7_dl_07021DE8_mesh_layer_5_tri_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_0_layer1_area1[] = {
+Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_0_layer1[] = {
 	gsSPGeometryMode(0, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetCycleType(G_CYC_2CYCLE),
 	gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
@@ -9487,7 +9485,7 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_0_layer1_area1
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_0_layer1_area1[] = {
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_0_layer1[] = {
 	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9496,14 +9494,12 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_0_layer
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_1_layer1_area1[] = {
+Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_1_layer1[] = {
 	gsSPGeometryMode(0, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetCycleType(G_CYC_2CYCLE),
@@ -9520,7 +9516,7 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_1_layer1_area1
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_1_layer1_area1[] = {
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_1_layer1[] = {
 	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9530,14 +9526,12 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_1_layer
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_2_layer1_area1[] = {
+Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_2_layer1[] = {
 	gsSPGeometryMode(0, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetCycleType(G_CYC_2CYCLE),
@@ -9554,7 +9548,7 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_2_layer1_area1
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_2_layer1_area1[] = {
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_2_layer1[] = {
 	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9564,14 +9558,12 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_2_layer
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_3_layer1_area1[] = {
+Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_3_layer1[] = {
 	gsSPGeometryMode(0, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetCycleType(G_CYC_2CYCLE),
 	gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
@@ -9584,7 +9576,7 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_3_layer1_area1
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_3_layer1_area1[] = {
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_3_layer1[] = {
 	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9593,14 +9585,12 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_3_layer
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_4_layer1_area1[] = {
+Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_4_layer1[] = {
 	gsSPGeometryMode(0, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetCycleType(G_CYC_2CYCLE),
 	gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
@@ -9613,7 +9603,7 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_4_layer1_area1
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_4_layer1_area1[] = {
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_4_layer1[] = {
 	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9622,14 +9612,12 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_4_layer
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_5_layer1_area1[] = {
+Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_5_layer1[] = {
 	gsSPGeometryMode(0, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetCycleType(G_CYC_2CYCLE),
@@ -9646,7 +9634,7 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_5_layer1_area1
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_5_layer1_area1[] = {
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_5_layer1[] = {
 	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9656,14 +9644,12 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_5_layer
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_6_layer1_area1[] = {
+Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_6_layer1[] = {
 	gsSPGeometryMode(0, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetCycleType(G_CYC_2CYCLE),
@@ -9680,7 +9666,7 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_6_layer1_area1
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_6_layer1_area1[] = {
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_6_layer1[] = {
 	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9690,14 +9676,12 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_6_layer
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_7_layer1_area1[] = {
+Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_7_layer1[] = {
 	gsSPGeometryMode(0, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetCycleType(G_CYC_2CYCLE),
 	gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
@@ -9710,7 +9694,7 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_7_layer1_area1
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_7_layer1_area1[] = {
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_7_layer1[] = {
 	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9719,14 +9703,12 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_7_layer
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_8_layer1_area1[] = {
+Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_8_layer1[] = {
 	gsSPGeometryMode(0, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetCycleType(G_CYC_2CYCLE),
 	gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
@@ -9739,7 +9721,7 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_8_layer1_area1
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_8_layer1_area1[] = {
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_8_layer1[] = {
 	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9748,14 +9730,12 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_8_layer
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_9_layer1_area1[] = {
+Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_9_layer1[] = {
 	gsSPGeometryMode(0, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetCycleType(G_CYC_2CYCLE),
@@ -9772,7 +9752,7 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_9_layer1_area1
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_9_layer1_area1[] = {
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_9_layer1[] = {
 	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9782,14 +9762,12 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_9_layer
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_10_layer1_area1[] = {
+Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_10_layer1[] = {
 	gsSPGeometryMode(0, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetCycleType(G_CYC_2CYCLE),
 	gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
@@ -9802,7 +9780,7 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_10_layer1_area
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_10_layer1_area1[] = {
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_10_layer1[] = {
 	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9811,14 +9789,12 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_10_laye
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_11_layer1_area1[] = {
+Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_11_layer1[] = {
 	gsSPGeometryMode(0, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetCycleType(G_CYC_2CYCLE),
@@ -9835,7 +9811,7 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_11_layer1_area
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_11_layer1_area1[] = {
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_11_layer1[] = {
 	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9845,14 +9821,12 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_11_laye
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_ice_decal_layer5_area1[] = {
+Gfx mat_ssl_dl_ice_decal_layer5[] = {
 	gsSPGeometryMode(G_CULL_BACK, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetCycleType(G_CYC_2CYCLE),
 	gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_XLU_DECAL2),
@@ -9866,7 +9840,7 @@ Gfx mat_ssl_dl_ice_decal_layer5_area1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_ice_decal_layer5_area1[] = {
+Gfx mat_revert_ssl_dl_ice_decal_layer5[] = {
 	gsSPGeometryMode(G_FOG, G_CULL_BACK),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9875,14 +9849,12 @@ Gfx mat_revert_ssl_dl_ice_decal_layer5_area1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_snow_layer1_area1[] = {
+Gfx mat_ssl_dl_snow_layer1[] = {
 	gsSPGeometryMode(0, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetCycleType(G_CYC_2CYCLE),
@@ -9899,7 +9871,7 @@ Gfx mat_ssl_dl_snow_layer1_area1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_snow_layer1_area1[] = {
+Gfx mat_revert_ssl_dl_snow_layer1[] = {
 	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9969,14 +9941,12 @@ Gfx mat_revert_ssl_dl_ice_decal_001_layer5_area1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_0_layer4_area1[] = {
+Gfx mat_ssl_dl_sm64_F3D_Mat_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_0_layer4[] = {
 	gsSPGeometryMode(G_CULL_BACK, G_FOG),
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(177, 196, 227, 255),
-	gsSPFogPosition(975, 990),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsDPSetCycleType(G_CYC_2CYCLE),
 	gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_TEX_EDGE2),
@@ -9989,7 +9959,7 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_0_layer4_area1
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_0_layer4_area1[] = {
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_0_layer4[] = {
 	gsSPGeometryMode(G_FOG, G_CULL_BACK),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -9998,11 +9968,15 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_0_layer
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_sm64_F3D_Mat_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_0[] = {
-	gsSPGeometryMode(G_LIGHTING, 0),
+Gfx mat_ssl_dl_sm64_F3D_Mat_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_0_layer6[] = {
+	gsSPGeometryMode(0, G_FOG),
+	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
+	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
 	gsDPSetAlphaDither(G_AD_NOISE),
+	gsDPSetCycleType(G_CYC_2CYCLE),
+	gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_XLU_DECAL2),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b_LOAD_BLOCK, 1, ssl_dl__1_ia16_ia16),
 	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
@@ -10012,10 +9986,12 @@ Gfx mat_ssl_dl_sm64_F3D_Mat_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ssl_dl_sm64_F3D_Mat_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_0[] = {
-	gsSPGeometryMode(0, G_LIGHTING),
+Gfx mat_revert_ssl_dl_sm64_F3D_Mat_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_0_layer6[] = {
+	gsSPGeometryMode(G_FOG, 0),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPSetRenderMode(G_RM_AA_ZB_XLU_DECAL, G_RM_AA_ZB_XLU_DECAL2),
 	gsSPEndDisplayList(),
 };
 
@@ -10475,36 +10451,6 @@ Gfx mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_2_ssl_seg7_dl_0701EE80_13_laye
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ssl_dl_ice_decal_layer5_area2[] = {
-	gsSPGeometryMode(G_CULL_BACK, G_FOG),
-	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
-	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
-	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-	gsDPSetFogColor(118, 130, 151, 255),
-	gsSPFogPosition(965, 985),
-	gsDPSetAlphaDither(G_AD_NOISE),
-	gsDPSetCycleType(G_CYC_2CYCLE),
-	gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_XLU_DECAL2),
-	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsDPSetPrimColor(0, 0, 255, 255, 255, 131),
-	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, ssl_dl_ccm_textures_00800_rgba16_rgba16),
-	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
-	gsDPLoadBlock(7, 0, 0, 1023, 256),
-	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
-	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPEndDisplayList(),
-};
-
-Gfx mat_revert_ssl_dl_ice_decal_layer5_area2[] = {
-	gsSPGeometryMode(G_FOG, G_CULL_BACK),
-	gsDPPipeSync(),
-	gsDPSetAlphaDither(G_AD_DISABLE),
-	gsDPSetCycleType(G_CYC_1CYCLE),
-	gsDPSetRenderMode(G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2),
-	gsSPEndDisplayList(),
-};
-
 Gfx mat_ssl_dl_sm64_F3D_Mat_16_GeoRoot_ssl_2_ssl_seg7_dl_0701F920_0_layer4[] = {
 	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, G_FOG),
 	gsDPPipeSync(),
@@ -10837,42 +10783,42 @@ Gfx ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1[] = {
 	gsSPVertex(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_0_layer1_area1),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_0_layer1),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_0_layer1_area1),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_1_layer1_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_0_layer1),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_1_layer1),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1_tri_1),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_1_layer1_area1),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_2_layer1_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_1_layer1),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_2_layer1),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1_tri_2),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_2_layer1_area1),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_3_layer1_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_2_layer1),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_3_layer1),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1_tri_3),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_3_layer1_area1),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_4_layer1_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_3_layer1),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_4_layer1),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1_tri_4),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_4_layer1_area1),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_5_layer1_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_4_layer1),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_5_layer1),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1_tri_5),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_5_layer1_area1),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_6_layer1_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_5_layer1),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_6_layer1),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1_tri_6),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_6_layer1_area1),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_7_layer1_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_6_layer1),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_7_layer1),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1_tri_7),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_7_layer1_area1),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_8_layer1_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_7_layer1),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_8_layer1),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1_tri_8),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_8_layer1_area1),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_9_layer1_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_8_layer1),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_9_layer1),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1_tri_9),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_9_layer1_area1),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_10_layer1_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_9_layer1),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_10_layer1),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1_tri_10),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_10_layer1_area1),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_11_layer1_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_10_layer1),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_11_layer1),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_1_tri_11),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_11_layer1_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_11_layer1),
 	gsSPEndDisplayList(),
 };
 
@@ -10881,9 +10827,9 @@ Gfx ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_5[] = {
 	gsSPVertex(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_5_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_ssl_dl_ice_decal_layer5_area1),
+	gsSPDisplayList(mat_ssl_dl_ice_decal_layer5),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_1_ssl_seg7_dl_07009F48_mesh_layer_5_tri_0),
-	gsSPDisplayList(mat_revert_ssl_dl_ice_decal_layer5_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_ice_decal_layer5),
 	gsSPEndDisplayList(),
 };
 
@@ -10892,9 +10838,9 @@ Gfx ssl_dl_16_GeoRoot_ssl_1_ssl_seg7_dl_0700BA78_mesh_layer_1[] = {
 	gsSPVertex(ssl_dl_16_GeoRoot_ssl_1_ssl_seg7_dl_0700BA78_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_ssl_dl_snow_layer1_area1),
+	gsSPDisplayList(mat_ssl_dl_snow_layer1),
 	gsSPDisplayList(ssl_dl_16_GeoRoot_ssl_1_ssl_seg7_dl_0700BA78_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_ssl_dl_snow_layer1_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_snow_layer1),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),
@@ -10931,9 +10877,9 @@ Gfx ssl_dl_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_mesh_layer_4[] = {
 	gsSPVertex(ssl_dl_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_mesh_layer_4_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_0_layer4_area1),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_0_layer4),
 	gsSPDisplayList(ssl_dl_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_mesh_layer_4_tri_0),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_0_layer4_area1),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_0_layer4),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),
@@ -10949,9 +10895,9 @@ Gfx ssl_dl_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_mesh_layer_6[] = {
 	gsSPVertex(ssl_dl_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_mesh_layer_6_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_0),
+	gsSPDisplayList(mat_ssl_dl_sm64_F3D_Mat_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_0_layer6),
 	gsSPDisplayList(ssl_dl_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_mesh_layer_6_tri_0),
-	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_0),
+	gsSPDisplayList(mat_revert_ssl_dl_sm64_F3D_Mat_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_0_layer6),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),
@@ -11024,9 +10970,9 @@ Gfx ssl_dl_15_GeoRoot_ssl_2_ssl_seg7_dl_0701EE80_mesh_layer_5[] = {
 	gsSPVertex(ssl_dl_15_GeoRoot_ssl_2_ssl_seg7_dl_0701EE80_mesh_layer_5_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_ssl_dl_ice_decal_layer5_area2),
+	gsSPDisplayList(mat_ssl_dl_ice_decal_layer5),
 	gsSPDisplayList(ssl_dl_15_GeoRoot_ssl_2_ssl_seg7_dl_0701EE80_mesh_layer_5_tri_0),
-	gsSPDisplayList(mat_revert_ssl_dl_ice_decal_layer5_area2),
+	gsSPDisplayList(mat_revert_ssl_dl_ice_decal_layer5),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),
