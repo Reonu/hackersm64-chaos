@@ -642,12 +642,19 @@ void bounce_back_from_attack(struct MarioState *m, u32 interaction) {
     if (interaction & (INT_PUNCH | INT_KICK | INT_TRIP)) {
         if (m->action == ACT_PUNCHING) {
             m->action = ACT_MOVE_PUNCHING;
+        }   
+
+        f32 knockback = -16.0f;
+        
+        if (gChaosCodeTable[GLOBAL_CHAOS_STRONG_PUNCH_KB].active) {
+            knockback *= 10;
         }
 
         if (m->action & ACT_FLAG_AIR) {
-            mario_set_forward_vel(m, -16.0f);
+            mario_set_forward_vel(m, knockback);
         } else {
-            mario_set_forward_vel(m, -48.0f);
+            knockback *= 3;
+            mario_set_forward_vel(m, knockback);
         }
 
         set_camera_shake_from_hit(SHAKE_ATTACK);

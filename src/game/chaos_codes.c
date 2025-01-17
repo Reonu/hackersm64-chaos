@@ -249,6 +249,7 @@ ChaosCode gChaosCodeTable[] = {
     {"No Speed Cap", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Super Jumps", chaos_generic, 10, 20, 0,   /*ignore these*/ 0, 0},
     {"Heave Ho Chaser", chaos_heave_ho_chaser, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Strong Punch KB", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
