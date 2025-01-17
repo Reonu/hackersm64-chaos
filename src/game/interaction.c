@@ -1813,16 +1813,21 @@ void check_kick_or_punch_wall(struct MarioState *m) {
         detector.radius = 5.0f;
 
         if (find_wall_collisions(&detector) > 0) {
+            f32 knockback = -16.0f;
+        
+            if (gChaosCodeTable[GLOBAL_CHAOS_STRONG_PUNCH_KB].active) {
+                knockback *= 10;
+            }
             if (m->action != ACT_MOVE_PUNCHING || m->forwardVel >= 0.0f) {
                 if (m->action == ACT_PUNCHING) {
                     m->action = ACT_MOVE_PUNCHING;
                 }
-
-                mario_set_forward_vel(m, -48.0f);
+                knockback *= 3;
+                mario_set_forward_vel(m, knockback);
                 play_sound(SOUND_ACTION_HIT_2, m->marioObj->header.gfx.cameraToObject);
                 m->particleFlags |= PARTICLE_TRIANGLE;
             } else if (m->action & ACT_FLAG_AIR) {
-                mario_set_forward_vel(m, -16.0f);
+                mario_set_forward_vel(m, knockback);
                 play_sound(SOUND_ACTION_HIT_2, m->marioObj->header.gfx.cameraToObject);
                 m->particleFlags |= PARTICLE_TRIANGLE;
             }
