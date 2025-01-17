@@ -244,11 +244,11 @@ static void update_swimming_speed(struct MarioState *m, f32 decelThreshold) {
         m->forwardVel = 0.0f;
     }
 
-    if (m->forwardVel > maxSpeed) {
+    if (m->forwardVel > maxSpeed && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         m->forwardVel = maxSpeed;
     }
 
-    if (m->forwardVel > decelThreshold) {
+    if (m->forwardVel > decelThreshold && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         m->forwardVel -= 0.5f * mul;
     }
 
@@ -1120,6 +1120,10 @@ static void play_metal_water_walking_sound(struct MarioState *m) {
 static void update_metal_water_walking_speed(struct MarioState *m) {
     f32 targetSpeed = m->intendedMag / 1.5f;
 
+    if (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
+        targetSpeed += m->forwardVel/20;
+    }
+
     if (m->forwardVel <= 0.0f) {
         m->forwardVel += 1.1f;
     } else if (m->forwardVel <= targetSpeed) {
@@ -1128,7 +1132,7 @@ static void update_metal_water_walking_speed(struct MarioState *m) {
         m->forwardVel -= 1.0f;
     }
 
-    if (m->forwardVel > 32.0f) {
+    if (m->forwardVel > 32.0f && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         m->forwardVel = 32.0f;
     }
 
@@ -1157,7 +1161,7 @@ static s32 update_metal_water_jump_speed(struct MarioState *m) {
         m->forwardVel = approach_f32(m->forwardVel, 0.0f, 0.25f, 0.25f);
     }
 
-    if (m->forwardVel > 16.0f) {
+    if (m->forwardVel > 16.0f && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         m->forwardVel -= 1.0f;
     }
 

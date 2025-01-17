@@ -192,7 +192,7 @@ void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
 
     //! Speed is capped a frame late (butt slide HSG)
     m->forwardVel = sqrtf(sqr(m->slideVelX) + sqr(m->slideVelZ));
-    if (m->forwardVel > 100.0f) {
+    if (m->forwardVel > 100.0f && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         m->slideVelX = m->slideVelX * 100.0f / m->forwardVel;
         m->slideVelZ = m->slideVelZ * 100.0f / m->forwardVel;
     }
@@ -342,13 +342,19 @@ void update_shell_speed(struct MarioState *m) {
         // m->floor->originOffset = m->waterLevel; //! (Original code) Negative origin offset
     }
 
-    if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
+        maxTargetSpeed = 4000.0f;
+    }
+    else if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
         maxTargetSpeed = 48.0f;
     } else {
         maxTargetSpeed = 64.0f;
     }
 
     targetSpeed = m->intendedMag * 2.0f;
+    if (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
+        targetSpeed += m->forwardVel / 20.0f;
+    }
     if (targetSpeed > maxTargetSpeed) {
         targetSpeed = maxTargetSpeed;
     }
@@ -365,7 +371,7 @@ void update_shell_speed(struct MarioState *m) {
     }
 
     //! No backward speed cap (shell hyperspeed)
-    if (m->forwardVel > 64.0f) {
+    if (m->forwardVel > 64.0f && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         m->forwardVel = 64.0f;
     }
 
@@ -384,14 +390,19 @@ void update_kart_speed(struct MarioState *m) {
         m->floor->originOffset = -m->waterLevel;
         // m->floor->originOffset = m->waterLevel; //! (Original code) Negative origin offset
     }
-
-    if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
+        maxTargetSpeed = 4000.0f;
+    }
+    else if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
         maxTargetSpeed = 350.0f;
     } else {
         maxTargetSpeed = 350.0f;
     }
 
     targetSpeed = m->intendedMag * 2.0f;
+    if (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
+        targetSpeed += m->forwardVel / 20.0f;
+    }
     if (targetSpeed > maxTargetSpeed) {
         targetSpeed = maxTargetSpeed;
     }
@@ -408,7 +419,7 @@ void update_kart_speed(struct MarioState *m) {
     }
 
     //! No backward speed cap (shell hyperspeed)
-    if (m->forwardVel > 350.0f) {
+    if (m->forwardVel > 350.0f && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         m->forwardVel = 350.0f;
     }
 
@@ -469,15 +480,19 @@ void update_walking_speed(struct MarioState *m) {
     } else {
         mul = 1.0f;
     }
-
-    if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
+        maxTargetSpeed = 4000.0f;
+    }
+    else if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
         maxTargetSpeed = 24.0f * mul;
     } else {
         maxTargetSpeed = 32.0f * mul;
     }
 
     targetSpeed = m->intendedMag < maxTargetSpeed ? m->intendedMag : maxTargetSpeed;
-
+    if (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
+        targetSpeed += m->forwardVel / 20.0f;
+    }
     if (m->quicksandDepth > 10.0f) {
         targetSpeed *= 6.25f / m->quicksandDepth;
     }
@@ -508,7 +523,7 @@ void update_walking_speed(struct MarioState *m) {
     }
 
 
-    if (m->forwardVel > 48.0f * mul) {
+    if (m->forwardVel > 48.0f * mul && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         m->forwardVel = 48.0f * mul;
     }
 
@@ -756,7 +771,7 @@ void push_or_sidle_wall(struct MarioState *m, Vec3f startPos) {
     //! (Speed Crash) If a wall is after moving 16384 distance, this crashes.
     s32 animSpeed = (s32)(movedDistance * 2.0f * 0x10000);
 
-    if (m->forwardVel > 6.0f) {
+    if (m->forwardVel > 6.0f && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         mario_set_forward_vel(m, 6.0f);
     }
     
@@ -1451,11 +1466,11 @@ s32 act_burning_ground(struct MarioState *m) {
     if (m->forwardVel < 8.0f) {
         m->forwardVel = 8.0f;
     }
-    if (m->forwardVel > 48.0f) {
+    if (m->forwardVel > 48.0f && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         m->forwardVel = 48.0f;
     }
 
-    m->forwardVel = approach_f32(m->forwardVel, 32.0f, 4.0f, 1.0f);
+    m->forwardVel = approach_f32(m->forwardVel, (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active ? 4000.0f : 32.0f), 4.0f, 1.0f);
 
     if (m->input & INPUT_NONZERO_ANALOG) {
         m->faceAngle[1] = approach_angle(m->faceAngle[1], m->intendedYaw, 0x600);
@@ -1737,10 +1752,10 @@ s32 common_ground_knockback_action(struct MarioState *m, s32 animation, s32 chec
         play_sound_if_no_flag(m, SOUND_MARIO_OOOF2, MARIO_MARIO_SOUND_PLAYED);
     }
 
-    if (m->forwardVel > 32.0f * mul) {
+    if (m->forwardVel > 32.0f * mul && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         m->forwardVel = 32.0f * mul;
     }
-    if (m->forwardVel < -32.0f * mul) {
+    if (m->forwardVel < -32.0f * mul && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         m->forwardVel = -32.0f * mul;
     }
 

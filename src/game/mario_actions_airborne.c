@@ -203,7 +203,7 @@ void update_air_with_turn(struct MarioState *m) {
         }
 
         //! Uncapped air speed. Net positive when moving forward.
-        if (m->forwardVel > dragThreshold) {
+        if (m->forwardVel > dragThreshold && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
             m->forwardVel -= 1.0f * mul;
         }
         if (m->forwardVel < -16.0f * mul) {
@@ -240,7 +240,7 @@ void update_air_without_turn(struct MarioState *m) {
         }
 
         //! Uncapped air speed. Net positive when moving forward.
-        if (m->forwardVel > dragThreshold) {
+        if (m->forwardVel > dragThreshold && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
             m->forwardVel -= 1.0f * mul;
         }
         if (m->forwardVel < -16.0f * mul) {
@@ -280,7 +280,7 @@ void update_lava_boost_or_twirling(struct MarioState *m) {
             m->forwardVel *= -1.0f * mul;
         }
 
-        if (m->forwardVel > 32.0f * mul) {
+        if (m->forwardVel > 32.0f * mul && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
             m->forwardVel -= 2.0f * mul;
         }
     }

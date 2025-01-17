@@ -18,6 +18,7 @@
 #include "rumble_init.h"
 
 #include "config.h"
+#include "src/game/chaos_codes.h"
 
 #define HANG_DISTANCE 144.0f
 
@@ -301,7 +302,7 @@ s32 update_hang_moving(struct MarioState *m) {
 #endif
 
     m->forwardVel += 1.0f;
-    if (m->forwardVel > maxSpeed) {
+    if (m->forwardVel > maxSpeed && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         m->forwardVel = maxSpeed;
     }
 
