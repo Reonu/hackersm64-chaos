@@ -5551,10 +5551,11 @@ Vtx ssl_dl_16_GeoRoot_ssl_1_ssl_seg7_dl_0700BA78_mesh_layer_5_vtx_cull[8] = {
 	{{ {7720, -8191, -1408}, 0, {0, 0}, {0, 0, 0, 0} }},
 };
 
-Vtx ssl_dl_16_GeoRoot_ssl_1_ssl_seg7_dl_0700BA78_mesh_layer_5_vtx_0[8] = {
+Vtx ssl_dl_16_GeoRoot_ssl_1_ssl_seg7_dl_0700BA78_mesh_layer_5_vtx_0[9] = {
 	{{ {7720, -7564, 50}, 0, {452, -194}, {0, 0, 129, 255} }},
 	{{ {4340, -530, 50}, 0, {727, 555}, {0, 0, 129, 255} }},
 	{{ {7720, -530, 50}, 0, {968, 307}, {0, 0, 129, 255} }},
+	{{ {1024, -1380, 50}, 0, {504, 579}, {0, 0, 129, 255} }},
 	{{ {960, -3344, 50}, 0, {280, 603}, {0, 0, 129, 255} }},
 	{{ {960, -4095, 50}, 0, {225, 549}, {0, 0, 129, 255} }},
 	{{ {-167, -4095, 50}, 0, {144, 632}, {0, 0, 129, 255} }},
@@ -5563,10 +5564,11 @@ Vtx ssl_dl_16_GeoRoot_ssl_1_ssl_seg7_dl_0700BA78_mesh_layer_5_vtx_0[8] = {
 };
 
 Gfx ssl_dl_16_GeoRoot_ssl_1_ssl_seg7_dl_0700BA78_mesh_layer_5_tri_0[] = {
-	gsSPVertex(ssl_dl_16_GeoRoot_ssl_1_ssl_seg7_dl_0700BA78_mesh_layer_5_vtx_0 + 0, 8, 0),
+	gsSPVertex(ssl_dl_16_GeoRoot_ssl_1_ssl_seg7_dl_0700BA78_mesh_layer_5_vtx_0 + 0, 9, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(0, 4, 3, 0, 0, 5, 4, 0),
 	gsSP2Triangles(0, 6, 5, 0, 0, 7, 6, 0),
+	gsSP1Triangle(0, 8, 7, 0),
 	gsSPEndDisplayList(),
 };
 
