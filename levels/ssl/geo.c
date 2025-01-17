@@ -24,3 +24,8 @@
 #include "levels/ssl/pyramid_elevator/geo.inc.c"
 #include "levels/ssl/areas/2/geo.inc.c"
 #include "levels/ssl/areas/3/geo.inc.c"
+
+#include "levels/ssl/geo.inc.c"
+#include "levels/ssl/ssl_pyramid_top_custom/geo.inc.c"
+#include "levels/ssl/ssl_snow_pit/geo.inc.c"
+#include "levels/ssl/ssl_tox_box_fog/geo.inc.c"

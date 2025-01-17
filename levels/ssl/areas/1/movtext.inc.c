@@ -58,12 +58,32 @@ const struct MovtexQuadCollection ssl_movtex_toxbox_quicksand_mist[] = {
 
 // 0x070127E0
 const Gfx ssl_dl_quicksand_begin[] = {
-    gsSPBranchList(ssl_dl_quicksand_pit_begin),
+    gsDPPipeSync(),
+    gsDPSetCycleType(G_CYC_2CYCLE),
+    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
+    gsDPSetDepthSource(G_ZS_PIXEL),
+    gsDPSetFogColor(0xDA, 0xDA, 0xDA, 255),
+    gsSPFogPosition(975, 990), // This isn't gsSPFogPosition since there is no valid min/max pair that corresponds to 0x0E49F2B7
+    gsSPSetGeometryMode(G_FOG),
+    gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_PASS2),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x3f3f3fff),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPTileSync(),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, 5, G_TX_NOLOD),
+    gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
+    gsSPEndDisplayList(),
 };
 
 // 0x070127E8
 const Gfx ssl_dl_quicksand_end[] = {
-    gsSPBranchList(ssl_dl_quicksand_pit_end),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
+    gsDPPipeSync(),
+    gsDPSetCycleType(G_CYC_1CYCLE),
+    gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_NOOP2),
+    gsSPClearGeometryMode(G_FOG),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsSPEndDisplayList(),
 };
 
 // 0x070127F0 - 0x070128B8

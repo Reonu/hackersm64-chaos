@@ -7,6 +7,10 @@ ALIGNED8 const Texture ssl_quicksand[] = {
 #include "levels/ssl/7.rgba16.inc.c"
 };
 
+ALIGNED8 const Texture ssl_cbt_snow[] = {
+#include "levels/ssl/ccm_textures.08800.rgba16.inc.c"
+};
+
 // 0x07004818 - 0x07004860
 const Gfx ssl_dl_quicksand_pit_begin[] = {
     gsDPPipeSync(),

@@ -131,6 +131,7 @@ s32 gWdwWaterLevelSet = FALSE;
 extern Texture ssl_quicksand[];
 extern Texture ssl_pyramid_sand[];
 extern Texture ttc_yellow_triangle[];
+extern Texture ssl_cbt_snow[];
 
 /**
  * An array for converting a movtex texture id to a pointer that can
@@ -139,7 +140,7 @@ extern Texture ttc_yellow_triangle[];
 Texture *gMovtexIdToTexture[] = { texture_waterbox_water,     texture_waterbox_mist,
                                   texture_waterbox_jrb_water, texture_waterbox_unknown_water,
                                   texture_waterbox_lava,      ssl_quicksand,
-                                  ssl_pyramid_sand,           ttc_yellow_triangle };
+                                  ssl_pyramid_sand,           ttc_yellow_triangle, ssl_cbt_snow };
 
 extern Gfx    castle_grounds_dl_waterfall[];
 extern Movtex castle_grounds_movtex_tris_waterfall[];

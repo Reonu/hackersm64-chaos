@@ -14,6 +14,8 @@
 #define MODEL_BOBOMB_COP                       0x104
 #define MODEL_BETA_BREAKABLE_WALL_1                 0x105
 #define MODEL_BETA_BREAKABLE_WALL_2                 0x106   
+#define MODEL_SSL_PYRAMID_TOP_CUSTOM           0x107
+#define MODEL_SSL_SNOW_PIT                     0x108
 
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 

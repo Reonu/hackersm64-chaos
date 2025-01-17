@@ -48,3 +48,8 @@
 #include "levels/ssl/pyramid_elevator/collision.inc.c"
 #include "levels/ssl/eyerok_col/collision.inc.c"
 #include "levels/ssl/areas/2/movtext.inc.c"
+
+#include "levels/ssl/leveldata.inc.c"
+#include "levels/ssl/ssl_pyramid_top_custom/model.inc.c"
+#include "levels/ssl/ssl_snow_pit/model.inc.c"
+#include "levels/ssl/ssl_tox_box_fog/model.inc.c"

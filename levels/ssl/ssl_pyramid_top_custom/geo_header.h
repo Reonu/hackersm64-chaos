@@ -1,0 +1,9 @@
+extern const GeoLayout ssl_pyramid_top_custom[];
+extern u8 ssl_pyramid_top_custom_bob_textures_00800_rgba16_ci8[];
+extern u8 ssl_pyramid_top_custom_bob_textures_00800_rgba16_pal_rgba16[];
+extern Vtx ssl_pyramid_top_custom_skinned_mesh_layer_1_vtx_cull[8];
+extern Vtx ssl_pyramid_top_custom_skinned_mesh_layer_1_vtx_0[14];
+extern Gfx ssl_pyramid_top_custom_skinned_mesh_layer_1_tri_0[];
+extern Gfx mat_ssl_pyramid_top_custom_f3dlite_material_007_layer1[];
+extern Gfx mat_revert_ssl_pyramid_top_custom_f3dlite_material_007_layer1[];
+extern Gfx ssl_pyramid_top_custom_skinned_mesh_layer_1[];
