@@ -41,7 +41,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SSL_MOVING_PYRAMID_WALL, ssl_geo_000794), 
 	LOAD_MODEL_FROM_GEO(MODEL_SSL_PYRAMID_ELEVATOR, ssl_geo_0007AC), 
 	LOAD_MODEL_FROM_GEO(MODEL_SSL_TOX_BOX, ssl_tox_box_fog_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_SSL_PYRAMID_TOP_CUSTOM, ssl_pyramid_top_custom), 
+	LOAD_MODEL_FROM_GEO(MODEL_SSL_PYRAMID_TOP_CUSTOM, ssl_pyramid_top_custom_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SSL_SNOW_PIT, ssl_snow_pit_geo), 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

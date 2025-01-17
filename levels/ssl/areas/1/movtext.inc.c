@@ -62,7 +62,7 @@ const Gfx ssl_dl_quicksand_begin[] = {
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
     gsDPSetDepthSource(G_ZS_PIXEL),
-    gsDPSetFogColor(0xDA, 0xDA, 0xDA, 255),
+    gsDPSetFogColor(177, 196, 227, 255),
     gsSPFogPosition(975, 990), // This isn't gsSPFogPosition since there is no valid min/max pair that corresponds to 0x0E49F2B7
     gsSPSetGeometryMode(G_FOG),
     gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_PASS2),
