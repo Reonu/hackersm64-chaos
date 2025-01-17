@@ -21,3 +21,4 @@
 #include "kart/geo.inc.c"
 #include "mario_billboard/geo.inc.c"
 #include "bobomb_cop/geo.inc.c"
+#include "heave_ho/geo.inc.c"

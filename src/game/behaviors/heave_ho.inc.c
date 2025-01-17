@@ -53,21 +53,33 @@ void heave_ho_act_1(void) {
 
         i++;
     }
+
+    if (o->oSuperHeaveHo == 1) {
+        o->oAction = 2;
+    }
 }
 
 void heave_ho_act_2(void) {
-    if (cur_obj_lateral_dist_from_mario_to_home() > 1000.0f) {
-        o->oAngleToMario = cur_obj_angle_to_home();
-    }
-
-    if (o->oTimer > 150) {
-        o->oHeaveHoTimedSpeed = (302 - o->oTimer) / 152.0f;
-        if (o->oHeaveHoTimedSpeed < 0.1f) {
-            o->oHeaveHoTimedSpeed = 0.1f;
-            o->oAction = 1;
+    
+    if (o->oSuperHeaveHo == 1) {
+        o->oHeaveHoTimedSpeed = 10;
+        if (o->oHeaveHoLifeTimer <= 0) {
+            obj_mark_for_deletion(o);
         }
-    } else {
-        o->oHeaveHoTimedSpeed = 1.0f;
+    }
+    else {
+        if (cur_obj_lateral_dist_from_mario_to_home() > 1000.0f) {
+            o->oAngleToMario = cur_obj_angle_to_home();
+        }
+        if (o->oTimer > 150) {
+            o->oHeaveHoTimedSpeed = (302 - o->oTimer) / 152.0f;
+            if (o->oHeaveHoTimedSpeed < 0.1f) {
+                o->oHeaveHoTimedSpeed = 0.1f;
+                o->oAction = 1;
+            }
+        } else {
+            o->oHeaveHoTimedSpeed = 1.0f;
+        }
     }
 
     cur_obj_init_animation_with_accel_and_sound(0, o->oHeaveHoTimedSpeed);
@@ -75,6 +87,8 @@ void heave_ho_act_2(void) {
     o->oForwardVel = o->oHeaveHoTimedSpeed * 10.0f;
     s16 angleVel = o->oHeaveHoTimedSpeed * 0x400;
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, angleVel);
+
+
 }
 
 void heave_ho_act_3(void) {
@@ -96,8 +110,12 @@ void heave_ho_act_3(void) {
 
 void heave_ho_act_0(void) {
     cur_obj_set_pos_to_home();
-
-    if (find_water_level(o->oPosX, o->oPosZ) < o->oPosY && o->oDistanceToMario < 4000.0f) {
+    if (o->oSuperHeaveHo == 1) {
+        cur_obj_become_tangible();
+        cur_obj_unhide();
+        o->oAction = 2;
+    }
+    else if (find_water_level(o->oPosX, o->oPosZ) < o->oPosY && o->oDistanceToMario < 4000.0f) {
         cur_obj_become_tangible();
         cur_obj_unhide();
         o->oAction = 1;

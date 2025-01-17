@@ -16,6 +16,7 @@
 #define MODEL_BETA_BREAKABLE_WALL_2                 0x106   
 #define MODEL_SSL_PYRAMID_TOP_CUSTOM           0x107
 #define MODEL_SSL_SNOW_PIT                     0x108
+#define MODEL_HEAVE_HO                    0x109
 
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
@@ -331,7 +332,6 @@
 #define MODEL_HOOT                        0x56        // hoot_geo
 #define MODEL_YOSHI_EGG                   0x57        // yoshi_egg_geo
 #define MODEL_THWOMP                      0x58        // thwomp_geo
-#define MODEL_HEAVE_HO                    0x59        // heave_ho_geo
 
 // group 2
 #define MODEL_BLARGG                      0x54        // blargg_geo

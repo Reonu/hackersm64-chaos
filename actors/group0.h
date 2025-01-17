@@ -331,6 +331,34 @@ extern const Gfx white_particle_small_dl_end[];
 extern const Gfx white_particle_small_dl[];
 extern const Gfx white_particle_small_unused_dl[];
 
+
+// heave_ho
+extern const GeoLayout heave_ho_geo[];
+extern const Gfx heave_ho_seg5_dl_05011D98[];
+extern const Gfx heave_ho_seg5_dl_05011DE0[];
+extern const Gfx heave_ho_seg5_dl_05011E28[];
+extern const Gfx heave_ho_seg5_dl_05011E80[];
+extern const Gfx heave_ho_seg5_dl_05011EC0[];
+extern const Gfx heave_ho_seg5_dl_050120A0[];
+extern const Gfx heave_ho_seg5_dl_05012100[];
+extern const Gfx heave_ho_seg5_dl_05012148[];
+extern const Gfx heave_ho_seg5_dl_05012300[];
+extern const Gfx heave_ho_seg5_dl_05012360[];
+extern const Gfx heave_ho_seg5_dl_050123A8[];
+extern const Gfx heave_ho_seg5_dl_05012560[];
+extern const Gfx heave_ho_seg5_dl_050125A8[];
+extern const Gfx heave_ho_seg5_dl_050125F8[];
+extern const Gfx heave_ho_seg5_dl_050126B0[];
+extern const Gfx heave_ho_seg5_dl_050126E8[];
+extern const Gfx heave_ho_seg5_dl_050127B0[];
+extern const Gfx heave_ho_seg5_dl_050127F8[];
+extern const Gfx heave_ho_seg5_dl_05014188[];
+extern const Gfx heave_ho_seg5_dl_05014560[];
+extern const Gfx heave_ho_seg5_dl_050145D0[];
+extern const Gfx heave_ho_seg5_dl_050149A8[];
+extern const Gfx heave_ho_seg5_dl_05014D80[];
+extern const struct Animation *const heave_ho_seg5_anims_0501534C[];
+
 #include "chao/geo_header.h"
 
 

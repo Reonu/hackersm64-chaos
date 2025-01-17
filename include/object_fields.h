@@ -618,6 +618,8 @@
 /* Heave-Ho */
 #define /*0x088*/ oHeaveHoThrowState OBJECT_FIELD_S32(0x00)
 #define /*0x0F4*/ oHeaveHoTimedSpeed OBJECT_FIELD_F32(0x1B)
+#define /*0x0F4*/ oSuperHeaveHo OBJECT_FIELD_S32(0x1C)
+#define /*0x0F4*/ oHeaveHoLifeTimer OBJECT_FIELD_S32(0x1D)
 
 /* Hidden Object */
 #define /*0x0F4*/ oHiddenObjectSwitchObj OBJECT_FIELD_OBJ(0x1B)

@@ -115,6 +115,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_KART,                    kart_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MARIO_BILLBOARD,         mario_billboard_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOBOMB_COP,              bobomb_cop_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_HEAVE_HO,                heave_ho_geo),
 #ifdef IA8_30FPS_COINS
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN,             silver_coin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN_NO_SHADOW,   silver_coin_no_shadow_geo),
@@ -210,7 +211,6 @@ const LevelScript script_func_global_2[] = {
     LOAD_MODEL_FROM_GEO(MODEL_HOOT,                    hoot_geo),
     LOAD_MODEL_FROM_GEO(MODEL_YOSHI_EGG,               yoshi_egg_geo),
     LOAD_MODEL_FROM_GEO(MODEL_THWOMP,                  thwomp_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_HEAVE_HO,                heave_ho_geo),
     RETURN(),
 };
 

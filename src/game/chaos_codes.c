@@ -182,6 +182,14 @@ void chaos_ad(void) {
     }
 }
 
+void chaos_heave_ho_chaser(void) {
+    struct Object *heaveho = spawn_object_relative(0, 0, 900, 0, gMarioState->marioObj, MODEL_HEAVE_HO, bhvHeaveHo);
+    heaveho->oSuperHeaveHo = 1;
+    heaveho->oHeaveHoLifeTimer = gChaosCodeTable[gCurrentChaosID].timer;
+    gChaosCodeTable[gCurrentChaosID].timer = 0;
+    gChaosCodeTable[gCurrentChaosID].active = FALSE;
+}
+
 void chaos_generic_bob(void) {
     if (gBoBChaosTable[gCurrentChaosID].active == FALSE) {
         gBoBChaosTable[gCurrentChaosID].active = TRUE;
@@ -240,6 +248,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Ad Spam", chaos_ad, 0, 0, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
     {"No Speed Cap", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Super Jumps", chaos_generic, 10, 20, 0,   /*ignore these*/ 0, 0},
+    {"Heave Ho Chaser", chaos_heave_ho_chaser, 15, 30, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

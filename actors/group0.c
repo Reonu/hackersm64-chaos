@@ -41,3 +41,8 @@
 #include "mario/anims/table.inc.c"
 #include "mario_billboard/model.inc.c"
 #include "bobomb_cop/model.inc.c"
+
+
+#include "heave_ho/model.inc.c"
+#include "heave_ho/anims/data.inc.c"
+#include "heave_ho/anims/table.inc.c"
