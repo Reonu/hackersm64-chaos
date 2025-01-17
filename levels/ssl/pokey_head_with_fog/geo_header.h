@@ -1,0 +1,14 @@
+extern const GeoLayout pokey_head_with_fog_000_switch_opt1[];
+extern const GeoLayout pokey_head_with_fog_geo[];
+extern u8 pokey_head_with_fog_ice_pokey_face_ci8[];
+extern u8 pokey_head_with_fog_ice_pokey_face_pal_rgba16[];
+extern u8 pokey_head_with_fog_ice_pokey_face_blink_ci8[];
+extern u8 pokey_head_with_fog_ice_pokey_face_blink_pal_rgba16[];
+extern Vtx pokey_head_with_fog_000_displaylist_mesh_layer_4_vtx_0[4];
+extern Gfx pokey_head_with_fog_000_displaylist_mesh_layer_4_tri_0[];
+extern Gfx mat_pokey_head_with_fog_pokey_head_custom_layer4[];
+extern Gfx mat_revert_pokey_head_with_fog_pokey_head_custom_layer4[];
+extern Gfx mat_pokey_head_with_fog_pokey_head_blink_custom_layer4[];
+extern Gfx mat_revert_pokey_head_with_fog_pokey_head_blink_custom_layer4[];
+extern Gfx pokey_head_with_fog_000_displaylist_mesh_layer_4[];
+extern Gfx pokey_head_with_fog_000_displaylist_mesh_layer_4_mat_override_pokey_head_blink_custom_0[];
