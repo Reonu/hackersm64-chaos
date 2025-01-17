@@ -239,6 +239,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Live Mario Reaction", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
     {"Ad Spam", chaos_ad, 0, 0, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
     {"No Speed Cap", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Super Jumps", chaos_generic, 10, 20, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

@@ -917,6 +917,10 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
             break;
     }
 
+    if (gChaosCodeTable[GLOBAL_CHAOS_SUPER_JUMPS].active) {
+        m->vel[1] *= 4;
+    }
+
     m->peakHeight = m->pos[1];
     m->flags |= MARIO_JUMPING;
 
