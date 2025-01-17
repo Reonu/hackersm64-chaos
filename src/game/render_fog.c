@@ -27,13 +27,22 @@ struct GlobalFog sOverrideFog = {
     .high = 1005
 };
 
-struct GlobalFog sSnowheadFogArea1 = {
-    .r    = 0xB3,
-    .g    = 0xBC,
-    .b    = 0xDD,
+struct GlobalFog sSSLAreaFog1 = {
+    .r    = 0xB1,
+    .g    = 0xC4,
+    .b    = 0xE3,
     .a    = 0xFF,
-    .low  = 950,
-    .high = 1000
+    .low  = 975,
+    .high = 990,
+};
+
+struct GlobalFog sSSLAreaFog2 = {
+    .r    = 0x76,
+    .g    = 0x82,
+    .b    = 0x97,
+    .a    = 0xFF,
+    .low  = 965,
+    .high = 985,
 };
 
 extern struct GlobalFog gGlobalFog;
@@ -73,11 +82,19 @@ void update_global_fog(void) {
         goalFog = &sOverrideFog;
     }
     else {
-        switch (gCurrAreaIndex)
+        switch (gCurrLevelNum)
         {
-        case 1:
+        case LEVEL_SSL:
         default:
-            goalFog = &sSnowheadFogArea1;
+            switch (gCurrAreaIndex) {
+                case 1:
+                default:
+                    goalFog = &sSSLAreaFog1;
+                    break;
+                case 2:
+                    goalFog = &sSSLAreaFog2;
+                    break;                   
+            }
             break;
         }
     }
