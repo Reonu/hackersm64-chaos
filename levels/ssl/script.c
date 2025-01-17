@@ -42,8 +42,8 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SSL_PYRAMID_ELEVATOR, ssl_geo_0007AC), 
 	LOAD_MODEL_FROM_GEO(MODEL_SSL_TOX_BOX, ssl_tox_box_fog_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SSL_PYRAMID_TOP_CUSTOM, ssl_pyramid_top_custom_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_SSL_SNOW_PIT, ssl_snow_pit_geo),
-	LOAD_MODEL_FROM_GEO(MODEL_POKEY_WITH_FOG, pokey_with_fog_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_SSL_SNOW_PIT, ssl_snow_pit_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_POKEY_WITH_FOG, pokey_with_fog_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_POKEY_HEAD_WITH_FOG, pokey_head_with_fog_geo), 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -201,7 +201,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_SSL_MOVING_PYRAMID_WALL, 1345, 2567, -2307, 0, 0, 0, 0x00020000, bhvSslMovingPyramidWall),
 		OBJECT(MODEL_SSL_MOVING_PYRAMID_WALL, 858, 1927, -2307, 0, 0, 0, 0x00000000, bhvSslMovingPyramidWall),
 		OBJECT(MODEL_STAR, 500, 5050, -500, 0, 0, 0, 0x02000000, bhvStar),
-		OBJECT(MODEL_LEVEL_GEOMETRY_04, 1741, -101, 1843, 0, 0, 0, 0x00000000, bhvStaticObject),
+		OBJECT(MODEL_SSL_SNOW_PIT, 1741, -101, 1843, 0, 0, 0, 0x00000000, bhvStaticObject),
 		OBJECT(MODEL_LEVEL_GEOMETRY_04, 0, -101, 528, 0, 0, 0, 0x00000000, bhvStaticObject),
 		OBJECT(MODEL_LEVEL_GEOMETRY_04, -1740, -101, 1843, 0, 0, 0, 0x00000000, bhvStaticObject),
 		OBJECT(MODEL_YELLOW_COIN, 736, 2652, -2250, 0, 0, 0, 0x00000000, bhvYellowCoin),
