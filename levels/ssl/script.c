@@ -125,8 +125,8 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_YELLOW_COIN, 1805, 1200, -2536, 0, 0, 0, 0x00000000, bhvYellowCoin),
 		TERRAIN(ssl_area_1_collision),
 		MACRO_OBJECTS(ssl_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_HOT),
-		TERRAIN_TYPE(TERRAIN_SAND),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_SNOW),
+		TERRAIN_TYPE(TERRAIN_SNOW),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
