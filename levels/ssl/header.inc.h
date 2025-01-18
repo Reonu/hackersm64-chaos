@@ -155,7 +155,7 @@ extern Vtx ssl_dl_area4gfx_mesh_layer_1_vtx_1[14];
 extern Gfx ssl_dl_area4gfx_mesh_layer_1_tri_1[];
 extern Vtx ssl_dl_area4gfx_mesh_layer_1_vtx_2[24];
 extern Gfx ssl_dl_area4gfx_mesh_layer_1_tri_2[];
-extern Vtx ssl_dl_area4gfx_mesh_layer_1_vtx_3[167];
+extern Vtx ssl_dl_area4gfx_mesh_layer_1_vtx_3[159];
 extern Gfx ssl_dl_area4gfx_mesh_layer_1_tri_3[];
 extern Vtx ssl_dl_area4gfx_mesh_layer_1_vtx_4[4];
 extern Gfx ssl_dl_area4gfx_mesh_layer_1_tri_4[];
