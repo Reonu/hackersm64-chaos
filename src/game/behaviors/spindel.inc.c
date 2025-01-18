@@ -59,8 +59,13 @@ void bhv_spindel_loop(void) {
             o->oVelZ = -20 / shake;
             o->oAngleVelPitch = -1024 / shake;
         }
-
-        o->oPosZ += o->oVelZ;
+        
+        if (BPARAM1) {
+            o->oPosX += o->oVelZ;
+        } else {
+            o->oPosZ += o->oVelZ;
+        }
+        
         o->oMoveAnglePitch += o->oAngleVelPitch;
 
         if (absf(o->oMoveAnglePitch & 0x1fff) < 800.0f && o->oAngleVelPitch != 0) {

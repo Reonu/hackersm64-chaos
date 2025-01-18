@@ -1200,6 +1200,7 @@ void mode_outward_radial_camera(struct Camera *c) {
     if (sMarioCamState->action == ACT_RIDING_HOOT) {
         pos[1] += 500.f;
     }
+
     set_camera_height(c, pos[1]);
     pan_ahead_of_player(c);
 }
@@ -2866,6 +2867,50 @@ void update_lakitu(struct Camera *c) {
     gLakituState.defMode = c->defMode;
 }
 
+void ssl_area_4_camera(struct Camera *c) {
+    static f32 clampXPlus;
+    static f32 clampZPlus;
+    static f32 clampXMinus;
+    static f32 clampZMinus;
+    static f32  xModifier;
+
+    if (gMarioState->pos[1] < 1600) {
+        clampXPlus = 970;
+        clampXMinus = -2390;
+        clampZPlus = -5550;
+        clampZMinus = -7200;
+        xModifier = -500;
+    } else if (gMarioState->pos[1] < 2450) {
+        clampXPlus = -1200;
+        clampXMinus = -1200;
+        clampZPlus = -5550;
+        clampZMinus = -7200;
+        xModifier = -500;
+    } else {
+        clampXPlus = 0;
+        clampXMinus = -1200;
+        clampZPlus = -5550;
+        clampZMinus = -6400;
+        xModifier = 850;
+    }
+
+
+    c->pos[0] = CLAMP(gMarioState->pos[0] + xModifier, clampXMinus, clampXPlus);
+    c->pos[1] = CLAMP(gMarioState->pos[1] + 500, 1750, 3300);
+    c->pos[2] = CLAMP(gMarioState->pos[2], clampZMinus, clampZPlus);
+
+    c->focus[0] = gMarioState->pos[0];
+    c->focus[1] = gMarioState->pos[1];
+    c->focus[2] = gMarioState->pos[2];
+
+    print_text_fmt_int(20, 80, "X %d", c->pos[0]);
+    print_text_fmt_int(20, 60, "Y %d", c->pos[1]);
+    print_text_fmt_int(20, 40, "Z %d", c->pos[2]);
+
+    c->yaw = calculate_yaw(c->pos, c->focus) + 0x8000;
+    sFOVState.fov = 65;
+}
+
 /**
  * The main camera update function.
  * Gets controller input, checks for cutscenes, handles mode changes, and moves the camera
@@ -3026,6 +3071,10 @@ void update_camera(struct Camera *c) {
             }
         }
     }
+    if (gCurrLevelNum == LEVEL_SSL && gCurrAreaIndex == 4 && gMarioState->pos[2] <= -5761) {
+        ssl_area_4_camera(c);
+    }
+    
 #ifdef PUPPYCAM
     }
 #endif
@@ -10402,7 +10451,7 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 1, 0, 0), // BBH            | CCM
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // CASTLE_INSIDE  | HMC
-	ZOOMOUT_AREA_MASK(1, 1, 1, 0, 1, 0, 0, 0), // SSL            | BOB
+	ZOOMOUT_AREA_MASK(1, 1, 1, 1, 1, 0, 0, 0), // SSL            | BOB
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 1, 1, 0), // JRB            | THI
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // TTC            | RR

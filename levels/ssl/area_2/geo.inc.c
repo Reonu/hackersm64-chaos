@@ -15,6 +15,7 @@ const GeoLayout ssl_area_2_geo[] = {
 		GEO_ASM(MOVTEX_PYRAMID_SAND_PATHWAY_FLOOR, geo_movtex_draw_nocolor),
 		GEO_ASM(MOVTEX_PYRAMID_SAND_PATHWAY_SIDE, geo_movtex_draw_nocolor),
 		GEO_ASM(ENVFX_MODE_NONE, geo_envfx_main),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, ssl_dl_from_area_2_to_4_gfx_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
