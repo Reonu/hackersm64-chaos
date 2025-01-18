@@ -8,6 +8,7 @@
 #include "level_update.h"
 #include "camera.h"
 #include "render_fog.h"
+#include "src/game/chaos_codes.h"
 
 struct GlobalFog sWaterFog = {
     .r    = 0x10,
@@ -34,6 +35,15 @@ struct GlobalFog sSSLAreaFog1 = {
     .a    = 0xFF,
     .low  = 975,
     .high = 990,
+};
+
+struct GlobalFog sSSLAreaFog1Blizzard = {
+    .r    = 0xB1,
+    .g    = 0xC4,
+    .b    = 0xE3,
+    .a    = 0xFF,
+    .low  = 930,
+    .high = 955,
 };
 
 struct GlobalFog sSSLAreaFog2 = {
@@ -89,7 +99,11 @@ void update_global_fog(void) {
             switch (gCurrAreaIndex) {
                 case 1:
                 default:
-                    goalFog = &sSSLAreaFog1;
+                    if (gSSLChaosTable[SSL_CHAOS_BLIZZARD].active) {
+                        goalFog = &sSSLAreaFog1Blizzard;
+                    } else {
+                        goalFog = &sSSLAreaFog1;
+                    }
                     break;
                 case 2:
                     goalFog = &sSSLAreaFog2;

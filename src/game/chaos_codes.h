@@ -41,6 +41,10 @@ enum BoBChaosNames {
     BOB_CHAOS_WATER_BOMB_SPAM,
 };
 
+enum SSLChaosNAmes {
+    SSL_CHAOS_BLIZZARD,
+};
+
 // A mark for exclusivity. Can only have one of thse effects active at a time.
 enum CodeFlags {
     CODEFLAG_NONE,
@@ -61,6 +65,7 @@ typedef struct ChaosCode {
 extern ChaosCode gChaosCodeTable[];
 extern ChaosCode gBoBChaosTable[];
 extern ChaosCode gTTCChaosTable[];
+extern ChaosCode gSSLChaosTable[];
 extern u8 gDisableChaos;
 extern float gCrimes;
 extern u8 gChaosOffOverride;

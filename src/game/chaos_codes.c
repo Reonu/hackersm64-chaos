@@ -209,6 +209,17 @@ void chaos_ttc_upwarp(void) {
     gTTCChaosTable[gCurrentChaosID].active = FALSE;
 }
 
+void chaos_generic_ssl(void) {
+    if (gSSLChaosTable[gCurrentChaosID].active == FALSE) {
+        gSSLChaosTable[gCurrentChaosID].active = TRUE;
+    }
+    gSSLChaosTable[gCurrentChaosID].timer--;
+    if (gSSLChaosTable[gCurrentChaosID].timer <= 0) {
+        gSSLChaosTable[gCurrentChaosID].timer = 0;
+        gSSLChaosTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
 void chaos_generic_ttc(void) {
     if (gTTCChaosTable[gCurrentChaosID].active == FALSE) {
         gTTCChaosTable[gCurrentChaosID].active = TRUE;
@@ -264,6 +275,10 @@ ChaosCode gTTCChaosTable[] = {
     {"TTC Upwarp", chaos_ttc_upwarp, 20, 35, 0,   /*ignore these*/ 0, 0},
 };
 
+ChaosCode gSSLChaosTable[] = {
+    {"SSL Blizzard", chaos_generic_ssl, 30, 60, 0,   /*ignore these*/ 0, 0},
+};
+
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
     if (table[codeID].flags) {
         for (s32 i = 0; i < tableSize; i++) {
@@ -297,6 +312,12 @@ ChaosCode *chaos_level_table(s32 levelID, s32 *size) {
     case LEVEL_TTC:
         *size = sizeof(gTTCChaosTable) / sizeof(ChaosCode);
         return gTTCChaosTable;
+    case LEVEL_SSL:
+        if (gCurrAreaIndex == 1) {
+            *size = sizeof(gSSLChaosTable) / sizeof(ChaosCode);
+            return gSSLChaosTable;
+        }
+        // fallthrough
     default:
         *size = sizeof(gChaosCodeTable) / sizeof(ChaosCode);
         return gChaosCodeTable;

@@ -151,9 +151,18 @@ s32 check_horizontal_wind(struct MarioState *m) {
     struct Surface *floor = m->floor;
     f32 speed;
     s16 pushAngle;
+    static s16 randomAngle;
 
-    if (floor->type == SURFACE_HORIZONTAL_WIND) {
-        pushAngle = floor->force << 8;
+    if (floor->type == SURFACE_HORIZONTAL_WIND || gSSLChaosTable[SSL_CHAOS_BLIZZARD].active) {
+        if (floor->type == SURFACE_HORIZONTAL_WIND) {
+            pushAngle = floor->force << 8;
+        } else {
+            if (randomAngle == 0) {
+                randomAngle = random_u16();
+            }
+            pushAngle = randomAngle;
+        }
+        
 
         m->slideVelX += 1.2f * sins(pushAngle);
         m->slideVelZ += 1.2f * coss(pushAngle);
@@ -175,7 +184,7 @@ s32 check_horizontal_wind(struct MarioState *m) {
         m->forwardVel = speed * coss(m->faceAngle[1] - m->slideYaw);
         return TRUE;
     }
-
+    randomAngle = 0;
     return FALSE;
 }
 
