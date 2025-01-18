@@ -2903,9 +2903,9 @@ void ssl_area_4_camera(struct Camera *c) {
     c->focus[1] = gMarioState->pos[1];
     c->focus[2] = gMarioState->pos[2];
 
-    print_text_fmt_int(20, 80, "X %d", c->pos[0]);
+    /*print_text_fmt_int(20, 80, "X %d", c->pos[0]);
     print_text_fmt_int(20, 60, "Y %d", c->pos[1]);
-    print_text_fmt_int(20, 40, "Z %d", c->pos[2]);
+    print_text_fmt_int(20, 40, "Z %d", c->pos[2]);*/
 
     c->yaw = calculate_yaw(c->pos, c->focus) + 0x8000;
     sFOVState.fov = 65;
