@@ -10,7 +10,7 @@ const Collision ssl_seg7_collision_0702808C[] = {
     COL_VERTEX(-63, 512, 307),
     COL_VERTEX(64, 512, 307),
     COL_VERTEX(64, 0, 307),
-    COL_TRI_INIT(SURFACE_DEFAULT, 12),
+    COL_TRI_INIT(SURFACE_VERY_SLIPPERY, 12),
     COL_TRI(0, 1, 2),
     COL_TRI(0, 2, 3),
     COL_TRI(4, 5, 1),

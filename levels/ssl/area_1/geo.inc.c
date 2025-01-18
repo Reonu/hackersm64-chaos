@@ -12,7 +12,7 @@ const GeoLayout ssl_area_1_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ssl_dl_16_GeoRoot_ssl_1_ssl_seg7_dl_0700BA78_mesh_layer_5),
 		GEO_CLOSE_NODE(),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_ALPHA, 90, 0, 0, ssl_dl_17_GeoRoot_ssl_1_ssl_seg7_dl_0700BC18_mesh_layer_4),
-		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, 90, 0, 0, ssl_dl_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_mesh_layer_6),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, ssl_dl_18_GeoRoot_ssl_1_ssl_seg7_dl_0700BD00_mesh_layer_5),
 		GEO_ASM(MOVTEX_SSL_SAND_PIT_OUTSIDE, geo_movtex_update_horizontal),
 		GEO_ASM(0, geo_movtex_pause_control),
 		GEO_ASM(SSL_MOVTEX_PUDDLE_WATER, geo_movtex_draw_water_regions),

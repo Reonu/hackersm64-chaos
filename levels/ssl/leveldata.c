@@ -56,3 +56,6 @@
 #include "levels/ssl/snow_tree_fog/model.inc.c"
 #include "levels/ssl/pokey_with_fog/model.inc.c"
 #include "levels/ssl/pokey_head_with_fog/model.inc.c"
+#include "levels/ssl/ssl_pryamid_wall_custom/model.inc.c"
+#include "levels/ssl/ssl_pryamid_walL_custom/model.inc.c"
+#include "levels/ssl/ssl_pryamid_elevator_custom/model.inc.c"

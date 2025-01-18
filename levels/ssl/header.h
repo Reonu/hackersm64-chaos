@@ -99,4 +99,10 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/pokey_head_with_fog/geo_header.h"
 
+#include "levels/ssl/ssl_pryamid_wall_custom/geo_header.h"
+
+#include "levels/ssl/ssl_pryamid_walL_custom/geo_header.h"
+
+#include "levels/ssl/ssl_pryamid_elevator_custom/geo_header.h"
+
 #endif

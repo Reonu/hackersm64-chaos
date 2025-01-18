@@ -32,3 +32,6 @@
 #include "levels/ssl/snow_tree_fog/geo.inc.c"
 #include "levels/ssl/pokey_with_fog/geo.inc.c"
 #include "levels/ssl/pokey_head_with_fog/geo.inc.c"
+#include "levels/ssl/ssl_pryamid_wall_custom/geo.inc.c"
+#include "levels/ssl/ssl_pryamid_walL_custom/geo.inc.c"
+#include "levels/ssl/ssl_pryamid_elevator_custom/geo.inc.c"

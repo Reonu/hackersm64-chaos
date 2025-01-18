@@ -1,0 +1,14 @@
+extern const GeoLayout ssl_pryamid_wall_custom_geo[];
+extern u8 ssl_pryamid_wall_custom_pyramid_blue_ci8[];
+extern u8 ssl_pryamid_wall_custom_pyramid_blue_pal_rgba16[];
+extern u8 ssl_pryamid_wall_custom_ccm_textures_00800_rgba16_rgba16[];
+extern Vtx ssl_pryamid_wall_custom_000_displaylist_mesh_layer_1_vtx_0[24];
+extern Gfx ssl_pryamid_wall_custom_000_displaylist_mesh_layer_1_tri_0[];
+extern Vtx ssl_pryamid_wall_custom_000_displaylist_mesh_layer_6_vtx_0[4];
+extern Gfx ssl_pryamid_wall_custom_000_displaylist_mesh_layer_6_tri_0[];
+extern Gfx mat_ssl_pryamid_wall_custom_top_layer1[];
+extern Gfx mat_revert_ssl_pryamid_wall_custom_top_layer1[];
+extern Gfx mat_ssl_pryamid_wall_custom_f3dlite_material_layer6[];
+extern Gfx mat_revert_ssl_pryamid_wall_custom_f3dlite_material_layer6[];
+extern Gfx ssl_pryamid_wall_custom_000_displaylist_mesh_layer_1[];
+extern Gfx ssl_pryamid_wall_custom_000_displaylist_mesh_layer_6[];
