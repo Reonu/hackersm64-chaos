@@ -4,7 +4,7 @@
 
 // 0x05008D40
 ALIGNED8 static const Texture eyerok_seg5_texture_05008D40[] = {
-#include "actors/eyerok/eyerok_bricks.rgba16.inc.c"
+#include "actors/eyerok/pyramid_blue.rgba16.inc.c"
 };
 
 // 0x05009540
