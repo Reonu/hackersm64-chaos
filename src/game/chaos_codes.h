@@ -77,3 +77,4 @@ extern s16 gSpamCursorY;
 void global_chaos_code_handler(void);
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize);
 ChaosCode *chaos_level_table(s32 levelID, s32 *size);
+void chaos_clear_level(ChaosCode *table, s32 size);
