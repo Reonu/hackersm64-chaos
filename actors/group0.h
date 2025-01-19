@@ -405,4 +405,6 @@ extern const Collision thwomp_seg5_collision_0500B92C[];
 
 
 #include "item_box/anim_header.h"
+#include "shadow_mario/geo_header.h"
+
 #endif

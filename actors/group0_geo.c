@@ -26,3 +26,4 @@
 #include "chain_chomp/geo.inc.c"
 #include "chain_ball/geo.inc.c"
 #include "thwomp/geo.inc.c"
+#include "shadow_mario/geo.inc.c"
