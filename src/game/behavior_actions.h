@@ -588,3 +588,6 @@ void bhv_gear_walls_init(void);
 void bhv_gear_walls_loop(void);
 void bhv_celebratory_coin_init(void);
 void bhv_celebratory_coin_loop(void);
+
+void bhv_quicksand_magnet_init(void);
+void bhv_quicksand_magnet_loop(void);

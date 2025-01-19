@@ -552,3 +552,5 @@ extern const BehaviorScript bhvRockVolcano[];
 extern const BehaviorScript bhvKoopaNpc[];
 extern const BehaviorScript bhvGearWalls[];
 extern const BehaviorScript bhvCelebratoryCoin[];
+
+extern const BehaviorScript bhvQuicksandMagnet[];

@@ -278,6 +278,7 @@ ChaosCode gTTCChaosTable[] = {
 
 ChaosCode gSSLChaosTable[] = {
     {"SSL Blizzard", chaos_generic_ssl, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"Quicksand Magnet", chaos_generic_ssl, 30, 60, 0,   /*ignore these*/ 0, 0},
 };
 
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {

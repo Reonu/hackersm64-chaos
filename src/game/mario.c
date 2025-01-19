@@ -1865,6 +1865,25 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         obj_set_model(gMarioObject, MODEL_MARIO);
     }
 
+    #define SAND_MAGNET_SPEED 11
+    if (gSSLChaosTable[SSL_CHAOS_QUICKSAND_MAGNET].active) {
+        struct Object *quicksand = cur_obj_nearest_object_with_behavior(bhvQuicksandMagnet);
+        // Pull mario towards quicksand
+        if (quicksand) {
+            f32 dx = quicksand->oPosX - gMarioObject->oPosX;
+            f32 dz = quicksand->oPosZ - gMarioObject->oPosZ;
+            f32 angle = atan2s(dz, dx);
+            f32 intendedPosX = gMarioObject->oPosX + SAND_MAGNET_SPEED * sins(angle);
+            f32 intendedPosZ = gMarioObject->oPosZ + SAND_MAGNET_SPEED * coss(angle);
+            struct Surface *floor;
+            find_floor(intendedPosX, gMarioObject->oPosY, intendedPosZ, &floor);
+            if (floor) {
+                gMarioState->pos[0] += SAND_MAGNET_SPEED * sins(angle);
+                gMarioState->pos[2] += SAND_MAGNET_SPEED * coss(angle);
+            }
+        }
+    }
+
     if (gChaosCodeTable[GLOBAL_CHAOS_DELETE_NEARBY_OBJECTS].active) {
         f32 dist;
         struct Object *deletusObjectus = cur_obj_find_nearest_object(&dist);

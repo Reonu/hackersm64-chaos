@@ -44,6 +44,7 @@ enum BoBChaosNames {
 
 enum SSLChaosNAmes {
     SSL_CHAOS_BLIZZARD,
+    SSL_CHAOS_QUICKSAND_MAGNET,
 };
 
 // A mark for exclusivity. Can only have one of thse effects active at a time.

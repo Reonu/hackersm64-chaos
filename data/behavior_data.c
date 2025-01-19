@@ -6198,3 +6198,12 @@ const BehaviorScript bhvCelebratoryCoin[] = {
         CALL_NATIVE(bhv_celebratory_coin_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvQuicksandMagnet[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    CALL_NATIVE(bhv_quicksand_magnet_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_quicksand_magnet_loop),
+    END_LOOP(),
+};
