@@ -194,14 +194,20 @@ void chaos_heave_ho_chaser(void) {
 }
 
 void chaos_chain_chomp(void) {
-    // Get position 400 units in front of Mario
     Vec3f pos;
-    // Use coss and sins to get the position in front of Mario
     pos[0] = gMarioState->pos[0] + 400 * sins(gMarioState->faceAngle[1]);
-    pos[1] = gMarioState->pos[1];
+    pos[1] = gMarioState->pos[1] + 100;
     pos[2] = gMarioState->pos[2] + 400 * coss(gMarioState->faceAngle[1]);
     struct Surface *floor;
     find_floor(pos[0], pos[1], pos[2], &floor);
+    if (floor == NULL) {
+        u8 attemptCounter = 0;
+        while (floor == NULL && attemptCounter < 10) {
+            pos[1] += 150;
+            find_floor(pos[0], pos[1], pos[2], &floor);
+            attemptCounter++;
+        }
+    }
     if (floor != NULL) {
         struct Object *chainChomp = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_CHAIN_CHOMP, bhvChaosChainChomp);
         chainChomp->oPosX = pos[0];
