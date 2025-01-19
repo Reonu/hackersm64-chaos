@@ -116,6 +116,9 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_MARIO_BILLBOARD,         mario_billboard_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOBOMB_COP,              bobomb_cop_geo),
     LOAD_MODEL_FROM_GEO(MODEL_HEAVE_HO,                heave_ho_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_ITEM_BOX,                item_box_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_CHAIN_CHOMP,             chain_chomp_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_METALLIC_BALL,           metallic_ball_geo),
 #ifdef IA8_30FPS_COINS
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN,             silver_coin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN_NO_SHADOW,   silver_coin_no_shadow_geo),

@@ -46,3 +46,12 @@
 #include "heave_ho/model.inc.c"
 #include "heave_ho/anims/data.inc.c"
 #include "heave_ho/anims/table.inc.c"
+#include "item_box/model.inc.c"
+#include "item_box/anims/data.inc.c"
+#include "item_box/anims/table.inc.c"
+
+#include "chain_chomp/model.inc.c"
+#include "chain_chomp/anims/data.inc.c"
+#include "chain_chomp/anims/table.inc.c"
+
+#include "chain_ball/model.inc.c"

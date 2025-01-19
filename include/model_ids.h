@@ -12,13 +12,16 @@
 #define MODEL_MARIO_BILLBOARD                  0x102
 #define MODEL_CCM_ROCK_VOLCANO                 0x103 // CCM leveldata
 #define MODEL_BOBOMB_COP                       0x104
-#define MODEL_BETA_BREAKABLE_WALL_1                 0x105
-#define MODEL_BETA_BREAKABLE_WALL_2                 0x106   
+#define MODEL_BETA_BREAKABLE_WALL_1            0x105
+#define MODEL_BETA_BREAKABLE_WALL_2            0x106   
 #define MODEL_SSL_PYRAMID_TOP_CUSTOM           0x107
 #define MODEL_SSL_SNOW_PIT                     0x108
 #define MODEL_HEAVE_HO                         0x109
 #define MODEL_POKEY_WITH_FOG                   0x10A
 #define MODEL_POKEY_HEAD_WITH_FOG              0x10B
+#define MODEL_ITEM_BOX                         0x10C
+#define MODEL_CHAIN_CHOMP                      0x10D        // chain_chomp
+#define MODEL_METALLIC_BALL                    0x10E        // metallic_ball_geo
 
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
@@ -423,8 +426,6 @@
 #define MODEL_PIRANHA_PLANT               0x64        // piranha_plant_geo
 #define MODEL_WHOMP                       0x67        // whomp_geo
 #define MODEL_KOOPA_WITH_SHELL            0x68        // koopa_with_shell_geo
-#define MODEL_METALLIC_BALL               0x65        // metallic_ball_geo
-#define MODEL_CHAIN_CHOMP                 0x66        // chain_chomp
 #define MODEL_KOOPA_FLAG                  0x6A        // koopa_flag_geo
 #define MODEL_WOODEN_POST                 0x6B        // wooden_post_geo
 

@@ -1,0 +1,12 @@
+extern const GeoLayout item_box_geo[];
+extern u8 item_box_question_mark_alphafix_rgba16_ia8[];
+extern Vtx item_box_a_cube_mesh_layer_5_vtx_0[48];
+extern Gfx item_box_a_cube_mesh_layer_5_tri_0[];
+extern Vtx item_box_z_question_mark_mesh_layer_5_vtx_0[4];
+extern Gfx item_box_z_question_mark_mesh_layer_5_tri_0[];
+extern Gfx mat_item_box_cube_layer5[];
+extern Gfx mat_revert_item_box_cube_layer5[];
+extern Gfx mat_item_box_question_mark_layer5[];
+extern Gfx mat_revert_item_box_question_mark_layer5[];
+extern Gfx item_box_a_cube_mesh_layer_5[];
+extern Gfx item_box_z_question_mark_mesh_layer_5[];

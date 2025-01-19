@@ -8,7 +8,7 @@
  * Processing order is bhvWoodenPost, bhvChainChompGate, bhvChainChomp, bhvChainChompChainPart.
  * The chain parts are processed starting at the post and ending at the chomp.
  */
-
+#include "include/behavior_data.h"
 #define CHAIN_CHOMP_CHAIN_MAX_DIST_BETWEEN_PARTS 180.0f
 
 #define CHAIN_CHOMP_LOAD_DIST   (3000.0f + (CHAIN_CHOMP_NUM_SEGMENTS * CHAIN_CHOMP_CHAIN_MAX_DIST_BETWEEN_PARTS))
@@ -395,6 +395,9 @@ static void chain_chomp_act_move(void) {
             o->oChainChompTargetPitch = -0x3000;
         }
     }
+    if (o->behavior == segmented_to_virtual(bhvChaosChainChomp) && o->oChaosChainChompTimer > 450) {
+        o->oAction = CHAIN_CHOMP_ACT_UNLOAD_CHAIN;
+    }
 }
 
 /**
@@ -408,6 +411,9 @@ static void chain_chomp_act_unload_chain(void) {
     o->oAction = CHAIN_CHOMP_ACT_UNINITIALIZED;
 
     if (o->oChainChompReleaseStatus != CHAIN_CHOMP_NOT_RELEASED) {
+        obj_mark_for_deletion(o);
+    }
+    if (o->behavior == segmented_to_virtual(bhvChaosChainChomp) && o->oChaosChainChompTimer > 450) {
         obj_mark_for_deletion(o);
     }
 }
@@ -427,6 +433,7 @@ void bhv_chain_chomp_update(void) {
             chain_chomp_act_unload_chain();
             break;
     }
+    o->oChaosChainChompTimer++;
 }
 
 /**
@@ -434,6 +441,14 @@ void bhv_chain_chomp_update(void) {
  */
 void bhv_wooden_post_update(void) {
     // When ground pounded by mario, drop by -45 + -20
+    if (o->parentObj->behavior == segmented_to_virtual(bhvChaosChainChomp)) {
+        if (o->parentObj->oAction == CHAIN_CHOMP_ACT_UNLOAD_CHAIN) {
+            obj_mark_for_deletion(o);
+        } else {
+            return;
+        }
+    }
+
     if (!o->oWoodenPostMarioPounding) {
         if ((o->oWoodenPostMarioPounding = cur_obj_is_mario_ground_pounding_platform())) {
             cur_obj_play_sound_2(SOUND_GENERAL_POUND_WOOD_POST);

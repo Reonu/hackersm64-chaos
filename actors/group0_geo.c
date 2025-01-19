@@ -22,3 +22,6 @@
 #include "mario_billboard/geo.inc.c"
 #include "bobomb_cop/geo.inc.c"
 #include "heave_ho/geo.inc.c"
+#include "item_box/geo.inc.c"
+#include "chain_chomp/geo.inc.c"
+#include "chain_ball/geo.inc.c"

@@ -15,6 +15,8 @@
 #include "fb_effects.h"
 #include "print.h"
 #include "src/audio/external.h"
+#include "engine/math_util.h"
+#include "engine/surface_collision.h"
 
 
 s32 nextGlobalCodeTimer = 150;
@@ -191,6 +193,25 @@ void chaos_heave_ho_chaser(void) {
     gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
 
+void chaos_chain_chomp(void) {
+    // Get position 400 units in front of Mario
+    Vec3f pos;
+    // Use coss and sins to get the position in front of Mario
+    pos[0] = gMarioState->pos[0] + 400 * sins(gMarioState->faceAngle[1]);
+    pos[1] = gMarioState->pos[1];
+    pos[2] = gMarioState->pos[2] + 400 * coss(gMarioState->faceAngle[1]);
+    struct Surface *floor;
+    find_floor(pos[0], pos[1], pos[2], &floor);
+    if (floor != NULL) {
+        struct Object *chainChomp = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_CHAIN_CHOMP, bhvChaosChainChomp);
+        chainChomp->oPosX = pos[0];
+        chainChomp->oPosY = pos[1];
+        chainChomp->oPosZ = pos[2];
+    }
+    gChaosCodeTable[gCurrentChaosID].timer = 0;
+    gChaosCodeTable[gCurrentChaosID].active = FALSE;
+}
+
 void chaos_ttc_upwarp(void) {
     int upwarpPos = gMarioState->pos[1];
     upwarpPos ^= 0b100000000000;
@@ -230,6 +251,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Heave Ho Chaser", chaos_heave_ho_chaser, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Strong Punch KB", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Automatic Wallkicks", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"Chaih Chomp", chaos_chain_chomp, 0, 0, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

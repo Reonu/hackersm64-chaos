@@ -5188,6 +5188,23 @@ const BehaviorScript bhvChainChomp2[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvChaosChainChomp[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    DROP_TO_FLOOR(),
+    LOAD_ANIMATIONS(oAnimations, chain_chomp_seg6_anims_06025178),
+    ANIMATE(CHAIN_CHOMP_ANIM_CHOMPING),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 0, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    HIDE(),
+    SET_HOME(),
+    SET_FLOAT(oGraphYOffset, 240),
+    SCALE(/*Unused*/ 0, /*Field*/ 200),
+    SPAWN_CHILD_WITH_PARAM(/*Bhv param*/ 0, /*Model*/ MODEL_NONE, /*Behavior*/ bhvIntangibleWoodenPost),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_chain_chomp_update),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvChainChompChainPart[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
@@ -5212,6 +5229,21 @@ const BehaviorScript bhvWoodenPost[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_wooden_post_update),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvIntangibleWoodenPost[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    //LOAD_COLLISION_DATA(poundable_pole_collision_wooden_post),
+    OR_LONG(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 0, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SET_INT(oNumLootCoins, 5),
+    DROP_TO_FLOOR(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 50),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_wooden_post_update),
+        //CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
 
@@ -6205,5 +6237,17 @@ const BehaviorScript bhvQuicksandMagnet[] = {
     CALL_NATIVE(bhv_quicksand_magnet_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_quicksand_magnet_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvItemBox[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_ANIMATIONS(oAnimations, item_box_anims),
+    CALL_NATIVE(bhv_item_box_init),
+    SET_FLOAT(oGraphYOffset, 200),
+    BEGIN_LOOP(),
+        ANIMATE(0),
+        CALL_NATIVE(bhv_item_box_loop),
     END_LOOP(),
 };

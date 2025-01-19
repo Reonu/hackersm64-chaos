@@ -359,6 +359,26 @@ extern const Gfx heave_ho_seg5_dl_050149A8[];
 extern const Gfx heave_ho_seg5_dl_05014D80[];
 extern const struct Animation *const heave_ho_seg5_anims_0501534C[];
 
+// chain_chomp
+extern const GeoLayout chain_chomp_geo[];
+extern const Gfx chain_chomp_seg6_dl_06024000[];
+extern const Gfx chain_chomp_seg6_dl_06024040[];
+extern const Gfx chain_chomp_seg6_dl_06024240[];
+extern const Gfx chain_chomp_seg6_dl_06024700[];
+extern const Gfx chain_chomp_seg6_dl_06024900[];
+extern const Gfx chain_chomp_seg6_dl_06024940[];
+extern const Gfx chain_chomp_seg6_dl_06024AA8[];
+extern const Gfx chain_chomp_seg6_dl_06024B00[];
+extern const Gfx chain_chomp_seg6_dl_06024CF0[];
+extern const Gfx chain_chomp_seg6_dl_06024D60[];
+extern const Gfx chain_chomp_seg6_dl_06024F50[];
+extern const Gfx chain_chomp_seg6_dl_06024FC0[];
+extern const struct Animation *const chain_chomp_seg6_anims_06025178[];
+
+// chain_ball
+extern const GeoLayout metallic_ball_geo[];
+extern const Gfx chain_ball_seg6_dl_060212E8[];
+
 #include "chao/geo_header.h"
 
 
@@ -373,4 +393,8 @@ extern const struct Animation *const heave_ho_seg5_anims_0501534C[];
 
 #include "bobomb_cop/geo_header.h"
 
+#include "item_box/geo_header.h"
+
+
+#include "item_box/anim_header.h"
 #endif
