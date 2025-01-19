@@ -62,7 +62,12 @@ void heave_ho_act_1(void) {
 void heave_ho_act_2(void) {
     
     if (o->oSuperHeaveHo == 1) {
-        o->oHeaveHoTimedSpeed = 10;
+
+        if (gMarioState->action == ACT_THROWN_BACKWARD || gMarioState->action == ACT_HARD_BACKWARD_GROUND_KB || gMarioState->action == ACT_FEET_STUCK_IN_GROUND) {
+            return;
+        }
+
+        o->oHeaveHoTimedSpeed = 5;
         if (o->oHeaveHoLifeTimer <= 0) {
             obj_mark_for_deletion(o);
         }

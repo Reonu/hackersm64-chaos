@@ -153,6 +153,12 @@ void bhv_bowling_ball_loop(void) {
         set_camera_shake_from_point(SHAKE_POS_BOWLING_BALL, o->oPosX, o->oPosY, o->oPosZ);
     }
 
+    if (gCurrLevelNum == LEVEL_THI) {
+        if (o->oTimer > 300) {
+            obj_mark_for_deletion(o);
+        }
+    }
+
     set_object_visibility(o, 4000);
 }
 
