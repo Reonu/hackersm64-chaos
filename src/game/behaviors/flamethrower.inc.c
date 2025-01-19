@@ -50,7 +50,7 @@ void bhv_flamethrower_flame_loop(void) {
 void bhv_flamethrower_loop(void) {
     if (o->oAction == FLAMETHROWER_ACT_IDLE) {
 #ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
-        if (gCurrLevelNum != LEVEL_BBH || gMarioOnMerryGoRound)
+        if (1) // is "(gCurrLevelNum != LEVEL_BBH || gMarioOnMerryGoRound)" in vanilla
 #endif
         {
             if (o->oDistanceToMario < 2000.0f) {

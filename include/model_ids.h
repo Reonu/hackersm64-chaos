@@ -24,6 +24,7 @@
 #define MODEL_METALLIC_BALL                    0x10E        // metallic_ball_geo
 #define MODEL_THWOMP                           0x10F        // thwomp_geo
 #define MODEL_SHADOW_MARIO                     0x110        // shadow_mario_geo
+#define MODEL_TREE                             0x111
 
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 

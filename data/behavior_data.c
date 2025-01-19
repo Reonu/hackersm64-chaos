@@ -3169,6 +3169,19 @@ const BehaviorScript bhvTree[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvGiantTree[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    BILLBOARD(),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_OPACITY_FROM_CAMERA_DIST)),
+    SET_INT(oInteractType, INTERACT_IGLOO_BARRIER),
+    SET_HITBOX(/*Radius*/ 300, /*Height*/ 1000),
+    SCALE(0, 500),
+    SET_INT(oIntangibleTimer, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_pole_base_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvSparkle[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),
     BILLBOARD(),
