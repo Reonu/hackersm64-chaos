@@ -230,12 +230,23 @@ void clear_area_graph_nodes(void) {
     }
 }
 
+
+ChaosCode *gPrevLevelTable;
+s32 gPrevLevelTableSize;
+
 void load_area(s32 index) {
     if (gCurrentArea == NULL && gAreaData[index].graphNode != NULL) {
         gCurrentArea = &gAreaData[index];
         gCurrAreaIndex = gCurrentArea->index;
         main_pool_pop_state();
         main_pool_push_state();
+        s32 size;
+        ChaosCode *table = chaos_level_table(gCurrLevelNum, &size);
+        if (table != gPrevLevelTable) {
+            chaos_clear_level(gPrevLevelTable, gPrevLevelTableSize);
+            gPrevLevelTable = table;
+            gPrevLevelTableSize = size;
+        }
 
         gMarioCurrentRoom = 0;
 

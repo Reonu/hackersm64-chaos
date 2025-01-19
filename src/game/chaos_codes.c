@@ -26,6 +26,7 @@ s16 gSpamCursorX;
 s16 gSpamCursorY;
 float gCrimes = 0;
 s32 gCrimeSpawnTimer;
+ChaosCode *gCurrentChaosTable;
 
 extern OSViMode VI;
 
@@ -131,13 +132,13 @@ void chaos_lawmetre(void) {
 }
 
 void chaos_generic(void) {
-    if (gChaosCodeTable[gCurrentChaosID].active == FALSE) {
-        gChaosCodeTable[gCurrentChaosID].active = TRUE;
+    if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
+        gCurrentChaosTable[gCurrentChaosID].active = TRUE;
     }
-    gChaosCodeTable[gCurrentChaosID].timer--;
-    if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
-        gChaosCodeTable[gCurrentChaosID].timer = 0;
-        gChaosCodeTable[gCurrentChaosID].active = FALSE;
+    gCurrentChaosTable[gCurrentChaosID].timer--;
+    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
+        gCurrentChaosTable[gCurrentChaosID].timer = 0;
+        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
     }
 }
 
@@ -190,45 +191,12 @@ void chaos_heave_ho_chaser(void) {
     gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
 
-void chaos_generic_bob(void) {
-    if (gBoBChaosTable[gCurrentChaosID].active == FALSE) {
-        gBoBChaosTable[gCurrentChaosID].active = TRUE;
-    }
-    gBoBChaosTable[gCurrentChaosID].timer--;
-    if (gBoBChaosTable[gCurrentChaosID].timer <= 0) {
-        gBoBChaosTable[gCurrentChaosID].timer = 0;
-        gBoBChaosTable[gCurrentChaosID].active = FALSE;
-    }
-}
-
 void chaos_ttc_upwarp(void) {
     int upwarpPos = gMarioState->pos[1];
     upwarpPos ^= 0b100000000000;
     gMarioState->pos[1] = upwarpPos;
     gTTCChaosTable[gCurrentChaosID].timer = 0;
     gTTCChaosTable[gCurrentChaosID].active = FALSE;
-}
-
-void chaos_generic_ssl(void) {
-    if (gSSLChaosTable[gCurrentChaosID].active == FALSE) {
-        gSSLChaosTable[gCurrentChaosID].active = TRUE;
-    }
-    gSSLChaosTable[gCurrentChaosID].timer--;
-    if (gSSLChaosTable[gCurrentChaosID].timer <= 0) {
-        gSSLChaosTable[gCurrentChaosID].timer = 0;
-        gSSLChaosTable[gCurrentChaosID].active = FALSE;
-    }
-}
-
-void chaos_generic_ttc(void) {
-    if (gTTCChaosTable[gCurrentChaosID].active == FALSE) {
-        gTTCChaosTable[gCurrentChaosID].active = TRUE;
-    }
-    gTTCChaosTable[gCurrentChaosID].timer--;
-    if (gTTCChaosTable[gCurrentChaosID].timer <= 0) {
-        gTTCChaosTable[gCurrentChaosID].timer = 0;
-        gTTCChaosTable[gCurrentChaosID].active = FALSE;
-    }
 }
 
 ChaosCode gChaosCodeTable[] = {
@@ -269,7 +237,7 @@ ChaosCode gCCMChaosTable[] = {
 };
 
 ChaosCode gBoBChaosTable[] = {
-    {"BoB Water Bombs", chaos_generic_bob, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"BoB Water Bombs", chaos_generic, 20, 35, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gTTCChaosTable[] = {
@@ -277,8 +245,8 @@ ChaosCode gTTCChaosTable[] = {
 };
 
 ChaosCode gSSLChaosTable[] = {
-    {"SSL Blizzard", chaos_generic_ssl, 30, 60, 0,   /*ignore these*/ 0, 0},
-    {"Quicksand Magnet", chaos_generic_ssl, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"SSL Blizzard", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"SSL Quicksand Magnet", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
 };
 
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
@@ -328,14 +296,14 @@ ChaosCode *chaos_level_table(s32 levelID, s32 *size) {
 
 void update_chaos_code_effects(void) {
     s32 size;
-    ChaosCode *table = chaos_level_table(gCurrLevelNum, &size);
+    gCurrentChaosTable = chaos_level_table(gCurrLevelNum, &size);
 
-    if (table != gChaosCodeTable) {
+    if (gCurrentChaosTable != gChaosCodeTable) {
         
         for (s32 i = 0; i < size; i++) {
-            if (table[i].timer) {
+            if (gCurrentChaosTable[i].timer) {
                 gCurrentChaosID = i;
-                (table[i].func)();
+                (gCurrentChaosTable[i].func)();
             }
         }
     }
@@ -344,6 +312,13 @@ void update_chaos_code_effects(void) {
             gCurrentChaosID = i;
             (gChaosCodeTable[i].func)();
         }
+    }
+}
+
+void chaos_clear_level(ChaosCode *table, s32 size) {
+    for (int i = 0; i < size; i++) {
+        table[i].timer = 0;
+        table[i].active = FALSE;
     }
 }
 
@@ -357,16 +332,15 @@ void global_chaos_code_handler(void) {
 
     nextGlobalCodeTimer--;
     if (nextGlobalCodeTimer <= 0) {
-        ChaosCode *table;
         s32 size;
         int rand = random_u16() % 100;
         if (rand >= 66) {
-            table = chaos_level_table(gCurrLevelNum, &size);
+            gCurrentChaosTable = chaos_level_table(gCurrLevelNum, &size);
         } else {
-            table = gChaosCodeTable;
+            gCurrentChaosTable = gChaosCodeTable;
             size = sizeof(gChaosCodeTable) / sizeof(ChaosCode);
         }
-        add_global_chaos_code(table, size);
+        add_global_chaos_code(gCurrentChaosTable, size);
         nextGlobalCodeTimer = 150 + (random_u16() % 600);
     }
 }
