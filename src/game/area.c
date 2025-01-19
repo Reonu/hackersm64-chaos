@@ -242,7 +242,7 @@ void load_area(s32 index) {
         main_pool_push_state();
         s32 size;
         ChaosCode *table = chaos_level_table(gCurrLevelNum, &size);
-        if (table != gPrevLevelTable) {
+        if (table != gPrevLevelTable && table != gChaosCodeTable) {
             chaos_clear_level(gPrevLevelTable, gPrevLevelTableSize);
             gPrevLevelTable = table;
             gPrevLevelTableSize = size;
