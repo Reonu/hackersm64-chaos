@@ -17,6 +17,7 @@
 #include "src/audio/external.h"
 #include "engine/math_util.h"
 #include "engine/surface_collision.h"
+#include "include/object_constants.h"
 
 
 s32 nextGlobalCodeTimer = 150;
@@ -225,6 +226,14 @@ void chaos_thwomp(void) {
     gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
 
+void chaos_yellow_block(void) {
+    if (gMarioState->vel[1] > 0) {
+        spawn_object_relative(EXCLAMATION_BOX_BP_COINS_1, 0, 200, 0, gMarioState->marioObj, MODEL_EXCLAMATION_BOX, bhvExclamationBox);
+        gChaosCodeTable[gCurrentChaosID].timer = 0;
+        gChaosCodeTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
 void chaos_ttc_upwarp(void) {
     int upwarpPos = gMarioState->pos[1];
     upwarpPos ^= 0b100000000000;
@@ -266,6 +275,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Automatic Wallkicks", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Chaih Chomp", chaos_chain_chomp, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Thwomp", chaos_thwomp, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Yellow Block on Jump", chaos_yellow_block, 30, 60, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
