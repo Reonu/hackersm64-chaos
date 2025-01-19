@@ -55,3 +55,6 @@
 #include "chain_chomp/anims/table.inc.c"
 
 #include "chain_ball/model.inc.c"
+
+#include "thwomp/model.inc.c"
+#include "thwomp/collision.inc.c"

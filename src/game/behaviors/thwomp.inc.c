@@ -24,21 +24,42 @@ void grindel_thwomp_act_land(void) {
         cur_obj_shake_screen(SHAKE_POS_SMALL);
         cur_obj_play_sound_2(SOUND_OBJ_THWOMP);
     }
-    if (o->oTimer >= 10) {
-        o->oAction = GRINDEL_THWOMP_ACT_ON_GROUND;
+    if (BPARAM1 != 0x01) { // vanilla bhv
+        if (o->oTimer >= 10) {
+            o->oAction = GRINDEL_THWOMP_ACT_ON_GROUND;
+        }
+    } else { // chaos bhv
+        if (o->oTimer >= 20) {
+            obj_mark_for_deletion(o);
+        }
     }
+
 }
 
 void grindel_thwomp_act_floating(void) {
-    if (o->oTimer == 0) {
-        o->oThwompRandomTimer = random_float() * 30.0f + 10.0f;
+    if (BPARAM1 != 0x01) { // vanilla bhv
+        if (o->oTimer == 0) {
+            o->oThwompRandomTimer = random_float() * 30.0f + 10.0f;
+        }
+        if (o->oTimer > o->oThwompRandomTimer) {
+            o->oAction = GRINDEL_THWOMP_ACT_FALLING;
+        }
+    } else { // chaos bhv
+        if (o->oTimer > 2) {
+            o->oAction = GRINDEL_THWOMP_ACT_FALLING;
+        }    
     }
-    if (o->oTimer > o->oThwompRandomTimer) {
-        o->oAction = GRINDEL_THWOMP_ACT_FALLING;
-    }
+
 }
 
 void grindel_thwomp_act_rising(void) {
+    if (o->oTimer == 0) {
+        if (BPARAM1 == 0x01) { // chaos bhv
+            o->oPosY += 500.0f;
+            o->oAction = GRINDEL_THWOMP_ACT_FLOATING;
+            return;
+        }        
+    }
     if (o->oBehParams2ndByte + 40 < o->oTimer) {
         o->oAction = GRINDEL_THWOMP_ACT_FLOATING;
         o->oPosY += 5.0f;

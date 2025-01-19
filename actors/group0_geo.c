@@ -25,3 +25,4 @@
 #include "item_box/geo.inc.c"
 #include "chain_chomp/geo.inc.c"
 #include "chain_ball/geo.inc.c"
+#include "thwomp/geo.inc.c"

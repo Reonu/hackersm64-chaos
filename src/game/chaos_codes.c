@@ -218,6 +218,13 @@ void chaos_chain_chomp(void) {
     gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
 
+void chaos_thwomp(void) {
+    struct Object *thwomp = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_THWOMP, bhvThwomp);
+    thwomp->oBehParams = 0x01300000;
+    gChaosCodeTable[gCurrentChaosID].timer = 0;
+    gChaosCodeTable[gCurrentChaosID].active = FALSE;
+}
+
 void chaos_ttc_upwarp(void) {
     int upwarpPos = gMarioState->pos[1];
     upwarpPos ^= 0b100000000000;
@@ -258,6 +265,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Strong Punch KB", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Automatic Wallkicks", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Chaih Chomp", chaos_chain_chomp, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Thwomp", chaos_thwomp, 0, 0, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

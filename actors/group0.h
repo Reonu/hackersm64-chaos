@@ -379,6 +379,14 @@ extern const struct Animation *const chain_chomp_seg6_anims_06025178[];
 extern const GeoLayout metallic_ball_geo[];
 extern const Gfx chain_ball_seg6_dl_060212E8[];
 
+// thwomp
+extern const GeoLayout thwomp_geo[];
+extern const Gfx thwomp_seg5_dl_0500B570[];
+extern const Gfx thwomp_seg5_dl_0500B718[];
+extern const Gfx thwomp_seg5_dl_0500B750[];
+extern const Collision thwomp_seg5_collision_0500B7D0[];
+extern const Collision thwomp_seg5_collision_0500B92C[];
+
 #include "chao/geo_header.h"
 
 

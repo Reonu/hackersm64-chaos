@@ -22,6 +22,7 @@
 #define MODEL_ITEM_BOX                         0x10C
 #define MODEL_CHAIN_CHOMP                      0x10D        // chain_chomp
 #define MODEL_METALLIC_BALL                    0x10E        // metallic_ball_geo
+#define MODEL_THWOMP                           0x10F        // thwomp_geo
 
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
@@ -336,7 +337,6 @@
 #define MODEL_YELLOW_SPHERE               0x55        // yellow_sphere_geo
 #define MODEL_HOOT                        0x56        // hoot_geo
 #define MODEL_YOSHI_EGG                   0x57        // yoshi_egg_geo
-#define MODEL_THWOMP                      0x58        // thwomp_geo
 
 // group 2
 #define MODEL_BLARGG                      0x54        // blargg_geo
