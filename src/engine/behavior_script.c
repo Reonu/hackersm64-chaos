@@ -834,6 +834,14 @@ void cur_obj_update(void) {
         cur_obj_set_model(MODEL_NONE);
     }
 
+    if (o->parentObj != NULL) {
+        if (o->parentObj->oNuked == TRUE) {
+            mark_obj_for_deletion(o);
+        } else if (o->oNuked == TRUE) {
+            mark_obj_for_deletion(o->parentObj);
+        }
+    }
+
     if (gChaosCodeTable[GLOBAL_CHAOS_RANDOMIZE_COIN_COLORS].active) {
         if (cur_obj_has_model(MODEL_YELLOW_COIN) || 
         cur_obj_has_model(MODEL_RED_COIN) || 
