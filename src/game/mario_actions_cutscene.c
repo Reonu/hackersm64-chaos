@@ -1028,8 +1028,17 @@ s32 act_spawn_spin_airborne(struct MarioState *m) {
 
     // landed on floor, play spawn land animation
     if (perform_air_step(m, AIR_STEP_CHECK_NONE) == AIR_STEP_LANDED) {
-        play_mario_landing_sound(m, SOUND_ACTION_TERRAIN_LANDING);
-        set_mario_action(m, ACT_SPAWN_SPIN_LANDING, 0);
+        
+        if (gCurrLevelNum == LEVEL_DDD) {
+            m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 16 : 24;
+                set_camera_shake_from_hit(SHAKE_FALL_DAMAGE);
+                play_sound(SOUND_MARIO_ATTACKED, m->marioObj->header.gfx.cameraToObject);
+                set_mario_action(m, ACT_HARD_BACKWARD_GROUND_KB, 4);
+        }
+        else {
+            play_mario_landing_sound(m, SOUND_ACTION_TERRAIN_LANDING);
+            set_mario_action(m, ACT_SPAWN_SPIN_LANDING, 0);
+        }
     }
 
     // is 300 units above floor, spin and play woosh sounds
