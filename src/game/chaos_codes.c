@@ -229,6 +229,24 @@ void chaos_thwomp(void) {
 void chaos_yellow_block(void) {
     if (gMarioState->vel[1] > 0) {
         spawn_object_relative(EXCLAMATION_BOX_BP_COINS_1, 0, 200, 0, gMarioState->marioObj, MODEL_EXCLAMATION_BOX, bhvExclamationBox);
+
+        s16 random = random_u16() % 4;
+        switch (random) {
+            case 0x00:
+            default:
+                play_sound(SOUND_NEW_FUNI1, gGlobalSoundSource);
+                break;
+            case 0x01:
+                play_sound(SOUND_NEW_FUNI2, gGlobalSoundSource);
+                break;
+            case 0x02:
+                play_sound(SOUND_NEW_FUNI3, gGlobalSoundSource);
+                break;
+            case 0x03:
+                play_sound(SOUND_NEW_FUNI4, gGlobalSoundSource);
+                break; 
+        }
+
         gChaosCodeTable[gCurrentChaosID].timer = 0;
         gChaosCodeTable[gCurrentChaosID].active = FALSE;
     }

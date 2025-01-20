@@ -8011,6 +8011,50 @@ chan_jump .main_loop_023589
 sound_ref .sound_snowball_lets_do_this
 sound_ref .sound_snowball_scream
 sound_ref .sound_fiverupees
+sound_ref .sound_funi1
+sound_ref .sound_funi2
+sound_ref .sound_funi3
+sound_ref .sound_funi4
+
+.sound_funi4:
+chan_setbank 11
+chan_setinstr 6
+chan_setlayer 0, .layer_funi4
+chan_end
+
+.layer_funi4:
+layer_note1 39, 0x92, 127
+layer_end
+
+.sound_funi3:
+chan_setbank 11
+chan_setinstr 5
+chan_setlayer 0, .layer_funi3
+chan_end
+
+.layer_funi3:
+layer_note1 39, 0x88, 127
+layer_end
+
+.sound_funi2:
+chan_setbank 11
+chan_setinstr 4
+chan_setlayer 0, .layer_funi2
+chan_end
+
+.layer_funi2:
+layer_note1 39, 0x52, 127
+layer_end
+
+.sound_funi1:
+chan_setbank 11
+chan_setinstr 3
+chan_setlayer 0, .layer_funi1
+chan_end
+
+.layer_funi1:
+layer_note1 39, 0x9f, 127
+layer_end
 
 .sound_fiverupees:
 chan_setbank 11

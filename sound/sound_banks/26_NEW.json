@@ -25,11 +25,35 @@
       "release_rate": 208,
       "envelope": "envelope0",
       "sound": "fiverupees"
+    },
+    "inst_funi1": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "funi1"
+    },
+    "inst_funi2": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "funi2"
+    },
+    "inst_funi3": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "funi3"
+    },
+    "inst_funi4": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "funi4"
     }
   },
   "instrument_list": [
     "inst_snowball_lets_do_this",
     "inst_snowball_scream",
-    "inst_fiverupees"
+    "inst_fiverupees",
+    "inst_funi1",
+    "inst_funi2",
+    "inst_funi3",
+    "inst_funi4"
   ]
 }
