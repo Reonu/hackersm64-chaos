@@ -242,6 +242,27 @@ void chaos_ttc_upwarp(void) {
     gTTCChaosTable[gCurrentChaosID].active = FALSE;
 }
 
+struct Object *sMirrorGhost;
+
+void chaos_mirrorghost(void) {
+    if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
+        gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+    }
+    if (sMirrorGhost == NULL) {
+        sMirrorGhost = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_SHADOW_MARIO, bhvMovementGhost);
+        play_sound(SOUND_MARIO_HELLO, gGlobalSoundSource);
+    }
+    gCurrentChaosTable[gCurrentChaosID].timer--;
+    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
+        gCurrentChaosTable[gCurrentChaosID].timer = 0;
+        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+        if (sMirrorGhost) {
+            obj_mark_for_deletion(sMirrorGhost);
+        }
+        sMirrorGhost = NULL;
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -276,6 +297,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Chaih Chomp", chaos_chain_chomp, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Thwomp", chaos_thwomp, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Yellow Block on Jump", chaos_yellow_block, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"Mirror Ghost", chaos_mirrorghost, 30, 60, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
@@ -353,6 +375,7 @@ void update_chaos_code_effects(void) {
             }
         }
     }
+    gCurrentChaosTable = gChaosCodeTable;
     for (u32 i = 0; i < sizeof(gChaosCodeTable) / sizeof(ChaosCode); i++) {
         if (gChaosCodeTable[i].timer) {
             gCurrentChaosID = i;

@@ -558,3 +558,4 @@ extern const BehaviorScript bhvChaosChainChomp[];
 extern const BehaviorScript bhvQuicksandMagnet[];
 extern const BehaviorScript bhvItemBox[];
 extern const BehaviorScript bhvGiantTree[];
+extern const BehaviorScript bhvMovementGhost[];

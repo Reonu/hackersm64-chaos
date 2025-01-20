@@ -77,6 +77,7 @@ extern u8 gChaosOffOverride;
 extern u8 gSpamAd;
 extern s16 gSpamCursorX;
 extern s16 gSpamCursorY;
+extern struct Object *sMirrorGhost;
 
 void global_chaos_code_handler(void);
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize);

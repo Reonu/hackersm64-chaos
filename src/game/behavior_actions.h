@@ -593,3 +593,6 @@ void bhv_quicksand_magnet_init(void);
 void bhv_quicksand_magnet_loop(void);
 void bhv_item_box_init(void);
 void bhv_item_box_loop(void);
+
+void bhv_mirrorghost_init(void);
+void bhv_mirrorghost_loop(void);

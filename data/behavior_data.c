@@ -6264,3 +6264,13 @@ const BehaviorScript bhvItemBox[] = {
         CALL_NATIVE(bhv_item_box_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvMovementGhost[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_ANIMATIONS(oAnimations, mario_anims),
+    CALL_NATIVE(bhv_mirrorghost_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_mirrorghost_loop),
+    END_LOOP(),
+};

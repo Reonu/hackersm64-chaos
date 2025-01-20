@@ -443,6 +443,7 @@ void unload_objects_from_area(UNUSED s32 unused, s32 areaIndex) {
             }
         }
     }
+    sMirrorGhost = NULL;
 }
 
 /**

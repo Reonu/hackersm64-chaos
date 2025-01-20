@@ -242,11 +242,14 @@ void load_area(s32 index) {
         main_pool_push_state();
         s32 size;
         ChaosCode *table = chaos_level_table(gCurrLevelNum, &size);
-        if (table != gPrevLevelTable && table != gChaosCodeTable) {
-            chaos_clear_level(gPrevLevelTable, gPrevLevelTableSize);
+        if (table != gPrevLevelTable) {
+            if (gPrevLevelTable != gChaosCodeTable) {
+                chaos_clear_level(gPrevLevelTable, gPrevLevelTableSize);
+            }
             gPrevLevelTable = table;
             gPrevLevelTableSize = size;
         }
+        sMirrorGhost = NULL;
 
         gMarioCurrentRoom = 0;
 
@@ -271,7 +274,6 @@ void unload_area(void) {
         gCurrentArea->flags = AREA_FLAG_UNLOAD;
         gCurrentArea = NULL;
         gWarpTransition.isActive = FALSE;
-        //gMarioState->marioObj = NULL;
     }
 }
 

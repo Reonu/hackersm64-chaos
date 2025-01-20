@@ -34,6 +34,7 @@
 #include "rumble_init.h"
 #include "src/game/chaos_codes.h"
 #include "buffers/buffers.h"
+#include "string.h"
 
 
 
@@ -1842,6 +1843,18 @@ void queue_rumble_particles(struct MarioState *m) {
 
 extern u8 fDebug;
 
+void mario_update_shadow(void) {
+    gMarioState->shadowTime++;
+    gMarioState->shadowTime %= 45;
+    s32 p = gMarioState->shadowTime;
+    gMarioState->shadowAngle[p] = gMarioState->faceAngle[1];
+    gMarioState->shadowPos[p][0] = gMarioState->pos[0];
+    gMarioState->shadowPos[p][1] = gMarioState->pos[1];
+    gMarioState->shadowPos[p][2] = gMarioState->pos[2];
+    gMarioState->shadowAnim[p] = gMarioState->marioObj->header.gfx.animInfo.animID;
+    gMarioState->shadowAnimFrame[p] = gMarioState->marioObj->header.gfx.animInfo.animAccel;
+}
+
 /**
  * Main function for executing Mario's behavior. Returns particleFlags.
  */
@@ -1856,6 +1869,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     vec3f_copy(gMarioState->prevPos, gMarioState->pos);
 
     if (gChaosCodeTable[GLOBAL_CHAOS_PAY_TO_MOVE].active) {
+        mario_update_shadow();
         return 0;
     }
 
@@ -1934,6 +1948,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
 
         // If Mario is OOB, stop executing actions.
         if (gMarioState->floor == NULL) {
+            mario_update_shadow();
             return ACTIVE_PARTICLE_NONE;
         }
 
@@ -1980,9 +1995,11 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         queue_rumble_particles(gMarioState);
 #endif
 
+        mario_update_shadow();
         return gMarioState->particleFlags;
     }
 
+    mario_update_shadow();
     return ACTIVE_PARTICLE_NONE;
 }
 
@@ -2073,6 +2090,7 @@ void init_mario_from_save_file(void) {
     gMarioState->numCoins = 0;
     gMarioState->numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
     gMarioState->numKeys = 0;
+    gMarioState->shadowTime = 0;
 #ifdef ENABLE_LIVES
     gMarioState->numLives = gSaveBuffer.files[gCurrSaveFileNum - 1]->lives;
 #else
