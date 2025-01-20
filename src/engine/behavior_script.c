@@ -835,11 +835,15 @@ void cur_obj_update(void) {
     }
 
     if (o->parentObj != NULL) {
-        if (o->parentObj->oNuked == TRUE) {
+        if (o->parentObj->oNuked >= 1) {
             mark_obj_for_deletion(o);
-        } else if (o->oNuked == TRUE) {
-            mark_obj_for_deletion(o->parentObj);
         }
+    }
+    
+    if (o->oNuked >= 2) {
+        mark_obj_for_deletion(o);
+    } else if (o->oNuked >= 1) {
+        o->oNuked++;
     }
 
     if (gChaosCodeTable[GLOBAL_CHAOS_RANDOMIZE_COIN_COLORS].active) {
