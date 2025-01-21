@@ -44,6 +44,10 @@ s8 gRedCoinsCollected;
 u8 textCurrRatio43[] = { TEXT_HUD_CURRENT_RATIO_43 };
 u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
 u8 textPressL[] = { TEXT_HUD_PRESS_L };
+
+u8 textCurrMusicoffOn[] = { TEXT_HUD_MUSICOFF_OFF };
+u8 textCurrMusicoffOff[] = { TEXT_HUD_MUSICOFF_ON };
+u8 textPressR[] = { TEXT_HUD_PRESS_R };
 #endif
 
 #if MULTILANG
@@ -1570,6 +1574,28 @@ void render_widescreen_setting(void) {
 }
 #endif
 
+void render_musicoff_setting(void) {
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+    if (!gConfig.musicOff) {
+        print_generic_string(gScreenWidth - 64, 20, textCurrMusicoffOn);
+        print_generic_string(gScreenWidth - 112,  7, textPressR);
+    } else {
+        print_generic_string(gScreenWidth - 64, 20, textCurrMusicoffOff);
+        print_generic_string(gScreenWidth - 112,  7, textPressR);
+    }
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+    if (gPlayer1Controller->buttonPressed & R_TRIG){
+        gConfig.musicOff ^= 1;
+        save_file_set_musicoff(gConfig.musicOff);
+        if (gConfig.musicOff) {
+            seq_player_fade_to_target_volume(SEQ_PLAYER_LEVEL, 1, 0);
+        } else {
+            seq_player_fade_to_normal_volume(SEQ_PLAYER_LEVEL, 1);
+        }
+    }
+}
+
 #if defined(VERSION_JP) || defined(VERSION_SH)
     #define CRS_NUM_X1 93
 #elif defined(VERSION_US)
@@ -1949,6 +1975,7 @@ s32 render_pause_courses_and_castle(void) {
 #if defined(WIDE) && !defined(PUPPYCAM)
         render_widescreen_setting();
 #endif
+    render_musicoff_setting();
     if (gDialogTextAlpha < 250) {
         gDialogTextAlpha += 25;
     }

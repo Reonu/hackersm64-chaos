@@ -30,6 +30,7 @@ struct Config {
     s16 widescreen;
 #endif
     u8 tvType;
+    u8 musicOff;
 };
 
 typedef struct Controller {

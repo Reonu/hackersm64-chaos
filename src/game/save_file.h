@@ -63,6 +63,7 @@ struct MainMenuSaveData {
 #ifdef WIDE
     u8 wideMode: 1;
 #endif
+    u8 musicOff : 1;
 
 #if MULTILANG
     u8 language: 2;
@@ -198,6 +199,8 @@ void save_file_move_cap_to_default_location(void);
 void disable_warp_checkpoint(void);
 void check_if_should_set_warp_checkpoint(struct WarpNode *warpNode);
 s32 check_warp_checkpoint(struct WarpNode *warpNode);
+u32 save_file_get_musicoff(void);
+void save_file_set_musicoff(u8 mode);
 
 #if MULTILANG
 enum EuLanguages {

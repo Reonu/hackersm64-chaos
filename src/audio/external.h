@@ -39,6 +39,8 @@ extern u32 gAudioRandom;
 
 extern s8 sLevelAreaReverbs[LEVEL_COUNT][3];
 
+typedef s32 FadeT;
+
 struct SPTask *create_next_audio_frame_task(void);
 void play_sound(s32 soundBits, f32 *pos);
 void audio_signal_game_loop_tick(void);
@@ -72,6 +74,8 @@ void play_power_star_jingle(void);
 void play_race_fanfare(void);
 void play_toads_jingle(void);
 void sound_reset(u8 reverbPresetId);
+void seq_player_fade_to_target_volume(s32 player, FadeT fadeDuration, u8 targetVolume);
+void seq_player_fade_to_normal_volume(s32 player, FadeT fadeDuration);
 
 void audio_init(void); // in load.c
 

@@ -501,7 +501,7 @@ static void seq_player_fade_to_percentage_of_volume(s32 player, FadeT fadeDurati
 /**
  * Called from threads: thread3_main, thread4_sound, thread5_game_loop
  */
-static void seq_player_fade_to_normal_volume(s32 player, FadeT fadeDuration) {
+void seq_player_fade_to_normal_volume(s32 player, FadeT fadeDuration) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[player];
 
 #if defined(VERSION_EU) || defined(VERSION_SH)
@@ -532,7 +532,7 @@ static void seq_player_fade_to_normal_volume(s32 player, FadeT fadeDuration) {
 /**
  * Called from threads: thread3_main, thread4_sound, thread5_game_loop
  */
-static void seq_player_fade_to_target_volume(s32 player, FadeT fadeDuration, u8 targetVolume) {
+void seq_player_fade_to_target_volume(s32 player, FadeT fadeDuration, u8 targetVolume) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[player];
 
 #if defined(VERSION_JP) || defined(VERSION_US)
@@ -2232,6 +2232,9 @@ void play_music(u8 player, u16 seqArgs, u16 fadeTimer) {
     // Insert item into queue.
     sBackgroundMusicQueue[foundIndex].priority = priority;
     sBackgroundMusicQueue[foundIndex].seqId = seqId;
+    if (gConfig.musicOff) {
+        seq_player_fade_to_target_volume(SEQ_PLAYER_LEVEL, 1, 0);
+    }
 }
 
 /**

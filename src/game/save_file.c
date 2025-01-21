@@ -723,6 +723,17 @@ void save_file_set_widescreen_mode(u8 mode) {
 }
 #endif
 
+u32 save_file_get_musicoff(void) {
+    return gSaveBuffer.menuData.musicOff;
+}
+
+void save_file_set_musicoff(u8 mode) {
+    gSaveBuffer.menuData.musicOff = mode;
+
+    gMainMenuDataModified = TRUE;
+    save_main_menu_data();
+}
+
 u32 save_file_get_sound_mode(void) {
     if (gSaveBuffer.menuData.soundMode >= SOUND_MODE_COUNT) {
         return 0;
