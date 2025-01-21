@@ -21,6 +21,7 @@
 #include "chaos_codes.h"
 #include "fb_effects.h"
 #include "segment2.h"
+#include "engine/surface_collision.h"
 
 #include "config.h"
 #include "config/config_world.h"
