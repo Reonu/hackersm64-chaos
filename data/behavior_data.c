@@ -6289,3 +6289,23 @@ const BehaviorScript bhvSpring[] = {
         SET_INT(oInteractStatus, 0),
     END_LOOP(),
 };
+
+const BehaviorScript bhvGiantDoor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    LOAD_COLLISION_DATA(giant_door_collision),
+    SET_FLOAT(oDrawingDistance, 30000),
+    CALL_NATIVE(load_object_static_model),
+    BREAK(),
+};
+
+const BehaviorScript bhvBbhSquareFloatingPlatform[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(bbh_wooden_platform_collision),
+    //SET_FLOAT(oFloatingPlatformHeightOffset, 64),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_floating_platform_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

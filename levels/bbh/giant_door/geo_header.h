@@ -1,0 +1,13 @@
+extern const GeoLayout giant_door_geo[];
+extern u8 giant_door_polished_wooden_door_rgba16_ci8[];
+extern u8 giant_door_polished_wooden_door_rgba16_pal_rgba16[];
+extern Vtx giant_door_skinned_mesh_layer_1_vtx_cull[8];
+extern Vtx giant_door_skinned_mesh_layer_1_vtx_0[24];
+extern Gfx giant_door_skinned_mesh_layer_1_tri_0[];
+extern Vtx giant_door_skinned_mesh_layer_1_vtx_1[24];
+extern Gfx giant_door_skinned_mesh_layer_1_tri_1[];
+extern Gfx mat_giant_door_door[];
+extern Gfx mat_revert_giant_door_door[];
+extern Gfx mat_giant_door_doorknob[];
+extern Gfx mat_revert_giant_door_doorknob[];
+extern Gfx giant_door_skinned_mesh_layer_1[];

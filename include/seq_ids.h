@@ -47,6 +47,7 @@ enum SeqId {
     SEQ_EVENT_CUTSCENE_LAKITU,  // 0x22 (not in JP)
     SEQ_CHAOGARDEN,  // 0x23
     SEQ_CLOCK_TOWER,
+    SEQ_INSIDE_CASTLE_REMIX,  // 0x25
     SEQ_COUNT,
 };
 

@@ -113,4 +113,12 @@ extern const LevelScript level_bbh_entry[];
 
 
 #include "levels/bbh/header.inc.h"
+#include "levels/bbh/giant_door/geo_header.h"
+
+#include "levels/bbh/giant_door/collision_header.h"
+
+#include "levels/bbh/bbh_wooden_platform/collision_header.h"
+
+#include "levels/bbh/bbh_wooden_platform/geo_header.h"
+
 #endif

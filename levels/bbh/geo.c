@@ -24,3 +24,5 @@
 #include "levels/bbh/areas/1/geo.inc.c"
 
 #include "levels/bbh/geo.inc.c"
+#include "levels/bbh/giant_door/geo.inc.c"
+#include "levels/bbh/bbh_wooden_platform/geo.inc.c"

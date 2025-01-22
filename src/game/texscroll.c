@@ -15,6 +15,7 @@
 
 #include "src/game/texscroll/CHAO_GARDEN_texscroll.inc.c"
 #include "src/game/texscroll/ssl_texscroll.inc.c"
+#include "src/game/texscroll/bbh_texscroll.inc.c"
 void scroll_textures() {
 	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_CHAO_GARDEN_segment_7SegmentRomStart)) {
 		scroll_textures_CHAO_GARDEN();
@@ -22,6 +23,10 @@ void scroll_textures() {
 
 	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_ssl_segment_7SegmentRomStart)) {
 		scroll_textures_ssl();
+	}
+
+	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_bbh_segment_7SegmentRomStart)) {
+		scroll_textures_bbh();
 	}
 
 }
