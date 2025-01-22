@@ -309,7 +309,7 @@ void chaos_swap_positions(void) {
         objCount++;
     }
 
-    shuffle_positions(objectPositions, objCount);
+    shuffle_positions(*objectPositions, objCount);
 
     
     for (i = 0; i < OBJECT_POOL_CAPACITY; i++) {
