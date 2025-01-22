@@ -330,6 +330,34 @@ void chaos_swap_positions(void) {
     gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
 
+void chaos_billboard(void) {
+    int i;
+    u8 shouldBillboard = 1;
+
+    gCurrentChaosTable[gCurrentChaosID].timer--;
+    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
+        gCurrentChaosTable[gCurrentChaosID].timer = 0;
+        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+        shouldBillboard = 0;
+    }
+
+    for (i = 0; i < OBJECT_POOL_CAPACITY; i++) {
+        struct Object *curObj = &gObjectPool[i];
+        if (curObj == NULL) {
+            break;
+        }
+        if (shouldBillboard) {
+            curObj->header.gfx.node.flags |= GRAPH_RENDER_BILLBOARD;
+        }
+        else {
+            curObj->header.gfx.node.flags &= ~GRAPH_RENDER_BILLBOARD;
+        }
+    }
+
+    
+    
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -367,6 +395,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Mirror Ghost", chaos_mirrorghost, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Weird Audio", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
     {"Swap Positions", chaos_swap_positions, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Billboard Everything", chaos_billboard, 15, 30, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
