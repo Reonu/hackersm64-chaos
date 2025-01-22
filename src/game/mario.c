@@ -1879,6 +1879,16 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         obj_set_model(gMarioObject, MODEL_MARIO);
     }
 
+    static s32 slideFade = 0;
+    if (gCurrLevelNum == LEVEL_PSS) {
+        if (gMarioState->pos[0] < 3000 && slideFade == 0) {
+            seq_player_fade_to_target_volume(SEQ_PLAYER_LEVEL, 30, 0);
+            slideFade = 1;
+        }
+    } else {
+        slideFade = 0;
+    }
+
     #define SAND_MAGNET_SPEED 11
     if (gSSLChaosTable[SSL_CHAOS_QUICKSAND_MAGNET].active) {
         struct Object *quicksand = cur_obj_nearest_object_with_behavior(bhvQuicksandMagnet);

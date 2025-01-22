@@ -416,7 +416,7 @@ ChaosCode gSSLChaosTable[] = {
 };
 
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
-    append_puppyprint_log("Chaos effect added: %s", table[codeID].name);
+    append_puppyprint_log("Chaos effect added: %s\n", table[codeID].name);
     if (table[codeID].flags) {
         for (s32 i = 0; i < tableSize; i++) {
             if (table[i].timer && table[i].flags == table[codeID].flags) {
