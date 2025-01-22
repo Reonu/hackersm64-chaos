@@ -29,6 +29,8 @@
 
 #include "game/object_list_processor.h"
 
+#include "src/game/chaos_codes.h"
+
 /**
  * This file contains the code that processes the scene graph for rendering.
  * The scene graph is responsible for drawing everything except the HUD / text boxes.
@@ -1109,7 +1111,7 @@ void geo_process_object(struct Object *node) {
         else{
             if (!noThrowMatrix) {
                 mtxf_scale_vec3f(gMatStack[gMatStackIndex + 1], *node->header.gfx.throwMatrix, node->header.gfx.scale);
-            } else if (node->header.gfx.node.flags & GRAPH_RENDER_BILLBOARD) {
+            } else if ((node->header.gfx.node.flags & GRAPH_RENDER_BILLBOARD) || gChaosCodeTable[GLOBAL_CHAOS_BILLBOARD_EVERYTHING].active) {
                 mtxf_billboard(gMatStack[gMatStackIndex + 1], gMatStack[gMatStackIndex],
                             node->header.gfx.pos, node->header.gfx.scale, gCurGraphNodeCamera->roll);
             } else {

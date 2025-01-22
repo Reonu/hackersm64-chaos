@@ -33,6 +33,8 @@
 #include "spawn_sound.h"
 #include "rumble_init.h"
 
+#include "src/game/chaos_codes.h"
+
 /**
  * @file obj_behaviors.c
  * This file contains a portion of the obj behaviors and many helper functions for those
@@ -193,7 +195,7 @@ void obj_orient_graph(struct Object *obj, f32 normalX, f32 normalY, f32 normalZ)
     }
 
     // Passes on orienting billboard objects, i.e. coins, trees, etc.
-    if (obj->header.gfx.node.flags & GRAPH_RENDER_BILLBOARD) {
+    if ((obj->header.gfx.node.flags & GRAPH_RENDER_BILLBOARD) || gChaosCodeTable[GLOBAL_CHAOS_BILLBOARD_EVERYTHING].active) {
         return;
     }
 
