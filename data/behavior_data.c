@@ -6304,6 +6304,7 @@ const BehaviorScript bhvBbhSquareFloatingPlatform[] = {
     LOAD_COLLISION_DATA(bbh_wooden_platform_collision),
     //SET_FLOAT(oFloatingPlatformHeightOffset, 64),
     SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 30000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_floating_platform_loop),
         CALL_NATIVE(load_object_collision_model),

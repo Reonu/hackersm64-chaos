@@ -3,6 +3,7 @@
 const GeoLayout bbh_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_TRANSPARENT, 0, -703, 0, 90, 0, 0, bbh_dl_15_GeoRoot_castle_courtyard_1_castle_courtyard_seg7_dl_0700_mesh_layer_5),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, bbh_dl_15_GeoRoot_castle_courtyard_1_castle_courtyard_seg7_dl_070048B8_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, bbh_dl_15_GeoRoot_castle_courtyard_1_castle_courtyard_seg7_dl_070048B8_mesh_layer_6),
@@ -31,6 +32,9 @@ const GeoLayout bbh_area_1_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 15993, 922, -6649, bbh_dl_tree_013_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 8557, 922, -6611, bbh_dl_tree_014_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 4926, 0, -4898, bbh_dl_tree_015_mesh_layer_1),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, bbh_dl_Z_BG_left_mesh_layer_1),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, bbh_dl_Z_BG_right_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 0, 7732, 10920, 90, 0, 0, bbh_dl_z_tower_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
