@@ -9,6 +9,9 @@
 #include "effects.h"
 #include "external.h"
 
+#include "src/game/chaos_codes.h"
+#include "src/game/game_init.h"
+
 void note_set_resampling_rate(struct Note *note, f32 resamplingRateInput);
 
 #if defined(VERSION_EU) || defined(VERSION_SH)
@@ -600,6 +603,12 @@ void process_notes(void) {
                 frequency *= (32000.0f / (f32) gAiFrequency);
             }
             frequency = (frequency < cap ? frequency : cap);
+
+            if (gChaosCodeTable[GLOBAL_CHAOS_WEIRD_AUDIO].active) {
+                frequency *= -1;
+                frequency += 0.05f*sins(gGlobalTimer * 0x222);
+            }
+
             scale *= 4.3498e-5f; // ~1 / 23000
             velocity = velocity * scale * scale;
             note_set_frequency(note, frequency);
