@@ -1900,6 +1900,7 @@ s8 gCourseCompleteCoinsEqual = FALSE;
 s32 gCourseDoneMenuTimer = 0;
 s32 gCourseCompleteCoins = 0;
 s8 gHudFlash = HUD_FLASH_NONE;
+extern u8 gCarpetExit;
 
 s32 render_pause_courses_and_castle(void) {
     s16 index;
@@ -1934,7 +1935,7 @@ s32 render_pause_courses_and_castle(void) {
             if ((gMarioStates[0].action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER | ACT_FLAG_PAUSE_EXIT))
              || (gMarioStates[0].pos[1] <= gMarioStates[0].floorHeight)) {
 #else
-            if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) {
+            if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT && gCarpetExit == 0) {
 #endif
                 render_pause_course_options(99, 93, &gDialogLineNum, 15);
             }

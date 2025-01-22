@@ -364,6 +364,8 @@ static void platform_on_track_rock_ski_lift(void) {
     clamp_f32(&o->oPlatformOnTrackSkiLiftRollVel, -100.0f, 100.0f);
 }
 
+u8 gCarpetExit = 0;
+
 void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 warpFlags);
 
 void platform_rise_forever(void) {
@@ -438,6 +440,7 @@ void platform_rise_forever(void) {
  * Update function for bhvPlatformOnTrack.
  */
 void bhv_platform_on_track_update(void) {
+    gCarpetExit = 0;
     switch (o->oAction) {
         case PLATFORM_ON_TRACK_ACT_INIT:
             platform_on_track_act_init();
@@ -476,9 +479,12 @@ void bhv_platform_on_track_update(void) {
         o->oFaceAngleRoll = approach_s32_symmetric(o->oFaceAngleRoll, targetRoll, 0x100);
 #else
 
-        if (!o->oPlatformOnTrackWasStoodOn && gMarioObject->platform == o) {
-            o->oPlatformOnTrackOffsetY = -8.0f;
-            o->oPlatformOnTrackWasStoodOn = TRUE;
+        if (gMarioObject->platform == o) {
+            if (o->oPlatformOnTrackWasStoodOn == 0) {
+                o->oPlatformOnTrackOffsetY = -8.0f;
+                o->oPlatformOnTrackWasStoodOn = TRUE;
+            }
+            gCarpetExit = 1;
         }
 
         approach_f32_ptr(&o->oPlatformOnTrackOffsetY, 0.0f, 0.5f);
