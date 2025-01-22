@@ -604,13 +604,15 @@ void process_notes(void) {
             }
             frequency = (frequency < cap ? frequency : cap);
 
+            scale *= 4.3498e-5f; // ~1 / 23000
+            velocity = velocity * scale * scale;
+            
+
             if (gChaosCodeTable[GLOBAL_CHAOS_WEIRD_AUDIO].active) {
                 frequency *= -1;
                 frequency += 0.05f*sins(gGlobalTimer * 0x222);
+                velocity *= 0.7f;
             }
-
-            scale *= 4.3498e-5f; // ~1 / 23000
-            velocity = velocity * scale * scale;
             note_set_frequency(note, frequency);
             note_set_vel_pan_reverb(note, velocity, pan, reverbVol);
             continue;
