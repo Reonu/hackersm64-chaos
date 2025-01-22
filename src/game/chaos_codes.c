@@ -316,6 +316,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Thwomp", chaos_thwomp, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Yellow Block on Jump", chaos_yellow_block, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Mirror Ghost", chaos_mirrorghost, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"Weird Audio", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
