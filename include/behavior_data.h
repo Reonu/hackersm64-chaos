@@ -559,3 +559,6 @@ extern const BehaviorScript bhvQuicksandMagnet[];
 extern const BehaviorScript bhvItemBox[];
 extern const BehaviorScript bhvGiantTree[];
 extern const BehaviorScript bhvMovementGhost[];
+
+extern const BehaviorScript bhvGiantDoor[];
+extern const BehaviorScript bhvBbhSquareFloatingPlatform[];

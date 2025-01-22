@@ -70,3 +70,7 @@
 #include "levels/bbh/areas/1/movtext.inc.c"
 
 #include "levels/bbh/leveldata.inc.c"
+#include "levels/bbh/giant_door/model.inc.c"
+#include "levels/bbh/giant_door/collision.inc.c"
+#include "levels/bbh/bbh_wooden_platform/collision.inc.c"
+#include "levels/bbh/bbh_wooden_platform/model.inc.c"

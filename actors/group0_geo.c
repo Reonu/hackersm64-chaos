@@ -28,3 +28,4 @@
 #include "thwomp/geo.inc.c"
 #include "shadow_mario/geo.inc.c"
 #include "spring/geo.inc.c"
+#include "skeeter/geo.inc.c"

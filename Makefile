@@ -571,7 +571,7 @@ endif
 ifneq (,$(call find-command,wslview))
     EMULATOR = "/mnt/c/Program Files (x86)/parallel-launcher/parallel-launcher.exe"
 else
-    EMULATOR = parallel-launcher
+    EMULATOR = RMG
 endif
 
 EMU_FLAGS =

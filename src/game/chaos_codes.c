@@ -312,7 +312,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Heave Ho Chaser", chaos_heave_ho_chaser, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Strong Punch KB", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Automatic Wallkicks", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
-    {"Chaih Chomp", chaos_chain_chomp, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Chain Chomp", chaos_chain_chomp, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Thwomp", chaos_thwomp, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Yellow Block on Jump", chaos_yellow_block, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Mirror Ghost", chaos_mirrorghost, 30, 60, 0,   /*ignore these*/ 0, 0},

@@ -26,6 +26,9 @@
 #define MODEL_SHADOW_MARIO                     0x110        // shadow_mario_geo
 #define MODEL_TREE                             0x111
 #define MODEL_SPRING                           0x112
+#define MODEL_GIANT_DOOR                       0x113
+#define MODEL_SKEETER                          0x114       // skeeter_geo
+#define MODEL_BBH_WOODEN_PLATFORM              0X115
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
 #define MODEL_LEVEL_GEOMETRY_03                0x03
@@ -422,7 +425,6 @@
 #define MODEL_TREASURE_CHEST_LID          0x66        // treasure_chest_lid_geo
 #define MODEL_CYAN_FISH                   0x67        // cyan_fish_geo
 #define MODEL_WATER_RING                  0x68        // water_ring_geo
-#define MODEL_SKEETER                     0x69        // skeeter_geo
 
 // group 14
 #define MODEL_PIRANHA_PLANT               0x64        // piranha_plant_geo

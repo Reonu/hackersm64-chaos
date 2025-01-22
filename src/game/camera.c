@@ -1815,7 +1815,7 @@ s32 mode_behind_mario(struct Camera *c) {
     c->pos[2] = newPos[2];
 
     // Keep the camera above the water surface if swimming
-    if (c->mode == WATER_SURFACE_CAMERA_MODE) {
+    if (c->mode == WATER_SURFACE_CAMERA_MODE && gCurrLevelNum != LEVEL_BBH) {
         floorHeight = find_floor(c->pos[0], c->pos[1], c->pos[2], &floor);
         newPos[1] = marioState->waterLevel + 120;
         if (newPos[1] < (floorHeight += 120.f)) {
