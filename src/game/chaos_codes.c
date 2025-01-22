@@ -18,6 +18,7 @@
 #include "engine/math_util.h"
 #include "engine/surface_collision.h"
 #include "include/object_constants.h"
+#include "src/game/object_list_processor.h"
 
 
 s32 nextGlobalCodeTimer = 150;
@@ -281,6 +282,54 @@ void chaos_mirrorghost(void) {
     }
 }
 
+// i stole this from stackexchange
+void shuffle_positions(f32 *array, size_t n) {
+    if (n > 1) {
+        for (size_t i = 0; i < n - 1; i++) {
+          size_t j = i + random_u16() / (U16_MAX / (n - i) + 1);
+          f32 t = array[j];
+          array[j] = array[i];
+          array[i] = t;
+        }
+    }
+}
+
+void chaos_swap_positions(void) {
+    f32 objectPositions[OBJECT_POOL_CAPACITY][3];
+    int i;
+    u16 objCount = 0;
+    for (i = 0; i < OBJECT_POOL_CAPACITY; i++) {
+        struct Object *curObj = &gObjectPool[i];
+        if (curObj == NULL) {
+            break;
+        }
+        objectPositions[i][0] = curObj->oPosX;
+        objectPositions[i][1] = curObj->oPosY;
+        objectPositions[i][2] = curObj->oPosZ;
+        objCount++;
+    }
+
+    shuffle_positions(objectPositions, objCount);
+
+    
+    for (i = 0; i < OBJECT_POOL_CAPACITY; i++) {
+        struct Object *curObj = &gObjectPool[i];
+        if (curObj == NULL) {
+            break;
+        }
+        curObj->oPosX = objectPositions[i][0];
+        curObj->oPosY = objectPositions[i][1];
+        curObj->oPosZ = objectPositions[i][2];
+    }
+
+    gMarioState->pos[0] = gMarioState->marioObj->oPosX;
+    gMarioState->pos[1] = gMarioState->marioObj->oPosY;
+    gMarioState->pos[2] = gMarioState->marioObj->oPosZ;
+
+    gChaosCodeTable[gCurrentChaosID].timer = 0;
+    gChaosCodeTable[gCurrentChaosID].active = FALSE;
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -317,6 +366,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Yellow Block on Jump", chaos_yellow_block, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Mirror Ghost", chaos_mirrorghost, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Weird Audio", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"Swap Positions", chaos_swap_positions, 0, 0, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
