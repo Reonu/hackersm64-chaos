@@ -396,7 +396,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Weird Audio", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
     {"Swap Positions", chaos_swap_positions, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Billboard Everything", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
-    {"Fast Goombas", chaos_generic, 15, 30, 0,  /*ignore these*/ 0, 0},
+    {"Fast Goombas", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
