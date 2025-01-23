@@ -1,4 +1,4 @@
-
+#include "game/chaos_codes.h"
 /**
  * Behavior for bhvGoomba and bhvGoombaTripletSpawner,
  * Goombas can either be spawned individually, or spawned by a triplet spawner.
@@ -169,9 +169,15 @@ static void mark_goomba_as_dead(void) {
  * chase him.
  */
 static void goomba_act_walk(void) {
+    f32 chaseDistance = gChaosCodeTable[GLOBAL_CHAOS_FAST_GOOMBAS].active ? 1500.f : 500.f;
     treat_far_home_as_mario(1000.0f);
 
-    obj_forward_vel_approach(o->oGoombaRelativeSpeed * o->oGoombaScale, 0.4f);
+    if (gChaosCodeTable[GLOBAL_CHAOS_FAST_GOOMBAS].active) {
+        o->oForwardVel = o->oGoombaRelativeSpeed;
+    } else {
+        obj_forward_vel_approach(o->oGoombaRelativeSpeed * o->oGoombaScale, 0.4f);
+    }
+    
 
     // If walking fast enough, play footstep sounds
     if (o->oGoombaRelativeSpeed > 4.0f / 3.0f) {
@@ -196,7 +202,7 @@ static void goomba_act_walk(void) {
 
         if (!(o->oGoombaTurningAwayFromWall =
                   obj_bounce_off_walls_edges_objects(&o->oGoombaTargetYaw))) {
-            if (o->oDistanceToMario < 500.0f) {
+            if (o->oDistanceToMario < chaseDistance) {
                 // If close to mario, begin chasing him. If not already chasing
                 // him, jump first
 
@@ -205,7 +211,7 @@ static void goomba_act_walk(void) {
                 }
 
                 o->oGoombaTargetYaw = o->oAngleToMario;
-                o->oGoombaRelativeSpeed = 20.0f;
+                o->oGoombaRelativeSpeed = gChaosCodeTable[GLOBAL_CHAOS_FAST_GOOMBAS].active ? 100.0f : 20.f;
             } else {
                 // If mario is far away, walk at a normal pace, turning randomly
                 // and occasionally jumping
@@ -226,7 +232,12 @@ static void goomba_act_walk(void) {
             }
         }
 
-        cur_obj_rotate_yaw_toward(o->oGoombaTargetYaw, 0x200);
+        if (gChaosCodeTable[GLOBAL_CHAOS_FAST_GOOMBAS].active) {
+            cur_obj_rotate_yaw_toward(o->oGoombaTargetYaw, 0x400);
+        } else {
+            cur_obj_rotate_yaw_toward(o->oGoombaTargetYaw, 0x200);
+        }
+        
     }
 }
 
