@@ -124,7 +124,7 @@ void chaos_lawmetre(void) {
     if (gCrimes > 100.0f) {
         gCrimeSpawnTimer--;
         if (gCrimeSpawnTimer <= 0) {
-            struct Object *bombOmb = spawn_object_relative(0x20, 0, 300, 0, gMarioState->marioObj, MODEL_BOBOMB_COP, bhvBobomb);
+            spawn_object_relative(0x20, 0, 300, 0, gMarioState->marioObj, MODEL_BOBOMB_COP, bhvBobomb);
             gCrimeSpawnTimer = 150 / repeat;
         }
     }
