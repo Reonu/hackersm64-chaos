@@ -35,6 +35,7 @@
 #include "src/game/chaos_codes.h"
 #include "buffers/buffers.h"
 #include "string.h"
+#include "game/object_helpers.h"
 
 
 
@@ -1860,7 +1861,7 @@ void mario_update_shadow(void) {
  */
 s32 execute_mario_action(UNUSED struct Object *obj) {
     s32 inLoop = TRUE;
-
+    int i;
     global_chaos_code_handler();
 
     // Updates once per frame:
@@ -1878,6 +1879,39 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     } else {
         obj_set_model(gMarioObject, MODEL_MARIO);
     }
+
+    if (gCurrLevelNum == LEVEL_BBH && gCurrAreaIndex == 2) {
+        int enemyCounter = 0;
+        static u8 tracker;
+        for (i = 0; i < OBJECT_POOL_CAPACITY; i++) {
+            struct Object *curObj = &gObjectPool[i];
+            if (curObj == NULL) {
+                break;
+            }
+            if (curObj->behavior == segmented_to_virtual(bhvGoomba)
+             || curObj->behavior == segmented_to_virtual(bhvChuckya)
+             || curObj->behavior == segmented_to_virtual(bhvFlyGuy)) 
+             {  
+                if (curObj->oPosY > -4300) {
+                    curObj->oPosY = -4300;
+                }
+                if (curObj->oFloor == NULL) {
+                    mark_obj_for_deletion(curObj);
+                } else if (curObj->activeFlags & ACTIVE_FLAG_ACTIVE) {
+                    enemyCounter++;
+                }
+             }
+        }
+        if (enemyCounter > 0) {
+            char buf[32];
+            sprintf(buf, "Enemies left: %d", enemyCounter);
+            print_small_text_buffered_light(20, 210, buf, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_DEFAULT);
+        } else if (tracker == 0) {
+            cur_obj_spawn_star_at_y_offset(1604, -2891, 1038, 0);
+            tracker = 1;
+        }
+    }
+
 
     static s32 slideFade = 0;
     if (gCurrLevelNum == LEVEL_PSS) {

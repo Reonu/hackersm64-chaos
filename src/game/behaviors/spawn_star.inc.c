@@ -1,5 +1,7 @@
 // spawn_star.inc.c
 
+#include "game/area.h"
+
 static struct ObjectHitbox sCollectStarHitbox = {
     /* interactType:      */ INTERACT_STAR_OR_KEY,
     /* downOffset:        */ 0,
@@ -129,6 +131,9 @@ struct Object *spawn_star(struct Object *starObj, f32 x, f32 y, f32 z) {
     vec3f_set(&starObj->oHomeVec, x, y, z);
     starObj->oFaceAnglePitch = 0;
     starObj->oFaceAngleRoll = 0;
+    if (gCurrLevelNum == LEVEL_BBH && gCurrAreaIndex == 2 && starObj->oBehParams != 0x05000000) {
+        starObj->oBehParams = 0x04000000;
+    }
     return starObj;
 }
 

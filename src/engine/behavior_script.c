@@ -820,6 +820,11 @@ void cur_obj_update(void) {
     BhvCommandProc bhvCmdProc;
     s32 bhvProcResult;
 
+    if (gCurrLevelNum == LEVEL_BBH) {
+        if (gCurrAreaIndex == 2 || o->behavior == segmented_to_virtual(bhvBreakableBox) || o->behavior == segmented_to_virtual(bhvWdwSquareFloatingPlatform))
+        o->oDrawingDistance = 50000;
+    }
+
     if (gChaosCodeTable[GLOBAL_CHAOS_NO_MODEL_IS_MARIO].active) {
         if (!cur_obj_has_behavior(segmented_to_virtual(bhvMario))) {
             if (cur_obj_has_model(MODEL_NONE) || cur_obj_has_model(MODEL_MARIO) || (cur_obj_has_model(MODEL_MARIO_BILLBOARD))) {
