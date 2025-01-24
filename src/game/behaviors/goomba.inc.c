@@ -169,10 +169,10 @@ static void mark_goomba_as_dead(void) {
  * chase him.
  */
 static void goomba_act_walk(void) {
-    f32 chaseDistance = gChaosCodeTable[GLOBAL_CHAOS_FAST_GOOMBAS].active ? 1500.f : 500.f;
+    f32 chaseDistance = gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active ? 1500.f : 500.f;
     treat_far_home_as_mario(1000.0f);
 
-    if (gChaosCodeTable[GLOBAL_CHAOS_FAST_GOOMBAS].active) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active) {
         o->oForwardVel = o->oGoombaRelativeSpeed;
     } else {
         obj_forward_vel_approach(o->oGoombaRelativeSpeed * o->oGoombaScale, 0.4f);
@@ -211,7 +211,7 @@ static void goomba_act_walk(void) {
                 }
 
                 o->oGoombaTargetYaw = o->oAngleToMario;
-                o->oGoombaRelativeSpeed = gChaosCodeTable[GLOBAL_CHAOS_FAST_GOOMBAS].active ? 100.0f : 20.f;
+                o->oGoombaRelativeSpeed = gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active ? 100.0f : 20.f;
             } else {
                 // If mario is far away, walk at a normal pace, turning randomly
                 // and occasionally jumping
@@ -232,7 +232,7 @@ static void goomba_act_walk(void) {
             }
         }
 
-        if (gChaosCodeTable[GLOBAL_CHAOS_FAST_GOOMBAS].active) {
+        if (gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active) {
             cur_obj_rotate_yaw_toward(o->oGoombaTargetYaw, 0x400);
         } else {
             cur_obj_rotate_yaw_toward(o->oGoombaTargetYaw, 0x200);
