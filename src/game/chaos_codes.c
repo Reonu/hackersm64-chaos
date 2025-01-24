@@ -93,11 +93,13 @@ void chaos_upside_down_camera(void) {
 }
 
 void chaos_mario_kart(void) {
-    if (gMarioState->action != ACT_RIDING_KART) {
-        spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
+    if (!((gMarioState->action & ACT_GROUP_MASK) >= ACT_GROUP_AIRBORNE && (gMarioState->action & ACT_GROUP_MASK) < (ACT_HOLD_JUMP & ACT_ID_MASK))) {
+        if (gMarioState->action != ACT_RIDING_KART) {
+            spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
+        }
+        gChaosCodeTable[gCurrentChaosID].timer = 0;
+        gChaosCodeTable[gCurrentChaosID].active = FALSE;
     }
-    gChaosCodeTable[gCurrentChaosID].timer = 0;
-    gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
 
 void chaos_pay_to_move(void) {
@@ -462,6 +464,43 @@ void chaos_random_cap(void) {
     gCurrentChaosTable[gCurrentChaosID].active = FALSE;
 }
 
+void chaos_koopa_shell(void) {
+    struct Object *obj =
+        spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KOOPA_SHELL, bhvKoopaShell);
+    gMarioState->interactObj = obj;
+    gMarioState->usedObj = obj;
+    gMarioState->riddenObj = obj;
+
+    attack_object(obj, INT_HIT_FROM_ABOVE);
+    update_mario_sound_and_camera(gMarioState);
+    play_shell_music();
+    mario_drop_held_object(gMarioState);
+
+    //! Puts Mario in ground action even when in air, making it easy to
+    // escape air actions into crouch slide (shell cancel)
+    set_mario_action(gMarioState, ACT_RIDING_SHELL_GROUND, 0);
+
+    gCurrentChaosTable[gCurrentChaosID].timer = 0;
+    gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+}
+
+void chaos_squish_mario(void) {
+    gMarioState->squishTimer = 15;
+    gCurrentChaosTable[gCurrentChaosID].timer--;
+    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
+        gCurrentChaosTable[gCurrentChaosID].timer = 0;
+        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
+void chaos_next_long_jump_gp(void) {
+    gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+    if (gMarioState->action == ACT_GROUND_POUND_LAND) {
+        gCurrentChaosTable[gCurrentChaosID].timer = 0;
+        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -504,6 +543,10 @@ ChaosCode gChaosCodeTable[] = {
     {"Bilerp", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Random Cap", chaos_random_cap, 0, 0, 0,  /*ignore these*/ 0, 0},
     {"Enemy PoV", chaos_enemypov, 0, 0, 0,  /*ignore these*/ 0, 0},
+    {"Koopa Shell", chaos_koopa_shell, 0, 0, 0,  /*ignore these*/ 0, 0},
+    {"Squish Mario", chaos_squish_mario, 4, 8, 0,  /*ignore these*/ 0, 0},
+    {"Ortho Cam", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Long Jump GP", chaos_next_long_jump_gp, 1, 2, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

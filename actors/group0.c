@@ -64,3 +64,5 @@
 #include "skeeter/model.inc.c"
 #include "skeeter/anims/data.inc.c"
 #include "skeeter/anims/table.inc.c"
+
+#include "koopa_shell/model.inc.c"

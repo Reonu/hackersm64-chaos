@@ -1374,12 +1374,13 @@ s32 act_riding_kart(struct MarioState *m) {
             break;
 
         case GROUND_STEP_HIT_WALL:
-            if (m->wall) {
-                m->faceAngle[1] += m->faceAngle[1] - (atan2s(m->wall->normal.z, m->wall->normal.x) + DEGREES(90));
-            }
-            play_sound(m->flags & MARIO_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
-                       m->marioObj->header.gfx.cameraToObject);
+            //if (m->wall) {
+            //    m->faceAngle[1] += m->faceAngle[1] - (atan2s(m->wall->normal.z, m->wall->normal.x) + DEGREES(90));
+            //}
+            //play_sound(m->flags & MARIO_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
+            //           m->marioObj->header.gfx.cameraToObject);
             m->particleFlags |= PARTICLE_VERTICAL_STAR;
+            set_mario_action(m, ACT_JUMP, 0);
             break;
     }
     
@@ -1615,7 +1616,13 @@ s32 act_crouch_slide(struct MarioState *m) {
         m->actionTimer++;
         if (m->input & INPUT_A_PRESSED) {
             if (m->forwardVel > 10.0f) {
-                return set_jumping_action(m, ACT_LONG_JUMP, 0);
+                if (gChaosCodeTable[GLOBAL_CHAOS_NEXT_LONG_JUMP_GP].active) {
+                    return set_mario_action(m, ACT_GROUND_POUND, 0);
+                }
+                else {
+                    return set_jumping_action(m, ACT_LONG_JUMP, 0);
+                }
+                
             }
         }
     }

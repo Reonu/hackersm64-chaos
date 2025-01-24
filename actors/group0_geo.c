@@ -29,3 +29,4 @@
 #include "shadow_mario/geo.inc.c"
 #include "spring/geo.inc.c"
 #include "skeeter/geo.inc.c"
+#include "koopa_shell/geo.inc.c"
