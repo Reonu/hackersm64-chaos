@@ -21,6 +21,8 @@
 #include "src/game/object_list_processor.h"
 #include "include/seq_ids.h"
 #include "src/game/interaction.h"
+#include "sound_init.h"
+#include "mario.h"
 
 
 s32 nextGlobalCodeTimer = 150;
@@ -481,6 +483,8 @@ void chaos_random_cap(void) {
     gCurrentChaosTable[gCurrentChaosID].timer = 0;
     gCurrentChaosTable[gCurrentChaosID].active = FALSE;
 }
+
+u32 attack_object(struct Object *obj, s32 interaction);
 
 void chaos_koopa_shell(void) {
     struct Object *obj =
