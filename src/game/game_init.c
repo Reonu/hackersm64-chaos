@@ -360,6 +360,9 @@ void init_rcp(s32 resetZB) {
     move_segment_table_to_dmem();
     gSPDisplayList(gDisplayListHead++, init_rdp);
     gSPDisplayList(gDisplayListHead++, init_rsp);
+    if (gChaosCodeTable[GLOBAL_CHAOS_BILERP].active) {
+        gDPSetTextureFilter(gDisplayListHead++, G_TF_POINT);
+    }
     init_z_buffer(resetZB);
     select_framebuffer();
 }
