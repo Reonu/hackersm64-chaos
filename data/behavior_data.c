@@ -6310,3 +6310,12 @@ const BehaviorScript bhvBbhSquareFloatingPlatform[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+const BehaviorScript bhvMedusaHead[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    CALL_NATIVE(bhv_medusa_head_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_medusa_head_loop),
+    END_LOOP(),
+};

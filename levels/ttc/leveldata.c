@@ -49,3 +49,4 @@
 #include "levels/ttc/gear_walls_1/model.inc.c"
 #include "levels/ttc/gear_walls_2/model.inc.c"
 #include "levels/ttc/gear_walls_3/model.inc.c"
+#include "levels/ttc/medusa_head/model.inc.c"

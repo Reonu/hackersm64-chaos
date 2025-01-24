@@ -34,3 +34,4 @@
 #include "levels/ttc/gear_walls_1/geo.inc.c"
 #include "levels/ttc/gear_walls_2/geo.inc.c"
 #include "levels/ttc/gear_walls_3/geo.inc.c"
+#include "levels/ttc/medusa_head/geo.inc.c"

@@ -73,4 +73,6 @@ extern const LevelScript level_ttc_entry[];
 
 #include "levels/ttc/gear_walls_3/geo_header.h"
 
+#include "levels/ttc/medusa_head/geo_header.h"
+
 #endif

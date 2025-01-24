@@ -48,6 +48,7 @@ const LevelScript level_ttc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_TTC_GEAR_WALLS_1, gear_walls_1_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TTC_GEAR_WALLS_2, gear_walls_2_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TTC_GEAR_WALLS_3, gear_walls_3_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MEDUSA_HEAD, medusa_head_geo), 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
 

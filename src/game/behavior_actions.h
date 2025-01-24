@@ -600,3 +600,5 @@ void bhv_item_box_loop(void);
 
 void bhv_mirrorghost_init(void);
 void bhv_mirrorghost_loop(void);
+void bhv_medusa_head_init(void);
+void bhv_medusa_head_loop(void);
