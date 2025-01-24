@@ -529,60 +529,60 @@ void chaos_random_jump(void) {
 }
 
 ChaosCode gChaosCodeTable[] = {
-    {"Cannon", chaos_cannon, 0, 0, 0,   /*ignore these*/ 0, 0},
-    {"Fall Damage", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
-    {"Trip", chaos_trip, 0, 0, 0,   /*ignore these*/ 0, 0},
-    {"Upside Down Camera", chaos_upside_down_camera, 10, 20, 0,   /*ignore these*/ 0, 0},
-    {"Model None Mario", chaos_generic, 10, 20, 0,   /*ignore these*/ 0, 0},
-    {"Retro Vision", chaos_retro, 15, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
-    {"Blur Vision", chaos_blur, 20, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
-    {"Mario Kart", chaos_mario_kart, 0, 0, 0,   /*ignore these*/ 0, 0},
-    {"Pay to Move", chaos_pay_to_move, 0, 0, 0,   /*ignore these*/ 0, 0},
-    {"Tank Controls", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
-    {"Invert Controls", chaos_generic, 20, 30, 0,   /*ignore these*/ 0, 0},
-    {"Dim Lights", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
-    {"Law Metre", chaos_lawmetre, 60, 90, 0,   /*ignore these*/ 0, 0},
-    {"Tiny Mario", chaos_generic, 20, 35, 0,   /*ignore these*/ 0, 0},
-    {"Billboard Mario", chaos_generic, 20, 35, 0,   /*ignore these*/ 0, 0},
-    {"Very Slippery", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
-    {"All Quicksand", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
-    {"Mario Sounds Scream", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
-    {"Randomize Coin Colors", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
-    {"Coin Cutscenes", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
-    {"All jumps are triple", chaos_generic, 15, 45, 0,   /*ignore these*/ 0, 0},
-    {"Delete Nearby Objects", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
-    {"Invert Dive and Kick", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
-    {"Live Mario Reaction", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
-    {"Ad Spam", chaos_ad, 0, 0, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
-    {"No Speed Cap", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
-    {"Super Jumps", chaos_generic, 10, 20, 0,   /*ignore these*/ 0, 0},
-    {"Heave Ho Chaser", chaos_heave_ho_chaser, 15, 30, 0,   /*ignore these*/ 0, 0},
-    {"Strong Punch KB", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
-    {"Automatic Wallkicks", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
-    {"Chain Chomp", chaos_chain_chomp, 0, 0, 0,   /*ignore these*/ 0, 0},
-    {"Thwomp", chaos_thwomp, 0, 0, 0,   /*ignore these*/ 0, 0},
-    {"Yellow Block on Jump", chaos_yellow_block, 30, 60, 0,   /*ignore these*/ 0, 0},
-    {"Mirror Ghost", chaos_mirrorghost, 30, 60, 0,   /*ignore these*/ 0, 0},
-    {"Weird Audio", chaos_generic, 30, 45, 0,   /*ignore these*/ 0, 0},
-    {"Swap Positions", chaos_swap_positions, 0, 0, 0,   /*ignore these*/ 0, 0},
-    {"Billboard Everything", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
-    {"Fast Enemies", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
-    {"Bilerp", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
-    {"Random Cap", chaos_random_cap, 0, 0, 0,  /*ignore these*/ 0, 0},
-    {"Enemy PoV", chaos_enemypov, 0, 0, 0,  /*ignore these*/ 0, 0},
-    {"Koopa Shell", chaos_koopa_shell, 0, 0, 0,  /*ignore these*/ 0, 0},
-    {"Squish Mario", chaos_squish_mario, 4, 8, 0,  /*ignore these*/ 0, 0},
-    {"Ortho Cam", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
-    {"Long Jump GP", chaos_next_long_jump_gp, 1, 2, 0,  /*ignore these*/ 0, 0},
-    {"Random Jump", chaos_random_jump, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Trip", chaos_trip, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Upside Down Camera", chaos_upside_down_camera, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
+    {"Model None Mario", chaos_generic, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
+    {"Retro Vision", chaos_retro, 100, 15, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
+    {"Blur Vision", chaos_blur, 100, 20, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
+    {"Mario Kart", chaos_mario_kart, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Pay to Move", chaos_pay_to_move, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Tank Controls", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Invert Controls", chaos_generic, 100, 20, 30, 0,   /*ignore these*/ 0, 0},
+    {"Dim Lights", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"Law Metre", chaos_lawmetre, 100, 60, 90, 0,   /*ignore these*/ 0, 0},
+    {"Tiny Mario", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"Billboard Mario", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"Very Slippery", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"All Quicksand", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"Mario Sounds Scream", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Randomize Coin Colors", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"Coin Cutscenes", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"All jumps are triple", chaos_generic, 100, 15, 45, 0,   /*ignore these*/ 0, 0},
+    {"Delete Nearby Objects", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Invert Dive and Kick", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Live Mario Reaction", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"Ad Spam", chaos_ad, 100, 0, 0, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
+    {"No Speed Cap", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Super Jumps", chaos_generic, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
+    {"Heave Ho Chaser", chaos_heave_ho_chaser, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Strong Punch KB", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"Automatic Wallkicks", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"Chain Chomp", chaos_chain_chomp, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Thwomp", chaos_thwomp, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Yellow Block on Jump", chaos_yellow_block, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"Mirror Ghost", chaos_mirrorghost, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"Weird Audio", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"Swap Positions", chaos_swap_positions, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Billboard Everything", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Fast Enemies", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Bilerp", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Random Cap", chaos_random_cap, 100, 0, 0, 0,  /*ignore these*/ 0, 0},
+    {"Enemy PoV", chaos_enemypov, 100, 0, 0, 0,  /*ignore these*/ 0, 0},
+    {"Koopa Shell", chaos_koopa_shell, 100, 0, 0, 0,  /*ignore these*/ 0, 0},
+    {"Squish Mario", chaos_squish_mario, 100, 4, 8, 0,  /*ignore these*/ 0, 0},
+    {"Ortho Cam", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Long Jump GP", chaos_next_long_jump_gp, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Random Jump", chaos_random_jump, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
-    {"CCM Volcano Rocks", chaos_ccm_rocks_from_volcano, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"CCM Volcano Rocks", chaos_ccm_rocks_from_volcano, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gBoBChaosTable[] = {
-    {"BoB Water Bombs", chaos_generic, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"BoB Water Bombs", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gTTCChaosTable[] = {
@@ -591,8 +591,8 @@ ChaosCode gTTCChaosTable[] = {
 };
 
 ChaosCode gSSLChaosTable[] = {
-    {"SSL Blizzard", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
-    {"SSL Quicksand Magnet", chaos_generic, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"SSL Blizzard", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"SSL Quicksand Magnet", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
 };
 
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
@@ -680,14 +680,21 @@ void global_chaos_code_handler(void) {
     nextGlobalCodeTimer--;
     if (nextGlobalCodeTimer <= 0) {
         s32 size;
-        int rand = random_u16() % 100;
+        int rand;
+        
+        tryAgain:
+        rand = random_u16() % 100;
         if (rand >= 66) {
             gCurrentChaosTable = chaos_level_table(gCurrLevelNum, &size);
         } else {
             gCurrentChaosTable = gChaosCodeTable;
             size = sizeof(gChaosCodeTable) / sizeof(ChaosCode);
         }
-        add_global_chaos_code(gCurrentChaosTable, size);
+        if ((random_u16() % 100) <= gCurrentChaosTable->probability) {
+            add_global_chaos_code(gCurrentChaosTable, size);
+        } else {
+            goto tryAgain;
+        }
         nextGlobalCodeTimer = 150 + (random_u16() % 600);
     }
 }
