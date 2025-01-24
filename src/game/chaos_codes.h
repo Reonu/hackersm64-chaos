@@ -71,6 +71,7 @@ enum CodeFlags {
 typedef struct ChaosCode {
     char *name;
     void (*func)();
+    unsigned char probability;
     unsigned short timerLow;
     unsigned short timerHigh;
     unsigned int flags;
