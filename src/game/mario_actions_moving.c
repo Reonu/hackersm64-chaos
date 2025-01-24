@@ -1374,12 +1374,13 @@ s32 act_riding_kart(struct MarioState *m) {
             break;
 
         case GROUND_STEP_HIT_WALL:
-            if (m->wall) {
-                m->faceAngle[1] += m->faceAngle[1] - (atan2s(m->wall->normal.z, m->wall->normal.x) + DEGREES(90));
-            }
-            play_sound(m->flags & MARIO_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
-                       m->marioObj->header.gfx.cameraToObject);
+            //if (m->wall) {
+            //    m->faceAngle[1] += m->faceAngle[1] - (atan2s(m->wall->normal.z, m->wall->normal.x) + DEGREES(90));
+            //}
+            //play_sound(m->flags & MARIO_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
+            //           m->marioObj->header.gfx.cameraToObject);
             m->particleFlags |= PARTICLE_VERTICAL_STAR;
+            set_mario_action(m, ACT_JUMP, 0);
             break;
     }
     

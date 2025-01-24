@@ -90,11 +90,13 @@ void chaos_upside_down_camera(void) {
 }
 
 void chaos_mario_kart(void) {
-    if (gMarioState->action != ACT_RIDING_KART) {
-        spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
+    if (!((gMarioState->action & ACT_GROUP_MASK) >= ACT_GROUP_AIRBORNE && (gMarioState->action & ACT_GROUP_MASK) < (ACT_HOLD_JUMP & ACT_ID_MASK))) {
+        if (gMarioState->action != ACT_RIDING_KART) {
+            spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
+        }
+        gChaosCodeTable[gCurrentChaosID].timer = 0;
+        gChaosCodeTable[gCurrentChaosID].active = FALSE;
     }
-    gChaosCodeTable[gCurrentChaosID].timer = 0;
-    gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
 
 void chaos_pay_to_move(void) {
