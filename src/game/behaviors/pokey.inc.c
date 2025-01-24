@@ -1,5 +1,6 @@
 
 #include "game/area.h"
+#include "game/chaos_codes.h"
 /**
  * Behavior for bhvPokey and bhvPokeyBodyPart.
  * bhvPokey is responsible for the behavior of the pokey itself, as well as
@@ -185,7 +186,7 @@ static void pokey_act_wander(void) {
         if (o->oPokeyHeadWasKilled) {
             o->oForwardVel = 0.0f;
         } else {
-            o->oForwardVel = 5.0f;
+            o->oForwardVel = gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active ? 50.f : 5.0f;
 
             // If a body part is missing, replenish it after 100 frames
             if (o->oPokeyNumAliveBodyParts < POKEY_NUM_SEGMENTS) {

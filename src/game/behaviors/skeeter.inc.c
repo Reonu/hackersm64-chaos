@@ -1,5 +1,5 @@
 // skeeter.inc.c
-
+#include "game/chaos_codes.h"
 struct SkeeterRelPos {
     s16 relPosX;
     s16 relPosZ;
@@ -53,7 +53,7 @@ static void skeeter_act_idle(void) {
                 } else if (cur_obj_check_if_near_animation_end()) {
                     cur_obj_play_sound_2(SOUND_OBJ_WALKING_WATER);
                     o->oAction = SKEETER_ACT_LUNGE;
-                    o->oForwardVel = 80.0f;
+                    o->oForwardVel = gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active ? 160.f : 80.f;
                     o->oSkeeterAngleVel = 0;
                 }
             }

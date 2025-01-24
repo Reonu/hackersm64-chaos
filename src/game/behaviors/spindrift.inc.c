@@ -1,5 +1,5 @@
 // spindrift.inc.c
-
+#include "game/chaos_codes.h"
 struct ObjectHitbox sSpindriftHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
@@ -22,13 +22,22 @@ void bhv_spindrift_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            approach_f32_symmetric_bool(&o->oForwardVel, 4.0f, 1.0f);
+            if (gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active) {
+                approach_f32_symmetric_bool(&o->oForwardVel, 40.0f, 10.0f);
+            } else {
+                approach_f32_symmetric_bool(&o->oForwardVel, 4.0f, 1.0f);
+            }
+            
             if (cur_obj_lateral_dist_from_mario_to_home() > 1000.0f) {
                 o->oAngleToMario = cur_obj_angle_to_home();
             } else if (o->oDistanceToMario > 300.0f) {
                 o->oAngleToMario = obj_angle_to_object(o, gMarioObject);
             }
-            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x400);
+            if (gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active) {
+                cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x1200);
+            } else {
+                cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x400);
+            }
             break;
 
         case 1:

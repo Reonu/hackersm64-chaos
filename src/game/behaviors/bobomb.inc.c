@@ -1,5 +1,5 @@
 // bobomb.inc.c
-
+#include "game/chaos_codes.h"
 static struct ObjectHitbox sBobombHitbox = {
     /* interactType:      */ INTERACT_GRABBABLE,
     /* downOffset:        */ 0,
@@ -67,10 +67,11 @@ void bobomb_check_interactions(void) {
 }
 
 void bobomb_act_patrol(void) {
-    o->oForwardVel = 5.0f;
+    s32 turnSpeed = gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active ? 1200 : 400;
+    o->oForwardVel = gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active ? 40.f : 5.0f;
 
     s16 collisionFlags = object_step();
-    if (obj_return_home_if_safe(o, o->oHomeX, o->oHomeY, o->oHomeZ, 400)
+    if (obj_return_home_if_safe(o, o->oHomeX, o->oHomeY, o->oHomeZ, turnSpeed)
      && obj_check_if_facing_toward_angle(o->oMoveAngleYaw, o->oAngleToMario, 0x2000)) {
         o->oBobombFuseLit = TRUE;
         o->oAction = BOBOMB_ACT_CHASE_MARIO;
@@ -82,7 +83,7 @@ void bobomb_act_patrol(void) {
 void bobomb_act_chase_mario(void) {
     s16 animFrame = ++o->header.gfx.animInfo.animFrame;
 
-    o->oForwardVel = 20.0f;
+    o->oForwardVel = gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active ? 40.f : 20.0f;
     s16 collisionFlags = object_step();
 
     if (animFrame == 5 || animFrame == 16) {
