@@ -273,6 +273,10 @@ void unload_area(void) {
 
         gCurrentArea->flags = AREA_FLAG_UNLOAD;
         gCurrentArea = NULL;
+        gChaosCodeTable[GLOBAL_CHAOS_ENEMY_POV].active = FALSE;
+        gChaosCodeTable[GLOBAL_CHAOS_ENEMY_POV].timer = 0;
+        gPovActive = FALSE;
+        gPovEnemy = NULL;
         gWarpTransition.isActive = FALSE;
     }
 }

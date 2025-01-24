@@ -28,6 +28,9 @@ u32 gCurrentChaosID;
 u8 gDisableChaos = TRUE; // Debug only
 u8 gChaosOffOverride = FALSE; // Use this one for non debug overrides.
 u8 gSpamAd;
+u8 gPovActive;
+struct Object *gPovEnemy;
+s16 gPovPrevMode = -1;
 s16 gSpamCursorX;
 s16 gSpamCursorY;
 float gCrimes = 0;
@@ -145,6 +148,46 @@ void chaos_generic(void) {
     if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
         gCurrentChaosTable[gCurrentChaosID].timer = 0;
         gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
+void chaos_enemypov(void) {
+    if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
+        gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+        gPovEnemy = NULL; 
+        gPovActive = FALSE;
+    }
+    if (gPovEnemy == NULL) {
+        for (int i = 0; i < OBJECT_POOL_CAPACITY; i++) {
+            BehaviorScript *beh = gObjectPool[i].behavior;
+            if (beh == segmented_to_virtual(bhvGoomba) ||
+                beh == segmented_to_virtual(bhvBobomb) ||
+                beh == segmented_to_virtual(bhvChuckya) ||
+                beh == segmented_to_virtual(bhvBobomb)) {
+                if (gObjectPool[i].activeFlags & ACTIVE_FLAG_ACTIVE && dist_between_objects(&gObjectPool[i], gMarioState->marioObj) < 3000.0f) {
+                    gPovEnemy = &gObjectPool[i];   
+                    break; 
+                }
+            }
+        }
+    }
+
+    if (gPovActive == FALSE) {
+        if (gPovEnemy && gMarioState->marioObj) {
+            float dist = dist_between_objects(gPovEnemy, gMarioState->marioObj);
+
+            if (dist < 1500.0f) {
+                gPovActive = TRUE;
+            }
+        }
+    }
+
+    if (gPovActive) {
+        if (!(gPovEnemy->activeFlags & ACTIVE_FLAG_ACTIVE)) {
+            gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+            gCurrentChaosTable[gCurrentChaosID].timer = 0;
+            gPovActive = FALSE;
+        }
     }
 }
 
@@ -460,6 +503,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Fast Enemies", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Bilerp", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Random Cap", chaos_random_cap, 0, 0, 0,  /*ignore these*/ 0, 0},
+    {"Enemy PoV", chaos_enemypov, 0, 0, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
