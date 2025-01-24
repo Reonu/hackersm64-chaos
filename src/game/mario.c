@@ -1861,7 +1861,8 @@ void mario_update_shadow(void) {
  */
 s32 execute_mario_action(UNUSED struct Object *obj) {
     s32 inLoop = TRUE;
-    int i;
+    int i = 0;
+    int i2 = 0;
     global_chaos_code_handler();
 
     // Updates once per frame:
@@ -1880,6 +1881,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         obj_set_model(gMarioObject, MODEL_MARIO);
     }
 
+    // enemy tracker in area 22 of BBH
     if (gCurrLevelNum == LEVEL_BBH && gCurrAreaIndex == 2) {
         int enemyCounter = 0;
         static u8 tracker;
@@ -1910,6 +1912,22 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             cur_obj_spawn_star_at_y_offset(1604, -2891, 1038, 0);
             tracker = 1;
         }
+    }
+
+    // prevent object overflow in area 3 of BBH
+    if (gCurrLevelNum == LEVEL_BBH && gCurrAreaIndex == 3) {
+        for (i2 = 0; i2 < OBJECT_POOL_CAPACITY; i2++) {
+            struct Object *curObj = &gObjectPool[i2];
+            if (i2 == 0) {
+                gFlameCounter = 0;
+            }
+            if (curObj == NULL) {
+                break;
+            }
+            if (curObj->activeFlags & ACTIVE_FLAG_ACTIVE && curObj->behavior == segmented_to_virtual(bhvFlamethrowerFlame)) {
+                gFlameCounter++;
+            }
+        }   
     }
 
 
