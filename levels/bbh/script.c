@@ -265,6 +265,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_HEART, 369, -1166, -136, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
 		OBJECT(MODEL_HEART, 879, -1767, -136, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
 		OBJECT(MODEL_HEART, 1351, -2165, -136, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
+		OBJECT(MODEL_STAR, -2759, 1446, -136, 0, 0, 0, (0x05 << 24), bhvStar),
 		OBJECT(MODEL_HEAVE_HO, 383, -1222, -647, 0, -180, 0, 0x00000000, bhvHeaveHo),
 		OBJECT(MODEL_HEAVE_HO, 1221, -2151, 187, 0, -180, 0, 0x00000000, bhvHeaveHo),
 		OBJECT(MODEL_HEAVE_HO, -174, -621, 272, 0, -180, 0, 0x00000000, bhvHeaveHo),
