@@ -493,6 +493,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Random Cap", chaos_random_cap, 0, 0, 0,  /*ignore these*/ 0, 0},
     {"Koopa Shell", chaos_koopa_shell, 0, 0, 0,  /*ignore these*/ 0, 0},
     {"Squish Mario", chaos_squish_mario, 4, 8, 0,  /*ignore these*/ 0, 0},
+    {"Ortho Cam", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

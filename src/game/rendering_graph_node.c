@@ -496,8 +496,13 @@ void geo_process_perspective(struct GraphNodePerspective *node) {
 
         // With low fovs, coordinate overflow can occur more easily. This slightly reduces precision only while zoomed in.
         f32 scale = node->fov < 28.0f ? remap(MAX(node->fov, 15), 15, 28, 0.5f, 1.0f): 1.0f;
-        guPerspective(mtx, &perspNorm, node->fov, sAspectRatio, node->near / WORLD_SCALE, node->far / WORLD_SCALE, scale);
-
+        if (gChaosCodeTable[GLOBAL_CHAOS_ORTHO_CAM].active) {
+            guOrtho(mtx, -360.0f * sAspectRatio, 360.0f * sAspectRatio, -360.0f, 360.0f, node->near / WORLD_SCALE, node->far / WORLD_SCALE, scale);
+        }
+        else {  
+            guPerspective(mtx, &perspNorm, node->fov, sAspectRatio, node->near / WORLD_SCALE, node->far / WORLD_SCALE, scale);
+        }
+        
         gSPPerspNormalize(gDisplayListHead++, perspNorm);
 
         gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx), G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);

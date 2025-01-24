@@ -44,6 +44,7 @@ enum GlobalChaosNames {
     GLOBAL_CHAOS_RANDOM_CAP,
     GLOBAL_CHAOS_KOOPA_SHELL,
     GLOBAL_CHAOS_SQUISH_MARIO,
+    GLOBAL_CHAOS_ORTHO_CAM,
 };
 
 enum CCMChaosNames {
