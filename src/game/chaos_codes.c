@@ -501,6 +501,15 @@ void chaos_next_long_jump_gp(void) {
     }
 }
 
+void chaos_random_jump(void) {
+    if (!((gMarioState->action & ACT_GROUP_MASK) >= ACT_GROUP_AIRBORNE && (gMarioState->action & ACT_GROUP_MASK) < (ACT_HOLD_JUMP & ACT_ID_MASK))) {
+        gMarioState->action = ACT_SIDE_FLIP;
+        gMarioState->vel[1] = 48.0f;
+        gCurrentChaosTable[gCurrentChaosID].timer = 0;
+        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -547,6 +556,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Squish Mario", chaos_squish_mario, 100, 4, 8, 0,  /*ignore these*/ 0, 0},
     {"Ortho Cam", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Long Jump GP", chaos_next_long_jump_gp, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Random Jump", chaos_random_jump, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
