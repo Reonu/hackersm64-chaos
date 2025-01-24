@@ -1345,6 +1345,7 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
                 vec3s_set(viewport[i]->vp.vscale, gScreenWidth * 2, gScreenHeight * 2, 511);
             } else {
                 s32 soRetro = gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
+                gSPClipRatio(gDisplayListHead++, FRUSTRATIO_2);
                 react_clear_zb();
                 select_framebuffer();
                 prepare_blank_box();
@@ -1364,6 +1365,7 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
                 gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
                 vec3s_set(viewport[i]->vp.vtrans, (gScreenWidth / 3.5f) * 2, ((float) gScreenHeight * 1.75f) * 2.0f, 511);
                 vec3s_set(viewport[i]->vp.vscale, (gScreenWidth / 4) * 2, (gScreenHeight / 4) * 2, 511);
+                make_viewport_clip_rect(viewport[i]);
             }
 
             if (b != NULL) {
