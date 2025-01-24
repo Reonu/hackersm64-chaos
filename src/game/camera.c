@@ -28,6 +28,7 @@
 #include "config.h"
 #include "puppyprint.h"
 #include "profiling.h"
+#include "chaos_codes.h"
 
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
@@ -2911,6 +2912,9 @@ void ssl_area_4_camera(struct Camera *c) {
     sFOVState.fov = 65;
 }
 
+s32 set_camera_mode_fixed(struct Camera *c, s16 x, s16 y, s16 z);
+void set_camera_mode(struct Camera *c, s16 mode, s16 frames);
+
 /**
  * The main camera update function.
  * Gets controller input, checks for cutscenes, handles mode changes, and moves the camera
@@ -2919,6 +2923,7 @@ void update_camera(struct Camera *c) {
     PROFILER_GET_SNAPSHOT_TYPE(PROFILER_DELTA_COLLISION);
     gCamera = c;
     update_camera_hud_status(c);
+    
     if (c->cutscene == CUTSCENE_NONE
 #ifdef PUPPYCAM
         && !gPuppyCam.enabled
@@ -2965,11 +2970,27 @@ void update_camera(struct Camera *c) {
     c->nextYaw = gLakituState.nextYaw;
     c->mode = gLakituState.mode;
     c->defMode = gLakituState.defMode;
+    if (gPovActive == FALSE) {
 #ifdef ENABLE_VANILLA_CAM_PROCESSING
     camera_course_processing(c);
 #else
     if (gCurrDemoInput != NULL) camera_course_processing(c);
 #endif
+    }
+    if (/*gChaosCodeTable[GLOBAL_CHAOS_ENEMY_POV].active && */gPovActive) {
+        if (c->mode != CAMERA_MODE_FIXED) {
+            gPovPrevMode = c->mode;
+        }
+        set_camera_mode_fixed(c, gPovEnemy->header.gfx.pos[0], gPovEnemy->header.gfx.pos[1] + 100.0f, gPovEnemy->header.gfx.pos[2]);
+        gCamera->pos[0] = gPovEnemy->header.gfx.pos[0];
+        gCamera->pos[1] = gPovEnemy->header.gfx.pos[1] + 100.0f;
+        gCamera->pos[2] = gPovEnemy->header.gfx.pos[2];
+    } else {
+        if (gPovPrevMode != -1) {
+            set_camera_mode(c, gPovPrevMode, 15);
+            gPovPrevMode = -1;
+        }
+    }
     sCButtonsPressed = find_c_buttons_pressed(sCButtonsPressed, gPlayer1Controller->buttonPressed, gPlayer1Controller->buttonDown);
 
     if (c->cutscene != CUTSCENE_NONE) {
@@ -3124,6 +3145,11 @@ void update_camera(struct Camera *c) {
     }
 #endif
 
+    if (/*gChaosCodeTable[GLOBAL_CHAOS_ENEMY_POV].active && */gPovActive) {
+        gCamera->pos[0] = gPovEnemy->header.gfx.pos[0];
+        gCamera->pos[1] = gPovEnemy->header.gfx.pos[1] + 100.0f;
+        gCamera->pos[2] = gPovEnemy->header.gfx.pos[2];
+    }
     update_lakitu(c);
 #ifdef PUPPYCAM
     }

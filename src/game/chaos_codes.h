@@ -42,6 +42,7 @@ enum GlobalChaosNames {
     GLOBAL_CHAOS_FAST_ENEMIES,
     GLOBAL_CHAOS_BILERP,
     GLOBAL_CHAOS_RANDOM_CAP,
+    GLOBAL_CHAOS_ENEMY_POV,
     GLOBAL_CHAOS_KOOPA_SHELL,
     GLOBAL_CHAOS_SQUISH_MARIO,
     GLOBAL_CHAOS_ORTHO_CAM,
@@ -89,7 +90,10 @@ extern u8 gChaosOffOverride;
 extern u8 gSpamAd;
 extern s16 gSpamCursorX;
 extern s16 gSpamCursorY;
+extern u8 gPovActive;
+extern struct Object *gPovEnemy;
 extern struct Object *sMirrorGhost;
+extern s16 gPovPrevMode;
 
 void global_chaos_code_handler(void);
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize);
