@@ -450,6 +450,14 @@ void chaos_squish_mario(void) {
     }
 }
 
+void chaos_next_long_jump_gp(void) {
+    gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+    if (gMarioState->action == ACT_GROUND_POUND_LAND) {
+        gCurrentChaosTable[gCurrentChaosID].timer = 0;
+        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -494,6 +502,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Koopa Shell", chaos_koopa_shell, 0, 0, 0,  /*ignore these*/ 0, 0},
     {"Squish Mario", chaos_squish_mario, 4, 8, 0,  /*ignore these*/ 0, 0},
     {"Ortho Cam", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Long Jump GP", chaos_next_long_jump_gp, 1, 2, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
