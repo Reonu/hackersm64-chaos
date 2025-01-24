@@ -35,6 +35,110 @@ static s32 sGameOverFrameCounter;
 static s32 sGameOverTableIndex;
 static s16 sIntroFrameCounter;
 static s32 sTmCopyrightAlpha;
+static s32 sImageID;
+
+void render_multi_image_copy(Gfx **gfx, Texture *image, s32 x, s32 y, s32 width, s32 height, UNUSED s32 scaleX, UNUSED s32 scaleY, s32 mode) {
+    s32 posW, posH, imW, imH, modeSC, mOne;
+    s32 i     = 0;
+    s32 num   = 256;
+    s32 maskW = 1;
+    s32 maskH = 1;
+
+    if (mode == G_CYC_COPY) {
+        modeSC = 4;
+        mOne   = 1;
+    } else {
+        modeSC = 1;
+        mOne   = 0;
+    }
+
+    // Find how best to seperate the horizontal. Keep going until it finds a whole value.
+    while (TRUE) {
+        f32 val = (f32)width / (f32)num;
+
+        if ((s32)val == val && (s32) val >= 1) {
+            imW = num;
+            break;
+        }
+        num /= 2;
+        if (num == 1) {
+            print_text(32, 32, "IMAGE WIDTH FAILURE");
+            return;
+        }
+    }
+    // Find the tile height
+    imH = 64 / (imW / 32); // This gets the vertical amount.
+
+    num = 2;
+    // Find the width mask
+    while (TRUE) {
+        if ((s32) num == imW) {
+            break;
+        }
+        num *= 2;
+        maskW++;
+        if (maskW == 9) {
+            print_text(32, 32, "WIDTH MASK FAILURE");
+            return;
+        }
+    }
+    num = 2;
+    // Find the height mask
+    while (TRUE) {
+        if ((s32) num == imH) {
+            break;
+        }
+        num *= 2;
+        maskH++;
+        if (maskH == 9) {
+            print_text(32, 32, "HEIGHT MASK FAILURE");
+            return;
+        }
+    }
+    num = height;
+    // Find the height remainder
+    s32 peakH  = height - (height % imH);
+    s32 cycles = (width * peakH) / (imW * imH);
+
+    // Pass 1
+    for (i = 0; i < cycles; i++) {
+        posW = 0;
+        posH = i * imH;
+        while (posH >= peakH) {
+            posW += imW;
+            posH -= peakH;
+        }
+
+        gDPLoadSync((*gfx)++);
+        gDPLoadTextureTile((*gfx)++,
+            image, G_IM_FMT_RGBA, G_IM_SIZ_16b, width, height, posW, posH, ((posW + imW) - 1), ((posH + imH) - 1), 0, (G_TX_NOMIRROR | G_TX_WRAP), (G_TX_NOMIRROR | G_TX_WRAP), maskW, maskH, 0, 0);
+        gSPTextureRectangle((*gfx)++,
+            ((x + posW) << 2),
+            ((y + posH) << 2),
+            (((x + posW + imW) - mOne) << 2),
+            (((y + posH + imH) - mOne) << 2),
+            G_TX_RENDERTILE, 0, 0, (modeSC << 10), (1 << 10));
+    }
+    // If there's a remainder on the vertical side, then it will cycle through that too.
+    if (height-peakH != 0) {
+        posW = 0;
+        posH = peakH;
+        for (i = 0; i < (width / imW); i++) {
+            posW = i * imW;
+            gDPLoadSync((*gfx)++);
+            gDPLoadTextureTile((*gfx)++,
+                image, G_IM_FMT_RGBA, G_IM_SIZ_16b, width, height, posW, posH, ((posW + imW) - 1), (height - 1), 0, (G_TX_NOMIRROR | G_TX_WRAP), (G_TX_NOMIRROR | G_TX_WRAP), maskW, maskH, 0, 0);
+            gSPTextureRectangle((*gfx)++,
+                (x + posW) << 2,
+                (y + posH) << 2,
+                ((x + posW + imW) - mOne) << 2,
+                ((y + posH + imH) - mOne) << 2,
+                G_TX_RENDERTILE, 0, 0, modeSC << 10, 1 << 10);
+        }
+    }
+}
+
+extern s16 gCurrAreaIndex;
 
 /**
  * Geo callback to render the "Super Mario 64" logo on the title screen
@@ -45,38 +149,86 @@ Gfx *geo_intro_super_mario_64_logo(s32 callContext, struct GraphNode *node, UNUS
     Gfx *dlIter = NULL;
 
     if (callContext != GEO_CONTEXT_RENDER) {
-        sIntroFrameCounter = 0;
-    } else if (callContext == GEO_CONTEXT_RENDER) {
-        f32 *scaleTable1 = segmented_to_virtual(intro_seg7_table_scale_1);
-        f32 *scaleTable2 = segmented_to_virtual(intro_seg7_table_scale_2);
-        SET_GRAPH_NODE_LAYER(graphNode->flags, LAYER_OPAQUE);
-        Mtx *scaleMat = alloc_display_list(sizeof(*scaleMat));
-        dl = alloc_display_list(4 * sizeof(*dl));
-        dlIter = dl;
-        Vec3f scale;
-
-        // determine scale based on the frame counter
-        if (sIntroFrameCounter >= 0 && sIntroFrameCounter < INTRO_STEPS_ZOOM_IN) {
-            // zooming in
-            vec3f_copy(scale, &scaleTable1[sIntroFrameCounter * 3]);
-        } else if (sIntroFrameCounter >= INTRO_STEPS_ZOOM_IN && sIntroFrameCounter < INTRO_STEPS_HOLD_1) {
-            // holding
-            vec3_same(scale, 1.0f);
-        } else if (sIntroFrameCounter >= INTRO_STEPS_HOLD_1 && sIntroFrameCounter < INTRO_STEPS_ZOOM_OUT) {
-            // zooming out
-            vec3f_copy(scale, &scaleTable2[(sIntroFrameCounter - INTRO_STEPS_HOLD_1) * 3]);
+        if (gCurrAreaIndex == 1) {
+            sIntroFrameCounter = 0;
         } else {
-            // disappeared
-            vec3_zero(scale);
+            sIntroFrameCounter = 90;
         }
-        guScale(scaleMat, scale[0], scale[1], scale[2]);
+        sImageID = 0;
+    } else if (callContext == GEO_CONTEXT_RENDER) {
+        if (sIntroFrameCounter < 90) {
+            f32 *scaleTable1 = segmented_to_virtual(intro_seg7_table_scale_1);
+            f32 *scaleTable2 = segmented_to_virtual(intro_seg7_table_scale_2);
+            SET_GRAPH_NODE_LAYER(graphNode->flags, LAYER_OPAQUE);
+            Mtx *scaleMat = alloc_display_list(sizeof(*scaleMat));
+            dl = alloc_display_list(4 * sizeof(*dl));
+            dlIter = dl;
+            Vec3f scale;
 
-        gSPMatrix(dlIter++, scaleMat, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
-        gSPDisplayList(dlIter++, &intro_seg7_dl_main_logo);  // draw model
-        gSPPopMatrix(dlIter++, G_MTX_MODELVIEW);
-        gSPEndDisplayList(dlIter);
+            // determine scale based on the frame counter
+            if (sIntroFrameCounter >= 0 && sIntroFrameCounter < INTRO_STEPS_ZOOM_IN) {
+                // zooming in
+                vec3f_copy(scale, &scaleTable1[sIntroFrameCounter * 3]);
+            } else if (sIntroFrameCounter >= INTRO_STEPS_ZOOM_IN && sIntroFrameCounter < INTRO_STEPS_HOLD_1) {
+                // holding
+                vec3_same(scale, 1.0f);
+            } else if (sIntroFrameCounter >= INTRO_STEPS_HOLD_1 && sIntroFrameCounter < INTRO_STEPS_ZOOM_OUT) {
+                // zooming out
+                vec3f_copy(scale, &scaleTable2[(sIntroFrameCounter - INTRO_STEPS_HOLD_1) * 3]);
+            } else {
+                // disappeared
+                vec3_zero(scale);
+            }
+            guScale(scaleMat, scale[0], scale[1], scale[2]);
+
+            gSPMatrix(dlIter++, scaleMat, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
+            gSPDisplayList(dlIter++, &intro_seg7_dl_main_logo);  // draw model
+            gSPPopMatrix(dlIter++, G_MTX_MODELVIEW);
+            gSPEndDisplayList(dlIter);
+        } else {
+            SET_GRAPH_NODE_LAYER(graphNode->flags, LAYER_OPAQUE);
+            dl = alloc_display_list(600 * sizeof(*dl));
+            dlIter = dl;
+            gDPPipeSync(dlIter++);
+            gDPSetCycleType(dlIter++, G_CYC_COPY);
+            gDPSetTexturePersp(dlIter++, G_TP_NONE);
+            gDPSetTextureFilter(dlIter++, G_TF_POINT);
+            gDPSetRenderMode(dlIter++, G_RM_NOOP, G_RM_NOOP2);
+            switch (sImageID) {
+            case 0:
+                render_multi_image_copy(&dlIter, segmented_to_virtual(intro_logo2), 0, 0, 320, 240, 0, 0, G_CYC_COPY);
+                break;
+            case 1:
+                render_multi_image_copy(&dlIter, segmented_to_virtual(intro_logo3), 0, 0, 320, 240, 0, 0, G_CYC_COPY);
+                break;
+            case 2:
+                render_multi_image_copy(&dlIter, segmented_to_virtual(intro_logo4), 0, 0, 320, 240, 0, 0, G_CYC_COPY);
+                break;
+            case 3:
+                render_multi_image_copy(&dlIter, segmented_to_virtual(intro_logo5), 0, 0, 320, 240, 0, 0, G_CYC_COPY);
+                break;
+            case 4:
+                render_multi_image_copy(&dlIter, segmented_to_virtual(intro_logo6), 0, 0, 320, 240, 0, 0, G_CYC_COPY);
+                break;
+            case 5:
+                render_multi_image_copy(&dlIter, segmented_to_virtual(intro_logo7), 0, 0, 320, 240, 0, 0, G_CYC_COPY);
+                break;
+            case 6:
+                render_multi_image_copy(&dlIter, segmented_to_virtual(intro_logo8), 0, 0, 320, 240, 0, 0, G_CYC_COPY);
+                break;
+            }
+            gDPPipeSync(dlIter++);
+            gDPSetCycleType(dlIter++, G_CYC_1CYCLE);
+            gDPSetTexturePersp(dlIter++, G_TP_PERSP);
+            gDPSetTextureFilter(dlIter++, G_TF_BILERP);
+            gDPSetRenderMode(dlIter++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+            gSPEndDisplayList(dlIter);
+        }
 
         sIntroFrameCounter++;
+        if (((sIntroFrameCounter - 90) % 112) == 0) {
+            sImageID++;
+        }
     }
     return dl;
 }
@@ -88,6 +240,10 @@ Gfx *geo_intro_tm_copyright(s32 callContext, struct GraphNode *node, UNUSED void
     struct GraphNode *graphNode = node;
     Gfx *dl = NULL;
     Gfx *dlIter = NULL;
+
+    if (gCurrAreaIndex != 1) {
+        return dl;
+    }
 
     if (callContext != GEO_CONTEXT_RENDER) { // reset
         sTmCopyrightAlpha = 0;
