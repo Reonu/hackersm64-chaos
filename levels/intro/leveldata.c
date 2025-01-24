@@ -3471,3 +3471,31 @@ const f32 intro_seg7_table_scale_2[] = {
     0.048600f, 0.048600f, 0.012800f, 0.012800f,
     0.012800f, 0.000000f, 0.000000f, 0.000000f,
 };
+
+ALIGNED8 const Texture intro_logo2[] = {
+#include "levels/intro/logo2.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture intro_logo3[] = {
+#include "levels/intro/logo3.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture intro_logo4[] = {
+#include "levels/intro/logo4.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture intro_logo5[] = {
+#include "levels/intro/logo5.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture intro_logo6[] = {
+#include "levels/intro/logo6.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture intro_logo7[] = {
+#include "levels/intro/logo7.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture intro_logo8[] = {
+#include "levels/intro/logo8.rgba16.inc.c"
+};

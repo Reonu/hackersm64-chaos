@@ -29,4 +29,12 @@ extern Gfx *intro_seg7_dl_copyright_trademark;
 extern f32 intro_seg7_table_scale_1[];
 extern f32 intro_seg7_table_scale_2[];
 
+extern const Texture intro_logo2[];
+extern const Texture intro_logo3[];
+extern const Texture intro_logo4[];
+extern const Texture intro_logo5[];
+extern const Texture intro_logo6[];
+extern const Texture intro_logo7[];
+extern const Texture intro_logo8[];
+
 #endif // SEGMENT7_H
