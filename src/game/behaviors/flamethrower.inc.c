@@ -1,4 +1,6 @@
 // flamethrower.inc.c
+#include "game/area.h"
+#include "game/object_list_processor.h"
 
 void bhv_flamethrower_flame_loop(void) {
     f32 scale;
@@ -48,9 +50,23 @@ void bhv_flamethrower_flame_loop(void) {
 }
 
 void bhv_flamethrower_loop(void) {
+    int i;
+    u16 objectCounter = 0;
+    if (gCurrLevelNum == LEVEL_BBH && gCurrAreaIndex == 3) {
+        for (i = 0; i < OBJECT_POOL_CAPACITY; i++) {
+            struct Object *curObj = &gObjectPool[i];
+            if (curObj == NULL) {
+                break;
+            }
+            if (curObj->activeFlags & ACTIVE_FLAG_ACTIVE) {
+                objectCounter++;
+            }
+        }   
+    }
+ 
     if (o->oAction == FLAMETHROWER_ACT_IDLE) {
 #ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
-        if (1) // is "(gCurrLevelNum != LEVEL_BBH || gMarioOnMerryGoRound)" in vanilla
+        if (1 && objectCounter < (OBJECT_POOL_CAPACITY - 50)) // is "(gCurrLevelNum != LEVEL_BBH || gMarioOnMerryGoRound)" in vanilla
 #endif
         {
             if (o->oDistanceToMario < 2000.0f) {
