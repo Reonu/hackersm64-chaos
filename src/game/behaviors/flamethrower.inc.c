@@ -65,9 +65,7 @@ void bhv_flamethrower_loop(void) {
     }
  
     if (o->oAction == FLAMETHROWER_ACT_IDLE) {
-#ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
-        if (1 && objectCounter < (OBJECT_POOL_CAPACITY - 50)) // is "(gCurrLevelNum != LEVEL_BBH || gMarioOnMerryGoRound)" in vanilla
-#endif
+        if (gCurrLevelNum != LEVEL_BBH || gCurrAreaIndex != 3 || objectCounter < (OBJECT_POOL_CAPACITY - 50)) // is "(gCurrLevelNum != LEVEL_BBH || gMarioOnMerryGoRound)" in vanilla
         {
             if (o->oDistanceToMario < 2000.0f) {
                 o->oAction = FLAMETHROWER_ACT_BLOW_FIRE;
