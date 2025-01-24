@@ -419,6 +419,26 @@ void chaos_random_cap(void) {
     gCurrentChaosTable[gCurrentChaosID].active = FALSE;
 }
 
+void chaos_koopa_shell(void) {
+    struct Object *obj =
+        spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KOOPA_SHELL, bhvKoopaShell);
+    gMarioState->interactObj = obj;
+    gMarioState->usedObj = obj;
+    gMarioState->riddenObj = obj;
+
+    attack_object(obj, INT_HIT_FROM_ABOVE);
+    update_mario_sound_and_camera(gMarioState);
+    play_shell_music();
+    mario_drop_held_object(gMarioState);
+
+    //! Puts Mario in ground action even when in air, making it easy to
+    // escape air actions into crouch slide (shell cancel)
+    set_mario_action(gMarioState, ACT_RIDING_SHELL_GROUND, 0);
+
+    gCurrentChaosTable[gCurrentChaosID].timer = 0;
+    gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -460,6 +480,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Fast Enemies", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Bilerp", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Random Cap", chaos_random_cap, 0, 0, 0,  /*ignore these*/ 0, 0},
+    {"Koopa Shell", chaos_koopa_shell, 0, 0, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

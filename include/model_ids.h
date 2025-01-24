@@ -29,6 +29,7 @@
 #define MODEL_GIANT_DOOR                       0x113
 #define MODEL_SKEETER                          0x114       // skeeter_geo
 #define MODEL_BBH_WOODEN_PLATFORM              0X115
+#define MODEL_KOOPA_SHELL                 0x116
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
 #define MODEL_LEVEL_GEOMETRY_03                0x03
@@ -528,7 +529,7 @@
 #define MODEL_BUTTERFLY                   0xBB        // butterfly_geo
 #define MODEL_BLACK_BOBOMB                0xBC        // black_bobomb_geo
 // find me
-#define MODEL_KOOPA_SHELL                 0xBE        // koopa_shell_geo
+
 #define MODEL_KOOPA_WITHOUT_SHELL         0xBF        // koopa_without_shell_geo
 #define MODEL_GOOMBA                      0xC0        // goomba_geo
 #define MODEL_SEAWEED                     0xC1        // seaweed_geo
