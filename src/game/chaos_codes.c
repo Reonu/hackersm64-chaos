@@ -19,6 +19,8 @@
 #include "engine/surface_collision.h"
 #include "include/object_constants.h"
 #include "src/game/object_list_processor.h"
+#include "include/seq_ids.h"
+#include "src/game/interaction.h"
 
 
 s32 nextGlobalCodeTimer = 150;
@@ -358,6 +360,65 @@ void chaos_billboard(void) {
     
 }
 
+void chaos_random_cap(void) {
+    u32 capFlag;
+    const BehaviorScript *script;
+    switch (random_u16()%3) {
+        case 0:
+            capFlag = MARIO_WING_CAP;
+            script = bhvWingCap;
+        break;
+        case 1:
+            capFlag = MARIO_METAL_CAP;
+            script = bhvMetalCap;
+        break;
+        case 2:
+            capFlag = MARIO_VANISH_CAP;
+            script = bhvVanishCap;
+        break;
+    }
+
+    
+    u16 capMusic = 0;
+    u16 capTime = 0;
+
+    if (gMarioState->action != ACT_GETTING_BLOWN && capFlag != 0) {
+        struct Object *obj = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_MARIOS_METAL_CAP, script);
+        gMarioState->interactObj = obj;
+        obj->oInteractStatus = INT_STATUS_INTERACTED;
+
+        gMarioState->flags &= ~MARIO_CAP_ON_HEAD & ~MARIO_CAP_IN_HAND;
+        gMarioState->flags |= capFlag;
+
+        switch (capFlag) {
+            case MARIO_VANISH_CAP: capTime =  600; capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP  ); break;
+            case MARIO_METAL_CAP:  capTime =  600; capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP); break;
+            case MARIO_WING_CAP:   capTime = 1800; capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP  ); break;
+        }
+
+        if (capTime > gMarioState->capTimer) {
+            gMarioState->capTimer = capTime;
+        }
+
+        if ((gMarioState->action & ACT_FLAG_IDLE) || gMarioState->action == ACT_WALKING) {
+            gMarioState->flags |= MARIO_CAP_IN_HAND;
+            set_mario_action(gMarioState, ACT_PUTTING_ON_CAP, 0);
+        } else {
+            gMarioState->flags |= MARIO_CAP_ON_HEAD;
+        }
+
+        play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
+        play_sound(SOUND_MARIO_HERE_WE_GO, gMarioState->marioObj->header.gfx.cameraToObject);
+
+        if (capMusic != 0) {
+            play_cap_music(capMusic);
+        }
+    }
+
+    gCurrentChaosTable[gCurrentChaosID].timer = 0;
+    gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -398,6 +459,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Billboard Everything", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Fast Enemies", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Bilerp", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Random Cap", chaos_random_cap, 0, 0, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
