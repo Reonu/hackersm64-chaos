@@ -439,6 +439,15 @@ void chaos_koopa_shell(void) {
     gCurrentChaosTable[gCurrentChaosID].active = FALSE;
 }
 
+void chaos_squish_mario(void) {
+    gMarioState->squishTimer = 15;
+    gCurrentChaosTable[gCurrentChaosID].timer--;
+    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
+        gCurrentChaosTable[gCurrentChaosID].timer = 0;
+        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -481,6 +490,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Bilerp", chaos_generic, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Random Cap", chaos_random_cap, 0, 0, 0,  /*ignore these*/ 0, 0},
     {"Koopa Shell", chaos_koopa_shell, 0, 0, 0,  /*ignore these*/ 0, 0},
+    {"Squish Mario", chaos_squish_mario, 4, 8, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
