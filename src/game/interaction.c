@@ -1964,7 +1964,7 @@ void mario_handle_special_floors(struct MarioState *m) {
         }
 
         if (!(m->action & (ACT_FLAG_AIR | ACT_FLAG_SWIMMING))) {
-            if (floorType == SURFACE_BURNING) {
+            if ((gCurrLevelNum == LEVEL_LLL && floorType != SURFACE_BURNING) || (gCurrLevelNum != LEVEL_LLL && floorType == SURFACE_BURNING)) {
                 check_lava_boost(m);
             }
         }

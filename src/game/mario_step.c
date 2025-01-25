@@ -10,6 +10,7 @@
 #include "interaction.h"
 #include "mario_step.h"
 #include "chaos_codes.h"
+#include "area.h"
 
 #include "config.h"
 
@@ -429,6 +430,7 @@ s32 bonk_or_hit_lava_wall(struct MarioState *m, struct WallCollisionData *wallDa
     s16 wallDYaw;
     s32 oldWallDYaw;
     s32 result = AIR_STEP_NONE;
+    s32 surfBurn;
 
     if (m->wall != NULL) {
         oldWallDYaw = abs_angle_diff(m->wallYaw, m->faceAngle[1]);
@@ -438,9 +440,16 @@ s32 bonk_or_hit_lava_wall(struct MarioState *m, struct WallCollisionData *wallDa
 
     for (i = 0; i < wallData->numWalls; i++) {
         if (wallData->walls[i] != NULL) {
-            if (wallData->walls[i]->type == SURFACE_BURNING) {
-                set_mario_wall(m, wallData->walls[i]);
-                return AIR_STEP_HIT_LAVA_WALL;
+            if (gCurrLevelNum == LEVEL_LLL) {
+                if ((gCurrLevelNum == LEVEL_LLL && wallData->walls[i]->type != SURFACE_BURNING) || (gCurrLevelNum != LEVEL_LLL && wallData->walls[i]->type == SURFACE_BURNING)) {
+                    set_mario_wall(m, wallData->walls[i]);
+                    return AIR_STEP_HIT_LAVA_WALL;
+                }
+            } else {
+                if ((gCurrLevelNum == LEVEL_LLL && wallData->walls[i]->type != SURFACE_BURNING) || (gCurrLevelNum != LEVEL_LLL && wallData->walls[i]->type == SURFACE_BURNING)) {
+                    set_mario_wall(m, wallData->walls[i]);
+                    return AIR_STEP_HIT_LAVA_WALL;
+                }
             }
 
             // Update wall reference (bonked wall) only if the new wall has a better facing angle

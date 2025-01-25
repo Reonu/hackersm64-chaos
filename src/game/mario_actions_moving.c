@@ -1334,7 +1334,7 @@ s32 act_riding_shell_ground(struct MarioState *m) {
     }
 
     tilt_body_ground_shell(m, startYaw);
-    if (m->floor->type == SURFACE_BURNING) {
+    if ((gCurrLevelNum == LEVEL_LLL && m->floor->type != SURFACE_BURNING) || (gCurrLevelNum != LEVEL_LLL && m->floor->type == SURFACE_BURNING)) {
         play_sound(SOUND_MOVING_RIDING_SHELL_LAVA, m->marioObj->header.gfx.cameraToObject);
     } else {
         play_sound(SOUND_MOVING_TERRAIN_RIDING_SHELL + m->terrainSoundAddend,
@@ -1385,7 +1385,7 @@ s32 act_riding_kart(struct MarioState *m) {
     }
     
     if (m->forwardVel > 10.0f) {
-        if (m->floor->type == SURFACE_BURNING) {
+        if ((gCurrLevelNum == LEVEL_LLL && m->floor->type != SURFACE_BURNING) || (gCurrLevelNum != LEVEL_LLL && m->floor->type == SURFACE_BURNING)) {
             play_sound(SOUND_MOVING_RIDING_SHELL_LAVA, m->marioObj->header.gfx.cameraToObject);
         } else {
             play_sound(SOUND_MOVING_TERRAIN_RIDING_SHELL + m->terrainSoundAddend,
