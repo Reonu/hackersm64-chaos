@@ -63,6 +63,10 @@ enum SSLChaosNAmes {
     SSL_CHAOS_QUICKSAND_MAGNET,
 };
 
+enum WDWChaosNames {
+    WDW_CHAOS_WATER_LEVEL,
+};
+
 // A mark for exclusivity. Can only have one of thse effects active at a time.
 enum CodeFlags {
     CODEFLAG_NONE,
