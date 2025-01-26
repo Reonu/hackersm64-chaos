@@ -18,6 +18,14 @@ ALIGNED8 const Texture grass_09001000[] = {
 #include "textures/grass/wf_textures.01000.rgba16.inc.c"
 };
 
+ALIGNED8 const Texture grass_top_platform_betah[] = {
+#include "textures/grass/top_platform_betah.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture grass_side_platform_betah[] = {
+#include "textures/grass/side_platform_betah.rgba16.inc.c"
+};
+
 // 0x09001800
 ALIGNED8 const Texture grass_09001800[] = {
 #include "textures/grass/wf_textures.01800.rgba16.inc.c"
@@ -86,6 +94,10 @@ ALIGNED8 const Texture grass_09007800[] = {
 // 0x09008000
 ALIGNED8 const Texture grass_09008000[] = {
 #include "textures/grass/wf_textures.08000.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture grass_cobblestone_betah[] = {
+#include "textures/grass/cobblestone_betah.rgba16.inc.c"
 };
 
 // 0x09008800

@@ -60,7 +60,7 @@ static const Vtx wf_seg7_vertex_0700DCE0[] = {
 
 // 0x0700DD20 - 0x0700DDE8
 static const Gfx wf_seg7_dl_0700DD20[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09008000),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_cobblestone_betah),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLightColor(LIGHT_1, 0xffffffff),
@@ -82,7 +82,7 @@ static const Gfx wf_seg7_dl_0700DD20[] = {
 
 // 0x0700DDE8 - 0x0700DE20
 static const Gfx wf_seg7_dl_0700DDE8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, wf_seg7_texture_07002000),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, wf_seg7_texture_bomp_betah),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(wf_seg7_vertex_0700DCE0, 4, 0),

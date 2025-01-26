@@ -17,8 +17,10 @@ static const Vtx wf_seg7_vertex_0700EA80[] = {
 };
 
 // 0x0700EAC0 - 0x0700EB08
+extern const Texture grass_top_platform_betah[];
+extern const Texture grass_side_platform_betah[];
 static const Gfx wf_seg7_dl_0700EAC0[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09000800),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_side_platform_betah),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLightColor(LIGHT_1, 0xffffffff),
@@ -30,7 +32,7 @@ static const Gfx wf_seg7_dl_0700EAC0[] = {
 
 // 0x0700EB08 - 0x0700EB40
 static const Gfx wf_seg7_dl_0700EB08[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09001000),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_top_platform_betah),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(wf_seg7_vertex_0700EA80, 4, 0),

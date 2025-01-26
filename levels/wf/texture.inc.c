@@ -23,6 +23,10 @@ ALIGNED8 static const Texture wf_seg7_texture_07002000[] = {
 #include "levels/wf/4.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture wf_seg7_texture_bomp_betah[] = {
+#include "levels/wf/4_betah.rgba16.inc.c"
+};
+
 // 0x07002800 - 0x07002900
 ALIGNED8 static const Texture wf_seg7_texture_07002800[] = {
 #include "levels/wf/5.ia8.inc.c"

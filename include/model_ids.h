@@ -29,8 +29,9 @@
 #define MODEL_GIANT_DOOR                       0x113
 #define MODEL_SKEETER                          0x114       // skeeter_geo
 #define MODEL_BBH_WOODEN_PLATFORM              0X115
-#define MODEL_KOOPA_SHELL                 0x116
-#define MODEL_MEDUSA_HEAD                 0x117
+#define MODEL_KOOPA_SHELL                      0x116
+#define MODEL_MEDUSA_HEAD                      0x117
+#define MODEL_THWOMP_BETA                      0x118
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
 #define MODEL_LEVEL_GEOMETRY_03                0x03
