@@ -23,6 +23,7 @@
 #include "src/game/interaction.h"
 #include "sound_init.h"
 #include "mario.h"
+#include "game/spawn_sound.h"
 
 
 s32 nextGlobalCodeTimer = 150;
