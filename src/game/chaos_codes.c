@@ -274,6 +274,9 @@ void chaos_chain_chomp(void) {
 void chaos_thwomp(void) {
     struct Object *thwomp = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_THWOMP, bhvThwomp);
     thwomp->oBehParams = 0x01300000;
+    if (gCurrLevelNum == LEVEL_WF) {
+        obj_set_model(thwomp, MODEL_THWOMP_BETA);
+    }
     gChaosCodeTable[gCurrentChaosID].timer = 0;
     gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
