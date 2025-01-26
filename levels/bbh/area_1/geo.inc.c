@@ -3,13 +3,10 @@
 const GeoLayout bbh_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(6, geo_switch_area),
+		GEO_SWITCH_CASE(3, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, bbh_dl_0room1_geo),
 			GEO_BRANCH(1, bbh_dl_0room2_geo),
-			GEO_BRANCH(1, bbh_dl_21_GeoRoot_castle_courtyard_1_asm_geo),
-			GEO_BRANCH(1, bbh_dl_tree_013_geo),
-			GEO_BRANCH(1, bbh_dl_z_tower_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -43,10 +40,12 @@ const GeoLayout bbh_dl_0room1_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 22545, 0, 3327, bbh_dl_tree_010_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 23348, 0, -733, bbh_dl_tree_011_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 21574, 0, -3936, bbh_dl_tree_012_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 15993, 922, -6649, bbh_dl_tree_013_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 8557, 922, -6611, bbh_dl_tree_014_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 4926, 0, -4898, bbh_dl_tree_015_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, bbh_dl_Z_BG_left_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, bbh_dl_Z_BG_right_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 0, 7732, 10920, 90, 0, 0, bbh_dl_z_tower_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -54,27 +53,6 @@ const GeoLayout bbh_dl_0room2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, bbh_dl_inside_fountain_gfx_mesh_layer_1),
-	GEO_CLOSE_NODE(),
-	GEO_RETURN(),
-};
-const GeoLayout bbh_dl_21_GeoRoot_castle_courtyard_1_asm_geo[] = {
-	GEO_NODE_START(),
-	GEO_OPEN_NODE(),
-		GEO_ASM(ENVFX_MODE_NONE, geo_envfx_main),
-	GEO_CLOSE_NODE(),
-	GEO_RETURN(),
-};
-const GeoLayout bbh_dl_tree_013_geo[] = {
-	GEO_NODE_START(),
-	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 15993, 922, -6649, bbh_dl_tree_013_mesh_layer_1),
-	GEO_CLOSE_NODE(),
-	GEO_RETURN(),
-};
-const GeoLayout bbh_dl_z_tower_geo[] = {
-	GEO_NODE_START(),
-	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 0, 7732, 10920, 90, 0, 0, bbh_dl_z_tower_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
