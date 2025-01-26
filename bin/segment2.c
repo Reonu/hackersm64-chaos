@@ -32,6 +32,10 @@ ALIGNED8 const Texture mario_react[] = {
 #include "textures/segment2/custom_react.i8.inc.c"
 };
 
+ALIGNED8 const Texture law_star[] = {
+#include "textures/segment2/lawstar.i8.inc.c"
+};
+
 ALIGNED8 const Texture ad1[] = {
 #include "textures/segment2/custom_ad1.rgba16.inc.c"
 };

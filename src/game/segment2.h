@@ -27,6 +27,7 @@ extern Texture texture_waterbox_unknown_water[];
 extern Texture texture_waterbox_lava[];
 extern Texture retro_watermark[];
 extern Texture mario_react[];
+extern Texture law_star[];
 extern Texture ad1[];
 extern Texture ad2[];
 extern Texture ad3[];

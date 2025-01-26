@@ -559,14 +559,24 @@ void render_law_metre(void) {
     }
 
     s32 repeat = gCrimes / 100.0f;
-    s32 x = (SCREEN_WIDTH / 2) - 48;
+    s32 x = (SCREEN_WIDTH / 2) - 44;
+
+    gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
+    gDPSetTextureFilter(gDisplayListHead++, G_TF_POINT);
+    gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
+    gDPSetRenderMode(gDisplayListHead++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+    gDPSetCombineMode(gDisplayListHead++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+    gDPLoadTextureBlock(gDisplayListHead++, segmented_to_virtual(law_star), G_IM_FMT_I, G_IM_SIZ_8b, 16, 16, 0, 0, 0, 0, 0, 0, 0);
 
     for (int i = 0; i < 5; i++) {
         if (i >= repeat) {
-            print_text(x >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active, (240 - 48) >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active, "*");
+            gDPSetPrimColor(gDisplayListHead++, 0, 0, 0, 0, 0, 127);
         } else {
-            print_text(x >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active, (240 - 48) >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active, "^");
+            gDPSetPrimColor(gDisplayListHead++, 0, 0, 255, 255, 0, 192);
         }
+        gSPTextureRectangle(gDisplayListHead++, (x >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active) << 2, ((48) >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active) << 2, 
+        ((x + 16) >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active) << 2, ((48 + 16) >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active) << 2, G_TX_RENDERTILE, 0, 0, 
+        1024 << gChaosCodeTable[GLOBAL_CHAOS_RETRO].active, 1024 << gChaosCodeTable[GLOBAL_CHAOS_RETRO].active);
         x += 16;
     }
 }
@@ -627,10 +637,6 @@ void render_hud(void) {
             render_hud_keys();
         }
 
-        if (gChaosCodeTable[GLOBAL_CHAOS_LAW_METRE].active) {
-            render_law_metre();
-        }
-
 #ifdef BREATH_METER
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_BREATH_METER) render_hud_breath_meter();
 #endif
@@ -644,6 +650,10 @@ void render_hud(void) {
 #ifdef PUPPYCAM
             }
 #endif
+        }
+
+        if (gChaosCodeTable[GLOBAL_CHAOS_LAW_METRE].active) {
+            render_law_metre();
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_TIMER) {
