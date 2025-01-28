@@ -13,6 +13,8 @@ s16 sHeaveHoTimings[][2] = {
     {  -1, 0 },
 };
 
+#include "game/chaos_codes.h"
+
 void bhv_heave_ho_throw_mario_loop(void) {
     o->oParentRelativePosX = 200.0f;
     o->oParentRelativePosY = -50.0f;
@@ -28,7 +30,11 @@ void bhv_heave_ho_throw_mario_loop(void) {
             cur_obj_play_sound_2(SOUND_OBJ_HEAVEHO_TOSSED);
             gMarioObject->oInteractStatus |= INT_STATUS_MARIO_THROWN_BY_OBJ;
             gMarioStates[0].forwardVel = -45.0f;
-            gMarioStates[0].vel[1] = 95.0f;
+            if (gWDWChaosTable[WDW_CHAOS_HEAVE_HO_STRENGTH].active) {
+                gMarioStates[0].vel[1] = gHeaveHoStrength;
+            } else {
+                gMarioStates[0].vel[1] = 95.0f;
+            }
             o->parentObj->oHeaveHoThrowState = 0;
             break;
     }

@@ -65,6 +65,7 @@ enum SSLChaosNAmes {
 
 enum WDWChaosNames {
     WDW_CHAOS_WATER_LEVEL,
+    WDW_CHAOS_HEAVE_HO_STRENGTH,
 };
 
 // A mark for exclusivity. Can only have one of thse effects active at a time.
@@ -89,6 +90,7 @@ extern ChaosCode gChaosCodeTable[];
 extern ChaosCode gBoBChaosTable[];
 extern ChaosCode gTTCChaosTable[];
 extern ChaosCode gSSLChaosTable[];
+extern ChaosCode gWDWChaosTable[];
 extern u8 gDisableChaos;
 extern float gCrimes;
 extern u8 gChaosOffOverride;
@@ -99,6 +101,7 @@ extern u8 gPovActive;
 extern struct Object *gPovEnemy;
 extern struct Object *sMirrorGhost;
 extern s16 gPovPrevMode;
+extern f32 gHeaveHoStrength;
 
 void global_chaos_code_handler(void);
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize);
