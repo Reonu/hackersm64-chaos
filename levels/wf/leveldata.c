@@ -71,3 +71,4 @@
 #include "levels/wf/leveldata.inc.c"
 #include "levels/wf/beta_corner_wall_1/model.inc.c"
 #include "levels/wf/beta_corner_wall_2/model.inc.c"
+#include "levels/wf/thwomp_beta/model.inc.c"

@@ -21,6 +21,9 @@
 #include "src/game/object_list_processor.h"
 #include "include/seq_ids.h"
 #include "src/game/interaction.h"
+#include "sound_init.h"
+#include "mario.h"
+#include "game/spawn_sound.h"
 
 
 s32 nextGlobalCodeTimer = 150;
@@ -33,8 +36,10 @@ struct Object *gPovEnemy;
 s16 gPovPrevMode = -1;
 s16 gSpamCursorX;
 s16 gSpamCursorY;
+s16 gWaterLevelTarget;
 float gCrimes = 0;
 s32 gCrimeSpawnTimer;
+f32 gHeaveHoStrength;
 ChaosCode *gCurrentChaosTable;
 
 extern OSViMode VI;
@@ -145,6 +150,18 @@ void chaos_lawmetre(void) {
 void chaos_generic(void) {
     if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
         gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+    }
+    gCurrentChaosTable[gCurrentChaosID].timer--;
+    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
+        gCurrentChaosTable[gCurrentChaosID].timer = 0;
+        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
+void chaos_wdw_heaveho(void) {
+    if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
+        gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+        gHeaveHoStrength = absf(random_f32_around_zero(300.0f));
     }
     gCurrentChaosTable[gCurrentChaosID].timer--;
     if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
@@ -270,6 +287,9 @@ void chaos_chain_chomp(void) {
 void chaos_thwomp(void) {
     struct Object *thwomp = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_THWOMP, bhvThwomp);
     thwomp->oBehParams = 0x01300000;
+    if (gCurrLevelNum == LEVEL_WF) {
+        obj_set_model(thwomp, MODEL_THWOMP_BETA);
+    }
     gChaosCodeTable[gCurrentChaosID].timer = 0;
     gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
@@ -482,6 +502,8 @@ void chaos_random_cap(void) {
     gCurrentChaosTable[gCurrentChaosID].active = FALSE;
 }
 
+u32 attack_object(struct Object *obj, s32 interaction);
+
 void chaos_koopa_shell(void) {
     struct Object *obj =
         spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KOOPA_SHELL, bhvKoopaShell);
@@ -526,6 +548,41 @@ void chaos_random_jump(void) {
         gCurrentChaosTable[gCurrentChaosID].timer = 0;
         gCurrentChaosTable[gCurrentChaosID].active = FALSE;
     }
+}
+
+void chaos_wdw_water(void) {
+    if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
+        gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+        s32 min;
+        s32 max;
+        if (gCurrAreaIndex == 1) {
+            min = 40;
+            max = 2700;
+        } else {
+            min = 0;
+            max = 2635;
+        }
+        gWaterLevelTarget = random_u16() % (max - min);
+        if (gCurrAreaIndex == 2) {
+            gWaterLevelTarget -= max;
+        } else {
+            gWaterLevelTarget -= min;
+        }
+        append_puppyprint_log("water level changing to %d\n", gWaterLevelTarget);
+    }
+    if (gEnvironmentLevels[0] != gWaterLevelTarget) {
+        gEnvironmentLevels[0] = approach_s32(gEnvironmentLevels[0], gWaterLevelTarget, 10, 10);
+        cur_obj_play_sound_1(SOUND_ENV_WATER_DRAIN);
+    } else {
+        gCurrentChaosTable[gCurrentChaosID].timer = 0;
+        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+    }
+    if (gEnvironmentRegions == NULL) {
+        gCurrentChaosTable[gCurrentChaosID].timer = 0;
+        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+        return;
+    }
+
 }
 
 ChaosCode gChaosCodeTable[] = {
@@ -586,13 +643,18 @@ ChaosCode gBoBChaosTable[] = {
 };
 
 ChaosCode gTTCChaosTable[] = {
-    {"TTC Upwarp", chaos_ttc_upwarp, 20, 35, 0,   /*ignore these*/ 0, 0},
-    {"Medusa Heads", chaos_ttc_medusa_heads, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"TTC Upwarp", chaos_ttc_upwarp, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"Medusa Heads", chaos_ttc_medusa_heads, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gSSLChaosTable[] = {
     {"SSL Blizzard", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"SSL Quicksand Magnet", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
+};
+
+ChaosCode gWDWChaosTable[] = {
+    {"Random Water Level", chaos_wdw_water, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Heave Ho Strength", chaos_wdw_heaveho, 100, 20, 30, 0,   /*ignore these*/ 0, 0},
 };
 
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
@@ -628,6 +690,9 @@ ChaosCode *chaos_level_table(s32 levelID, s32 *size) {
     case LEVEL_TTC:
         *size = sizeof(gTTCChaosTable) / sizeof(ChaosCode);
         return gTTCChaosTable;
+    case LEVEL_WDW:
+        *size = sizeof(gWDWChaosTable) / sizeof(ChaosCode);
+        return gWDWChaosTable;
     case LEVEL_SSL:
         if (gCurrAreaIndex == 1) {
             *size = sizeof(gSSLChaosTable) / sizeof(ChaosCode);

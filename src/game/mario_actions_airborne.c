@@ -74,7 +74,7 @@ s32 check_fall_damage(struct MarioState *m, u32 hardFallAction) {
         damageHeight = 100;
     }
 
-    if (m->action != ACT_TWIRLING && m->floor->type != SURFACE_BURNING) {
+    if (m->action != ACT_TWIRLING && ((gCurrLevelNum == LEVEL_LLL && m->floor->type == SURFACE_BURNING) || (gCurrLevelNum != LEVEL_LLL && m->floor->type != SURFACE_BURNING))) {
         if ((m->vel[1] < -55.0f) || (gChaosCodeTable[GLOBAL_CHAOS_FALL_DAMAGE].active)) {
             if ((fallHeight > FALL_DAMAGE_HEIGHT_LARGE) || 
             ((gChaosCodeTable[GLOBAL_CHAOS_FALL_DAMAGE].active) && fallHeight > chaosLargeDamageHeight)) {
@@ -1513,7 +1513,7 @@ s32 act_lava_boost(struct MarioState *m) {
 
     switch (perform_air_step(m, 0)) {
         case AIR_STEP_LANDED:
-            if (m->floor->type == SURFACE_BURNING) {
+            if ((gCurrLevelNum == LEVEL_LLL && m->floor->type != SURFACE_BURNING) || (gCurrLevelNum != LEVEL_LLL && m->floor->type == SURFACE_BURNING)) {
                 m->actionState = ACT_STATE_LAVA_BOOST_HIT_LAVA;
                 if (!(m->flags & MARIO_METAL_CAP)) {
                     m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;

@@ -105,4 +105,6 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/beta_corner_wall_2/geo_header.h"
 
+#include "levels/wf/thwomp_beta/geo_header.h"
+
 #endif

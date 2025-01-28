@@ -80,6 +80,9 @@ static const LevelScript script_func_local_4[] = {
     OBJECT(/*model*/ MODEL_NONE,            /*pos*/  5423,    2, -1991, /*angle*/ 0, 315, 0, /*behParam*/ 0x00000000, /*beh*/ bhvBouncingFireball),
     OBJECT(/*model*/ MODEL_NONE,            /*pos*/  4921,    2, -1504, /*angle*/ 0,  90, 0, /*behParam*/ 0x00000000, /*beh*/ bhvBouncingFireball),
     OBJECT_WITH_ACTS(/*model*/ MODEL_EXCLAMATION_BOX, /*pos*/  1050,  550,  6200, /*angle*/ 0,   0, 0, /*behParam*/ 0x00030000, /*beh*/ bhvExclamationBox, /*acts*/ ACT_5 | ACT_6),
+    OBJECT(/*model*/ MODEL_EXCLAMATION_BOX, /*pos*/  1484,  300,  7365, /*angle*/ 0,   0, 0, /*behParam*/ 0x00030000, /*beh*/ bhvExclamationBox),
+    OBJECT(/*model*/ MODEL_EXCLAMATION_BOX, /*pos*/  1833,  300,  -1829, /*angle*/ 0,   0, 0, /*behParam*/ 0x00030000, /*beh*/ bhvExclamationBox),
+    OBJECT(/*model*/ MODEL_EXCLAMATION_BOX, /*pos*/  -6897,  300,  1691, /*angle*/ 0,   0, 0, /*behParam*/ 0x00030000, /*beh*/ bhvExclamationBox),
     RETURN(),
 };
 
@@ -104,6 +107,9 @@ static const LevelScript script_func_local_6[] = {
     OBJECT(/*model*/ MODEL_CHECKERBOARD_PLATFORM,        /*pos*/  -764,    0,  1664, /*angle*/ 0, 180, 0, /*behParam*/ 0x08A50000, /*beh*/ bhvPlatformOnTrack),
     OBJECT(/*model*/ MODEL_CHECKERBOARD_PLATFORM,        /*pos*/   184,  980, -1366, /*angle*/ 0, 180, 0, /*behParam*/ 0x08A60000, /*beh*/ bhvPlatformOnTrack),
     OBJECT(/*model*/ MODEL_NONE,                         /*pos*/   -26,  103, -2649, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvVolcanoSoundLoop),
+    OBJECT(/*model*/ MODEL_EXCLAMATION_BOX, /*pos*/  -964,  300,  -2114, /*angle*/ 0,   0, 0, /*behParam*/ 0x00030000, /*beh*/ bhvExclamationBox),
+    OBJECT(/*model*/ MODEL_EXCLAMATION_BOX, /*pos*/  -40,  300,  -172, /*angle*/ 0,   0, 0, /*behParam*/ 0x00030000, /*beh*/ bhvExclamationBox),
+    OBJECT(/*model*/ MODEL_EXCLAMATION_BOX, /*pos*/  -2267,  300,  344, /*angle*/ 0,   0, 0, /*behParam*/ 0x00030000, /*beh*/ bhvExclamationBox),
     RETURN(),
 };
 

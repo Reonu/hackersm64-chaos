@@ -50,8 +50,6 @@ void bhv_flamethrower_flame_loop(void) {
 }
 
 void bhv_flamethrower_loop(void) {
-    int i;
- 
     if (o->oAction == FLAMETHROWER_ACT_IDLE) {
         if (gCurrLevelNum != LEVEL_BBH || gCurrAreaIndex != 3 || gFlameCounter < 50) // is "(gCurrLevelNum != LEVEL_BBH || gMarioOnMerryGoRound)" in vanilla
         {

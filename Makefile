@@ -571,7 +571,7 @@ endif
 ifneq (,$(call find-command,wslview))
     EMULATOR = "/mnt/c/Program Files (x86)/parallel-launcher/parallel-launcher.exe"
 else
-    EMULATOR = RMG
+    EMULATOR = parallel-launcher
 endif
 
 EMU_FLAGS =
@@ -629,6 +629,9 @@ distclean: clean
 
 test: $(ROM)
 	$(EMULATOR) $(EMU_FLAGS) $<
+
+test_ares: $(ROM)
+	/Applications/ares.app/Contents/MacOS/ares "./build/us_n64/superbetarecreation.z64"
 
 test-pj64: $(ROM)
 	wine ~/Desktop/new64/Project64.exe $<
