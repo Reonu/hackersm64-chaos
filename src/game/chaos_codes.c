@@ -312,9 +312,9 @@ void chaos_ttc_medusa_heads(void) {
     
     if (gGlobalTimer % 45 == 0) {
         spawn_object_abs_with_rot(gMarioState->marioObj, 0, MODEL_MEDUSA_HEAD, bhvMedusaHead, 
-            gMarioState->pos[0] + 1000*sins(gCamera->yaw),
+            gMarioState->pos[0] + -1000*sins(gCamera->yaw + 0x4000),
             gMarioState->pos[1] + random_u16()%300,
-            gMarioState->pos[2] + 1000*coss(gCamera->yaw),
+            gMarioState->pos[2] + -1000*coss(gCamera->yaw + 0x4000),
             0,
             gCamera->yaw + 0x4000, 0);
     }

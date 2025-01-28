@@ -22,11 +22,11 @@ void bhv_medusa_head_loop(void) {
     obj_set_hitbox(o, &sMedusaHeadHitbox);
     o->oInteractStatus = 0;
 
-    if ((o->oTimer / 20)%2 == 0 ) {
-        o->oFaceAngleRoll = 0x1500;
-    }
-    else {
-        o->oFaceAngleRoll = -0x1500;
+    
+    o->oFaceAngleRoll = 0x1500 * sins(o->oTimer * 0x300);
+
+    if (o->oTimer >= 300) {
+        obj_mark_for_deletion(o);
     }
 }
 
