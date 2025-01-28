@@ -39,6 +39,7 @@ s16 gSpamCursorY;
 s16 gWaterLevelTarget;
 float gCrimes = 0;
 s32 gCrimeSpawnTimer;
+f32 gHeaveHoStrength;
 ChaosCode *gCurrentChaosTable;
 
 extern OSViMode VI;
@@ -149,6 +150,18 @@ void chaos_lawmetre(void) {
 void chaos_generic(void) {
     if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
         gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+    }
+    gCurrentChaosTable[gCurrentChaosID].timer--;
+    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
+        gCurrentChaosTable[gCurrentChaosID].timer = 0;
+        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
+void chaos_wdw_heaveho(void) {
+    if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
+        gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+        gHeaveHoStrength = absf(random_f32_around_zero(300.0f));
     }
     gCurrentChaosTable[gCurrentChaosID].timer--;
     if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
@@ -641,6 +654,7 @@ ChaosCode gSSLChaosTable[] = {
 
 ChaosCode gWDWChaosTable[] = {
     {"Random Water Level", chaos_wdw_water, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Heave Ho Strength", chaos_wdw_heaveho, 100, 20, 30, 0,   /*ignore these*/ 0, 0},
 };
 
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
