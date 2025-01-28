@@ -924,19 +924,7 @@ void obj_mark_for_deletion(struct Object *obj) {
     //! NOTE: Changing this can cause reference issues!
     if (gChaosCodeTable[GLOBAL_CHAOS_CHUCKYA_ON_OBJECT_DELETION].active) {
         //spawn_object_abs_with_rot(gMarioState->marioObj, 0, MODEL_CHUCKYA, bhvChuckya, obj->oPosX, obj->oPosY, obj->oPosZ, 0, 0, 0);
-        if (obj->behavior != segmented_to_virtual(bhvSmallParticle) 
-        && obj->behavior != segmented_to_virtual(bhvSmallParticleBubbles) 
-        && obj->behavior != segmented_to_virtual(bhvSmallParticleSnow)
-        && obj->behavior != segmented_to_virtual(bhvPurpleParticle)
-        && obj->behavior != segmented_to_virtual(bhvMrIParticle)
-        && obj->behavior != segmented_to_virtual(bhvSmoke)
-        && obj->behavior != segmented_to_virtual(bhvWhitePuff1)
-        && obj->behavior != segmented_to_virtual(bhvWhitePuff2)
-        && obj->behavior != segmented_to_virtual(bhvWhitePuffExplosion)
-        && obj->behavior != segmented_to_virtual(bhvWhitePuffSmoke2)
-        && obj->behavior != segmented_to_virtual(bhvWhitePuffSmoke)
-        && obj->behavior != segmented_to_virtual(bhvChuckya)
-        && obj->behavior != segmented_to_virtual(bhvChuckyaAnchorMario)
+        if (!(obj->oFlags & OBJ_FLAG_DO_NOT_SPAWN_ENEMY) 
         && !cur_obj_has_model(MODEL_WHITE_PARTICLE)
         && !cur_obj_has_model(MODEL_WHITE_PARTICLE_DL)
         && !cur_obj_has_model(MODEL_WHITE_PARTICLE_SMALL)

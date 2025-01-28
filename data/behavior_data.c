@@ -432,7 +432,7 @@ const BehaviorScript bhvMrIIris[] = {
 const BehaviorScript bhvMrIParticle[] = {
     BEGIN(OBJ_LIST_LEVEL),
     BILLBOARD(),
-    OR_INT(oFlags, (OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DO_NOT_SPAWN_ENEMY)),
     SET_INT(oIntangibleTimer, 0),
     SET_HITBOX(50, 50),
     SET_INT(oDamageOrCoinValue, 1),
@@ -447,7 +447,7 @@ const BehaviorScript bhvMrIParticle[] = {
 const BehaviorScript bhvPurpleParticle[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),
     BILLBOARD(),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DO_NOT_SPAWN_ENEMY)),
     BEGIN_REPEAT(10),
         CALL_NATIVE(bhv_piranha_particle_loop),
     END_REPEAT(),
@@ -640,7 +640,7 @@ const BehaviorScript bhvWaterAirBubble[] = {
 const BehaviorScript bhvSmallParticle[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),
     BILLBOARD(),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DO_NOT_SPAWN_ENEMY)),
     CALL_NATIVE(bhv_particle_init),
     BEGIN_REPEAT(70),
         CALL_NATIVE(bhv_particle_loop),
@@ -659,7 +659,7 @@ const BehaviorScript bhvPlungeBubble[] = {
 const BehaviorScript bhvSmallParticleSnow[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),
     BILLBOARD(),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DO_NOT_SPAWN_ENEMY)),
     CALL_NATIVE(bhv_particle_init),
     BEGIN_REPEAT(30),
         CALL_NATIVE(bhv_particle_loop),
@@ -670,7 +670,7 @@ const BehaviorScript bhvSmallParticleSnow[] = {
 const BehaviorScript bhvSmallParticleBubbles[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),
     BILLBOARD(),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DO_NOT_SPAWN_ENEMY)),
     CALL_NATIVE(bhv_particle_init),
     BEGIN_REPEAT(70),
         CALL_NATIVE(bhv_small_bubbles_loop),
@@ -722,7 +722,7 @@ const BehaviorScript bhvCannonBaseUnused[] = {
 
 const BehaviorScript bhvChuckya[] = {
     BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, (OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DO_NOT_SPAWN_ENEMY)),
     LOAD_ANIMATIONS(oAnimations, chuckya_seg8_anims_0800C070),
     ANIMATE(CHUCKYA_ANIM_SPAWN),
     SET_INT(oInteractType, INTERACT_GRABBABLE),
@@ -739,7 +739,7 @@ const BehaviorScript bhvChuckya[] = {
 
 const BehaviorScript bhvChuckyaAnchorMario[] = {
     BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DO_NOT_SPAWN_ENEMY)),
     BILLBOARD(),
     SET_FLOAT(oParentRelativePosY, -60),
     SET_FLOAT(oParentRelativePosZ, 150),
@@ -896,7 +896,7 @@ const BehaviorScript bhvWarpPipe[] = {
 
 const BehaviorScript bhvWhitePuffExplosion[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DO_NOT_SPAWN_ENEMY)),
     BILLBOARD(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_white_puff_exploding_loop),
@@ -1976,7 +1976,7 @@ const BehaviorScript bhvBulletBill[] = {
 
 const BehaviorScript bhvWhitePuffSmoke[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DO_NOT_SPAWN_ENEMY)),
     BILLBOARD(),
     ADD_FLOAT(oPosY, -100),
     CALL_NATIVE(bhv_white_puff_smoke_init),
@@ -2785,7 +2785,7 @@ const BehaviorScript bhvMistParticleSpawner[] = {
 const BehaviorScript bhvWhitePuff1[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     PARENT_BIT_CLEAR(oActiveParticleFlags, ACTIVE_PARTICLE_DUST),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DO_NOT_SPAWN_ENEMY)),
     BILLBOARD(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_white_puff_1_loop),
@@ -2794,7 +2794,7 @@ const BehaviorScript bhvWhitePuff1[] = {
 
 const BehaviorScript bhvWhitePuff2[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),
-    OR_INT(oFlags, (OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DO_NOT_SPAWN_ENEMY)),
     BILLBOARD(),
     SET_INT(oAnimState, OBJ_ANIM_STATE_INIT_ANIM),
     BEGIN_REPEAT(7),
@@ -2806,7 +2806,7 @@ const BehaviorScript bhvWhitePuff2[] = {
 
 const BehaviorScript bhvWhitePuffSmoke2[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DO_NOT_SPAWN_ENEMY)),
     BILLBOARD(),
     SET_INT(oAnimState, OBJ_ANIM_STATE_INIT_ANIM),
     BEGIN_REPEAT(7),
@@ -3948,7 +3948,7 @@ const BehaviorScript bhvBobombBullyDeathSmoke[] = {
 
 const BehaviorScript bhvSmoke[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),
-    OR_INT(oFlags, (OBJ_FLAG_MOVE_Y_WITH_TERMINAL_VEL | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_MOVE_Y_WITH_TERMINAL_VEL | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DO_NOT_SPAWN_ENEMY)),
     BILLBOARD(),
     SET_INT(oAnimState, OBJ_ANIM_STATE_INIT_ANIM),
     DELAY(1),
