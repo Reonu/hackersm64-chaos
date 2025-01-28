@@ -646,6 +646,7 @@ ChaosCode gBoBChaosTable[] = {
 ChaosCode gTTCChaosTable[] = {
     {"TTC Upwarp", chaos_ttc_upwarp, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"Medusa Heads", chaos_ttc_medusa_heads, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"Objects Catch Mario", chaos_generic, 100, 20, 45, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gSSLChaosTable[] = {

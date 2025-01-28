@@ -1893,6 +1893,26 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         obj_set_model(gMarioObject, MODEL_MARIO);
     }
 
+    
+    //i'm so sorry
+    if (gCurrLevelNum == LEVEL_TTC && gTTCChaosTable[TTC_CHAOS_OBJECTS_CATCH_MARIO].active) {
+        struct ObjectNode *objList = &gObjectLists[OBJ_LIST_SURFACE];
+        struct ObjectNode *firstObj = objList->next;
+        struct Object *moveObj;
+        s32 count = 0;
+
+        while (objList != firstObj) {
+            moveObj = (struct Object *) firstObj;
+            if (moveObj->oPosY < gMarioState->pos[1]) {
+                moveObj->oPosX = approach_f32_symmetric(moveObj->oPosX, gMarioState->pos[0], 20.0f);
+                moveObj->oPosZ = approach_f32_symmetric(moveObj->oPosZ, gMarioState->pos[2], 20.0f);
+            }
+
+            firstObj = firstObj->next;
+            count++;
+        }
+    }
+
     // enemy tracker in area 22 of BBH
     if (gCurrLevelNum == LEVEL_BBH && gCurrAreaIndex == 2) {
         int enemyCounter = 0;

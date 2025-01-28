@@ -69,6 +69,12 @@ enum WDWChaosNames {
     WDW_CHAOS_HEAVE_HO_STRENGTH,
 };
 
+enum TTCChaosNames {
+    TTC_CHAOS_UPWARP,
+    TTC_CHAOS_MEDUSA_HEADS,
+    TTC_CHAOS_OBJECTS_CATCH_MARIO
+};
+
 // A mark for exclusivity. Can only have one of thse effects active at a time.
 enum CodeFlags {
     CODEFLAG_NONE,
