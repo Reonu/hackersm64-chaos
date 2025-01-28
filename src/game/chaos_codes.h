@@ -48,6 +48,7 @@ enum GlobalChaosNames {
     GLOBAL_CHAOS_ORTHO_CAM,
     GLOBAL_CHAOS_NEXT_LONG_JUMP_GP,
     GLOBAL_CHAOS_RANDOM_JUMP,
+    GLOBAL_CHAOS_MARIO_SOUNDS_RANDOM_BANK,
     GLOBAL_CHAOS_CHUCKYA_ON_OBJECT_DELETION
 };
 
@@ -67,6 +68,12 @@ enum SSLChaosNAmes {
 enum WDWChaosNames {
     WDW_CHAOS_WATER_LEVEL,
     WDW_CHAOS_HEAVE_HO_STRENGTH,
+};
+
+enum TTCChaosNames {
+    TTC_CHAOS_UPWARP,
+    TTC_CHAOS_MEDUSA_HEADS,
+    TTC_CHAOS_OBJECTS_CATCH_MARIO
 };
 
 // A mark for exclusivity. Can only have one of thse effects active at a time.

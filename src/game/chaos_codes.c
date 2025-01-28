@@ -332,9 +332,9 @@ void chaos_ttc_medusa_heads(void) {
     
     if (gGlobalTimer % 45 == 0) {
         spawn_object_abs_with_rot(gMarioState->marioObj, 0, MODEL_MEDUSA_HEAD, bhvMedusaHead, 
-            gMarioState->pos[0] + 1000*sins(gCamera->yaw),
+            gMarioState->pos[0] + -1000*sins(gCamera->yaw + 0x4000),
             gMarioState->pos[1] + random_u16()%300,
-            gMarioState->pos[2] + 1000*coss(gCamera->yaw),
+            gMarioState->pos[2] + -1000*coss(gCamera->yaw + 0x4000),
             0,
             gCamera->yaw + 0x4000, 0);
     }
@@ -632,6 +632,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Ortho Cam", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Long Jump GP", chaos_next_long_jump_gp, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Random Jump", chaos_random_jump, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Mario Random Bank", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Chuckya on Object Deletion", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
 };
 
@@ -646,6 +647,7 @@ ChaosCode gBoBChaosTable[] = {
 ChaosCode gTTCChaosTable[] = {
     {"TTC Upwarp", chaos_ttc_upwarp, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"Medusa Heads", chaos_ttc_medusa_heads, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"Objects Catch Mario", chaos_generic, 100, 20, 45, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gSSLChaosTable[] = {

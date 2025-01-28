@@ -16,6 +16,7 @@
 #include "seq_ids.h"
 #include "dialog_ids.h"
 
+#include "src/game/chaos_codes.h"
 #include "config/config_audio.h"
 
 // N.B. sound banks are different from the audio banks referred to in other
@@ -713,6 +714,15 @@ static void process_sound_request(u32 bits, f32 *pos) {
 
     if (sSoundBankDisabled[bank]) {
         return;
+    }
+
+    if (gChaosCodeTable[GLOBAL_CHAOS_MARIO_SOUNDS_RANDOM_BANK].active) {
+        if (bank == SOUND_BANK_VOICE) {
+            bank = random_u16() % SOUND_BANK_NEW;
+            //if (bank == SOUND_BANK_ENV) {
+            //    bank = SOUND_BANK_ACTION;
+            //}
+        }
     }
 
     s32 soundIndex = sSoundBanks[bank][0].next;

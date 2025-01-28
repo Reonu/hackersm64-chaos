@@ -282,11 +282,23 @@ void play_sound_if_no_flag(struct MarioState *m, u32 soundBits, u32 flags) {
 void play_mario_jump_sound(struct MarioState *m) {
     if (!(m->flags & MARIO_MARIO_SOUND_PLAYED)) {
         if (m->action == ACT_TRIPLE_JUMP) {
-            play_sound(SOUND_MARIO_YAHOO_WAHA_YIPPEE + ((gAudioRandom % 5) << 16),
+            if (gChaosCodeTable[GLOBAL_CHAOS_MARIO_SOUNDS_RANDOM_BANK].active) {
+                play_sound(SOUND_MARIO_YAHOO,
                        m->marioObj->header.gfx.cameraToObject);
+            }
+            else {
+                play_sound(SOUND_MARIO_YAHOO_WAHA_YIPPEE + ((gAudioRandom % 5) << 16),
+                        m->marioObj->header.gfx.cameraToObject);
+            }
         } else {
+            if (gChaosCodeTable[GLOBAL_CHAOS_MARIO_SOUNDS_RANDOM_BANK].active) {
+                play_sound(SOUND_MARIO_PUNCH_YAH,
+                       m->marioObj->header.gfx.cameraToObject);
+            }
+            else {
             play_sound(SOUND_MARIO_YAH_WAH_HOO + ((gAudioRandom % 3) << 16),
                        m->marioObj->header.gfx.cameraToObject);
+            }
         }
         m->flags |= MARIO_MARIO_SOUND_PLAYED;
     }
@@ -1880,6 +1892,26 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         obj_set_model(gMarioObject, MODEL_MARIO_BILLBOARD);
     } else {
         obj_set_model(gMarioObject, MODEL_MARIO);
+    }
+
+    
+    //i'm so sorry
+    if (gCurrLevelNum == LEVEL_TTC && gTTCChaosTable[TTC_CHAOS_OBJECTS_CATCH_MARIO].active) {
+        struct ObjectNode *objList = &gObjectLists[OBJ_LIST_SURFACE];
+        struct ObjectNode *firstObj = objList->next;
+        struct Object *moveObj;
+        s32 count = 0;
+
+        while (objList != firstObj) {
+            moveObj = (struct Object *) firstObj;
+            if (moveObj->oPosY < gMarioState->pos[1]) {
+                moveObj->oPosX = approach_f32_symmetric(moveObj->oPosX, gMarioState->pos[0], 20.0f);
+                moveObj->oPosZ = approach_f32_symmetric(moveObj->oPosZ, gMarioState->pos[2], 20.0f);
+            }
+
+            firstObj = firstObj->next;
+            count++;
+        }
     }
 
     // enemy tracker in area 22 of BBH
