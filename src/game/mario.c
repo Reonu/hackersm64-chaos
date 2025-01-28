@@ -1863,6 +1863,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     s32 inLoop = TRUE;
     int i = 0;
     int i2 = 0;
+    int i3 = 0;
     global_chaos_code_handler();
 
     // Updates once per frame:
@@ -1928,6 +1929,23 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                 gFlameCounter++;
             }
         }   
+    }
+
+    if (gChaosCodeTable[GLOBAL_CHAOS_CHUCKYA_ON_OBJECT_DELETION].active) {
+        for (i3 = 0; i3 < OBJECT_POOL_CAPACITY; i3++) {
+            struct Object *curObj = &gObjectPool[i3];
+            if (i3 == 0) {
+                gChuckyaCounter = 0;
+            }
+            if (curObj == NULL) {
+                break;
+            }
+            if (curObj->activeFlags & ACTIVE_FLAG_ACTIVE && curObj->behavior == segmented_to_virtual(bhvChuckya) && curObj->oBehParams == CHUCKYA_BP_CHAOS) {
+                gChuckyaCounter++;
+            }
+        }   
+    } else {
+        gChuckyaCounter = 0;
     }
 
 

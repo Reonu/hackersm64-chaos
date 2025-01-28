@@ -51,6 +51,7 @@ extern struct GfxPool *gGfxPool;
 extern u8 gControllerBits;
 extern u8 gBorderHeight;
 extern u16 gFlameCounter;
+extern u16 gChuckyaCounter;
 #ifdef VANILLA_STYLE_CUSTOM_DEBUG
 extern u8 gCustomDebugMode;
 #endif

@@ -26,6 +26,7 @@
 #include "rendering_graph_node.h"
 #include "spawn_object.h"
 #include "spawn_sound.h"
+#include "chaos_codes.h"
 
 static s32 clear_move_flag(u32 *bitSet, s32 flag);
 
@@ -921,6 +922,33 @@ void obj_mark_for_deletion(struct Object *obj) {
     //  object is marked for deletion, it still updates on that frame (I think),
     //  so this is worth looking into.
     //! NOTE: Changing this can cause reference issues!
+    if (gChaosCodeTable[GLOBAL_CHAOS_CHUCKYA_ON_OBJECT_DELETION].active) {
+        //spawn_object_abs_with_rot(gMarioState->marioObj, 0, MODEL_CHUCKYA, bhvChuckya, obj->oPosX, obj->oPosY, obj->oPosZ, 0, 0, 0);
+        if (obj->behavior != segmented_to_virtual(bhvSmallParticle) 
+        && obj->behavior != segmented_to_virtual(bhvSmallParticleBubbles) 
+        && obj->behavior != segmented_to_virtual(bhvSmallParticleSnow)
+        && obj->behavior != segmented_to_virtual(bhvPurpleParticle)
+        && obj->behavior != segmented_to_virtual(bhvMrIParticle)
+        && obj->behavior != segmented_to_virtual(bhvSmoke)
+        && obj->behavior != segmented_to_virtual(bhvWhitePuff1)
+        && obj->behavior != segmented_to_virtual(bhvWhitePuff2)
+        && obj->behavior != segmented_to_virtual(bhvWhitePuffExplosion)
+        && obj->behavior != segmented_to_virtual(bhvWhitePuffSmoke2)
+        && obj->behavior != segmented_to_virtual(bhvWhitePuffSmoke)
+        && obj->behavior != segmented_to_virtual(bhvChuckya)
+        && obj->behavior != segmented_to_virtual(bhvChuckyaAnchorMario)
+        && !cur_obj_has_model(MODEL_WHITE_PARTICLE)
+        && !cur_obj_has_model(MODEL_WHITE_PARTICLE_DL)
+        && !cur_obj_has_model(MODEL_WHITE_PARTICLE_SMALL)
+        && !cur_obj_has_model(MODEL_RED_FLAME)
+        && !cur_obj_has_model(MODEL_SAND_DUST)
+        && gObjectCounter < (OBJECT_POOL_CAPACITY - 10)
+        && gChuckyaCounter < 10) {
+            struct Object *chuckya = spawn_object_abs_with_rot(gMarioState->marioObj, 0, MODEL_CHUCKYA, bhvChuckya, obj->oPosX, obj->oPosY, obj->oPosZ, 0, 0, 0);
+            chuckya->oBehParams = CHUCKYA_BP_CHAOS;
+        }
+    }
+
     obj->activeFlags = ACTIVE_FLAG_DEACTIVATED;
 }
 

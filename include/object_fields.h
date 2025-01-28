@@ -1341,6 +1341,7 @@ os16112*/
 #define /*0x104*/ oAnimationIndex                               OBJECT_FIELD_S32(0x1F)
 #define /*0x110*/ oPrimRGB                                      OBJECT_FIELD_S32(0x22)
 
-#define /*0x110*/ oNuked                                        OBJECT_FIELD_S32(0x50)
+#define           oNuked                                        OBJECT_FIELD_S32(0x50)
+#define           oChaosTimer                                   OBJECT_FIELD_S32(0x51)
 
 #endif // OBJECT_FIELDS_H

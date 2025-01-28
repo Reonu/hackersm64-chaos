@@ -1,6 +1,7 @@
 // chuckya.inc.c
 
 #include "game/chaos_codes.h"
+#include "game/print.h"
 
 void common_anchor_mario_behavior(f32 forwardVel, f32 yVel, s32 flag) {
     switch (o->parentObj->oCommonAnchorAction) {
@@ -195,6 +196,13 @@ void bhv_chuckya_loop(void) {
     }
 
     o->oInteractStatus = INT_STATUS_NONE;
+
+    if (o->oBehParams == CHUCKYA_BP_CHAOS) {
+        if (o->oChaosTimer > 300 && o->oAction != CHUCKYA_ACT_GRABBED_MARIO) {
+            mark_obj_for_deletion(o);
+        }
+        o->oDrawingDistance = 6000;
+    }
 
     print_debug_bottom_up("md %d", o->oAction);
 }

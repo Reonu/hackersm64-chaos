@@ -2715,4 +2715,6 @@ enum gCutsceneObjSpawns {
     CUTSCENE_OBJ_2_END_BIRDS_1
 };
 
+#define CHUCKYA_BP_CHAOS 0xFF000000
+
 #endif // OBJECT_CONSTANTS_H

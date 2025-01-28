@@ -632,6 +632,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Ortho Cam", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Long Jump GP", chaos_next_long_jump_gp, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Random Jump", chaos_random_jump, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Chuckya on Object Deletion", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
