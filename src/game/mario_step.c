@@ -530,7 +530,7 @@ s32 perform_air_quarter_step(struct MarioState *m, Vec3f intendedPos, u32 stepAr
             // Grab ceiling unless they just were grabbing a ceiling
             if (!(m->prevAction & ACT_FLAG_HANGING) && ceil != NULL && ceil->type == SURFACE_HANGABLE) {
 #else
-            if ((stepArg & AIR_STEP_CHECK_HANG) && ceil != NULL && ceil->type == SURFACE_HANGABLE) {
+            if ((stepArg & AIR_STEP_CHECK_HANG) && ceil != NULL && (ceil->type == SURFACE_HANGABLE || gChaosCodeTable[GLOBAL_CHAOS_ALL_CEILINGS_HANGABLE].active)) {
 #endif
                 return AIR_STEP_GRABBED_CEILING;
             }
