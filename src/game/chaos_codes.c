@@ -98,7 +98,9 @@ void chaos_upside_down_camera(void) {
 }
 
 void chaos_mario_kart(void) {
-    if (!((gMarioState->action & ACT_GROUP_MASK) >= ACT_GROUP_AIRBORNE && (gMarioState->action & ACT_GROUP_MASK) < (ACT_HOLD_JUMP & ACT_ID_MASK))) {
+    if (!((gMarioState->action & ACT_GROUP_MASK) >= ACT_GROUP_AIRBORNE && 
+    (gMarioState->action & ACT_GROUP_MASK) < (ACT_HOLD_JUMP & ACT_ID_MASK)) &&
+    (gMarioState->action & ACT_GROUP_MASK) != ACT_GROUP_SUBMERGED) {
         if (gMarioState->action != ACT_RIDING_KART) {
             spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
         }
