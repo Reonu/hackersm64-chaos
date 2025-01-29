@@ -50,6 +50,20 @@ u8 buffer_code_until_grounded_out_of_water() {
     (gMarioState->action & ACT_GROUP_MASK) != ACT_GROUP_SUBMERGED;
 }
 
+void disable_current_code(void) {
+    gCurrentChaosTable[gCurrentChaosID].timer = 0;
+    gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+}
+
+u8 current_code_update_timer(void) {
+    gCurrentChaosTable[gCurrentChaosID].timer--;
+    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
+        disable_current_code();
+        return TRUE;
+    }
+    return FALSE;
+}
+
 void chaos_cannon(void) {
     struct Object *cannon = spawn_object_relative(0, 0, 300, 0, gMarioState->marioObj, MODEL_NONE, bhvCannon);
     SET_BPARAM1(cannon->oBehParams, CHAOS_CODE_BPARAM);
@@ -69,11 +83,8 @@ void chaos_retro(void) {
         gChaosCodeTable[gCurrentChaosID].active = TRUE;
         change_vi(&VI, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
     }
-    gChaosCodeTable[gCurrentChaosID].timer--;
-    if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
+    if (current_code_update_timer()) {
         change_vi(&VI, SCREEN_WIDTH, SCREEN_HEIGHT);
-        gChaosCodeTable[gCurrentChaosID].timer = 0;
-        gChaosCodeTable[gCurrentChaosID].active = FALSE;
     }
 }
 
@@ -82,12 +93,7 @@ void chaos_blur(void) {
         gChaosCodeTable[gCurrentChaosID].active = TRUE;
         set_fb_effect_type(FBE_EFFECT_MULT);
     }
-    set_motion_blur(32);
-    gChaosCodeTable[gCurrentChaosID].timer--;
-    if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
-        gChaosCodeTable[gCurrentChaosID].timer = 0;
-        gChaosCodeTable[gCurrentChaosID].active = FALSE;
-    }
+    current_code_update_timer();
 }
 
 void chaos_upside_down_camera(void) {
@@ -95,11 +101,8 @@ void chaos_upside_down_camera(void) {
         gChaosCodeTable[gCurrentChaosID].active = TRUE;
     }
     sFOVState.fovFunc = CAM_FOV_SET_315;
-    gChaosCodeTable[gCurrentChaosID].timer--;
-    if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
+    if (current_code_update_timer()) {
         sFOVState.fovFunc = CAM_FOV_DEFAULT;
-        gChaosCodeTable[gCurrentChaosID].timer = 0;
-        gChaosCodeTable[gCurrentChaosID].active = FALSE;
     }
 }
 
@@ -108,8 +111,7 @@ void chaos_mario_kart(void) {
         if (gMarioState->action != ACT_RIDING_KART) {
             spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
         }
-        gChaosCodeTable[gCurrentChaosID].timer = 0;
-        gChaosCodeTable[gCurrentChaosID].active = FALSE;
+        disable_current_code();
     }
 }
 
@@ -121,13 +123,11 @@ void chaos_pay_to_move(void) {
             gMarioState->numCoins -= 20;
             gHudDisplay.coins -= 20;
             play_sound(SOUND_GENERAL_COIN, gGlobalSoundSource);
-            gChaosCodeTable[gCurrentChaosID].timer = 0;
-            gChaosCodeTable[gCurrentChaosID].active = FALSE;
+            disable_current_code();
         }
     }
     else {
-        gChaosCodeTable[gCurrentChaosID].timer = 0;
-        gChaosCodeTable[gCurrentChaosID].active = FALSE;
+        disable_current_code();
     }
 }
 
@@ -147,22 +147,14 @@ void chaos_lawmetre(void) {
             gCrimeSpawnTimer = 150 / repeat;
         }
     }
-    gChaosCodeTable[gCurrentChaosID].timer--;
-    if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
-        gChaosCodeTable[gCurrentChaosID].timer = 0;
-        gChaosCodeTable[gCurrentChaosID].active = FALSE;
-    }
+    current_code_update_timer();
 }
 
 void chaos_generic(void) {
     if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
         gCurrentChaosTable[gCurrentChaosID].active = TRUE;
     }
-    gCurrentChaosTable[gCurrentChaosID].timer--;
-    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
-        gCurrentChaosTable[gCurrentChaosID].timer = 0;
-        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
-    }
+    current_code_update_timer();
 }
 
 void chaos_wdw_heaveho(void) {
@@ -170,11 +162,7 @@ void chaos_wdw_heaveho(void) {
         gCurrentChaosTable[gCurrentChaosID].active = TRUE;
         gHeaveHoStrength = absf(random_f32_around_zero(300.0f));
     }
-    gCurrentChaosTable[gCurrentChaosID].timer--;
-    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
-        gCurrentChaosTable[gCurrentChaosID].timer = 0;
-        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
-    }
+    current_code_update_timer();
 }
 
 void chaos_enemypov(void) {
@@ -230,23 +218,14 @@ void chaos_ccm_rocks_from_volcano(void) {
     if (random_u16() % 100 < 9) {
         spawn_object_relative(0, x, 1000, z + 250, gMarioState->marioObj, MODEL_CCM_ROCK_VOLCANO, bhvRockVolcano);
     }
-    gChaosCodeTable[gCurrentChaosID].timer--;
-    if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
-        gChaosCodeTable[gCurrentChaosID].timer = 0;
-        gChaosCodeTable[gCurrentChaosID].active = FALSE;
-    }
+    current_code_update_timer();
 }
 
 void chaos_randomize_coin_colors(void) {
     if (gChaosCodeTable[gCurrentChaosID].active == FALSE) {
         gChaosCodeTable[gCurrentChaosID].active = TRUE;
     }
-    
-    gChaosCodeTable[gCurrentChaosID].timer--;
-    if (gChaosCodeTable[gCurrentChaosID].timer <= 0) {
-        gChaosCodeTable[gCurrentChaosID].timer = 0;
-        gChaosCodeTable[gCurrentChaosID].active = FALSE;
-    }
+    current_code_update_timer();
 }
 
 void chaos_ad(void) {
@@ -287,8 +266,7 @@ void chaos_chain_chomp(void) {
         chainChomp->oPosY = pos[1];
         chainChomp->oPosZ = pos[2];
     }
-    gChaosCodeTable[gCurrentChaosID].timer = 0;
-    gChaosCodeTable[gCurrentChaosID].active = FALSE;
+    disable_current_code();
 }
 
 void chaos_thwomp(void) {
@@ -297,8 +275,7 @@ void chaos_thwomp(void) {
     if (gCurrLevelNum == LEVEL_WF) {
         obj_set_model(thwomp, MODEL_THWOMP_BETA);
     }
-    gChaosCodeTable[gCurrentChaosID].timer = 0;
-    gChaosCodeTable[gCurrentChaosID].active = FALSE;
+    disable_current_code();
 }
 
 void chaos_yellow_block(void) {
@@ -322,8 +299,7 @@ void chaos_yellow_block(void) {
                 break; 
         }
 
-        gChaosCodeTable[gCurrentChaosID].timer = 0;
-        gChaosCodeTable[gCurrentChaosID].active = FALSE;
+        disable_current_code();
     }
 }
 
@@ -331,12 +307,10 @@ void chaos_ttc_upwarp(void) {
     int upwarpPos = gMarioState->pos[1];
     upwarpPos ^= 0b100000000000;
     gMarioState->pos[1] = upwarpPos;
-    gTTCChaosTable[gCurrentChaosID].timer = 0;
-    gTTCChaosTable[gCurrentChaosID].active = FALSE;
+    disable_current_code();
 }
 
 void chaos_ttc_medusa_heads(void) {
-    
     if (gGlobalTimer % 45 == 0) {
         spawn_object_abs_with_rot(gMarioState->marioObj, 0, MODEL_MEDUSA_HEAD, bhvMedusaHead, 
             gMarioState->pos[0] + -1000*sins(gCamera->yaw + 0x4000),
@@ -346,11 +320,7 @@ void chaos_ttc_medusa_heads(void) {
             gCamera->yaw + 0x4000, 0);
     }
 
-    gTTCChaosTable[gCurrentChaosID].timer--;
-    if (gTTCChaosTable[gCurrentChaosID].timer <= 0) {
-        gTTCChaosTable[gCurrentChaosID].timer = 0;
-        gTTCChaosTable[gCurrentChaosID].active = FALSE;
-    }
+    current_code_update_timer();
 }
 
 struct Object *sMirrorGhost;
@@ -363,10 +333,7 @@ void chaos_mirrorghost(void) {
         sMirrorGhost = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_SHADOW_MARIO, bhvMovementGhost);
         play_sound(SOUND_MARIO_HELLO, gGlobalSoundSource);
     }
-    gCurrentChaosTable[gCurrentChaosID].timer--;
-    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
-        gCurrentChaosTable[gCurrentChaosID].timer = 0;
-        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+    if (current_code_update_timer()) {
         if (sMirrorGhost) {
             obj_mark_for_deletion(sMirrorGhost);
         }
@@ -418,18 +385,17 @@ void chaos_swap_positions(void) {
     gMarioState->pos[1] = gMarioState->marioObj->oPosY;
     gMarioState->pos[2] = gMarioState->marioObj->oPosZ;
 
-    gChaosCodeTable[gCurrentChaosID].timer = 0;
-    gChaosCodeTable[gCurrentChaosID].active = FALSE;
+    disable_current_code();
 }
 
+//unused
 void chaos_billboard(void) {
     int i;
     u8 shouldBillboard = 1;
 
     gCurrentChaosTable[gCurrentChaosID].timer--;
     if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
-        gCurrentChaosTable[gCurrentChaosID].timer = 0;
-        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+        disable_current_code();
         shouldBillboard = 0;
     }
 
@@ -445,9 +411,6 @@ void chaos_billboard(void) {
             curObj->header.gfx.node.flags &= ~GRAPH_RENDER_BILLBOARD;
         }
     }
-
-    
-    
 }
 
 void chaos_random_cap(void) {
@@ -505,8 +468,7 @@ void chaos_random_cap(void) {
         }
     }
 
-    gCurrentChaosTable[gCurrentChaosID].timer = 0;
-    gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+    disable_current_code();
 }
 
 u32 attack_object(struct Object *obj, s32 interaction);
@@ -527,24 +489,18 @@ void chaos_koopa_shell(void) {
     // escape air actions into crouch slide (shell cancel)
     set_mario_action(gMarioState, ACT_RIDING_SHELL_GROUND, 0);
 
-    gCurrentChaosTable[gCurrentChaosID].timer = 0;
-    gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+    disable_current_code();
 }
 
 void chaos_squish_mario(void) {
     gMarioState->squishTimer = 15;
-    gCurrentChaosTable[gCurrentChaosID].timer--;
-    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
-        gCurrentChaosTable[gCurrentChaosID].timer = 0;
-        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
-    }
+    current_code_update_timer();
 }
 
 void chaos_next_long_jump_gp(void) {
     gCurrentChaosTable[gCurrentChaosID].active = TRUE;
     if (gMarioState->action == ACT_GROUND_POUND_LAND) {
-        gCurrentChaosTable[gCurrentChaosID].timer = 0;
-        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+        disable_current_code();
     }
 }
 
@@ -552,8 +508,7 @@ void chaos_random_jump(void) {
     if (!((gMarioState->action & ACT_GROUP_MASK) >= ACT_GROUP_AIRBORNE && (gMarioState->action & ACT_GROUP_MASK) < (ACT_HOLD_JUMP & ACT_ID_MASK))) {
         gMarioState->action = ACT_SIDE_FLIP;
         gMarioState->vel[1] = 48.0f;
-        gCurrentChaosTable[gCurrentChaosID].timer = 0;
-        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+        disable_current_code();
     }
 }
 
@@ -581,12 +536,10 @@ void chaos_wdw_water(void) {
         gEnvironmentLevels[0] = approach_s32(gEnvironmentLevels[0], gWaterLevelTarget, 10, 10);
         cur_obj_play_sound_1(SOUND_ENV_WATER_DRAIN);
     } else {
-        gCurrentChaosTable[gCurrentChaosID].timer = 0;
-        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+        disable_current_code();
     }
     if (gEnvironmentRegions == NULL) {
-        gCurrentChaosTable[gCurrentChaosID].timer = 0;
-        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+        disable_current_code();
         return;
     }
 
@@ -600,12 +553,7 @@ void chaos_lll_super_burning(void) {
         }
     }
     gCurrentChaosTable[gCurrentChaosID].active = TRUE;
-
-    gCurrentChaosTable[gCurrentChaosID].timer--;
-    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
-        gCurrentChaosTable[gCurrentChaosID].timer = 0;
-        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
-    }
+    current_code_update_timer();
 }
 
 ChaosCode gChaosCodeTable[] = {
