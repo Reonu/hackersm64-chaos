@@ -2,6 +2,7 @@
 
 #include "game/chaos_codes.h"
 #include "game/print.h"
+#include "engine/math_util.h"
 
 void common_anchor_mario_behavior(f32 forwardVel, f32 yVel, s32 flag) {
     switch (o->parentObj->oCommonAnchorAction) {
@@ -182,6 +183,13 @@ void bhv_chuckya_loop(void) {
     cur_obj_scale(2.0f);
     o->oInteractionSubtype |= INT_SUBTYPE_GRABS_MARIO;
 
+    if (gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active) {
+        o->oForwardVel = CLAMP(o->oForwardVel * 3.f, 0.f, 100.f);
+        o->oDrawingDistance = 8000;
+    } else {
+        o->oDrawingDistance = 4000;
+    }
+
     switch (o->oHeldState) {
         case HELD_FREE:
             chuckya_move();
@@ -201,7 +209,7 @@ void bhv_chuckya_loop(void) {
         if (o->oChaosTimer > 300 && o->oAction != CHUCKYA_ACT_GRABBED_MARIO) {
             mark_obj_for_deletion(o);
         }
-        o->oDrawingDistance = 6000;
+        o->oDrawingDistance = gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active ? 6000 : 8000;
     }
 
     print_debug_bottom_up("md %d", o->oAction);

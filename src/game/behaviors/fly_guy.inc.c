@@ -1,4 +1,4 @@
-
+#include "game/chaos_codes.h"
 /**
  * Behavior for bhvFlyGuy.
  */
@@ -79,6 +79,9 @@ static void fly_guy_act_approach_mario(void) {
                 o->oFlyGuyLungeTargetPitch = obj_turn_pitch_toward_mario(-200.0f, 0);
 
                 o->oForwardVel = 25.0f * coss(o->oFlyGuyLungeTargetPitch);
+                if (gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active) {
+                    o->oForwardVel = CLAMP(o->oForwardVel * 3.f, 0.f, 120.f);
+                }
                 o->oVelY = 25.0f * -sins(o->oFlyGuyLungeTargetPitch);
                 o->oFlyGuyLungeYDecel = -o->oVelY / 30.0f;
             }

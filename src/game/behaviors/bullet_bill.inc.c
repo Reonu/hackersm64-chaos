@@ -1,4 +1,5 @@
 // bullet_bill.inc.c
+#include "game/chaos_codes.h"
 
 void bhv_white_puff_smoke_init(void) {
     cur_obj_scale(random_float() * 2 + 2.0);
@@ -41,7 +42,7 @@ void bullet_bill_act_2(void) {
         }
 
         spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
-        o->oForwardVel = 30.0f;
+        o->oForwardVel = gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active ? 90 : 30;
 
         if (o->oDistanceToMario > 300.0f) {
             cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x100);

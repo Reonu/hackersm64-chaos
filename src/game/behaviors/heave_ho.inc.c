@@ -96,6 +96,9 @@ void heave_ho_act_2(void) {
     cur_obj_init_animation_with_accel_and_sound(0, o->oHeaveHoTimedSpeed);
 
     o->oForwardVel = o->oHeaveHoTimedSpeed * 10.0f;
+    if (gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active) {
+        o->oForwardVel = CLAMP(o->oForwardVel * 4.f, 0.f, 120.f);
+    }
     s16 angleVel = o->oHeaveHoTimedSpeed * 0x400;
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, angleVel);
 
