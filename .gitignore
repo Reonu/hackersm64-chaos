@@ -2136,3 +2136,9 @@ lib/libs2d_engine.a
 # user-specific config file
 include/config/config_local.h
 .DS_Store
+
+# python venv
+/venv/*
+
+# sound import folder
+/sound_import/*
