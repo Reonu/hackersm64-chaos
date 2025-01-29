@@ -1017,7 +1017,9 @@ s32 act_burning_jump(struct MarioState *m) {
 
     m->marioObj->oMarioBurnTimer += 3;
 
-    m->health -= 10;
+    if (!gLLLChaosTable[LLL_CHAOS_SUPER_BURNING].active) {
+        m->health -= 10;
+    }
     if (m->health < 0x100) {
         m->health = 0xFF;
     }
@@ -1039,7 +1041,9 @@ s32 act_burning_fall(struct MarioState *m) {
     m->particleFlags |= PARTICLE_FIRE;
     m->marioObj->oMarioBurnTimer += 3;
 
-    m->health -= 10;
+    if (!gLLLChaosTable[LLL_CHAOS_SUPER_BURNING].active) {
+        m->health -= 10;
+    }
     if (m->health < 0x100) {
         m->health = 0xFF;
     }

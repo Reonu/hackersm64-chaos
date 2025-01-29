@@ -62,6 +62,10 @@ enum BoBChaosNames {
     BOB_CHAOS_WATER_BOMB_SPAM,
 };
 
+enum LLLChaosNames {
+    LLL_CHAOS_SUPER_BURNING,
+};
+
 enum SSLChaosNAmes {
     SSL_CHAOS_BLIZZARD,
     SSL_CHAOS_QUICKSAND_MAGNET,
@@ -104,6 +108,7 @@ extern ChaosCode gBoBChaosTable[];
 extern ChaosCode gTTCChaosTable[];
 extern ChaosCode gSSLChaosTable[];
 extern ChaosCode gWDWChaosTable[];
+extern ChaosCode gLLLChaosTable[];
 extern u8 gDisableChaos;
 extern float gCrimes;
 extern u8 gChaosOffOverride;

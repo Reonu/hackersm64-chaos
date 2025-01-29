@@ -44,6 +44,12 @@ ChaosCode *gCurrentChaosTable;
 
 extern OSViMode VI;
 
+u8 buffer_code_until_grounded_out_of_water() {
+    return !((gMarioState->action & ACT_GROUP_MASK) >= ACT_GROUP_AIRBORNE && 
+    (gMarioState->action & ACT_GROUP_MASK) < (ACT_HOLD_JUMP & ACT_ID_MASK)) &&
+    (gMarioState->action & ACT_GROUP_MASK) != ACT_GROUP_SUBMERGED;
+}
+
 void chaos_cannon(void) {
     struct Object *cannon = spawn_object_relative(0, 0, 300, 0, gMarioState->marioObj, MODEL_NONE, bhvCannon);
     SET_BPARAM1(cannon->oBehParams, CHAOS_CODE_BPARAM);
@@ -98,9 +104,7 @@ void chaos_upside_down_camera(void) {
 }
 
 void chaos_mario_kart(void) {
-    if (!((gMarioState->action & ACT_GROUP_MASK) >= ACT_GROUP_AIRBORNE && 
-    (gMarioState->action & ACT_GROUP_MASK) < (ACT_HOLD_JUMP & ACT_ID_MASK)) &&
-    (gMarioState->action & ACT_GROUP_MASK) != ACT_GROUP_SUBMERGED) {
+    if (buffer_code_until_grounded_out_of_water()) {
         if (gMarioState->action != ACT_RIDING_KART) {
             spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
         }
@@ -588,6 +592,22 @@ void chaos_wdw_water(void) {
 
 }
 
+void chaos_lll_super_burning(void) {
+    gMarioState->marioObj->oMarioBurnTimer = 100;
+    if (buffer_code_until_grounded_out_of_water()) {
+        if (gMarioState->action != ACT_BURNING_GROUND && gMarioState->action != ACT_BURNING_JUMP && gMarioState->action != ACT_BURNING_FALL) {
+            gMarioState->action = ACT_BURNING_GROUND;
+        }
+    }
+    gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+
+    gCurrentChaosTable[gCurrentChaosID].timer--;
+    if (gCurrentChaosTable[gCurrentChaosID].timer <= 0) {
+        gCurrentChaosTable[gCurrentChaosID].timer = 0;
+        gCurrentChaosTable[gCurrentChaosID].active = FALSE;
+    }
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -655,6 +675,10 @@ ChaosCode gTTCChaosTable[] = {
     {"Objects Catch Mario", chaos_generic, 100, 20, 45, 0,   /*ignore these*/ 0, 0},
 };
 
+ChaosCode gLLLChaosTable[] = {
+    {"LLL Super Burning", chaos_lll_super_burning, 100, 10, 15, 0,   /*ignore these*/ 0, 0},
+};
+
 ChaosCode gSSLChaosTable[] = {
     {"SSL Blizzard", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"SSL Quicksand Magnet", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
@@ -697,6 +721,9 @@ ChaosCode *chaos_level_table(s32 levelID, s32 *size) {
     case LEVEL_BOB:
         *size = sizeof(gBoBChaosTable) / sizeof(ChaosCode);
         return gBoBChaosTable;
+    case LEVEL_LLL:
+        *size = sizeof(gLLLChaosTable) / sizeof(ChaosCode);
+        return gLLLChaosTable;
     case LEVEL_TTC:
         *size = sizeof(gTTCChaosTable) / sizeof(ChaosCode);
         return gTTCChaosTable;

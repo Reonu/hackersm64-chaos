@@ -1468,14 +1468,19 @@ s32 act_burning_ground(struct MarioState *m) {
         return set_mario_action(m, ACT_WALKING, 0);
     }
 
+    f32 burningRunSpeed = 32.0f;
+    if (gLLLChaosTable[LLL_CHAOS_SUPER_BURNING].active) {
+        burningRunSpeed = 212.0f;
+    }
+
     if (m->forwardVel < 8.0f) {
         m->forwardVel = 8.0f;
     }
-    if (m->forwardVel > 48.0f && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
-        m->forwardVel = 48.0f;
+    if (m->forwardVel > burningRunSpeed*1.5f && !gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
+        m->forwardVel = burningRunSpeed*1.5f;
     }
-
-    m->forwardVel = approach_f32(m->forwardVel, (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active ? 4000.0f : 32.0f), 4.0f, 1.0f);
+    
+    m->forwardVel = approach_f32(m->forwardVel, (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active ? 4000.0f : burningRunSpeed), burningRunSpeed*0.25f, 1.0f);
 
     if (m->input & INPUT_NONZERO_ANALOG) {
         m->faceAngle[1] = approach_angle(m->faceAngle[1], m->intendedYaw, 0x600);
@@ -1493,7 +1498,9 @@ s32 act_burning_ground(struct MarioState *m) {
     m->particleFlags |= PARTICLE_FIRE;
     play_sound(SOUND_MOVING_LAVA_BURN, m->marioObj->header.gfx.cameraToObject);
 
-    m->health -= 10;
+    if (!gLLLChaosTable[LLL_CHAOS_SUPER_BURNING].active) {
+        m->health -= 10;
+    }
     if (m->health < 0x100) {
         set_mario_action(m, ACT_STANDING_DEATH, 0);
     }
