@@ -45,6 +45,16 @@
       "release_rate": 208,
       "envelope": "envelope0",
       "sound": "funi4"
+    },
+    "inst_welcome_to_mario_kart": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "welcome_to_mario_kart"
+    },
+    "inst_engine": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "engine"
     }
   },
   "instrument_list": [
@@ -54,6 +64,8 @@
     "inst_funi1",
     "inst_funi2",
     "inst_funi3",
-    "inst_funi4"
+    "inst_funi4",
+    "inst_welcome_to_mario_kart",
+    "inst_engine"
   ]
 }

@@ -1,5 +1,6 @@
 #include "src/game/mario.h"
 #include "src/game/chaos_codes.h"
+#include "src/game/spawn_sound.h"
 
 void bhv_kart_controller_init(void) {
     cur_obj_scale(0.3f);
@@ -11,6 +12,7 @@ void bhv_kart_controller_loop(void) {
             set_mario_action(gMarioState, ACT_RIDING_KART, 0);
             set_custom_mario_animation(gMarioState, 0);
             cur_obj_init_animation(0);
+            cur_obj_play_sound_2(SOUND_NEW_WELCOME_TO_MARIO_KART);
             o->oAction++;
         break;
         case 1:
@@ -80,5 +82,18 @@ void bhv_kart_controller_loop(void) {
             }
         break;
     }
+
+    if (o->oAction == 1) {
+        if (o->oTimer == 0) {
+            cur_obj_play_sound_2(SOUND_NEW_WELCOME_TO_MARIO_KART);
+        }
+    } else if (o->oAction >= 2) {
+        cur_obj_play_sound_2(SOUND_NEW_ENGINE);
+        if (o->oTimer % 2 == 0) {
+            spawn_object_relative(0, 0, 0, -20, o, MODEL_WHITE_PUFF, bhvWhitePuff1);
+        }
+    }
+
+
 }
 

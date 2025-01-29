@@ -1350,48 +1350,52 @@ s32 act_riding_shell_ground(struct MarioState *m) {
 
 s32 act_riding_kart(struct MarioState *m) {
     if (m->actionTimer++ > 90) {
-    s16 startYaw = m->faceAngle[1];
+        s16 startYaw = m->faceAngle[1];
 
-    //if (m->input & INPUT_A_PRESSED) {
-    //    return set_mario_action(m, ACT_RIDING_SHELL_JUMP, 0);
-    //}
+        //if (m->input & INPUT_A_PRESSED) {
+        //    return set_mario_action(m, ACT_RIDING_SHELL_JUMP, 0);
+        //}
 
-    if (m->input & INPUT_Z_PRESSED) {
-        mario_stop_riding_object(m);
-        if (m->forwardVel < 24.0f) {
-            mario_set_forward_vel(m, 24.0f);
+        if (m->input & INPUT_Z_PRESSED) {
+            mario_stop_riding_object(m);
+            if (m->forwardVel < 24.0f) {
+                mario_set_forward_vel(m, 24.0f);
+            }
+            return set_mario_action(m, ACT_CROUCH_SLIDE, 0);
         }
-        return set_mario_action(m, ACT_CROUCH_SLIDE, 0);
-    }
 
-    update_kart_speed(m);
-    //set_mario_animation(m, m->actionArg == 0 ? MARIO_ANIM_START_RIDING_SHELL : MARIO_ANIM_RIDING_SHELL);
+        update_kart_speed(m);
+        //set_mario_animation(m, m->actionArg == 0 ? MARIO_ANIM_START_RIDING_SHELL : MARIO_ANIM_RIDING_SHELL);
 
-    switch (perform_ground_step(m)) {
-        case GROUND_STEP_LEFT_GROUND:
-            set_mario_action(m, ACT_JUMP, 0);
-            m->vel[1] = 20.0f;
-            break;
+        switch (perform_ground_step(m)) {
+            case GROUND_STEP_LEFT_GROUND:
+                set_mario_action(m, ACT_JUMP, 0);
+                m->vel[1] = 20.0f;
+                break;
 
-        case GROUND_STEP_HIT_WALL:
-            //if (m->wall) {
-            //    m->faceAngle[1] += m->faceAngle[1] - (atan2s(m->wall->normal.z, m->wall->normal.x) + DEGREES(90));
-            //}
-            //play_sound(m->flags & MARIO_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
-            //           m->marioObj->header.gfx.cameraToObject);
-            m->particleFlags |= PARTICLE_VERTICAL_STAR;
-            set_mario_action(m, ACT_JUMP, 0);
-            break;
-    }
-    
-    if (m->forwardVel > 10.0f) {
-        if ((gCurrLevelNum == LEVEL_LLL && m->floor->type != SURFACE_BURNING) || (gCurrLevelNum != LEVEL_LLL && m->floor->type == SURFACE_BURNING)) {
-            play_sound(SOUND_MOVING_RIDING_SHELL_LAVA, m->marioObj->header.gfx.cameraToObject);
-        } else {
-            play_sound(SOUND_MOVING_TERRAIN_RIDING_SHELL + m->terrainSoundAddend,
-                    m->marioObj->header.gfx.cameraToObject);
+            case GROUND_STEP_HIT_WALL:
+                //if (m->wall) {
+                //    m->faceAngle[1] += m->faceAngle[1] - (atan2s(m->wall->normal.z, m->wall->normal.x) + DEGREES(90));
+                //}
+                //play_sound(m->flags & MARIO_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
+                //           m->marioObj->header.gfx.cameraToObject);
+                m->particleFlags |= PARTICLE_VERTICAL_STAR;
+                set_mario_action(m, ACT_JUMP, 0);
+                break;
         }
-    }
+        
+        if (m->forwardVel > 10.0f) {
+            if ((gCurrLevelNum == LEVEL_LLL && m->floor->type != SURFACE_BURNING) || (gCurrLevelNum != LEVEL_LLL && m->floor->type == SURFACE_BURNING)) {
+                play_sound(SOUND_MOVING_RIDING_SHELL_LAVA, m->marioObj->header.gfx.cameraToObject);
+            } else {
+                play_sound(SOUND_MOVING_TERRAIN_RIDING_SHELL + m->terrainSoundAddend,
+                        m->marioObj->header.gfx.cameraToObject);
+            }
+        }
+    } else {
+        if (m->actionTimer == 45) {
+            play_sound(SOUND_MARIO_MAMA_MIA, m->marioObj->header.gfx.cameraToObject);
+        }
     }
 
     return FALSE;

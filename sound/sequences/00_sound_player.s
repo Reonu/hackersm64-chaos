@@ -8015,6 +8015,28 @@ sound_ref .sound_funi1
 sound_ref .sound_funi2
 sound_ref .sound_funi3
 sound_ref .sound_funi4
+sound_ref .sound_welcome_to_mario_kart
+sound_ref .sound_engine
+
+.sound_engine:
+chan_setbank 11
+chan_setinstr 8
+chan_setlayer 0, .layer_engine
+chan_end
+
+.layer_engine:
+layer_note1 39, 0x89, 127
+layer_end
+
+.sound_welcome_to_mario_kart:
+chan_setbank 11
+chan_setinstr 7
+chan_setlayer 0, .layer_welcome_to_mario_kart
+chan_end
+
+.layer_welcome_to_mario_kart:
+layer_note1 39, 0xf0, 127
+layer_end
 
 .sound_funi4:
 chan_setbank 11
