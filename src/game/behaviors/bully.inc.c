@@ -68,10 +68,11 @@ void bully_act_chase_mario(void) {
     f32 homeX = o->oHomeX;
     f32 posY = o->oPosY;
     f32 homeZ = o->oHomeZ;
+    u16 turnSpeedExtra = gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active ? 3 : 1;
 
     if (o->oTimer < 10) {
         o->oForwardVel = 3.0f;
-        obj_turn_toward_object(o, gMarioObject, O_MOVE_ANGLE_YAW_INDEX, 0x1000);
+        obj_turn_toward_object(o, gMarioObject, O_MOVE_ANGLE_YAW_INDEX, (0x1000 * turnSpeedExtra));
     } else if (o->oBehParams2ndByte == BULLY_BP_SIZE_SMALL) {
         o->oForwardVel = 20.0f;
         if (o->oTimer > 30) {
@@ -82,6 +83,10 @@ void bully_act_chase_mario(void) {
         if (o->oTimer > 35) {
             o->oTimer = 0;
         }
+    }
+
+    if (gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active) {
+        o->oForwardVel = CLAMP(o->oForwardVel * 3.f, 0.f, 120.f);
     }
 
     if (!is_point_within_radius_of_mario(homeX, posY, homeZ, 1000)) {

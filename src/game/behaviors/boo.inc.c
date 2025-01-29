@@ -406,13 +406,15 @@ static void boo_act_5(void) {
 
 static void boo_act_1(void) {
     s32 attackStatus;
+    f32 mul = gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active ? 3.f : 0.5f;
+    u16 turningSpeedExtra = gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active ? 3 : 1;
 
     if (o->oTimer == 0) {
         o->oBooNegatedAggressiveness = -random_float() * 5.0f;
         o->oBooTurningSpeed = (s32)(random_float() * 128.0f);
     }
 
-    boo_chase_mario(-100.0f, o->oBooTurningSpeed + 0x180, 0.5f);
+    boo_chase_mario(-100.0f, o->oBooTurningSpeed + (0x180 * turningSpeedExtra), mul);
 
     attackStatus = boo_get_attack_status();
 
