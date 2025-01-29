@@ -825,7 +825,7 @@ void cur_obj_update(void) {
         o->oDrawingDistance = 50000;
     }
 
-    if (gChaosCodeTable[GLOBAL_CHAOS_NO_MODEL_IS_MARIO].active) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_NO_MODEL_IS_MARIO].active && gCurrLevelNum != LEVEL_BOWSER_1 && gCurrLevelNum != LEVEL_BOWSER_2 && gCurrLevelNum != LEVEL_BOWSER_3) {
         if (!cur_obj_has_behavior(segmented_to_virtual(bhvMario))) {
             if (cur_obj_has_model(MODEL_NONE) || cur_obj_has_model(MODEL_MARIO) || (cur_obj_has_model(MODEL_MARIO_BILLBOARD))) {
                 if (gChaosCodeTable[GLOBAL_CHAOS_BILLBOARD_MARIO].active) {

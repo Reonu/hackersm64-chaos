@@ -588,23 +588,23 @@ void chaos_wdw_water(void) {
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
-    {"Trip", chaos_trip, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Trip", chaos_trip, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Upside Down Camera", chaos_upside_down_camera, 100, 10, 20, CODEFLAG_CAMERA,   /*ignore these*/ 0, 0},
     {"Model None Mario", chaos_generic, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
     {"Retro Vision", chaos_retro, 100, 15, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
     {"Blur Vision", chaos_blur, 100, 20, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
     {"Mario Kart", chaos_mario_kart, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
-    {"Pay to Move", chaos_pay_to_move, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Pay to Move", chaos_pay_to_move, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Tank Controls", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Invert Controls", chaos_generic, 100, 20, 30, 0,   /*ignore these*/ 0, 0},
-    {"Dim Lights", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"Dim Lights", chaos_generic, 100, 30, 60, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Law Metre", chaos_lawmetre, 100, 60, 90, 0,   /*ignore these*/ 0, 0},
     {"Tiny Mario", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
-    {"Billboard Mario", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"Billboard Mario", chaos_generic, 100, 20, 35, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Very Slippery", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
     {"All Quicksand", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
-    {"Mario Sounds Scream", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
-    {"Randomize Coin Colors", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"Mario Sounds Scream", chaos_generic, 100, 15, 30, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
+    {"Randomize Coin Colors", chaos_generic, 100, 30, 45, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Coin Cutscenes", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
     {"All jumps are triple", chaos_generic, 100, 15, 45, 0,   /*ignore these*/ 0, 0},
     {"Delete Nearby Objects", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -620,12 +620,12 @@ ChaosCode gChaosCodeTable[] = {
     {"Thwomp", chaos_thwomp, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Yellow Block on Jump", chaos_yellow_block, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Mirror Ghost", chaos_mirrorghost, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
-    {"Weird Audio", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"Weird Audio", chaos_generic, 100, 30, 45, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Swap Positions", chaos_swap_positions, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Billboard Everything", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Fast Enemies", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
-    {"Bilerp", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
-    {"Random Cap", chaos_random_cap, 100, 0, 0, 0,  /*ignore these*/ 0, 0},
+    {"Bilerp", chaos_generic, 100, 30, 60, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
+    {"Random Cap", chaos_random_cap, 100, 0, 0, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Enemy PoV", chaos_enemypov, 100, 0, 0, 0,  /*ignore these*/ 0, 0},
     {"Koopa Shell", chaos_koopa_shell, 100, 0, 0, 0,  /*ignore these*/ 0, 0},
     {"Squish Mario", chaos_squish_mario, 100, 4, 8, 0,  /*ignore these*/ 0, 0},
@@ -657,16 +657,16 @@ ChaosCode gSSLChaosTable[] = {
 };
 
 ChaosCode gWDWChaosTable[] = {
-    {"Random Water Level", chaos_wdw_water, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Random Water Level", chaos_wdw_water, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Heave Ho Strength", chaos_wdw_heaveho, 100, 20, 30, 0,   /*ignore these*/ 0, 0},
 };
 
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
     append_puppyprint_log("Chaos effect added: %s\n", table[codeID].name);
-    if (table[codeID].flags) {
+    if (table[codeID].flags && table[codeID].flags != CODEFLAG_MINOR) {
         for (s32 i = 0; i < tableSize; i++) {
             if (table[i].timer && table[i].flags == table[codeID].flags) {
-                table[i].timer = 0;
+                table[i].timer = 1;
             }
         }
     }
@@ -678,9 +678,11 @@ void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
     }
 }
 
+u16 gPrevChosenCode;
+
 void add_global_chaos_code(ChaosCode *table, s32 tableSize) {
-    u16 chosenCode = random_u16() % tableSize;
-    chaos_enable(table, chosenCode, tableSize);
+    gPrevChosenCode = random_u16() % tableSize;
+    chaos_enable(table, gPrevChosenCode, tableSize);
 }
 
 ChaosCode *chaos_level_table(s32 levelID, s32 *size) {
@@ -764,6 +766,10 @@ void global_chaos_code_handler(void) {
         } else {
             goto tryAgain;
         }
-        nextGlobalCodeTimer = 150 + (random_u16() % 600);
+        if (gCurrentChaosTable[gPrevChosenCode].flags == CODEFLAG_MINOR) {
+            nextGlobalCodeTimer = (random_u16() % 200);
+        } else {
+            nextGlobalCodeTimer = 150 + (random_u16() % 600);
+        }
     }
 }

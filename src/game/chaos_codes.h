@@ -81,7 +81,9 @@ enum TTCChaosNames {
 enum CodeFlags {
     CODEFLAG_NONE,
     CODEFLAG_SCREEN,
-    CODEFLAG_CAMERA,    
+    CODEFLAG_CAMERA,
+
+    CODEFLAG_MINOR, // This isn't actually exclusivity, but will set the timer to 1/3 it's normal value
 };
 
 typedef struct ChaosCode {
@@ -112,6 +114,7 @@ extern struct Object *gPovEnemy;
 extern struct Object *sMirrorGhost;
 extern s16 gPovPrevMode;
 extern f32 gHeaveHoStrength;
+extern s32 nextGlobalCodeTimer;
 
 void global_chaos_code_handler(void);
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize);

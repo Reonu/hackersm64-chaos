@@ -1138,6 +1138,9 @@ void puppyprint_chaos(void) {
     } else {
         print_small_text_light(SCREEN_WIDTH - 16, SCREEN_HEIGHT - 24, "Chaos on", PRINT_TEXT_ALIGN_RIGHT, PRINT_ALL, FONT_OUTLINE);
     }
+
+    sprintf(textBytes, "Chaos Timer: %d", nextGlobalCodeTimer);
+    print_small_text_light(16, SCREEN_HEIGHT - 24, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
 }
 
 struct PuppyPrintPage ppPages[] = {
