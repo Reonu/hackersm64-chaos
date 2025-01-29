@@ -11,6 +11,7 @@
 #include "audio/external.h"
 #include "textures.h"
 #include "level_geo.h"
+#include "area.h"
 
 /**
  * This file implements environment effects that are not snow:
@@ -133,7 +134,7 @@ void envfx_set_lava_bubble_position(s32 index, Vec3s centerPos) {
         return;
     }
 
-    if (surface->type != SURFACE_BURNING) {
+    if ((gCurrLevelNum != LEVEL_LLL && surface->type == SURFACE_BURNING) || (gCurrLevelNum == LEVEL_LLL && surface->type != SURFACE_BURNING)) {
         (gEnvFxBuffer + index)->yPos = floorY;
     } else {
         (gEnvFxBuffer + index)->yPos = FLOOR_LOWER_LIMIT_MISC;
