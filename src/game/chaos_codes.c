@@ -589,7 +589,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Trip", chaos_trip, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
-    {"Upside Down Camera", chaos_upside_down_camera, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
+    {"Upside Down Camera", chaos_upside_down_camera, 100, 10, 20, CODEFLAG_CAMERA,   /*ignore these*/ 0, 0},
     {"Model None Mario", chaos_generic, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
     {"Retro Vision", chaos_retro, 100, 15, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
     {"Blur Vision", chaos_blur, 100, 20, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
@@ -634,7 +634,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Random Jump", chaos_random_jump, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Mario Random Bank", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Chuckya on Object Deletion", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
-    {"FoV based on fvel", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"FoV based on fvel", chaos_generic, 100, 30, 60, CODEFLAG_CAMERA,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

@@ -80,7 +80,8 @@ enum TTCChaosNames {
 // A mark for exclusivity. Can only have one of thse effects active at a time.
 enum CodeFlags {
     CODEFLAG_NONE,
-    CODEFLAG_SCREEN,    
+    CODEFLAG_SCREEN,
+    CODEFLAG_CAMERA,    
 };
 
 typedef struct ChaosCode {
