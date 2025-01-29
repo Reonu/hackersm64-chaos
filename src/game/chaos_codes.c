@@ -110,6 +110,7 @@ void chaos_mario_kart(void) {
 void chaos_pay_to_move(void) {
     if (gMarioState->numCoins >= 20) {
         print_text(SCREEN_CENTER_X - 150, 180, "PAY 20 COINS TO MOVE");
+        gChaosCodeTable[gCurrentChaosID].active = TRUE;
         if (gPlayer1Controller->buttonPressed & A_BUTTON) {
             gMarioState->numCoins -= 20;
             gHudDisplay.coins -= 20;

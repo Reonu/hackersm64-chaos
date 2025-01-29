@@ -1884,6 +1884,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     vec3f_copy(gMarioState->prevPos, gMarioState->pos);
 
     if (gChaosCodeTable[GLOBAL_CHAOS_PAY_TO_MOVE].active) {
+        obj_set_model(gMarioObject, MODEL_MARIO);
         mario_update_shadow();
         return 0;
     }
