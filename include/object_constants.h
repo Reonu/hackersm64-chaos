@@ -263,7 +263,7 @@ enum ObjGeneralAnimations {
 enum TTCSpeedSetting {
     TTC_SPEED_SLOW,
     TTC_SPEED_FAST,
-    TTC_SPEED_RANDOM,
+    TTC_SPEED_INSANE,
     TTC_SPEED_STOPPED
 };
 

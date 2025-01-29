@@ -10,7 +10,7 @@
 static f32 sTTCPendulumInitialAccels[] = {
     /* TTC_SPEED_SLOW    */ 13.0f,
     /* TTC_SPEED_FAST    */ 22.0f,
-    /* TTC_SPEED_RANDOM  */ 13.0f,
+    /* TTC_SPEED_INSANE  */ 120.0f,
     /* TTC_SPEED_STOPPED */ 0.0f,
 };
 
@@ -60,20 +60,8 @@ void bhv_ttc_pendulum_update(void) {
             //  be a multiple of angle accel, and so the pendulum would continue
             //  oscillating forever
             if (o->oTTCPendulumAngleVel == 0.0f) {
-                if (gTTCSpeedSetting == TTC_SPEED_RANDOM) {
-                    // Select a new acceleration
-                    //! By manipulating this, we can cause the pendulum to reach
-                    //  extreme angles and speeds
-                    if (random_u16() % 3 != 0) {
-                        o->oTTCPendulumAngleAccel = 13.0f;
-                    } else {
-                        o->oTTCPendulumAngleAccel = 42.0f;
-                    }
-
-                    // Pick a random delay
-                    if (random_u16() % 2 == 0) {
-                        o->oTTCPendulumDelay = random_linear_offset(5, 30);
-                    }
+                if (gTTCSpeedSetting == TTC_SPEED_INSANE) {
+                    o->oTTCPendulumAngleAccel = 120.0f;
                 }
 
                 // Play the sound 15 frames after beginning to move

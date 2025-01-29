@@ -20,7 +20,7 @@ static s8 sTTCCogDirections[] = { 1, -1 };
 /**
  * The speed that the cog moves on the slow and fast settings, respectively.
  */
-static s16 sTTCCogNormalSpeeds[] = { 200, 400 };
+static s16 sTTCCogNormalSpeeds[] = { 200, 400, 4000};
 
 /**
  * Init function for bhvTTCCog.
@@ -45,10 +45,8 @@ void bhv_ttc_cog_update(void) {
             o->oTTCCogSpeed = sTTCCogNormalSpeeds[gTTCSpeedSetting];
             break;
 
-        case TTC_SPEED_RANDOM:
-            if (approach_f32_ptr(&o->oTTCCogSpeed, o->oTTCCogTargetVel, 50.0f)) {
-                o->oTTCCogTargetVel = 200.0f * (random_u16() % 7) * random_sign();
-            }
+        case TTC_SPEED_INSANE:
+            o->oTTCCogSpeed = sTTCCogNormalSpeeds[gTTCSpeedSetting];
 
         case TTC_SPEED_STOPPED:
             break;

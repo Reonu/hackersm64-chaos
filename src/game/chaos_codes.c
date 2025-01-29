@@ -556,6 +556,22 @@ void chaos_lll_super_burning(void) {
     current_code_update_timer();
 }
 
+void chaos_ttc_super_speed(void) {
+    gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+    gTTCSpeedSetting = TTC_SPEED_INSANE;
+    if (current_code_update_timer()) {
+        gTTCSpeedSetting = TTC_SPEED_FAST;
+    };
+}
+
+void chaos_ttc_stopped_speed(void) {
+    gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+    gTTCSpeedSetting = TTC_SPEED_STOPPED;
+    if (current_code_update_timer()) {
+        gTTCSpeedSetting = TTC_SPEED_FAST;
+    };
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -619,8 +635,11 @@ ChaosCode gBoBChaosTable[] = {
 
 ChaosCode gTTCChaosTable[] = {
     {"TTC Upwarp", chaos_ttc_upwarp, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
-    {"Medusa Heads", chaos_ttc_medusa_heads, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
-    {"Objects Catch Mario", chaos_generic, 100, 20, 45, 0,   /*ignore these*/ 0, 0},
+    {"TTC Medusa Heads", chaos_ttc_medusa_heads, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"TTC Objects Catch Mario", chaos_generic, 100, 20, 45, 0,   /*ignore these*/ 0, 0},
+    {"TTC Super Speed", chaos_ttc_super_speed, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
+    {"TTC Stopped Speed", chaos_ttc_stopped_speed, 100, 20, 45, 0,   /*ignore these*/ 0, 0},
+
 };
 
 ChaosCode gLLLChaosTable[] = {

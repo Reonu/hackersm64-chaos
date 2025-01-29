@@ -18,7 +18,7 @@ static Collision const *sTTCRotatingSolidCollisionModels[] = {
 static u8 sTTCRotatingSolidInitialDelays[] = {
     /* TTC_SPEED_SLOW    */ 120,
     /* TTC_SPEED_FAST    */ 40,
-    /* TTC_SPEED_RANDOM  */ 0,
+    /* TTC_SPEED_INSANE  */ 5,
     /* TTC_SPEED_STOPPED */ 0,
 };
 
@@ -61,9 +61,6 @@ void bhv_ttc_rotating_solid_update(void) {
                     (o->oTTCRotatingSolidNumTurns + 1) % o->oTTCRotatingSolidNumSides;
 
                 o->oTimer = 0;
-                if (gTTCSpeedSetting == TTC_SPEED_RANDOM) {
-                    o->oTTCRotatingSolidRotationDelay = random_mod_offset(5, 20, 7);
-                }
             }
         } else {
             // 2. Move vertically with vel -4.5, -4.0, ... until reached back home

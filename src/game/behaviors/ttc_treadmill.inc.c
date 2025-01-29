@@ -17,7 +17,7 @@ static Collision const *sTTCTreadmillCollisionModels[] = {
 static s16 sTTCTreadmillSpeeds[] = {
     /* TTC_SPEED_SLOW    */ 50,
     /* TTC_SPEED_FAST    */ 2000,
-    /* TTC_SPEED_RANDOM  */ 0,
+    /* TTC_SPEED_INSANE  */ 16000,
     /* TTC_SPEED_STOPPED */ 0,
 };
 
@@ -49,20 +49,8 @@ void bhv_ttc_treadmill_update(void) {
 
         cur_obj_play_sound_1(SOUND_ENV_ELEVATOR2);
 
-        if (gTTCSpeedSetting == TTC_SPEED_RANDOM) {
-            // Stay still for 5 frames, then accelerate toward the target speed
-            // until it's time to switch
-            if (o->oTimer > o->oTTCTreadmillTimeUntilSwitch) {
-                // Then stop and select new target speed and time until switch
-                if (approach_f32_ptr(&o->oTTCTreadmillSpeed, 0.0f, 10.0f)) {
-                    o->oTTCTreadmillTimeUntilSwitch = random_mod_offset(10, 20, 7);
-                    o->oTTCTreadmillTargetSpeed = random_sign() * 50.0f;
-                    o->oTimer = 0;
-                }
-            } else if (o->oTimer > 5) {
-                approach_f32_ptr(&o->oTTCTreadmillSpeed, o->oTTCTreadmillTargetSpeed, 10.0f);
-            }
-
+        if (gTTCSpeedSetting == TTC_SPEED_INSANE) {
+            o->oTTCTreadmillSpeed = sTTCTreadmillSpeeds[gTTCSpeedSetting];
             *o->oTTCTreadmillBigSurface = *o->oTTCTreadmillSmallSurface = o->oTTCTreadmillSpeed;
         }
     }

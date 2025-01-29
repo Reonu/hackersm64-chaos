@@ -22,13 +22,13 @@ static s16 sTTC2DRotatorTimeBetweenTurns[][4] = {
     {
         /* TTC_SPEED_SLOW    */ 40,
         /* TTC_SPEED_FAST    */ 10,
-        /* TTC_SPEED_RANDOM  */ 10,
+        /* TTC_SPEED_INSANE  */ 2,
         /* TTC_SPEED_STOPPED */ 0,
     },
     {
         /* TTC_SPEED_SLOW    */ 20,
         /* TTC_SPEED_FAST    */ 5,
-        /* TTC_SPEED_RANDOM  */ 5,
+        /* TTC_SPEED_INSANE  */ 1,
         /* TTC_SPEED_STOPPED */ 0,
     },
 };
@@ -62,22 +62,7 @@ void bhv_ttc_2d_rotator_update(void) {
             // Increment target yaw
             o->oTTC2DRotatorTargetYaw += o->oTTC2DRotatorIncrement;
             o->oTimer = 0;
-
-            if (gTTCSpeedSetting == TTC_SPEED_RANDOM) {
-                // If ready for a change in direction, then pick a new
-                // direction
-                if (o->oTTC2DRotatorRandomDirTimer == 0) {
-                    if (random_u16() & 0x03) {
-                        o->oTTC2DRotatorIncrement = o->oTTC2DRotatorSpeed;
-                        o->oTTC2DRotatorRandomDirTimer = random_mod_offset(90, 60, 4);
-                    } else {
-                        o->oTTC2DRotatorIncrement = -o->oTTC2DRotatorSpeed;
-                        o->oTTC2DRotatorRandomDirTimer = random_mod_offset(30, 30, 3);
-                    }
-                }
-
-                o->oTTC2DRotatorMinTimeUntilNextTurn = random_mod_offset(10, 20, 3);
-            }
+            
         }
     }
 
