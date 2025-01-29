@@ -634,6 +634,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Random Jump", chaos_random_jump, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Mario Random Bank", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Chuckya on Object Deletion", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"FoV based on fvel", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
