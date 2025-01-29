@@ -3096,7 +3096,7 @@ void update_camera(struct Camera *c) {
         ssl_area_4_camera(c);
     }
     if (gChaosCodeTable[GLOBAL_CHAOS_FOV_BASED_ON_FVEL].active) {
-        f32 remapSpeed = remap(gMarioState->forwardVel, 0.f, 75.f, 45.f, 120.f);
+        f32 remapSpeed = remap(gMarioState->forwardVel, 0.f, 75.f, 45.f, 160.f);
         sFOVState.fov = approach_f32_asymptotic(sFOVState.fov, remapSpeed, 0.2f);
     }
 
