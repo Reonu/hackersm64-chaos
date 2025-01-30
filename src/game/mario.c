@@ -1915,7 +1915,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         }
     }
 
-    // enemy tracker in area 22 of BBH
+    // enemy tracker in area 2 of BBH
     if (gCurrLevelNum == LEVEL_BBH && gCurrAreaIndex == 2) {
         int enemyCounter = 0;
         static u8 tracker;
@@ -1964,6 +1964,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         }   
     }
 
+    // prevent more from 10 chaos chuckyas from spawning at the same time
     if (gChaosCodeTable[GLOBAL_CHAOS_CHUCKYA_ON_OBJECT_DELETION].active) {
         for (i3 = 0; i3 < OBJECT_POOL_CAPACITY; i3++) {
             struct Object *curObj = &gObjectPool[i3];
@@ -2014,7 +2015,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     if (gChaosCodeTable[GLOBAL_CHAOS_DELETE_NEARBY_OBJECTS].active) {
         f32 dist;
         struct Object *deletusObjectus = cur_obj_find_nearest_object(&dist);
-        if (deletusObjectus && deletusObjectus->oNuked < 1 && !(deletusObjectus->activeFlags & ACTIVE_FLAG_UNIMPORTANT) && dist < 500) {
+        if (deletusObjectus && deletusObjectus->behavior != segmented_to_virtual(bhvChainChompChainPart) && deletusObjectus->oNuked < 1 && !(deletusObjectus->activeFlags & ACTIVE_FLAG_UNIMPORTANT) && dist < 500) {
             struct Object *explosion = spawn_object(deletusObjectus, MODEL_EXPLOSION, bhvExplosion);
             explosion->oGraphYOffset += 100.0f;
             explosion->parentObj = gMarioObject;
