@@ -42,7 +42,7 @@ const LevelScript level_ddd_entry[] = {
 	/* Fast64 end persistent block [level commands] */
 
 	AREA(1, ddd_area_1),
-		WARP_NODE(3, LEVEL_BOB, 2, 0x0A, WARP_NO_CHECKPOINT),
+		INSTANT_WARP(3, 2, -8192, 0, 0),
 		WARP_NODE(0xF1, LEVEL_CASTLE, 0x03, 0x67, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF0, LEVEL_CASTLE, 0x03, 0x35, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0A, LEVEL_DDD, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -102,7 +102,7 @@ const LevelScript level_ddd_entry[] = {
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 	AREA(2, ddd_area_2),
-		WARP_NODE(2, LEVEL_BOB, 1, 0x0A, WARP_NO_CHECKPOINT),
+		INSTANT_WARP(2, 1, 8192, 0, 0),
 		WARP_NODE(0xF3, LEVEL_CASTLE_GROUNDS, 0x01, 0x1E, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF1, LEVEL_CASTLE, 0x03, 0x67, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF0, LEVEL_CASTLE, 0x03, 0x35, WARP_NO_CHECKPOINT),
