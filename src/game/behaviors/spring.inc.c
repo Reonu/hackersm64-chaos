@@ -31,4 +31,7 @@ void bhv_spring_loop(void) {
             o->oAction = 0;
         }
     }
+    if (BPARAM1 == 0x01 && o->oTimer > 10) {
+        obj_mark_for_deletion(o);
+    }  
 }

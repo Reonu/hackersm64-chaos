@@ -278,6 +278,26 @@ void chaos_thwomp(void) {
     disable_current_code();
 }
 
+void chaos_spring(void) {
+    if (gMarioState->vel[1] < 0) {
+        struct Object *spring = spawn_object_relative(0, 0, -100, 0, gMarioState->marioObj, MODEL_SPRING, bhvSpring);
+        u16 color = random_u16() % 3;
+        switch (color) {
+            case 0:
+                spring->oBehParams = 0x01000000;
+                break;
+            case 1:
+            default:
+                spring->oBehParams = 0x01010000;
+                break;
+            case 2:
+                spring->oBehParams = 0x01020000;
+                break;
+        }
+        disable_current_code();
+    }
+}
+
 void chaos_yellow_block(void) {
     if (gMarioState->vel[1] > 0) {
         spawn_object_relative(EXCLAMATION_BOX_BP_COINS_1, 0, 200, 0, gMarioState->marioObj, MODEL_EXCLAMATION_BOX, bhvExclamationBox);
@@ -623,6 +643,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Chuckya on Object Deletion", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"FoV based on fvel", chaos_generic, 100, 30, 60, CODEFLAG_CAMERA,  /*ignore these*/ 0, 0},
     {"All Ceilings Hangable", chaos_generic, 100, 60, 120, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
+    {"Sudden Reonu Spring", chaos_spring, 100, 60, 120, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
