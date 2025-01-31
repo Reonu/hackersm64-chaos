@@ -206,7 +206,7 @@ void bhv_chuckya_loop(void) {
     o->oInteractStatus = INT_STATUS_NONE;
 
     if (o->oBehParams == CHUCKYA_BP_CHAOS) {
-        if (o->oChaosTimer > 300 && o->oAction != CHUCKYA_ACT_GRABBED_MARIO) {
+        if (o->oChaosTimer > 220 && o->oAction != CHUCKYA_ACT_GRABBED_MARIO) {
             mark_obj_for_deletion(o);
         }
         o->oDrawingDistance = gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active ? 6000 : 8000;
