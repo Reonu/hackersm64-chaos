@@ -298,6 +298,11 @@ void chaos_spring(void) {
     }
 }
 
+void chaos_amp(void) {
+    spawn_object_relative(HOMING_AMP_BP_CHAOS, 30, 0, 0, gMarioState->marioObj, MODEL_AMP, bhvHomingAmp);
+    disable_current_code();
+}
+
 void chaos_yellow_block(void) {
     if (gMarioState->vel[1] > 0) {
         spawn_object_relative(EXCLAMATION_BOX_BP_COINS_1, 0, 200, 0, gMarioState->marioObj, MODEL_EXCLAMATION_BOX, bhvExclamationBox);
@@ -643,7 +648,8 @@ ChaosCode gChaosCodeTable[] = {
     {"Chuckya on Object Deletion", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"FoV based on fvel", chaos_generic, 100, 30, 60, CODEFLAG_CAMERA,  /*ignore these*/ 0, 0},
     {"All Ceilings Hangable", chaos_generic, 100, 60, 120, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
-    {"Sudden Reonu Spring", chaos_spring, 100, 60, 120, 0,  /*ignore these*/ 0, 0},
+    {"Sudden Reonu Spring", chaos_spring, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Amp", chaos_amp, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

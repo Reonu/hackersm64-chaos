@@ -215,7 +215,9 @@ void bhv_homing_amp_loop(void) {
     }
 
     object_step();
-
+    if (o->oBehParams == HOMING_AMP_BP_CHAOS && o->oChaosTimer > 200) {
+        obj_mark_for_deletion(o);
+    }
     // Oscillate
     o->oAmpYPhase++;
 }

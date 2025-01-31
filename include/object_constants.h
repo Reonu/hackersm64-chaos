@@ -893,6 +893,8 @@ enum oActionsStarDoor {
     #define HOMING_AMP_ACT_CHASE                            0x2
     #define HOMING_AMP_ACT_GIVE_UP                          0x3
     #define HOMING_AMP_ACT_ATTACK_COOLDOWN                  0x4
+    #define HOMING_AMP_BP_CHAOS                             0xFF000000
+
 
 /* Amp */
     /* oBehParams2ndByte */
