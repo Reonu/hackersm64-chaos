@@ -622,6 +622,11 @@ void geo_process_camera(struct GraphNodeCamera *node) {
         } else {
             flipdir = 0;
         }
+        if (gChaosCodeTable[GLOBAL_CHAOS_BILLBOARD_MARIO].active) {
+            gMarioHeadPos[0] = gMarioState->pos[0];
+            gMarioHeadPos[1] = gMarioState->pos[1] + 100.0f;
+            gMarioHeadPos[2] = gMarioState->pos[2];
+        }
         f32 tempSin = coss(gMarioState->marioObj->header.gfx.angle[2] + gMarioHeadRot[2]);
         pos[0] = gMarioHeadPos[0] + (150.0f * tempSin) * sins(gMarioState->marioObj->header.gfx.angle[1] + flipdir + gMarioHeadRot[1]);
         pos[2] = gMarioHeadPos[2] + (150.0f * tempSin) * coss(gMarioState->marioObj->header.gfx.angle[1] + flipdir + gMarioHeadRot[1]);
