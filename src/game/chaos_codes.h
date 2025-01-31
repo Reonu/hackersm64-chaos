@@ -91,6 +91,7 @@ enum CodeFlags {
     CODEFLAG_NONE,
     CODEFLAG_SCREEN,
     CODEFLAG_CAMERA,
+    CODEFLAG_AUDIO,
 
     CODEFLAG_MINOR, // This isn't actually exclusivity, but will set the timer to 1/3 it's normal value
 };
