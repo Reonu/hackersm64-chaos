@@ -1,11 +1,11 @@
 extern const GeoLayout spring_geo[];
 extern Vtx spring_spring_mesh_layer_1_vtx_cull[8];
-extern Vtx spring_spring_mesh_layer_1_vtx_0[58];
+extern Vtx spring_spring_mesh_layer_1_vtx_0[96];
 extern Gfx spring_spring_mesh_layer_1_tri_0[];
-extern Vtx spring_spring_mesh_layer_1_vtx_1[16];
+extern Vtx spring_spring_mesh_layer_1_vtx_1[28];
 extern Gfx spring_spring_mesh_layer_1_tri_1[];
-extern Gfx mat_spring_a_spring[];
-extern Gfx mat_revert_spring_a_spring[];
-extern Gfx mat_spring_z_metal[];
-extern Gfx mat_revert_spring_z_metal[];
+extern Gfx mat_spring__0_spring[];
+extern Gfx mat_revert_spring__0_spring[];
+extern Gfx mat_spring__1_thing[];
+extern Gfx mat_revert_spring__1_thing[];
 extern Gfx spring_spring_mesh_layer_1[];
