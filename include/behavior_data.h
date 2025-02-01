@@ -563,3 +563,4 @@ extern const BehaviorScript bhvMovementGhost[];
 extern const BehaviorScript bhvGiantDoor[];
 extern const BehaviorScript bhvBbhSquareFloatingPlatform[];
 extern const BehaviorScript bhvMedusaHead[];
+extern const BehaviorScript bhvCream[];

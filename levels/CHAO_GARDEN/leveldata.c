@@ -12,3 +12,6 @@
 
 
 #include "levels/CHAO_GARDEN/leveldata.inc.c"
+#include "levels/CHAO_GARDEN/cream/model.inc.c"
+#include "levels/CHAO_GARDEN/cream/anims/data.inc.c"
+#include "levels/CHAO_GARDEN/cream/anims/table.inc.c"

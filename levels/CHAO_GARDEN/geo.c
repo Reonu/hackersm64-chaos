@@ -15,3 +15,4 @@
 
 
 #include "levels/CHAO_GARDEN/geo.inc.c"
+#include "levels/CHAO_GARDEN/cream/geo.inc.c"
