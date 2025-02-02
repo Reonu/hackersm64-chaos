@@ -859,9 +859,9 @@ void cur_obj_update(void) {
                     o->oOldScaleY = o->header.gfx.scale[1];
                     o->oOldScaleZ = o->header.gfx.scale[2];
                 }
-                o->header.gfx.scale[0] = approach_f32_asymptotic(o->header.gfx.scale[0], 2.f, 0.05f);
-                o->header.gfx.scale[1] = approach_f32_asymptotic(o->header.gfx.scale[1], 2.f, 0.05f);
-                o->header.gfx.scale[2] = approach_f32_asymptotic(o->header.gfx.scale[2], 2.f, 0.05f);
+                o->header.gfx.scale[0] = approach_f32_asymptotic(o->header.gfx.scale[0], o->oOldScaleX * 2.f, 0.05f);
+                o->header.gfx.scale[1] = approach_f32_asymptotic(o->header.gfx.scale[1], o->oOldScaleY * 2.f, 0.05f);
+                o->header.gfx.scale[2] = approach_f32_asymptotic(o->header.gfx.scale[2], o->oOldScaleZ * 2.f, 0.05f);
             } else {
                 o->header.gfx.scale[0] = o->oOldScaleX;
                 o->header.gfx.scale[1] = o->oOldScaleY;
