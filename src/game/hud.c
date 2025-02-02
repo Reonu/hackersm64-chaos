@@ -452,7 +452,6 @@ void render_hud_stars(void) {
     x += 16 >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
     if (showX) {
         print_text(x, HUD_TOP_Y + yOffset, "*"); // 'X' glyph
-        x += 16 >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
     }
     print_text_fmt_int(((showX * 14) >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active) + x, HUD_TOP_Y + yOffset, "%d", gHudDisplay.stars);
 }
