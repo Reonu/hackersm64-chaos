@@ -1,5 +1,8 @@
 // bobomb.inc.c
 #include "game/chaos_codes.h"
+#include "game/game_init.h"
+#include "include/behavior_data.h"
+#include "game/level_update.h"
 static struct ObjectHitbox sBobombHitbox = {
     /* interactType:      */ INTERACT_GRABBABLE,
     /* downOffset:        */ 0,
@@ -408,8 +411,16 @@ void bobomb_buddy_act_turn_to_talk(void) {
     if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
         o->oAction = BOBOMB_BUDDY_ACT_TALK;
     }
-
-    cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
+    
+    if (!cur_obj_has_model(MODEL_CREAM)) {
+        cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
+    } else {
+        if (gChaoTutorial == 1) {
+            gChaoTutorial = 2;
+        } else if(gChaoTutorial == 3) {
+            gChaoTutorial = 4;
+        }
+    }
 }
 
 void bobomb_buddy_actions(void) {
@@ -424,6 +435,12 @@ void bobomb_buddy_actions(void) {
 
         case BOBOMB_BUDDY_ACT_TALK:
             bobomb_buddy_act_talk();
+            if (cur_obj_has_model(MODEL_CREAM)) {
+                gCreamHasTalked++;
+                if (gCreamHasTalked > 254) {
+                    gCreamHasTalked = 254;
+                }
+            }
             break;
     }
 
@@ -434,6 +451,21 @@ void bhv_bobomb_buddy_loop(void) {
     bobomb_buddy_actions();
 
     curr_obj_random_blink(&o->oBobombBuddyBlinkTimer);
+    
+    if (cur_obj_has_model(MODEL_CREAM)) {
+        if (gChaoTutorial == 2 && o->oAction != BOBOMB_BUDDY_ACT_TURN_TO_TALK && gMarioState->action != ACT_WAITING_FOR_DIALOG && gMarioState->action != ACT_READING_NPC_DIALOG && gCreamHasTalked >= 2) {
+            f32 dist;
+            struct Object *chao = cur_obj_find_nearest_object_with_behavior(bhvChao, &dist);
+            if (chao != NULL && dist < 600.f) {
+                gChaoTutorial = 3;
+            }
+        }
+        if (gChaoTutorial == 3) {
+            o->oBehParams = 0x00B60000;
+            o->oBehParams2ndByte = 0xB6;
+        }
+        o->oDrawingDistance = 30000;
+    }
 
     o->oInteractStatus = INT_STATUS_NONE;
 }

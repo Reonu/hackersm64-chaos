@@ -587,6 +587,10 @@ void render_law_metre(void) {
 void render_hud(void) {
     s16 hudDisplayFlags = gHudDisplay.flags;
 
+    if (gCurrLevelNum == LEVEL_CHAO_GARDEN) {
+        return;
+    }
+
     if (hudDisplayFlags == HUD_DISPLAY_NONE) {
         sPowerMeterHUD.animation = POWER_METER_HIDDEN;
         sPowerMeterStoredHealth = 8;

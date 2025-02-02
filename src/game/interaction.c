@@ -1951,7 +1951,12 @@ void mario_handle_special_floors(struct MarioState *m) {
                 break;
 
             case SURFACE_WARP:
-                level_trigger_warp(m, WARP_OP_WARP_FLOOR);
+                if (gCurrLevelNum != LEVEL_CHAO_GARDEN) {
+                    level_trigger_warp(m, WARP_OP_WARP_FLOOR);
+                } else if (gChaoTutorial == 4) {
+                    level_trigger_warp(m, WARP_OP_WARP_DOOR);
+                    gNeverEnteredCastle = 1;
+                }
                 break;
 
             case SURFACE_TIMER_START:

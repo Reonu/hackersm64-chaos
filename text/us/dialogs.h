@@ -278,12 +278,9 @@ a cake for you.\n\
 Yours truly--\n\
 Princess Toadstool"))
 
-DEFINE_DIALOG(DIALOG_021, 1, 5, 95, 200, _("\
-Welcome.\n\
-No one's home!\n\
-Now " SCRAM "\n\
-and don't come back!\n\
-Gwa ha ha!"))
+DEFINE_DIALOG(DIALOG_021, 1, 2, 95, 200, _("\
+lmao jk\n\
+Welcome to CBT64"))
 
 DEFINE_DIALOG(DIALOG_022, 1, 2, 95, 200, _("\
 You need a key to open\n\
@@ -2123,3 +2120,25 @@ I'm cold!"))
 
 DEFINE_DIALOG(DIALOGUE_178, 1, 1, 30, 200, _("\
 im hiding :o)"))
+
+DEFINE_DIALOG(DIALOGUE_179, 1, 4, 30, 200, _("\
+Welcome to\n\
+Chao Garden 64!\n\
+To get started, talk\n\
+to Cream over there."))
+
+DEFINE_DIALOG(DIALOGUE_180, 1, 4, 30, 200, _("\
+Hello! My name is Cream.\n\
+I'm going to teach you\n\
+how to take care of Chao!\n\
+\n\
+To get started, bring\n\
+a Chao close to me\n\
+and then talk to me\n\
+again."))
+
+DEFINE_DIALOG(DIALOGUE_181, 1, 4, 30, 200, _("\
+Very good! Next, let's\n\
+buy some food.\n\
+Head through the exit\n\
+and go to the market."))

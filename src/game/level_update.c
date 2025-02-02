@@ -257,8 +257,9 @@ void load_level_init_text(u32 arg) {
 }
 
 void init_door_warp(struct SpawnInfo *spawnInfo, u32 warpDestFlags) {
-    if (warpDestFlags & WARP_FLAG_DOOR_FLIP_MARIO) {
+    if (warpDestFlags & WARP_FLAG_DOOR_FLIP_MARIO || gFlipMarioOnce) {
         spawnInfo->startAngle[1] += 0x8000;
+        gFlipMarioOnce = 0;
     }
 
     spawnInfo->startPos[0] += 300.0f * sins(spawnInfo->startAngle[1]);
@@ -820,7 +821,11 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
             case WARP_OP_WARP_DOOR:
                 sDelayedWarpTimer = 20;
                 sDelayedWarpArg = m->actionArg;
-                sSourceWarpNodeId = GET_BPARAM2(m->usedObj->oBehParams);
+                if (gCurrLevelNum == LEVEL_CHAO_GARDEN) {
+                    sSourceWarpNodeId = 0x01;
+                } else {
+                    sSourceWarpNodeId = GET_BPARAM2(m->usedObj->oBehParams);
+                }
                 fadeMusic = !music_unchanged_through_warp(sSourceWarpNodeId);
                 play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, sDelayedWarpTimer, 0x00, 0x00, 0x00);
                 break;

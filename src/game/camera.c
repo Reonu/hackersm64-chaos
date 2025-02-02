@@ -1150,7 +1150,10 @@ void mode_8_directions_camera(struct Camera *c) {
         s8DirModeYawOffset = snap_to_45_degrees(s8DirModeYawOffset);
     }
 #endif
-
+    if (gCurrLevelNum == LEVEL_CHAO_GARDEN && !gChaoTutorialCameraMoved) {
+        s8DirModeYawOffset += DEGREES(180);
+        gChaoTutorialCameraMoved = 1;
+    }
     lakitu_zoom(400.f, 0x900);
     c->nextYaw = update_8_directions_camera(c, c->focus, pos);
     c->pos[0] = pos[0];

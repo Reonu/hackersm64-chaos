@@ -36,6 +36,7 @@
 #include "buffers/buffers.h"
 #include "string.h"
 #include "game/object_helpers.h"
+#include "include/dialog_ids.h"
 
 
 
@@ -1888,6 +1889,15 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         mario_update_shadow();
         return 0;
     }
+    
+    if (gCurrLevelNum == LEVEL_CHAO_GARDEN) {
+        if (!gChaoTutorial && gGlobalTimer > 15) {
+            gNeverEnteredCastle = 0;
+            set_mario_action(gMarioState, ACT_READING_AUTOMATIC_DIALOG, DIALOGUE_179+1);
+            gChaoTutorial = 1;
+        }
+    }
+
 
     if (gChaosCodeTable[GLOBAL_CHAOS_BILLBOARD_MARIO].active) {
         obj_set_model(gMarioObject, MODEL_MARIO_BILLBOARD);

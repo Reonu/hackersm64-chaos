@@ -48,6 +48,10 @@ OSContStatus gControllerStatuses[MAXCONTROLLERS];
 OSContPadEx gControllerPads[MAXCONTROLLERS];
 u8 gControllerBits = 0b0000;
 u8 gBorderHeight;
+u8 gChaoTutorial;
+u8 gChaoTutorialCameraMoved;
+u8 gFlipMarioOnce = 1;
+u8 gCreamHasTalked;
 u16 gFlameCounter;
 u16 gChuckyaCounter;
 #ifdef VANILLA_STYLE_CUSTOM_DEBUG
