@@ -670,7 +670,7 @@ ChaosCode gTTCChaosTable[] = {
 };
 
 ChaosCode gLLLChaosTable[] = {
-    {"LLL Super Burning", chaos_lll_super_burning, 100, 10, 15, 0,   /*ignore these*/ 0, 0},
+    {"LLL Super Burning", chaos_lll_super_burning, 20, 10, 15, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gSSLChaosTable[] = {

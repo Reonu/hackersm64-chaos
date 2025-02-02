@@ -218,7 +218,6 @@ const LevelScript script_func_global_2[] = {
     LOAD_MODEL_FROM_GEO(MODEL_YELLOW_SPHERE,           yellow_sphere_geo),
     LOAD_MODEL_FROM_GEO(MODEL_HOOT,                    hoot_geo),
     LOAD_MODEL_FROM_GEO(MODEL_YOSHI_EGG,               yoshi_egg_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_THWOMP,                  thwomp_geo),
     RETURN(),
 };
 
