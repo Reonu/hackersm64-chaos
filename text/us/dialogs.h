@@ -1863,11 +1863,11 @@ back and visit anytime."))
 DEFINE_DIALOG(DIALOG_153, 1, 4, 30, 200, _("\
 Hey! Who's there?\n\
 What's climbing on me?\n\
-Is it an ice ant?\n\
-A snow flea?\n\
+Is it a sand ant?\n\
+A dune flea?\n\
 Whatever it is, it's\n\
 bugging me! I think I'll\n\
-blow it away!"))
+blow it!"))
 
 DEFINE_DIALOG(DIALOG_154, 1, 5, 30, 200, _("\
 Hold on to your hat! If\n\
