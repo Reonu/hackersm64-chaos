@@ -2047,6 +2047,15 @@ s32 lvl_init_menu_values_and_cursor_pos(UNUSED s32 arg, UNUSED s32 unused) {
     return 0;
 }
 
+
+s32 lvl_init_level_id(UNUSED s32 arg0, UNUSED s32 arg1) {
+    if (save_file_exists(gCurrSaveFileNum - 1)) {
+        return START_LEVEL;
+    } else {
+        return LEVEL_CHAO_GARDEN;
+    }
+}
+
 /**
  * Updates file select menu button objects so they can be interacted.
  * When a save file is selected, it returns fileNum value
