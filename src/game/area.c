@@ -31,6 +31,7 @@
 #endif
 #include "chaos_codes.h"
 #include "main.h"
+#include "buffers/framebuffers.h"
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *gGraphNodePointers[MODEL_ID_COUNT];
@@ -492,6 +493,10 @@ void render_game(void) {
         gDPPipeSync(gDisplayListHead++);
         gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
         gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
+        FORCE_CRASH;
+        gFramebuffer0[random_u16()] = random_u16();
+        gFramebuffer1[random_u16()] = random_u16();
+        gFramebuffer2[random_u16()] = random_u16();
     }
 
     if (gChaosCodeTable[GLOBAL_CHAOS_AD_SPAM].active) {

@@ -338,7 +338,10 @@ void bhv_goomba_update(void) {
             }
         }
 
-        cur_obj_scale(o->oGoombaScale);
+        if (!gChaosCodeTable[GLOBAL_CHAOS_SCALE_UP].active || o->oChaosTimer == 0) {
+            cur_obj_scale(o->oGoombaScale);
+        }
+
         obj_update_blinking(&o->oGoombaBlinkTimer, 30, 50, 5);
 #ifdef FLOOMBAS
         if (o->oIsFloomba) {

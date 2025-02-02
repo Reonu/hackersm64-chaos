@@ -851,29 +851,6 @@ void cur_obj_update(void) {
         o->oNuked++;
     }
 
-    if (gChaosCodeTable[GLOBAL_CHAOS_SCALE_UP].active) {
-        if (o->behavior != segmented_to_virtual(bhvMario)) {
-            if (gChaosCodeTable[GLOBAL_CHAOS_SCALE_UP].timer > 1) {
-                if (o->oOldScaleX == 0) {
-                    o->oOldScaleX = o->header.gfx.scale[0];
-                    o->oOldScaleY = o->header.gfx.scale[1];
-                    o->oOldScaleZ = o->header.gfx.scale[2];
-                }
-                o->header.gfx.scale[0] = approach_f32_asymptotic(o->header.gfx.scale[0], o->oOldScaleX * 2.f, 0.05f);
-                o->header.gfx.scale[1] = approach_f32_asymptotic(o->header.gfx.scale[1], o->oOldScaleY * 2.f, 0.05f);
-                o->header.gfx.scale[2] = approach_f32_asymptotic(o->header.gfx.scale[2], o->oOldScaleZ * 2.f, 0.05f);
-            } else {
-                o->header.gfx.scale[0] = o->oOldScaleX;
-                o->header.gfx.scale[1] = o->oOldScaleY;
-                o->header.gfx.scale[2] = o->oOldScaleZ;
-            }
-        }
-    } else {
-        o->oOldScaleX = 0;
-        o->oOldScaleY = 0;
-        o->oOldScaleZ = 0;
-    }
-
     if (gChaosCodeTable[GLOBAL_CHAOS_RANDOMIZE_COIN_COLORS].active) {
         if (cur_obj_has_model(MODEL_YELLOW_COIN) || 
         cur_obj_has_model(MODEL_RED_COIN) || 
@@ -957,6 +934,54 @@ void cur_obj_update(void) {
 
     // Execute various code based on object flags.
     objFlags = o->oFlags;
+
+    if (gChaosCodeTable[GLOBAL_CHAOS_SCALE_UP].active) {
+        static u8 started = 0;
+        static u8 sizeToggle = 0;
+        f32 sizeMultiplier = 1.0;
+        if (o->behavior != segmented_to_virtual(bhvMario)) {
+            if (gChaosCodeTable[GLOBAL_CHAOS_SCALE_UP].timer > 1) {
+                if (started == 0) {
+                    sizeToggle = random_u16() % 4;
+                    started = 1;
+                }
+                switch (sizeToggle) {
+                    case 0:
+                        sizeMultiplier = 0.25f;
+                        break;
+                    case 1:
+                        sizeMultiplier = 0.5f;
+                        break;
+                    case 2:
+                        sizeMultiplier = 2.0f;
+                        break;
+                    case 3:
+                        sizeMultiplier = 4.0f;
+                        break;
+                }
+                if (o->oOldScaleX == 0) {
+                    o->oOldScaleX = o->header.gfx.scale[0];
+                    o->oOldScaleY = o->header.gfx.scale[1];
+                    o->oOldScaleZ = o->header.gfx.scale[2];
+                    o->oOldCollisionDistance = o->oCollisionDistance;
+                }
+                o->header.gfx.scale[0] = approach_f32_asymptotic(o->header.gfx.scale[0], o->oOldScaleX * sizeMultiplier, 0.05f);
+                o->header.gfx.scale[1] = approach_f32_asymptotic(o->header.gfx.scale[1], o->oOldScaleY * sizeMultiplier, 0.05f);
+                o->header.gfx.scale[2] = approach_f32_asymptotic(o->header.gfx.scale[2], o->oOldScaleZ * sizeMultiplier, 0.05f);
+                o->oCollisionDistance = o->oOldCollisionDistance * sizeMultiplier;
+            } else {
+                o->header.gfx.scale[0] = o->oOldScaleX;
+                o->header.gfx.scale[1] = o->oOldScaleY;
+                o->header.gfx.scale[2] = o->oOldScaleZ;
+                o->oCollisionDistance = o->oOldCollisionDistance;
+                started = 0;
+            }
+        }
+    } else {
+        o->oOldScaleX = 0;
+        o->oOldScaleY = 0;
+        o->oOldScaleZ = 0;
+    }
 
     if (objFlags & OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE) {
         vec3i_copy(&o->oFaceAngleVec, &o->oMoveAngleVec);

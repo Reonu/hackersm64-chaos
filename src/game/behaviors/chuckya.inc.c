@@ -180,7 +180,10 @@ void chuckya_move(void) {
 }
 
 void bhv_chuckya_loop(void) {
-    cur_obj_scale(2.0f);
+
+    if (!gChaosCodeTable[GLOBAL_CHAOS_SCALE_UP].active) {
+        cur_obj_scale(2.0f);
+    }
     o->oInteractionSubtype |= INT_SUBTYPE_GRABS_MARIO;
 
     if (gChaosCodeTable[GLOBAL_CHAOS_FAST_ENEMIES].active) {

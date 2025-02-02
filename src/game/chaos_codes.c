@@ -650,7 +650,7 @@ ChaosCode gChaosCodeTable[] = {
     {"All Ceilings Hangable", chaos_generic, 100, 60, 120, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Sudden Reonu Spring", chaos_spring, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Amp", chaos_amp, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
-    {"Everything scales up", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Random object scale", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

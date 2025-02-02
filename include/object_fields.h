@@ -1346,5 +1346,6 @@ os16112*/
 #define           oOldScaleX                                    OBJECT_FIELD_F32(0x52)
 #define           oOldScaleY                                    OBJECT_FIELD_F32(0x53)
 #define           oOldScaleZ                                    OBJECT_FIELD_F32(0x54)
+#define           oOldCollisionDistance                         OBJECT_FIELD_F32(0x55)
 
 #endif // OBJECT_FIELDS_H
