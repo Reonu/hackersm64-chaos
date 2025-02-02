@@ -1343,5 +1343,8 @@ os16112*/
 
 #define           oNuked                                        OBJECT_FIELD_S32(0x50)
 #define           oChaosTimer                                   OBJECT_FIELD_S32(0x51)
+#define           oOldScaleX                                    OBJECT_FIELD_F32(0x52)
+#define           oOldScaleY                                    OBJECT_FIELD_F32(0x53)
+#define           oOldScaleZ                                    OBJECT_FIELD_F32(0x54)
 
 #endif // OBJECT_FIELDS_H

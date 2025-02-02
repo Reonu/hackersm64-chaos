@@ -851,6 +851,29 @@ void cur_obj_update(void) {
         o->oNuked++;
     }
 
+    if (gChaosCodeTable[GLOBAL_CHAOS_SCALE_UP].active) {
+        if (o->behavior != segmented_to_virtual(bhvMario)) {
+            if (gChaosCodeTable[GLOBAL_CHAOS_SCALE_UP].timer > 1) {
+                if (o->oOldScaleX == 0) {
+                    o->oOldScaleX = o->header.gfx.scale[0];
+                    o->oOldScaleY = o->header.gfx.scale[1];
+                    o->oOldScaleZ = o->header.gfx.scale[2];
+                }
+                o->header.gfx.scale[0] = approach_f32_asymptotic(o->header.gfx.scale[0], 2.f, 0.05f);
+                o->header.gfx.scale[1] = approach_f32_asymptotic(o->header.gfx.scale[1], 2.f, 0.05f);
+                o->header.gfx.scale[2] = approach_f32_asymptotic(o->header.gfx.scale[2], 2.f, 0.05f);
+            } else {
+                o->header.gfx.scale[0] = o->oOldScaleX;
+                o->header.gfx.scale[1] = o->oOldScaleY;
+                o->header.gfx.scale[2] = o->oOldScaleZ;
+            }
+        }
+    } else {
+        o->oOldScaleX = 0;
+        o->oOldScaleY = 0;
+        o->oOldScaleZ = 0;
+    }
+
     if (gChaosCodeTable[GLOBAL_CHAOS_RANDOMIZE_COIN_COLORS].active) {
         if (cur_obj_has_model(MODEL_YELLOW_COIN) || 
         cur_obj_has_model(MODEL_RED_COIN) || 
