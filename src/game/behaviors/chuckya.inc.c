@@ -181,7 +181,7 @@ void chuckya_move(void) {
 
 void bhv_chuckya_loop(void) {
 
-    if (!gChaosCodeTable[GLOBAL_CHAOS_SCALE_UP].active) {
+    if (!gChaosCodeTable[GLOBAL_CHAOS_RANDOM_SCALE].active) {
         cur_obj_scale(2.0f);
     }
     o->oInteractionSubtype |= INT_SUBTYPE_GRABS_MARIO;

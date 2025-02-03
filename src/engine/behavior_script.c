@@ -935,12 +935,12 @@ void cur_obj_update(void) {
     // Execute various code based on object flags.
     objFlags = o->oFlags;
 
-    if (gChaosCodeTable[GLOBAL_CHAOS_SCALE_UP].active) {
+    if (gChaosCodeTable[GLOBAL_CHAOS_RANDOM_SCALE].active) {
         static u8 started = 0;
         static u8 sizeToggle = 0;
         f32 sizeMultiplier = 1.0;
         if (o->behavior != segmented_to_virtual(bhvMario)) {
-            if (gChaosCodeTable[GLOBAL_CHAOS_SCALE_UP].timer > 1) {
+            if (gChaosCodeTable[GLOBAL_CHAOS_RANDOM_SCALE].timer > 1) {
                 if (started == 0) {
                     sizeToggle = random_u16() % 4;
                     started = 1;

@@ -338,7 +338,7 @@ void bhv_goomba_update(void) {
             }
         }
 
-        if (!gChaosCodeTable[GLOBAL_CHAOS_SCALE_UP].active || o->oChaosTimer == 0) {
+        if (!gChaosCodeTable[GLOBAL_CHAOS_RANDOM_SCALE].active || o->oChaosTimer == 0) {
             cur_obj_scale(o->oGoombaScale);
         }
 
