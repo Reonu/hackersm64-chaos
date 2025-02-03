@@ -117,6 +117,7 @@ extern ChaosCode gTTCChaosTable[];
 extern ChaosCode gSSLChaosTable[];
 extern ChaosCode gWDWChaosTable[];
 extern ChaosCode gLLLChaosTable[];
+extern ChaosCode gSLChaosTable[];
 extern u8 gDisableChaos;
 extern float gCrimes;
 extern u8 gChaosOffOverride;

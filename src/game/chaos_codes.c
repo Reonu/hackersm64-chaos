@@ -605,6 +605,13 @@ void chaos_bob_koopa_storm(void) {
     current_code_update_timer();
 }
 
+void chaos_sl_swap_mario_xz(void) {
+    f32 marioX = gMarioState->pos[0];
+    gMarioState->pos[0] = gMarioState->pos[2];
+    gMarioState->pos[2] = marioX;
+    disable_current_code();
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -689,6 +696,10 @@ ChaosCode gSSLChaosTable[] = {
     {"SSL Quicksand Magnet", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
 };
 
+ChaosCode gSLChaosTable[] = {
+    {"SL Swap Mario XZ", chaos_sl_swap_mario_xz, 50, 0, 0, 0,   /*ignore these*/ 0, 0},
+};
+
 ChaosCode gWDWChaosTable[] = {
     {"Random Water Level", chaos_wdw_water, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Heave Ho Strength", chaos_wdw_heaveho, 100, 20, 30, 0,   /*ignore these*/ 0, 0},
@@ -729,6 +740,9 @@ ChaosCode *chaos_level_table(s32 levelID, s32 *size) {
     case LEVEL_LLL:
         *size = sizeof(gLLLChaosTable) / sizeof(ChaosCode);
         return gLLLChaosTable;
+    case LEVEL_SL:
+        *size = sizeof(gSLChaosTable) / sizeof(ChaosCode);
+        return gSLChaosTable;
     case LEVEL_TTC:
         *size = sizeof(gTTCChaosTable) / sizeof(ChaosCode);
         return gTTCChaosTable;
