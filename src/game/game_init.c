@@ -436,9 +436,9 @@ void render_init(void) {
     // Skip incrementing the initial framebuffer index on emulators so that they display immediately as the Gfx task finishes
     // VC probably emulates osViSwapBuffer accurately so instant patch breaks VC compatibility
     // Currently, Ares and Simple64 have issues with single buffering so disable it there as well.
-    if ((gEmulator & INSTANT_INPUT_BLACKLIST) == 0 && gChaosCodeTable[GLOBAL_CHAOS_RETRO].active == FALSE) {
+    //if ((gEmulator & INSTANT_INPUT_BLACKLIST) == 0 && gChaosCodeTable[GLOBAL_CHAOS_RETRO].active == FALSE) {
         sRenderingFramebuffer++;
-    }
+    //}
     gGlobalTimer++;
 }
 
@@ -489,6 +489,9 @@ void display_and_vsync(void) {
             } else if (gChaosCodeTable[GLOBAL_CHAOS_RETRO].active == FALSE) {
                 sRenderedFramebuffer ^= 1;
                 sRenderingFramebuffer ^= 1;
+                if (sRenderedFramebuffer == sRenderingFramebuffer) {
+                    sRenderingFramebuffer ^= 1;
+                }
             } else if (gChaosCodeTable[GLOBAL_CHAOS_BLUR].active == FALSE) {
                 sRenderedFramebuffer = 0;
                 sRenderingFramebuffer = 0;
