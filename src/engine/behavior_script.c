@@ -887,7 +887,7 @@ void cur_obj_update(void) {
     }
 
     // Calculate the distance from the object to Mario.
-    if (objFlags & OBJ_FLAG_COMPUTE_DIST_TO_MARIO) {
+    if (objFlags & OBJ_FLAG_COMPUTE_DIST_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) {
         o->oDistanceToMario = dist_between_objects(o, gMarioObject);
         distanceFromMario = o->oDistanceToMario;
     } else {
@@ -895,8 +895,15 @@ void cur_obj_update(void) {
     }
 
     // Calculate the angle from the object to Mario.
-    if (objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO) {
+    if (objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) {
         o->oAngleToMario = obj_angle_to_object(o, gMarioObject);
+    }
+
+    if (gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) {
+        if (o->oDistanceToMario < 500.0f) {
+            o->oPosX -= sins(o->oAngleToMario) * 40.0f;
+            o->oPosZ -= coss(o->oAngleToMario) * 40.0f;
+        }
     }
 
     // If the object's action has changed, reset the action timer.

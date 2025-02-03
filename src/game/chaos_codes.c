@@ -651,6 +651,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Sudden Reonu Spring", chaos_spring, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Amp", chaos_amp, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Random object scale", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Objects flee Mario", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
