@@ -597,6 +597,14 @@ void chaos_ttc_stopped_speed(void) {
     };
 }
 
+void chaos_bob_koopa_storm(void) {
+    gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+    if (gCurrentChaosTable[gCurrentChaosID].timer % 20 == 0) {
+        spawn_object_relative(0, 0, 300, 0, gMarioState->marioObj, MODEL_KOOPA_WITHOUT_SHELL, bhvKoopa);
+    }
+    current_code_update_timer();
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -660,6 +668,7 @@ ChaosCode gCCMChaosTable[] = {
 
 ChaosCode gBoBChaosTable[] = {
     {"BoB Water Bombs", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"BoB Koopa Storm", chaos_bob_koopa_storm, 100, 5, 10, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gTTCChaosTable[] = {
