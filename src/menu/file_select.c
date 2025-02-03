@@ -2050,6 +2050,7 @@ s32 lvl_init_menu_values_and_cursor_pos(UNUSED s32 arg, UNUSED s32 unused) {
 
 s32 lvl_init_level_id(UNUSED s32 arg0, UNUSED s32 arg1) {
     if (save_file_exists(gCurrSaveFileNum - 1)) {
+        gFlipMarioOnce = 0;
         return START_LEVEL;
     } else {
         return LEVEL_CHAO_GARDEN;
