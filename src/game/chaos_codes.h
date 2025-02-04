@@ -91,6 +91,7 @@ enum TTCChaosNames {
 
 enum HMCChaosNames {
     HMC_RANDOM_BOULDER,
+    HMC_BOULDERS_FACE_MARIO,
 };
 
 // A mark for exclusivity. Can only have one of thse effects active at a time.
@@ -122,6 +123,7 @@ extern ChaosCode gSSLChaosTable[];
 extern ChaosCode gWDWChaosTable[];
 extern ChaosCode gLLLChaosTable[];
 extern ChaosCode gSLChaosTable[];
+extern ChaosCode gHMCChaosTable[];
 extern u8 gDisableChaos;
 extern float gCrimes;
 extern u8 gChaosOffOverride;

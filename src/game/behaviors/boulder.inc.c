@@ -47,6 +47,16 @@ void bhv_big_boulder_loop(void) {
     if (o->oBehParams == HMC_BOULDER_BP_CHAOS && o->oChaosTimer > 120) {
         obj_mark_for_deletion(o);
     }
+
+    if (gHMCChaosTable[HMC_BOULDERS_FACE_MARIO].active) {
+        o->oMoveAngleYaw = o->oAngleToMario;
+        o->oFaceAngleYaw = o->oAngleToMario;
+    }
+
+    //safeguard
+    if (o->oChaosTimer > 300) {
+        obj_mark_for_deletion(o);
+    }
 }
 
 void bhv_big_boulder_generator_loop(void) {
