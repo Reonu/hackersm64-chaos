@@ -2719,4 +2719,6 @@ enum gCutsceneObjSpawns {
 
 #define CHUCKYA_BP_CHAOS 0xFF000000
 
+#define HMC_BOULDER_BP_CHAOS 0xFF000000
+
 #endif // OBJECT_CONSTANTS_H

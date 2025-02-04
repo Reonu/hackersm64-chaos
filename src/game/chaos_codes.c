@@ -299,7 +299,8 @@ void chaos_spring(void) {
 }
 
 void chaos_amp(void) {
-    spawn_object_relative(HOMING_AMP_BP_CHAOS, 30, 0, 0, gMarioState->marioObj, MODEL_AMP, bhvHomingAmp);
+    struct Object *amp = spawn_object_relative(0, 30, 0, 0, gMarioState->marioObj, MODEL_AMP, bhvHomingAmp);
+    amp->oBehParams = HOMING_AMP_BP_CHAOS;
     disable_current_code();
 }
 
@@ -612,6 +613,32 @@ void chaos_sl_swap_mario_xz(void) {
     disable_current_code();
 }
 
+void chaos_hmc_boulder(void) {
+    Vec3f pos;
+    pos[0] = gMarioState->pos[0] + 2000 * sins(gMarioState->faceAngle[1]);
+    pos[1] = gMarioState->pos[1] + 100;
+    pos[2] = gMarioState->pos[2] + 2000 * coss(gMarioState->faceAngle[1]);
+    struct Surface *floor;
+    find_floor(pos[0], pos[1], pos[2], &floor);
+    if (floor == NULL) {
+        u8 attemptCounter = 0;
+        while (floor == NULL && attemptCounter < 10) {
+            pos[1] += 150;
+            find_floor(pos[0], pos[1], pos[2], &floor);
+            attemptCounter++;
+        }
+    }
+    if (floor != NULL) {
+        struct Object *boulder = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_HMC_ROLLING_ROCK, bhvBigBoulder);
+        boulder->oPosX = pos[0];
+        boulder->oPosY = pos[1];
+        boulder->oPosZ = pos[2];
+        boulder->oMoveAngleYaw += DEGREES(180);
+        boulder->oBehParams = HMC_BOULDER_BP_CHAOS;
+    }    
+    disable_current_code();
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -705,6 +732,10 @@ ChaosCode gWDWChaosTable[] = {
     {"Heave Ho Strength", chaos_wdw_heaveho, 100, 20, 30, 0,   /*ignore these*/ 0, 0},
 };
 
+ChaosCode gHMCChaosTable[] = {
+    {"HMC Random Boulder", chaos_hmc_boulder, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
+};
+
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
     append_puppyprint_log("Chaos effect added: %s\n", table[codeID].name);
     if (table[codeID].flags && table[codeID].flags != CODEFLAG_MINOR) {
@@ -749,6 +780,9 @@ ChaosCode *chaos_level_table(s32 levelID, s32 *size) {
     case LEVEL_WDW:
         *size = sizeof(gWDWChaosTable) / sizeof(ChaosCode);
         return gWDWChaosTable;
+    case LEVEL_HMC:
+        *size = sizeof(gHMCChaosTable) / sizeof(ChaosCode);
+        return gHMCChaosTable;        
     case LEVEL_SSL:
         if (gCurrAreaIndex == 1) {
             *size = sizeof(gSSLChaosTable) / sizeof(ChaosCode);

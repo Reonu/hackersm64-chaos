@@ -89,6 +89,10 @@ enum TTCChaosNames {
     TTC_CHAOS_STOPPED_SPEED
 };
 
+enum HMCChaosNames {
+    HMC_RANDOM_BOULDER,
+};
+
 // A mark for exclusivity. Can only have one of thse effects active at a time.
 enum CodeFlags {
     CODEFLAG_NONE,

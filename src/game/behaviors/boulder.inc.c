@@ -1,5 +1,5 @@
 // boulder.inc.c
-
+#include "game/chaos_codes.h"
 void bhv_big_boulder_init(void) {
     vec3f_copy(&o->oHomeVec, &o->oPosVec);
 
@@ -44,6 +44,9 @@ void bhv_big_boulder_loop(void) {
     }
 
     set_rolling_sphere_hitbox();
+    if (o->oBehParams == HMC_BOULDER_BP_CHAOS && o->oChaosTimer > 120) {
+        obj_mark_for_deletion(o);
+    }
 }
 
 void bhv_big_boulder_generator_loop(void) {
