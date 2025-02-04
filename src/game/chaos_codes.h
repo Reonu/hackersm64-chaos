@@ -92,6 +92,7 @@ enum TTCChaosNames {
 enum HMCChaosNames {
     HMC_RANDOM_BOULDER,
     HMC_BOULDERS_FACE_MARIO,
+    HMC_RANDOM_DOOR_WARPS,
 };
 
 // A mark for exclusivity. Can only have one of thse effects active at a time.

@@ -27,6 +27,7 @@
 #include "seq_ids.h"
 #include "sound_init.h"
 #include "rumble_init.h"
+#include "game/chaos_codes.h"
 
 static struct Object *sIntroWarpPipeObj;
 static struct Object *sEndPeachObj;
@@ -934,6 +935,22 @@ s32 act_entering_star_door(struct MarioState *m) {
 
 s32 act_going_through_door(struct MarioState *m) {
     if (m->actionTimer == 0) {
+        if (gHMCChaosTable[HMC_RANDOM_DOOR_WARPS].active) {
+           struct Object *door;
+           u16 random_object = random_u16() % OBJECT_POOL_CAPACITY;
+           door = &gObjectPool[random_object];
+
+            while (door->behavior != segmented_to_virtual(bhvDoor)) {
+                random_object = random_u16() % OBJECT_POOL_CAPACITY;
+                door = &gObjectPool[random_object];
+            }
+            m->interactObj = door;
+            m->usedObj = door;
+            m->pos[0] = m->usedObj->oPosX;
+            m->pos[1] = m->usedObj->oPosY;
+            m->pos[2] = m->usedObj->oPosZ;
+
+        }
         if (m->actionArg & WARP_FLAG_DOOR_PULLED) {
             m->interactObj->oInteractStatus = INT_STATUS_DOOR_PULLED;
             set_mario_animation(m, MARIO_ANIM_PULL_DOOR_WALK_IN);
@@ -944,6 +961,9 @@ s32 act_going_through_door(struct MarioState *m) {
     }
     m->faceAngle[1] = m->usedObj->oMoveAngleYaw;
     m->pos[0] = m->usedObj->oPosX;
+    if (gHMCChaosTable[HMC_RANDOM_DOOR_WARPS].active) {
+        m->pos[1] = m->usedObj->oPosY;
+    }
     m->pos[2] = m->usedObj->oPosZ;
 
     update_mario_pos_for_anim(m);

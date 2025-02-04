@@ -29,7 +29,10 @@ void bhv_big_boulder_loop(void) {
     cur_obj_scale(1.5f);
 
     o->oGraphYOffset = 270.0f;
-
+    if (gHMCChaosTable[HMC_BOULDERS_FACE_MARIO].active) {
+        o->oMoveAngleYaw = o->oAngleToMario;
+        o->oFaceAngleYaw = o->oAngleToMario;
+    }
     switch (o->oAction) {
         case 0:
             o->oForwardVel = 40.0f;
@@ -48,10 +51,6 @@ void bhv_big_boulder_loop(void) {
         obj_mark_for_deletion(o);
     }
 
-    if (gHMCChaosTable[HMC_BOULDERS_FACE_MARIO].active) {
-        o->oMoveAngleYaw = o->oAngleToMario;
-        o->oFaceAngleYaw = o->oAngleToMario;
-    }
 
     //safeguard
     if (o->oChaosTimer > 300) {

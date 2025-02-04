@@ -735,6 +735,7 @@ ChaosCode gWDWChaosTable[] = {
 ChaosCode gHMCChaosTable[] = {
     {"HMC Random Boulder", chaos_hmc_boulder, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"HMC Boulders Face Mario", chaos_generic, 100, 15, 45, 0,   /*ignore these*/ 0, 0},
+    {"HMC Random Door Warps", chaos_generic, 100, 40, 70, 0,   /*ignore these*/ 0, 0},
 };
 
 void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
