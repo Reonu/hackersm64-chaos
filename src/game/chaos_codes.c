@@ -662,6 +662,13 @@ void chaos_thi_area_change(void) {
     disable_current_code();
 }
 
+void chaos_thi_bowling_balls(void) {
+    if (gGlobalTimer % 30 == 0) {
+        spawn_object_relative(0, random_u16()%2000 - 1000, 500, random_u16()%2000 - 1000, gMarioState->marioObj, MODEL_BOWLING_BALL, bhvBowlingBall);
+    }
+    current_code_update_timer();
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -760,6 +767,7 @@ ChaosCode gTHIChaosTable[] = {
     {"THI Vertical Wind", chaos_generic, 60, 5, 10, 0,   /*ignore these*/ 0, 0},
     {"THI Lakitu Throw Lakitu", chaos_thi_lakitu_throw_lakitu, 100, 5, 10, 0,   /*ignore these*/ 0, 0},
     {"THI Area Change", chaos_thi_area_change, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"THI Bowling Balls", chaos_thi_bowling_balls, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gHMCChaosTable[] = {

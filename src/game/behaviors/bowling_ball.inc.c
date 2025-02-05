@@ -43,6 +43,10 @@ void bhv_bowling_ball_init(void) {
     o->oGravity = 5.5f;
     o->oFriction = 1.0f;
     o->oBuoyancy = 2.0f;
+
+    if (find_floor_height(o->oPosX, o->oPosY + 10, o->oPosZ) <= FLOOR_LOWER_LIMIT) {
+        obj_mark_for_deletion(o);
+    }
 }
 
 void bowling_ball_set_hitbox(void) {
