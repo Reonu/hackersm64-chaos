@@ -52,6 +52,34 @@ ALIGNED8 static const Texture texture_power_meter_one_segments[] = {
 #include "actors/power_meter/power_meter_one_segment.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture beta_0[] = {
+#include "actors/power_meter/beta_0.rgba16.inc.c"
+};
+ALIGNED8 static const Texture beta_1[] = {
+#include "actors/power_meter/beta_1.rgba16.inc.c"
+};
+ALIGNED8 static const Texture beta_2[] = {
+#include "actors/power_meter/beta_2.rgba16.inc.c"
+};
+ALIGNED8 static const Texture beta_3[] = {
+#include "actors/power_meter/beta_3.rgba16.inc.c"
+};
+ALIGNED8 static const Texture beta_4[] = {
+#include "actors/power_meter/beta_4.rgba16.inc.c"
+};
+ALIGNED8 static const Texture beta_5[] = {
+#include "actors/power_meter/beta_5.rgba16.inc.c"
+};
+ALIGNED8 static const Texture beta_6[] = {
+#include "actors/power_meter/beta_6.rgba16.inc.c"
+};
+ALIGNED8 static const Texture beta_7[] = {
+#include "actors/power_meter/beta_7.rgba16.inc.c"
+};
+ALIGNED8 static const Texture beta_8[] = {
+#include "actors/power_meter/beta_8.rgba16.inc.c"
+};
+
 // 0x030293E0
 const Texture *const power_meter_health_segments_lut[] = {
     texture_power_meter_one_segments,
@@ -62,6 +90,18 @@ const Texture *const power_meter_health_segments_lut[] = {
     texture_power_meter_six_segments,
     texture_power_meter_seven_segments,
     texture_power_meter_full,
+};
+
+const Texture *const power_meter_health_segments_lut_beta[] = {
+    beta_0,
+    beta_1,
+    beta_2,
+    beta_3,
+    beta_4,
+    beta_5,
+    beta_6,
+    beta_7,
+    beta_8
 };
 
 // 0x03029400

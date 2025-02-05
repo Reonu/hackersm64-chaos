@@ -279,12 +279,70 @@ void handle_power_meter_actions(s16 numHealthWedges) {
 #endif
 }
 
+void beta_texrect(s32 x, s32 y, s32 id) {
+    s32 shift = gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
+    Texture *(*chr)[] = segmented_to_virtual(&beta_hud_numbers);
+    gDPLoadTextureBlock(gDisplayListHead++, (*chr)[id], G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, 0, 0, 0, 0, 0, 0);
+    gSPScisTextureRectangle(gDisplayListHead++, (x >> shift) << 2, (y >> shift) << 2, (((x + 16) >> shift) - 1) << 2, (((y + 16) >> shift) - 1) << 2, 
+    G_TX_RENDERTILE, 0, 0, (4 << shift) << 10, (1 << shift) << 10);
+}
+
+void beta_number(s32 x, s32 y, s32 num) {
+    s32 repeat;
+    if (num >= 100) {
+        repeat = 3;
+    } else if (num >= 10) {
+        repeat = 2;
+    } else {
+        repeat = 1;
+    }
+    s32 tX = x + (repeat * 16) - 16;
+    s32 n[3] = {0};
+    s32 divCount = 1;
+    for (int i = 0; i < repeat; i++) {
+        n[i] = (num / divCount) % 10;
+        //beta_texrect(tX, y, n[i]);
+        beta_texrect(tX, y, n[i]);
+        tX -= 16;
+        divCount *= 10;
+    }
+}
+
 /**
  * Renders the power meter that shows when Mario is in underwater
  * or has taken damage and has less than 8 health segments.
  * And calls a power meter animation function depending of the value defined.
  */
 void render_hud_power_meter(void) {
+    if (gCurrLevelNum == LEVEL_WF) {
+        int shift = gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
+        Texture *(*healthLUT)[] = segmented_to_virtual(&power_meter_health_segments_lut_beta);
+        s32 numHealthWedges = gHudDisplay.wedges;
+        gDPPipeSync(gDisplayListHead++);
+        gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
+        gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
+        gSPClearGeometryMode(gDisplayListHead++, G_LIGHTING);
+        gDPSetRenderMode(gDisplayListHead++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+        gDPSetCombineMode(gDisplayListHead++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+        gDPSetTextureFilter(gDisplayListHead++, G_TF_POINT);
+
+        gDPLoadTextureTile(gDisplayListHead++, (*healthLUT)[numHealthWedges], G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 64, 0, 0, 64 - 1, 32 - 1, 
+        0, (G_TX_NOMIRROR | G_TX_WRAP), (G_TX_NOMIRROR | G_TX_WRAP), 7, 7, 0, 0);
+        gSPScisTextureRectangle(gDisplayListHead++, (90 >> shift) << 2, (8 >> shift) << 2, ((90 + 64) >> shift) << 2, ((8 + 32) >> shift) << 2, 
+        G_TX_RENDERTILE, 0, 0, (1 << shift) << 10, (1 << shift) << 10);
+
+        gDPPipeSync(gDisplayListHead++);
+
+        gDPLoadTextureTile(gDisplayListHead++, (*healthLUT)[numHealthWedges], G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 64, 0, 32, 64 - 1, 64 - 1, 
+        0, (G_TX_NOMIRROR | G_TX_WRAP), (G_TX_NOMIRROR | G_TX_WRAP), 7, 7, 0, 0);
+        gSPScisTextureRectangle(gDisplayListHead++, (90 >> shift) << 2, ((8 + 32) >> shift) << 2, ((90 + 64) >> shift) << 2, ((8 + 32 + 32) >> shift) << 2, 
+        G_TX_RENDERTILE, 0, 0, (1 << shift) << 10, (1 << shift) << 10);
+
+        gDPPipeSync(gDisplayListHead++);
+        gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
+        gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
+        return;
+    }
     s16 shownHealthWedges = gHudDisplay.wedges;
     if (sPowerMeterHUD.animation != POWER_METER_HIDING) handle_power_meter_actions(shownHealthWedges);
     if (sPowerMeterHUD.animation == POWER_METER_HIDDEN) return;
@@ -430,6 +488,21 @@ void render_debug_mode(void) {
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) {
+    if (gCurrLevelNum == LEVEL_WF) {
+        // Coins
+        beta_texrect(HUD_COINS_X, 31, 11);
+        beta_texrect(HUD_COINS_X + 16, 31, 10);
+        beta_number(HUD_COINS_X + 32, 31, gHudDisplay.coins);
+        // Stars
+        beta_texrect(HUD_COINS_X, 15, 12);
+        beta_texrect(HUD_COINS_X + 16, 15, 10);
+        beta_number(HUD_COINS_X + 32, 15, gHudDisplay.stars);
+        // Deaths
+        beta_texrect(22, 15, 13);
+        beta_texrect(22 + 16, 15, 10);
+        beta_number(22 + 32, 15, gHudDisplay.lives);
+        return;
+    }
     s32 x = HUD_COINS_X >> gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
     s32 yOffset = gChaosCodeTable[GLOBAL_CHAOS_RETRO].active * 8;
     print_text(x, HUD_TOP_Y + yOffset, "$"); // 'Coin' glyph
@@ -622,22 +695,30 @@ void render_hud(void) {
             render_hud_cannon_reticle();
         }
 
-#ifdef ENABLE_LIVES
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_LIVES) {
-            render_hud_mario_lives();
+        if (gCurrLevelNum == LEVEL_WF) {
+            gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
         }
-#endif
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
             render_hud_coins();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
-            render_hud_stars();
-        }
+        if (gCurrLevelNum != LEVEL_WF) {
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
-            render_hud_keys();
+#ifdef ENABLE_LIVES
+            if (hudDisplayFlags & HUD_DISPLAY_FLAG_LIVES) {
+                render_hud_mario_lives();
+            }
+#endif
+
+
+            if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
+                render_hud_stars();
+            }
+
+            if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
+                render_hud_keys();
+            }
         }
 
 #ifdef BREATH_METER

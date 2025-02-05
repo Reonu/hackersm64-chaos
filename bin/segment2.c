@@ -2056,6 +2056,56 @@ ALIGNED8 static const Texture texture_hud_char_arrow_down[] = {
 #include "textures/segment2/segment2.081D0.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture hud_beta_0[] = {
+#include "textures/segment2/beta_0.rgba16.inc.c"
+};
+ALIGNED8 static const Texture hud_beta_1[] = {
+#include "textures/segment2/beta_1.rgba16.inc.c"
+};
+ALIGNED8 static const Texture hud_beta_2[] = {
+#include "textures/segment2/beta_2.rgba16.inc.c"
+};
+ALIGNED8 static const Texture hud_beta_3[] = {
+#include "textures/segment2/beta_3.rgba16.inc.c"
+};
+ALIGNED8 static const Texture hud_beta_4[] = {
+#include "textures/segment2/beta_4.rgba16.inc.c"
+};
+ALIGNED8 static const Texture hud_beta_5[] = {
+#include "textures/segment2/beta_5.rgba16.inc.c"
+};
+ALIGNED8 static const Texture hud_beta_6[] = {
+#include "textures/segment2/beta_6.rgba16.inc.c"
+};
+ALIGNED8 static const Texture hud_beta_7[] = {
+#include "textures/segment2/beta_7.rgba16.inc.c"
+};
+ALIGNED8 static const Texture hud_beta_8[] = {
+#include "textures/segment2/beta_8.rgba16.inc.c"
+};
+ALIGNED8 static const Texture hud_beta_9[] = {
+#include "textures/segment2/beta_9.rgba16.inc.c"
+};
+ALIGNED8 static const Texture hud_beta_x[] = {
+#include "textures/segment2/beta_x.rgba16.inc.c"
+};
+ALIGNED8 static const Texture hud_beta_coins[] = {
+#include "textures/segment2/beta_coin.rgba16.inc.c"
+};
+ALIGNED8 static const Texture hud_beta_star[] = {
+#include "textures/segment2/beta_star.rgba16.inc.c"
+};
+ALIGNED8 static const Texture hud_beta_mario[] = {
+#include "textures/segment2/beta_lives.rgba16.inc.c"
+};
+
+const Texture *const beta_hud_numbers[] = {
+    hud_beta_0, hud_beta_1, hud_beta_2, hud_beta_3,
+    hud_beta_4, hud_beta_5, hud_beta_6, hud_beta_7,
+    hud_beta_8, hud_beta_9, hud_beta_x, hud_beta_coins,
+    hud_beta_star, hud_beta_mario,
+};
+
 // Main HUD print table 0x02008250-0x02008337
 const Texture *const main_hud_lut[] = {
     texture_hud_char_0, texture_hud_char_1, texture_hud_char_2, texture_hud_char_3,

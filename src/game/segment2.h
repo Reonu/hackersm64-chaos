@@ -57,6 +57,7 @@ extern Gfx dl_paintings_env_mapped_end[];
 extern s16 seg2_painting_triangle_mesh[];
 extern s16 seg2_painting_mesh_neighbor_tris[];
 extern Texture *main_hud_lut[58];
+extern Texture *beta_hud_numbers[];
 extern Gfx dl_hud_img_load_tex_block[];
 extern Gfx dl_hud_img_begin[];
 extern Gfx dl_hud_img_end[];
