@@ -34,9 +34,12 @@ extern const Collision sl_seg7_area_2_collision[];
 extern const MacroObject sl_seg7_area_2_macro_objs[];
 extern const struct MovtexQuadCollection sl_movtex_water[];
 
+extern ALIGNED8 const Texture pharaoh_curse[];
+
 // script
 extern const LevelScript level_sl_entry[];
 
 
 #include "levels/sl/header.inc.h"
+
 #endif

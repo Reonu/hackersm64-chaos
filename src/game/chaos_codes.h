@@ -77,6 +77,11 @@ enum SSLChaosNAmes {
     SSL_CHAOS_INSTA_SNOW
 };
 
+enum SLChaosNAmes {
+    SL_CHAOS_SWAP_MARIO_XZ,
+    SL_CHAOS_PHARAOH_CURSE
+};
+
 enum WDWChaosNames {
     WDW_CHAOS_WATER_LEVEL,
     WDW_CHAOS_HEAVE_HO_STRENGTH,

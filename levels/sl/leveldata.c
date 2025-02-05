@@ -33,3 +33,7 @@
 #include "levels/sl/areas/1/movtext.inc.c"
 
 #include "levels/sl/leveldata.inc.c"
+
+ALIGNED8 const Texture pharaoh_curse[] = {
+    #include "levels/sl/pharaoh.rgba16.inc.c"
+};

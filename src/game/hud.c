@@ -20,6 +20,7 @@
 #include "chaos_codes.h"
 
 #include "config.h"
+#include "levels/sl/header.h"
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
@@ -743,6 +744,21 @@ void render_hud(void) {
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_TIMER) {
             render_hud_timer();
         }
+
+        if (gSLChaosTable[SL_CHAOS_PHARAOH_CURSE].timer > 840) {
+            gDPPipeSync(gDisplayListHead++);
+            gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
+            gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
+            gDPSetTextureFilter(gDisplayListHead++, G_TF_POINT);
+            gDPSetRenderMode(gDisplayListHead++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+            
+            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 
+                (255 - 255*(absf((f32)(gSLChaosTable[SL_CHAOS_PHARAOH_CURSE].timer - 870))/30.0f)));
+            gDPSetCombineMode(gDisplayListHead++, G_CC_FADEA, G_CC_FADEA);
+            
+            render_multi_image(segmented_to_virtual(pharaoh_curse), 0, 0, 320, 240, 1, 1, G_CYC_1CYCLE);
+            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+        } 
 
 #ifdef VANILLA_STYLE_CUSTOM_DEBUG
         if (gCustomDebugMode) {

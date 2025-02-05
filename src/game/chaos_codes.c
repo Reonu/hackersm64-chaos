@@ -613,6 +613,34 @@ void chaos_sl_swap_mario_xz(void) {
     disable_current_code();
 }
 
+void chaos_sl_pharaoh_curse(void) {
+
+    if (buffer_code_until_grounded_out_of_water()) {
+        if (gCurrentChaosTable[gCurrentChaosID].timer > 900) {
+            gCurrentChaosTable[gCurrentChaosID].timer = 900;
+        }
+        if (gCurrentChaosTable[gCurrentChaosID].timer > 870) {
+            set_mario_action(gMarioState, ACT_WAITING_FOR_DIALOG, 0);
+        }
+        if (gCurrentChaosTable[gCurrentChaosID].timer == 870) {
+            gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+            gMarioState->quicksandDepth = 120;
+            set_mario_action(gMarioState, ACT_IDLE, 0);
+        }  
+        current_code_update_timer();
+
+        if (gMarioState->pos[1] > gMarioState->floorHeight + 30) {
+            disable_current_code();
+        }
+    }
+    else if (gCurrentChaosTable[gCurrentChaosID].timer <= 870) {
+        current_code_update_timer();
+        if (gMarioState->pos[1] > gMarioState->floorHeight + 30) {
+            disable_current_code();
+        }
+    }
+}
+
 void chaos_ssl_insta_snow(void) {
     if (buffer_code_until_grounded_out_of_water()) {
         play_sound(SOUND_MARIO_OOOF2, gMarioState->marioObj->header.gfx.cameraToObject);
@@ -756,6 +784,7 @@ ChaosCode gSSLChaosTable[] = {
 
 ChaosCode gSLChaosTable[] = {
     {"SL Swap Mario XZ", chaos_sl_swap_mario_xz, 50, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"SL Pharaoh's Curse", chaos_sl_pharaoh_curse, 100, 30, 31, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gWDWChaosTable[] = {
