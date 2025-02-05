@@ -147,7 +147,26 @@ static void spiny_act_thrown_by_lakitu(void) {
 
         cur_obj_init_animation_with_sound(0);
 
+        if (o->oSpinyIsActuallyLakitu >= 1 && o->oSpinyIsActuallyLakitu < 4 && o->oVelY < -30.0f) {
+            struct Object *lakitu = spawn_object_relative(0, 0, 0, 0, o, MODEL_ENEMY_LAKITU, bhvEnemyLakitu);
+            lakitu->oEnemyLakituThrowsLakitus = o->oSpinyIsActuallyLakitu + 1;
+            lakitu->oFaceAnglePitch = 0;
+            lakitu->oFaceAngleRoll = 0;
+            obj_mark_for_deletion(o);
+            return;
+        }
+
         if (o->oMoveFlags & OBJ_MOVE_LANDED) {
+
+            if (o->oSpinyIsActuallyLakitu >= 1 && o->oSpinyIsActuallyLakitu < 4 ) {
+            struct Object *lakitu = spawn_object_relative(0, 0, 0, 0, o, MODEL_ENEMY_LAKITU, bhvEnemyLakitu);
+            lakitu->oEnemyLakituThrowsLakitus = o->oSpinyIsActuallyLakitu + 1;
+            lakitu->oFaceAnglePitch = 0;
+            lakitu->oFaceAngleRoll = 0;
+            obj_mark_for_deletion(o);
+            return;
+        }
+
             cur_obj_play_sound_2(SOUND_OBJ_SPINY_LAND);
             cur_obj_set_model(MODEL_SPINY);
             obj_init_animation_with_sound(o, spiny_seg5_anims_05016EAC, 0);

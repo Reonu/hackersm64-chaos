@@ -649,6 +649,12 @@ void chaos_hmc_boulder(void) {
     disable_current_code();
 }
 
+void chaos_thi_lakitu_throw_lakitu(void) {
+    struct Object *lakitu = spawn_object_relative(0, 0, 1000, 0, gMarioState->marioObj, MODEL_ENEMY_LAKITU, bhvEnemyLakitu);
+    lakitu->oEnemyLakituThrowsLakitus = 1;
+    disable_current_code();
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -745,6 +751,7 @@ ChaosCode gWDWChaosTable[] = {
 
 ChaosCode gTHIChaosTable[] = {
     {"THI Vertical Wind", chaos_generic, 60, 5, 10, 0,   /*ignore these*/ 0, 0},
+    {"THI Lakitu Throw Lakitu", chaos_thi_lakitu_throw_lakitu, 100, 5, 10, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gHMCChaosTable[] = {

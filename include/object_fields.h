@@ -706,6 +706,7 @@
 #define /*0x0F8*/ oEnemyLakituBlinkTimer           OBJECT_FIELD_S32(0x1C)
 #define /*0x0FC*/ oEnemyLakituSpinyCooldown        OBJECT_FIELD_S32(0x1D)
 #define /*0x100*/ oEnemyLakituFaceForwardCountdown OBJECT_FIELD_S32(0x1E)
+#define /*0x100*/ oEnemyLakituThrowsLakitus OBJECT_FIELD_S32(0x1F)
 
 /* Intro Cutscene Lakitu */
 #define /*0x0F8*/ oIntroLakituSplineSegmentProgress OBJECT_FIELD_F32(0x1C)
@@ -989,6 +990,7 @@
 #define /*0x0F4*/ oSpinyTimeUntilTurn       OBJECT_FIELD_S32(0x1B)
 #define /*0x0F8*/ oSpinyTargetYaw           OBJECT_FIELD_S32(0x1C)
 #define /*0x100*/ oSpinyTurningAwayFromWall OBJECT_FIELD_S32(0x1E)
+#define /*0x100*/ oSpinyIsActuallyLakitu OBJECT_FIELD_S32(0x1F)
 
 /* Sound Effect */
 #define /*0x0F4*/ oSoundEffectBits      OBJECT_FIELD_S32(0x1B)

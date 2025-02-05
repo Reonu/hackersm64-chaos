@@ -84,6 +84,7 @@ enum WDWChaosNames {
 
 enum THIChaosNames {
     THI_CHAOS_VERTICAL_WIND,
+    THI_CHAOS_LAKITU_THROW_LAKITU,
 };
 
 enum TTCChaosNames {
