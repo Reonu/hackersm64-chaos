@@ -74,6 +74,7 @@ enum LLLChaosNames {
 enum SSLChaosNAmes {
     SSL_CHAOS_BLIZZARD,
     SSL_CHAOS_QUICKSAND_MAGNET,
+    SSL_CHAOS_INSTA_SNOW
 };
 
 enum WDWChaosNames {

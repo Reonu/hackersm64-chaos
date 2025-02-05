@@ -613,6 +613,16 @@ void chaos_sl_swap_mario_xz(void) {
     disable_current_code();
 }
 
+void chaos_ssl_insta_snow(void) {
+    if (buffer_code_until_grounded_out_of_water()) {
+        play_sound(SOUND_MARIO_OOOF2, gMarioState->marioObj->header.gfx.cameraToObject);
+        gMarioState->particleFlags |= PARTICLE_MIST_CIRCLE;
+        drop_and_set_mario_action(gMarioState, ACT_HEAD_STUCK_IN_GROUND + random_u16()%3, 0);
+
+        disable_current_code();
+    }
+}
+
 void chaos_hmc_boulder(void) {
     Vec3f pos;
     pos[0] = gMarioState->pos[0] + 2000 * sins(gMarioState->faceAngle[1]);
@@ -721,6 +731,7 @@ ChaosCode gLLLChaosTable[] = {
 ChaosCode gSSLChaosTable[] = {
     {"SSL Blizzard", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"SSL Quicksand Magnet", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"SSL Insta Snow", chaos_ssl_insta_snow, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gSLChaosTable[] = {
