@@ -655,6 +655,13 @@ void chaos_thi_lakitu_throw_lakitu(void) {
     disable_current_code();
 }
 
+void chaos_thi_area_change(void) {
+    if (gCurrAreaIndex < 3) {
+        change_area((gCurrAreaIndex)%2 + 1);
+    }
+    disable_current_code();
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -752,6 +759,7 @@ ChaosCode gWDWChaosTable[] = {
 ChaosCode gTHIChaosTable[] = {
     {"THI Vertical Wind", chaos_generic, 60, 5, 10, 0,   /*ignore these*/ 0, 0},
     {"THI Lakitu Throw Lakitu", chaos_thi_lakitu_throw_lakitu, 100, 5, 10, 0,   /*ignore these*/ 0, 0},
+    {"THI Area Change", chaos_thi_area_change, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gHMCChaosTable[] = {
