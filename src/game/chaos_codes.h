@@ -64,7 +64,8 @@ enum CCMChaosNames {
 
 enum BoBChaosNames {
     BOB_CHAOS_WATER_BOMB_SPAM,
-    BOB_CHAOS_KOOPA_STORM
+    BOB_CHAOS_KOOPA_STORM,
+    BOB_CHAOS_NUKE_OMB
 };
 
 enum LLLChaosNames {

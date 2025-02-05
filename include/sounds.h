@@ -604,4 +604,5 @@ enum SoundBank {
 #define SOUND_NEW_FUNI4                                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x06, 0xFF, SOUND_DISCRETE)
 #define SOUND_NEW_WELCOME_TO_MARIO_KART                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x07, 0xFF, SOUND_DISCRETE)
 #define SOUND_NEW_ENGINE                                          SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x08, 0xFF, SOUND_DISCRETE)
+#define SOUND_NEW_NUKE_EXPLOSION                                  SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x09, 0xFF, SOUND_DISCRETE)
 #endif // SOUNDS_H

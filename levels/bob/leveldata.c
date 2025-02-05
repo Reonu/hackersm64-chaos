@@ -27,3 +27,7 @@
 #include "levels/bob/areas/1/trajectory.inc.c"
 
 #include "levels/bob/leveldata.inc.c"
+
+ALIGNED8 const Texture nuke_omb[] = {
+    #include "levels/bob/nuke.rgba16.inc.c"
+};

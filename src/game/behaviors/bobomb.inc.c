@@ -3,6 +3,7 @@
 #include "game/game_init.h"
 #include "include/behavior_data.h"
 #include "game/level_update.h"
+#include "src/game/chaos_codes.h"
 static struct ObjectHitbox sBobombHitbox = {
     /* interactType:      */ INTERACT_GRABBABLE,
     /* downOffset:        */ 0,
@@ -33,7 +34,16 @@ void bobomb_spawn_coin(void) {
 void bobomb_act_explode(void) {
     if (o->oTimer < 5) {
         cur_obj_scale(1.0f + ((f32) o->oTimer / 5.0f));
-    } else {
+    } 
+    else if (gBoBChaosTable[BOB_CHAOS_NUKE_OMB].timer > 0) {
+        gBoBChaosTable[BOB_CHAOS_NUKE_OMB].active = TRUE;
+        if (o->oBehParams2ndByte != 0x20) {
+            bobomb_spawn_coin();
+            create_respawner(MODEL_BLACK_BOBOMB, bhvBobomb, 3000);
+        }
+        o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+    }
+    else {
         struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
         explosion->oGraphYOffset += 100.0f;
 

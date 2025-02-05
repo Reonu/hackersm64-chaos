@@ -55,6 +55,11 @@
       "release_rate": 208,
       "envelope": "envelope0",
       "sound": "engine"
+    },
+    "inst_nuke_explosion": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "nuke_explosion"
     }
   },
   "instrument_list": [
@@ -66,6 +71,7 @@
     "inst_funi3",
     "inst_funi4",
     "inst_welcome_to_mario_kart",
-    "inst_engine"
+    "inst_engine",
+    "inst_nuke_explosion"
   ]
 }

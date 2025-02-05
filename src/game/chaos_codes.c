@@ -606,6 +606,26 @@ void chaos_bob_koopa_storm(void) {
     current_code_update_timer();
 }
 
+void chaos_bob_nuke_omb(void) {
+    if (gCurrentChaosTable[gCurrentChaosID].active == TRUE) {
+        gMarioState->action = ACT_DEATH_ON_STOMACH;
+        set_mario_animation(gMarioState, MARIO_ANIM_DYING_ON_STOMACH);
+        gMarioState->marioObj->header.gfx.animInfo.animFrame = 40;
+        if (current_code_update_timer()) {
+            gMarioState->marioObj->header.gfx.animInfo.animFrame = 36;
+        }
+
+        if (gCurrentChaosTable[gCurrentChaosID].timer == 221) {
+            
+            play_sound(SOUND_NEW_NUKE_EXPLOSION, gGlobalSoundSource);
+        }
+    }
+    else {
+        gCurrentChaosTable[gCurrentChaosID].timer = 222;
+    }
+    
+}
+
 void chaos_sl_swap_mario_xz(void) {
     f32 marioX = gMarioState->pos[0];
     gMarioState->pos[0] = gMarioState->pos[2];
@@ -761,6 +781,7 @@ ChaosCode gCCMChaosTable[] = {
 ChaosCode gBoBChaosTable[] = {
     {"BoB Water Bombs", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"BoB Koopa Storm", chaos_bob_koopa_storm, 100, 5, 10, 0,   /*ignore these*/ 0, 0},
+    {"BoB Nuke Omb", chaos_bob_nuke_omb, 100, 5, 10, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gTTCChaosTable[] = {

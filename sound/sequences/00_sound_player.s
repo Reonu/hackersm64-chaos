@@ -8017,6 +8017,13 @@ sound_ref .sound_funi3
 sound_ref .sound_funi4
 sound_ref .sound_welcome_to_mario_kart
 sound_ref .sound_engine
+sound_ref .sound_nuke
+
+.sound_nuke:
+chan_setbank 11
+chan_setinstr 9
+chan_setlayer 0, .layer_nuke
+chan_end
 
 .sound_engine:
 chan_setbank 11
@@ -8036,6 +8043,10 @@ chan_end
 
 .layer_welcome_to_mario_kart:
 layer_note1 39, 0xf0, 127
+layer_end
+
+.layer_nuke:
+layer_note1 39, 0xff, 127
 layer_end
 
 .sound_funi4:

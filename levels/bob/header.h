@@ -28,6 +28,8 @@ extern const Trajectory bob_seg7_metal_ball_path0[];
 extern const Trajectory bob_seg7_metal_ball_path1[];
 extern const Trajectory bob_seg7_trajectory_koopa[];
 
+extern ALIGNED8 const Texture nuke_omb[];
+
 // script
 extern const LevelScript level_bob_entry[];
 

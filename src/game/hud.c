@@ -21,6 +21,7 @@
 
 #include "config.h"
 #include "levels/sl/header.h"
+#include "levels/bob/header.h"
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
@@ -757,6 +758,35 @@ void render_hud(void) {
             gDPSetCombineMode(gDisplayListHead++, G_CC_FADEA, G_CC_FADEA);
             
             render_multi_image(segmented_to_virtual(pharaoh_curse), 0, 0, 320, 240, 1, 1, G_CYC_1CYCLE);
+            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+        } 
+
+        if (gBoBChaosTable[BOB_CHAOS_NUKE_OMB].active == TRUE) {
+            gDPPipeSync(gDisplayListHead++);
+            gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
+            gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
+            gDPSetTextureFilter(gDisplayListHead++, G_TF_POINT);
+            gDPSetRenderMode(gDisplayListHead++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+            
+            if (gBoBChaosTable[BOB_CHAOS_NUKE_OMB].timer > 90) {
+                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+            }
+            else {
+                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255 * ((f32)gBoBChaosTable[BOB_CHAOS_NUKE_OMB].timer/90.0f));
+            }
+            gDPSetCombineMode(gDisplayListHead++, G_CC_FADEA, G_CC_FADEA);
+            
+            extern const u8 nuke_textures_dma[];
+            //extern u8 brainrot_brainrot147_rgba16_rgba16[];
+            u8 *dmaTexture = segmented_to_virtual(nuke_omb);
+
+            s16 bombTimer = CLAMP((222 - gBoBChaosTable[BOB_CHAOS_NUKE_OMB].timer) / 2, 0, 110);
+
+            dma_read(dmaTexture, 
+                nuke_textures_dma + (bombTimer)*153600, 
+                nuke_textures_dma + (bombTimer)*153600 + 153600);
+
+            render_multi_image(dmaTexture, 0, 0, 320, 240, 1, 1, G_CYC_1CYCLE);
             gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
         } 
 
