@@ -82,6 +82,10 @@ enum WDWChaosNames {
     WDW_CHAOS_HEAVE_HO_STRENGTH,
 };
 
+enum THIChaosNames {
+    THI_CHAOS_VERTICAL_WIND,
+};
+
 enum TTCChaosNames {
     TTC_CHAOS_UPWARP,
     TTC_CHAOS_MEDUSA_HEADS,
@@ -125,6 +129,7 @@ extern ChaosCode gSSLChaosTable[];
 extern ChaosCode gWDWChaosTable[];
 extern ChaosCode gLLLChaosTable[];
 extern ChaosCode gSLChaosTable[];
+extern ChaosCode gTHIChaosTable[];
 extern ChaosCode gHMCChaosTable[];
 extern u8 gDisableChaos;
 extern float gCrimes;

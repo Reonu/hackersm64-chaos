@@ -659,7 +659,7 @@ s32 act_long_jump(struct MarioState *m) {
 
     play_mario_sound(m, SOUND_ACTION_TERRAIN_JUMP, SOUND_MARIO_YAHOO);
 
-    if (m->floor->type == SURFACE_VERTICAL_WIND && m->actionState == 0) {
+    if ((m->floor->type == SURFACE_VERTICAL_WIND || gTHIChaosTable[THI_CHAOS_VERTICAL_WIND].active)&& m->actionState == 0) {
         play_sound(SOUND_MARIO_HERE_WE_GO, m->marioObj->header.gfx.cameraToObject);
         m->actionState = 1;
     }
@@ -2029,7 +2029,7 @@ s32 check_common_airborne_cancels(struct MarioState *m) {
         return drop_and_set_mario_action(m, ACT_SQUISHED, 0);
     }
 
-    if (m->floor->type == SURFACE_VERTICAL_WIND && (m->action & ACT_FLAG_ALLOW_VERTICAL_WIND_ACTION)) {
+    if ((m->floor->type == SURFACE_VERTICAL_WIND || gTHIChaosTable[THI_CHAOS_VERTICAL_WIND].active)&& (m->action & ACT_FLAG_ALLOW_VERTICAL_WIND_ACTION)) {
         return drop_and_set_mario_action(m, ACT_VERTICAL_WIND, 0);
     }
 

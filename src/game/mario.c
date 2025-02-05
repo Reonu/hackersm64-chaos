@@ -2103,7 +2103,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             play_sound(SOUND_ENV_WIND2, gMarioState->marioObj->header.gfx.cameraToObject);
         }
 
-        if (gMarioState->floor->type == SURFACE_VERTICAL_WIND) {
+        if (gMarioState->floor->type == SURFACE_VERTICAL_WIND || gTHIChaosTable[THI_CHAOS_VERTICAL_WIND].active) {
             spawn_wind_particles(1, 0);
             play_sound(SOUND_ENV_WIND2, gMarioState->marioObj->header.gfx.cameraToObject);
         }

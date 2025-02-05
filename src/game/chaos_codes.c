@@ -731,7 +731,7 @@ ChaosCode gLLLChaosTable[] = {
 ChaosCode gSSLChaosTable[] = {
     {"SSL Blizzard", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"SSL Quicksand Magnet", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
-    {"SSL Insta Snow", chaos_ssl_insta_snow, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"SSL Insta Snow", chaos_ssl_insta_snow, 100, 30, 60, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gSLChaosTable[] = {
@@ -741,6 +741,10 @@ ChaosCode gSLChaosTable[] = {
 ChaosCode gWDWChaosTable[] = {
     {"Random Water Level", chaos_wdw_water, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Heave Ho Strength", chaos_wdw_heaveho, 100, 20, 30, 0,   /*ignore these*/ 0, 0},
+};
+
+ChaosCode gTHIChaosTable[] = {
+    {"THI Vertical Wind", chaos_generic, 60, 5, 10, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gHMCChaosTable[] = {
@@ -793,6 +797,9 @@ ChaosCode *chaos_level_table(s32 levelID, s32 *size) {
     case LEVEL_WDW:
         *size = sizeof(gWDWChaosTable) / sizeof(ChaosCode);
         return gWDWChaosTable;
+    case LEVEL_THI:
+        *size = sizeof(gTHIChaosTable) / sizeof(ChaosCode);
+        return gTHIChaosTable;
     case LEVEL_HMC:
         *size = sizeof(gHMCChaosTable) / sizeof(ChaosCode);
         return gHMCChaosTable;        
