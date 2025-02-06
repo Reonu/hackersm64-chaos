@@ -659,6 +659,8 @@ void render_law_metre(void) {
  * Render HUD strings using hudDisplayFlags with it's render functions,
  * excluding the cannon reticle which detects a camera preset for it.
  */
+extern void dma_read(u8 *dest, u8 *srcStart, u8 *srcEnd);
+
 void render_hud(void) {
     s16 hudDisplayFlags = gHudDisplay.flags;
 
