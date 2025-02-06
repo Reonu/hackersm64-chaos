@@ -110,8 +110,8 @@ void bhv_ethel_act_end(void) {
 }
 
 void bhv_ethel_the_cat_loop(void) {
-    o->oPosX = gLakituState.curPos[0] - 650 * sins(gCamera->yaw);
-    o->oPosZ = gLakituState.curPos[2] - 650 * coss(gCamera->yaw);
+    o->oPosX = gLakituState.curPos[0] - 650 * sins(gLakituState.yaw);
+    o->oPosZ = gLakituState.curPos[2] - 650 * coss(gLakituState.yaw);
 
 
     //print_text_fmt_int(20, 20, "TIME %d", o->oTimer);
