@@ -887,7 +887,7 @@ void cur_obj_update(void) {
     }
 
     // Calculate the distance from the object to Mario.
-    if (objFlags & OBJ_FLAG_COMPUTE_DIST_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) {
+    if (objFlags & OBJ_FLAG_COMPUTE_DIST_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active || gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
         o->oDistanceToMario = dist_between_objects(o, gMarioObject);
         distanceFromMario = o->oDistanceToMario;
     } else {
@@ -895,7 +895,7 @@ void cur_obj_update(void) {
     }
 
     // Calculate the angle from the object to Mario.
-    if (objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) {
+    if (objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active || gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
         o->oAngleToMario = obj_angle_to_object(o, gMarioObject);
     }
 
@@ -903,6 +903,40 @@ void cur_obj_update(void) {
         if (o->oDistanceToMario < 500.0f) {
             o->oPosX -= sins(o->oAngleToMario) * 40.0f;
             o->oPosZ -= coss(o->oAngleToMario) * 40.0f;
+        }
+    }
+
+    if (gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
+
+        
+        Vec3f d;
+        d[0] = o->oPosX - gMarioObject->oPosX;
+            d[1] = -o->oPosY + gMarioObject->oPosY;
+            d[2] = o->oPosZ - gMarioObject->oPosZ;
+        if (o->oGravitationalMarioPullSpeed > 0) {
+            o->oMoveAnglePitch = approach_s32_symmetric(o->oMoveAnglePitch, atan2s(sqrtf(sqr(d[0]) + sqr(d[2])), d[1]), 0x100);
+            o->oMoveAngleYaw = approach_s32_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x200);
+        }
+
+        f32 approachValue;
+        if (gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
+            approachValue = 1500 * (1 / CLAMP(sqrtf(o->oDistanceToMario*0.3f), 1, 63000));
+        }
+        else {
+            approachValue = 1500 * (1 / CLAMP(sqrtf(o->oDistanceToMario*4.0f), 1, 30000));
+        }
+
+        o->oGravitationalMarioPullSpeed = approach_f32_symmetric(o->oGravitationalMarioPullSpeed, approachValue, 10);
+
+        if (o->oGravitationalMarioPullSpeed > 500) {
+            o->oGravitationalMarioPullSpeed = -o->oGravitationalMarioPullSpeed;
+        }
+
+        o->oPosX += o->oGravitationalMarioPullSpeed * sins(o->oMoveAngleYaw);
+        o->oPosZ += o->oGravitationalMarioPullSpeed * coss(o->oMoveAngleYaw);
+
+        if (o->oDistanceToMario < 1000) {
+            o->oPosY = approach_f32_symmetric(o->oPosY, gMarioObject->oPosY, 50);
         }
     }
 
