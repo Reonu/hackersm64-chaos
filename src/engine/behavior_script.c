@@ -895,18 +895,18 @@ void cur_obj_update(void) {
     }
 
     // Calculate the angle from the object to Mario.
-    if (objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active || gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
+    if (gMarioObject && objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active || gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
         o->oAngleToMario = obj_angle_to_object(o, gMarioObject);
     }
 
-    if (gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) {
+    if (gMarioObject && gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) {
         if (o->oDistanceToMario < 500.0f) {
             o->oPosX -= sins(o->oAngleToMario) * 40.0f;
             o->oPosZ -= coss(o->oAngleToMario) * 40.0f;
         }
     }
 
-    if (gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
+    if (gMarioObject && gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
 
         
         Vec3f d;
