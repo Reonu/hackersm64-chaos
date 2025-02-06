@@ -5,3 +5,7 @@
 #include "anim_on_kart_turn_right.inc.c"
 #include "anim_on_kart_right_idle.inc.c"
 #include "anim_get_coin.inc.c"
+#include "anim_epicdab.inc.c"
+#include "anim_pose2.inc.c"
+#include "anim_pose1.inc.c"
+#include "anim_pose3.inc.c"

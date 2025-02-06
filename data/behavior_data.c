@@ -6342,7 +6342,7 @@ const BehaviorScript bhvCream[] = {
 const BehaviorScript bhvEthelTheCat[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    SCALE(/*Unused*/ 0, /*Field*/ 7),
+    SCALE(/*Unused*/ 0, /*Field*/ 8),
     SET_HOME(),
     CALL_NATIVE(bhv_ethel_the_cat_init),
     BEGIN_LOOP(),

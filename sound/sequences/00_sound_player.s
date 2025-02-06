@@ -8019,6 +8019,17 @@ sound_ref .sound_welcome_to_mario_kart
 sound_ref .sound_engine
 sound_ref .sound_nuke
 sound_ref .sound_oiiaoiia
+sound_ref .sound_pizza_tower_taunt
+
+.sound_pizza_tower_taunt:
+chan_setbank 11
+chan_setinstr 11
+chan_setlayer 0, .layer_pizza_tower_taunt
+chan_end
+
+.layer_pizza_tower_taunt:
+layer_note1 39, 0x18, 127
+layer_end
 
 .sound_oiiaoiia:
 chan_setbank 11

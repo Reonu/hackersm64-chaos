@@ -11,8 +11,8 @@
 #define FRAME_FOURTH_MEME 303
 #define FRAME_END 350
 
-#define BASE_CAMERA_HEIGHT_IDLE gLakituState.curPos[1] - 85
-#define BASE_CAMERA_HEIGHT_MEME gLakituState.curPos[1] - 85
+#define BASE_CAMERA_HEIGHT_IDLE gLakituState.curPos[1] - 103
+#define BASE_CAMERA_HEIGHT_MEME gLakituState.curPos[1] - 103
 
 #define SPINNING_SPEED_FAST DEGREES(30)
 #define SPINNING_SPEED_NORMAL DEGREES(15)
@@ -110,8 +110,8 @@ void bhv_ethel_act_end(void) {
 }
 
 void bhv_ethel_the_cat_loop(void) {
-    o->oPosX = gLakituState.curPos[0] - 650 * sins(gCamera->yaw);
-    o->oPosZ = gLakituState.curPos[2] - 650 * coss(gCamera->yaw);
+    o->oPosX = gLakituState.curPos[0] - 650 * sins(gLakituState.yaw);
+    o->oPosZ = gLakituState.curPos[2] - 650 * coss(gLakituState.yaw);
 
 
     //print_text_fmt_int(20, 20, "TIME %d", o->oTimer);
