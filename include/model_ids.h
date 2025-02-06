@@ -33,6 +33,8 @@
 #define MODEL_MEDUSA_HEAD                      0x117
 #define MODEL_THWOMP_BETA                      0x118
 #define MODEL_CREAM                            0x119
+#define MODEL_ETHEL_THE_CAT                    0x120
+#define MODEL_ETHEL_THE_CAT_LOAF               0x121
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
 #define MODEL_LEVEL_GEOMETRY_03                0x03

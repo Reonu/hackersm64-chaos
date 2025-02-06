@@ -6338,3 +6338,14 @@ const BehaviorScript bhvCream[] = {
         CALL_NATIVE(bhv_bobomb_buddy_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvEthelTheCat[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SCALE(/*Unused*/ 0, /*Field*/ 7),
+    SET_HOME(),
+    CALL_NATIVE(bhv_ethel_the_cat_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_ethel_the_cat_loop),
+    END_LOOP(),    
+};

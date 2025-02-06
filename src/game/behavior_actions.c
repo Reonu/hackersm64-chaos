@@ -242,3 +242,4 @@ void set_obj_anim_with_accel_and_sound(s16 frame1, s16 frame2, s32 sound) {
 #include "behaviors/item_box.inc.c"
 #include "behaviors/mirrorghost.inc.c"
 #include "behaviors/medusa_head.inc.c"
+#include "behaviors/ethel_the_cat.inc.c"

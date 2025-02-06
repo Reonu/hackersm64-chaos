@@ -66,3 +66,5 @@
 #include "skeeter/anims/table.inc.c"
 
 #include "koopa_shell/model.inc.c"
+#include "cat_normal/model.inc.c"
+#include "cat_loaf/model.inc.c"

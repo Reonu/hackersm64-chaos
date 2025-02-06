@@ -538,6 +538,32 @@ void chaos_random_jump(void) {
     }
 }
 
+void chaos_ethel(void) {
+    static u8 started = 0;
+    Vec3f pos;
+    pos[0] = gCamera->pos[0] - 1000 * sins(gCamera->yaw);
+    pos[1] = gCamera->pos[1];
+    pos[2] = gCamera->pos[2] - 1000 * coss(gCamera->yaw);
+    struct Object *ethel;
+    if (!started) {
+        ethel = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_ETHEL_THE_CAT, bhvEthelTheCat);
+        started = 1;
+        ethel->oPosX = pos[0];
+        ethel->oPosY = pos[1];
+        ethel->oPosZ = pos[2];
+        ethel->oFaceAngleYaw = 0;
+        ethel->oFaceAngleRoll = 0;
+        ethel->oFaceAnglePitch = 0;
+    } else {
+        if (gChaosCodeTable[GLOBAL_CHAOS_ETHEL_THE_CAT].timer == 1) {
+            started = 0;
+            disable_current_code();
+            return;
+        }
+    }
+    current_code_update_timer();
+}
+
 void chaos_wdw_water(void) {
     if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
         gCurrentChaosTable[gCurrentChaosID].active = TRUE;
@@ -772,6 +798,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Amp", chaos_amp, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Random object scale", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Objects flee Mario", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Ethel the Cat", chaos_ethel, 100, 14, 15, 0,  /*ignore these*/ 0, 0}, // the code lasts for the duration of time the cat takes to despawn, do not change
 };
 
 ChaosCode gCCMChaosTable[] = {

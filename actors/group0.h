@@ -456,4 +456,8 @@ extern const Gfx koopa_shell_seg8_dl_08028B78[];
 
 #include "spring/geo_header.h"
 
+#include "cat_normal/geo_header.h"
+
+#include "cat_loaf/geo_header.h"
+
 #endif

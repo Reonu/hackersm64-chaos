@@ -30,3 +30,5 @@
 #include "spring/geo.inc.c"
 #include "skeeter/geo.inc.c"
 #include "koopa_shell/geo.inc.c"
+#include "cat_normal/geo.inc.c"
+#include "cat_loaf/geo.inc.c"
