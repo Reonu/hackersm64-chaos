@@ -606,4 +606,5 @@ enum SoundBank {
 #define SOUND_NEW_ENGINE                                          SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x08, 0xFD, SOUND_DISCRETE)
 #define SOUND_NEW_NUKE_EXPLOSION                                  SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x09, 0xFF, SOUND_DISCRETE)
 #define SOUND_NEW_OIIAOIIA                                        SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x0A, 0xFE, SOUND_DISCRETE)
+#define SOUND_NEW_PIZZA_TOWER_TAUNT                               SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x0B, 0xFF, SOUND_DISCRETE)
 #endif // SOUNDS_H

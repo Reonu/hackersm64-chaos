@@ -65,6 +65,11 @@
       "release_rate": 208,
       "envelope": "envelope0",
       "sound": "oiiaoiia"
+    },
+    "inst_pizza_tower_taunt": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "pizza_tower_taunt"
     }
   },
   "instrument_list": [
@@ -78,6 +83,7 @@
     "inst_welcome_to_mario_kart",
     "inst_engine",
     "inst_nuke_explosion",
-    "inst_oiiaoiia"
+    "inst_oiiaoiia",
+    "inst_pizza_tower_taunt"
   ]
 }

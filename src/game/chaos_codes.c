@@ -564,6 +564,11 @@ void chaos_ethel(void) {
     current_code_update_timer();
 }
 
+void chaos_dab(void) {
+    drop_and_set_mario_action(gMarioState, ACT_DAB, 0);
+    disable_current_code();
+}
+
 void chaos_wdw_water(void) {
     if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
         gCurrentChaosTable[gCurrentChaosID].active = TRUE;
@@ -799,6 +804,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Random object scale", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Objects flee Mario", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Ethel the Cat", chaos_ethel, 100, 14, 15, 0,  /*ignore these*/ 0, 0}, // the code lasts for the duration of time the cat takes to despawn, do not change
+    {"Mario Dabs", chaos_dab, 100, 30, 1, 2,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
