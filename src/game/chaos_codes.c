@@ -754,13 +754,13 @@ ChaosCode gChaosCodeTable[] = {
     {"Trip", chaos_trip, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Upside Down Camera", chaos_upside_down_camera, 100, 10, 20, CODEFLAG_CAMERA,   /*ignore these*/ 0, 0},
     {"Model None Mario", chaos_generic, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
-    {"Retro Vision", chaos_retro, 100, 15, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
-    {"Blur Vision", chaos_blur, 100, 20, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
+    {"Retro Vision", chaos_retro, 50, 15, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
+    {"Blur Vision", chaos_blur, 30, 20, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
     {"Mario Kart", chaos_mario_kart, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Pay to Move", chaos_pay_to_move, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Tank Controls", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Invert Controls", chaos_generic, 100, 20, 30, 0,   /*ignore these*/ 0, 0},
-    {"Dim Lights", chaos_generic, 100, 30, 60, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
+    {"Dim Lights", chaos_generic, 30, 30, 60, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Law Metre", chaos_lawmetre, 100, 60, 90, 0,   /*ignore these*/ 0, 0},
     {"Tiny Mario", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"Billboard Mario", chaos_generic, 100, 20, 35, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
@@ -804,7 +804,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Random object scale", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Objects flee Mario", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Ethel the Cat", chaos_ethel, 100, 14, 15, 0,  /*ignore these*/ 0, 0}, // the code lasts for the duration of time the cat takes to despawn, do not change
-    {"Mario Dabs", chaos_dab, 100, 30, 1, 2,  /*ignore these*/ 0, 0},
+    {"Mario Dabs", chaos_dab, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
