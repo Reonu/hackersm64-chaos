@@ -120,6 +120,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_XLU_SURF,
         [LAYER_TRANSPARENT] = G_RM_AA_XLU_SURF,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_XLU_SURF,
+        [LAYER_ETHEL] = G_RM_AA_OPA_SURF,
     } },
     [RENDER_ZB] = { {
         [LAYER_FORCE] = G_RM_ZB_OPA_SURF,
@@ -137,6 +138,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_ZB_XLU_DECAL,
         [LAYER_TRANSPARENT] = G_RM_AA_ZB_XLU_SURF,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_ZB_XLU_INTER,
+        [LAYER_ETHEL] = G_RM_AA_OPA_SURF,
     } } };
 
 /* Rendermode settings for cycle 2 for all 13 layers. */

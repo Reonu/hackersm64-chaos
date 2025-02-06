@@ -27,6 +27,7 @@
 #include "spawn_object.h"
 #include "spawn_sound.h"
 #include "chaos_codes.h"
+#include "game/main.h"
 
 static s32 clear_move_flag(u32 *bitSet, s32 flag);
 
@@ -2429,6 +2430,34 @@ Gfx *geo_set_spring_color(s32 callContext, struct GraphNode *node, UNUSED void *
         gDPSetPrimColor(dlHead++, 0, 0, r, g, b, 255);
         gSPEndDisplayList(dlHead);
     }
+    return dlStart;
+}
+
+Gfx *cat_clear_zbuffer(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct Object *objectGraphNode;
+    struct GraphNodeGenerated *currentGraphNode;
+    u8 layer;
+    dlStart = NULL;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        dlStart = alloc_display_list(sizeof(Gfx) * 8);
+        dlHead = dlStart;
+        gDPPipeSync(dlHead++);
+
+        gDPSetDepthSource(dlHead++, G_ZS_PIXEL);
+        gDPSetDepthImage(dlHead++, gPhysicalZBuffer);
+
+        gDPSetColorImage(dlHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, gScreenWidth, gPhysicalZBuffer);
+
+        gDPSetFillColor(dlHead++,
+                        GPACK_ZDZ(G_MAXFBZ, 0) << 16 | GPACK_ZDZ(G_MAXFBZ, 0));
+
+        gDPFillRectangle(dlHead++, 0, gBorderHeight, gScreenWidth - 1,
+                        gScreenHeight - 1 - gBorderHeight);
+        gDPPipeSync(dlHead++);
+        gDPSetColorImage(dlHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, gScreenWidth, gPhysicalFramebuffers[sRenderingFramebuffer]);
+    }
+
     return dlStart;
 }
 
