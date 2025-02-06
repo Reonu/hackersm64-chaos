@@ -11,8 +11,8 @@
 #define FRAME_FOURTH_MEME 303
 #define FRAME_END 350
 
-#define BASE_CAMERA_HEIGHT_IDLE gLakituState.curPos[1] - 85
-#define BASE_CAMERA_HEIGHT_MEME gLakituState.curPos[1] - 85
+#define BASE_CAMERA_HEIGHT_IDLE gLakituState.curPos[1] - 103
+#define BASE_CAMERA_HEIGHT_MEME gLakituState.curPos[1] - 103
 
 #define SPINNING_SPEED_FAST DEGREES(30)
 #define SPINNING_SPEED_NORMAL DEGREES(15)
