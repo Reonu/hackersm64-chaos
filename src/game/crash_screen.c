@@ -398,6 +398,7 @@ extern void audio_signal_game_loop_tick(void);
 extern void stop_sounds_in_continuous_banks(void);
 extern void read_controller_inputs(s32 threadID);
 extern struct SequenceQueueItem sBackgroundMusicQueue[6];
+extern OSViMode VI;
 
 void thread2_crash_screen(UNUSED void *arg) {
     OSMesg mesg;
@@ -415,6 +416,7 @@ void thread2_crash_screen(UNUSED void *arg) {
                     map_data_init();
                 }
                 gCrashScreen.thread.priority = 15;
+                change_vi(&VI, SCREEN_WIDTH, SCREEN_HEIGHT);
                 stop_sounds_in_continuous_banks();
                 stop_background_music(sBackgroundMusicQueue[0].seqId);
                 audio_signal_game_loop_tick();
