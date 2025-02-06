@@ -887,7 +887,7 @@ void cur_obj_update(void) {
     }
 
     // Calculate the distance from the object to Mario.
-    if (objFlags & OBJ_FLAG_COMPUTE_DIST_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) {
+    if ((objFlags & OBJ_FLAG_COMPUTE_DIST_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) && (gMarioObject)) {
         o->oDistanceToMario = dist_between_objects(o, gMarioObject);
         distanceFromMario = o->oDistanceToMario;
     } else {
@@ -895,7 +895,7 @@ void cur_obj_update(void) {
     }
 
     // Calculate the angle from the object to Mario.
-    if (objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) {
+    if ((objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) && (gMarioObject)) {
         o->oAngleToMario = obj_angle_to_object(o, gMarioObject);
     }
 
