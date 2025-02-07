@@ -3,7 +3,6 @@
 const GeoLayout rr_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_ASM(0, geo_exec_flying_carpet_timer_update),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_ALPHA, 90, 0, 0, rr_dl_16_GeoRoot_rr_1_dl_cruiser_metal_holes_mesh_layer_4),
 		GEO_ASM(ENVFX_MODE_NONE, geo_envfx_main),
 		GEO_ASM(0, geo_cannon_circle_base),

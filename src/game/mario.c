@@ -2122,6 +2122,8 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     return ACTIVE_PARTICLE_NONE;
 }
 
+void carpet_init(void);
+
 /**************************************************
  *                  INITIALIZATION                *
  **************************************************/
@@ -2132,6 +2134,8 @@ void init_mario(void) {
     gMarioState->framesSinceB = 0xFF;
 
     gMarioState->invincTimer = 0;
+
+    carpet_init();
 
     if (save_file_get_flags()
         & (SAVE_FLAG_CAP_ON_GROUND | SAVE_FLAG_CAP_ON_KLEPTO | SAVE_FLAG_CAP_ON_UKIKI

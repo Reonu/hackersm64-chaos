@@ -1326,6 +1326,8 @@ void react_clear_zb(void) {
     gDisplayListHead = tempGfxHead;
 }
 
+void carpet_update(void);
+
 /**
  * Process a root node. This is the entry point for processing the scene graph.
  * The root node itself sets up the viewport, then all its children are processed
@@ -1342,6 +1344,8 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
         } else {
             repeat = 0;
         }
+
+        carpet_update();
 
         gDisplayListHeap = alloc_only_pool_init(main_pool_available() - sizeof(struct AllocOnlyPool), MEMORY_POOL_LEFT);
         for (int i = 0; i <= repeat; i++) {

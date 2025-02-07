@@ -1,4 +1,7 @@
 // 0x0E000848
+
+#include "game/geo_misc.h"
+
 const GeoLayout rr_geo_000848[] = {
    GEO_CULLING_RADIUS(500),
    GEO_OPEN_NODE(),

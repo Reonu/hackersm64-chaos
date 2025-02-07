@@ -73,3 +73,6 @@
 #include "moneybag/model.inc.c"
 #include "moneybag/anims/data.inc.c"
 #include "moneybag/anims/table.inc.c"
+
+#include "levels/rr/flying_carpet/model.inc.c"
+#include "levels/rr/flying_carpet/collision.inc.c"

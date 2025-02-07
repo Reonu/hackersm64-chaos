@@ -191,7 +191,7 @@
 
 // rr
 #define MODEL_RR_SLIDING_PLATFORM                 0x36        // rr_geo_0008C0
-#define MODEL_RR_FLYING_CARPET                    0x37        // rr_geo_000848
+#define MODEL_RR_FLYING_CARPET                    0xe6        // rr_geo_000848
 #define MODEL_RR_OCTAGONAL_PLATFORM               0x38        // rr_geo_0008A8
 #define MODEL_RR_ROTATING_BRIDGE_PLATFORM         0x39        // rr_geo_000878
 #define MODEL_RR_TRIANGLE_PLATFORM                0x3A        // rr_geo_0008D8 - unused

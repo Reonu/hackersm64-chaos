@@ -127,6 +127,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_ETHEL_THE_CAT_LOAF,      cat_loaf_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BETAH_MARIO_ICON,        betah_mario_icon_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MONEYBAG,                moneybag_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_RR_FLYING_CARPET,        rr_geo_000848), 
 #ifdef IA8_30FPS_COINS
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN,             silver_coin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN_NO_SHADOW,   silver_coin_no_shadow_geo),

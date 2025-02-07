@@ -28,6 +28,10 @@ const s16 flying_carpet_static_vertex_data[] = {
      307, -204,    0,    0,
 };
 
+ALIGNED8 static const Texture texture_quarter_flying_carpet[] = {
+#include "levels/rr/quarter_flying_carpet.rgba16.inc.c"
+};
+
 // 0x070192F0 - 0x07019360
 const Gfx dl_flying_carpet_begin[] = {
     gsDPPipeSync(),
