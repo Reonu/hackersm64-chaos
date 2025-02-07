@@ -585,6 +585,23 @@ void chaos_ethel(void) {
     current_code_update_timer();
 }
 
+void chaos_moneybags(void) {
+    int i;
+    for (i = 0; i < OBJECT_POOL_CAPACITY; i++) {
+        struct Object *curObj = &gObjectPool[i];
+        if (curObj == NULL) {
+            break;
+        }
+        if (curObj->behavior == (segmented_to_virtual(bhvYellowCoin))) {
+            if (random_u16() % 3 == 1) {
+                spawn_object_relative(0, 0, -25, 0, curObj, MODEL_YELLOW_COIN, bhvMoneybagHidden);
+                mark_obj_for_deletion(curObj);
+            }
+        }
+    }    
+    disable_current_code();
+}   
+
 void chaos_dab(void) {
     drop_and_set_mario_action(gMarioState, ACT_DAB, 0);
     disable_current_code();
@@ -830,6 +847,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Mario Gravitation", chaos_generic, 60, 20, 30, 0,  /*ignore these*/ 0, 0},
     {"Hurricane", chaos_generic, 30, 15, 20, 0,  /*ignore these*/ 0, 0},
     {"Mario Dabs", chaos_dab, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
+    {"Swap Coins with Moneybags", chaos_moneybags, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
