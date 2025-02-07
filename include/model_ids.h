@@ -36,6 +36,7 @@
 #define MODEL_ETHEL_THE_CAT                    0x120
 #define MODEL_ETHEL_THE_CAT_LOAF               0x121
 #define MODEL_BETAH_MARIO_ICON                 0x122
+#define MODEL_MONEYBAG                         0x123
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
 #define MODEL_LEVEL_GEOMETRY_03                0x03
@@ -448,7 +449,6 @@
 // group 16
 #define MODEL_CHILL_BULLY                 0x64        // chilly_chief_geo
 #define MODEL_BIG_CHILL_BULLY             0x65        // chilly_chief_big_geo
-#define MODEL_MONEYBAG                    0x66        // moneybag_geo
 
 // group 17
 #define MODEL_SWOOP                       0x64        // swoop_geo

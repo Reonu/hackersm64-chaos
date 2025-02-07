@@ -69,3 +69,7 @@
 #include "cat_normal/model.inc.c"
 #include "cat_loaf/model.inc.c"
 #include "betah_mario_icon/model.inc.c"
+
+#include "moneybag/model.inc.c"
+#include "moneybag/anims/data.inc.c"
+#include "moneybag/anims/table.inc.c"
