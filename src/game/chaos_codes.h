@@ -65,6 +65,7 @@ enum GlobalChaosNames {
 
 enum CCMChaosNames {
     CCM_CHAOS_VOLCANIC_ROCKS,
+    CCM_CHAOS_SPAWN_PENGUINS,
 };
 
 enum BoBChaosNames {

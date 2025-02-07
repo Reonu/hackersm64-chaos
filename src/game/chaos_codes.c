@@ -234,6 +234,14 @@ void chaos_ccm_rocks_from_volcano(void) {
     current_code_update_timer();
 }
 
+void chaos_ccm_spawn_penguins(void) {
+    gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+    if (gCurrentChaosTable[gCurrentChaosID].timer % 20 == 0) {
+        spawn_object_relative(0, 0, 300, 0, gMarioState->marioObj, MODEL_PENGUIN, bhvSmallPenguin);
+    }
+    current_code_update_timer();    
+}
+
 void chaos_randomize_coin_colors(void) {
     if (gChaosCodeTable[gCurrentChaosID].active == FALSE) {
         gChaosCodeTable[gCurrentChaosID].active = TRUE;
@@ -825,6 +833,7 @@ ChaosCode gChaosCodeTable[] = {
 
 ChaosCode gCCMChaosTable[] = {
     {"CCM Volcano Rocks", chaos_ccm_rocks_from_volcano, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"CCM Spawn Penguins", chaos_ccm_spawn_penguins, 100, 5, 7, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gWFChaosTable[] = {
