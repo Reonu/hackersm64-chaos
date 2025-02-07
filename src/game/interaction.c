@@ -740,7 +740,14 @@ void reset_mario_pitch(struct MarioState *m) {
 }
 
 u32 interact_coin(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
-    m->numCoins += obj->oDamageOrCoinValue;
+    s32 coins = obj->oDamageOrCoinValue;
+    if (gChaosCodeTable[GLOBAL_CHAOS_COINS_DOWN].active) {
+        coins *= -1;
+    }
+    m->numCoins += coins;
+    if (m->numCoins <= 0) {
+        m->numCoins = 0;
+    }
     m->healCounter += 4 * obj->oDamageOrCoinValue;
     gCrimes += 20.0f * obj->oDamageOrCoinValue;
 #ifdef BREATH_METER
