@@ -948,6 +948,12 @@ s32 act_going_through_door(struct MarioState *m) {
             }
             m->interactObj = door;
             m->usedObj = door;
+            gCamera->pos[0] += (gCamera->pos[0] - m->usedObj->oPosX);
+            gLakituState.pos[0] += (gLakituState.pos[0] - m->usedObj->oPosX);
+            gCamera->pos[1] += (gCamera->pos[1] - m->usedObj->oPosY);
+            gLakituState.pos[1] += (gLakituState.pos[1] - m->usedObj->oPosY);
+            gCamera->pos[2] += (gCamera->pos[2] - m->usedObj->oPosZ);
+            gLakituState.pos[2] += (gLakituState.pos[2] - m->usedObj->oPosZ);
             m->pos[0] = m->usedObj->oPosX;
             m->pos[1] = m->usedObj->oPosY;
             m->pos[2] = m->usedObj->oPosZ;
