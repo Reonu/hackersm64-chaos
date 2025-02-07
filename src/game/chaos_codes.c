@@ -73,7 +73,20 @@ void chaos_cannon(void) {
 
 // Not final, just there to have a different func
 void chaos_trip(void) {
-    gMarioState->action = ACT_HARD_BACKWARD_GROUND_KB;
+    if ((gMarioState->action & ACT_FLAG_SWIMMING) == 0) {
+        gMarioState->action = ACT_HARD_BACKWARD_GROUND_KB;
+    }
+    gChaosCodeTable[gCurrentChaosID].timer = 0;
+    gChaosCodeTable[gCurrentChaosID].active = FALSE;
+}
+
+
+void chaos_spinflower(void) {
+    if ((gMarioState->action & ACT_FLAG_SWIMMING) == 0) {
+        play_sound(SOUND_MARIO_TWIRL_BOUNCE, gGlobalSoundSource);
+        gMarioState->action = ACT_TWIRLING;
+        gMarioState->vel[1] = 300.0f;
+    }
     gChaosCodeTable[gCurrentChaosID].timer = 0;
     gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
@@ -793,6 +806,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Koopa Shell", chaos_koopa_shell, 100, 0, 0, 0,  /*ignore these*/ 0, 0},
     {"Squish Mario", chaos_squish_mario, 100, 4, 8, 0,  /*ignore these*/ 0, 0},
     {"Ortho Cam", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Random Spin", chaos_spinflower, 100, 0, 0, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Long Jump GP", chaos_next_long_jump_gp, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Random Jump", chaos_random_jump, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Mario Random Bank", chaos_generic, 100, 30, 60, CODEFLAG_AUDIO,  /*ignore these*/ 0, 0},
