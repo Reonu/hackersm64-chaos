@@ -846,7 +846,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Mario Gravitation", chaos_generic, 60, 20, 30, 0,  /*ignore these*/ 0, 0},
     {"Hurricane", chaos_generic, 30, 15, 20, 0,  /*ignore these*/ 0, 0},
     {"Mario Dabs", chaos_dab, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
-    {"Swap Coins with Moneybags", chaos_moneybags, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Swap Coins with Moneybags", chaos_moneybags, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
