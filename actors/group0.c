@@ -68,3 +68,4 @@
 #include "koopa_shell/model.inc.c"
 #include "cat_normal/model.inc.c"
 #include "cat_loaf/model.inc.c"
+#include "betah_mario_icon/model.inc.c"

@@ -879,6 +879,16 @@ void cur_obj_update(void) {
         o->oldSharedChild = NULL;
     }
 
+    if (gWFChaosTable[WF_CHAOS_BETAH_INVASION].active) {
+        if (o->oldSharedChild == NULL) {
+            o->oldSharedChild = o->header.gfx.sharedChild;
+            o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_BETAH_MARIO_ICON];
+        }
+    } else if (o->oldSharedChild != NULL) {
+        o->header.gfx.sharedChild = o->oldSharedChild;
+        o->oldSharedChild = NULL;
+    }
+
     s32 inRoom = cur_obj_is_mario_in_room();
 
     if (inRoom == MARIO_OUTSIDE_ROOM && (objFlags & OBJ_FLAG_ONLY_PROCESS_INSIDE_ROOM)) {

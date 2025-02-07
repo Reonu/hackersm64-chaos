@@ -32,3 +32,4 @@
 #include "koopa_shell/geo.inc.c"
 #include "cat_normal/geo.inc.c"
 #include "cat_loaf/geo.inc.c"
+#include "betah_mario_icon/geo.inc.c"

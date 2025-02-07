@@ -827,6 +827,10 @@ ChaosCode gCCMChaosTable[] = {
     {"CCM Volcano Rocks", chaos_ccm_rocks_from_volcano, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
 };
 
+ChaosCode gWFChaosTable[] = {
+    {"WF Betah Invasion", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
+};
+
 ChaosCode gBoBChaosTable[] = {
     {"BoB Water Bombs", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"BoB Koopa Storm", chaos_bob_koopa_storm, 100, 5, 10, 0,   /*ignore these*/ 0, 0},
@@ -907,6 +911,9 @@ ChaosCode *chaos_level_table(s32 levelID, s32 *size) {
     case LEVEL_BOB:
         *size = sizeof(gBoBChaosTable) / sizeof(ChaosCode);
         return gBoBChaosTable;
+    case LEVEL_WF:
+        *size = sizeof(gWFChaosTable) / sizeof(ChaosCode);
+        return gWFChaosTable;        
     case LEVEL_LLL:
         *size = sizeof(gLLLChaosTable) / sizeof(ChaosCode);
         return gLLLChaosTable;

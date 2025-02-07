@@ -460,4 +460,6 @@ extern const Gfx koopa_shell_seg8_dl_08028B78[];
 
 #include "cat_loaf/geo_header.h"
 
+#include "betah_mario_icon/geo_header.h"
+
 #endif

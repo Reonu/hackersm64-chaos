@@ -73,6 +73,10 @@ enum BoBChaosNames {
     BOB_CHAOS_NUKE_OMB
 };
 
+enum WFChaosNames {
+    WF_CHAOS_BETAH_INVASION,
+};
+
 enum LLLChaosNames {
     LLL_CHAOS_SUPER_BURNING,
 };
@@ -138,6 +142,7 @@ typedef struct ChaosCode {
 
 extern ChaosCode gChaosCodeTable[];
 extern ChaosCode gBoBChaosTable[];
+extern ChaosCode gWFChaosTable[];
 extern ChaosCode gTTCChaosTable[];
 extern ChaosCode gSSLChaosTable[];
 extern ChaosCode gWDWChaosTable[];
