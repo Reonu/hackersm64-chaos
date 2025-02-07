@@ -828,7 +828,7 @@ ChaosCode gCCMChaosTable[] = {
 };
 
 ChaosCode gWFChaosTable[] = {
-    {"WF Betah Invasion", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"WF Betah Invasion", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gBoBChaosTable[] = {

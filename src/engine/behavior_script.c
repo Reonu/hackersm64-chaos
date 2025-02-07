@@ -880,10 +880,13 @@ void cur_obj_update(void) {
     }
 
     if (gWFChaosTable[WF_CHAOS_BETAH_INVASION].active) {
-        if (o->oldSharedChild == NULL) {
+        if (o->oTimer > 1) {
+            if (o->oldSharedChild == NULL) {
             o->oldSharedChild = o->header.gfx.sharedChild;
             o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_BETAH_MARIO_ICON];
+            }
         }
+
     } else if (o->oldSharedChild != NULL) {
         o->header.gfx.sharedChild = o->oldSharedChild;
         o->oldSharedChild = NULL;
