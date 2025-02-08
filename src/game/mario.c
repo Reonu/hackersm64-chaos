@@ -1886,6 +1886,10 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     
     gInActSelect = 0;
 
+    if (gConfig.musicOff) {
+        seq_player_fade_to_target_volume(SEQ_PLAYER_LEVEL, 1, 0);
+    }
+
     if (gChaosCodeTable[GLOBAL_CHAOS_PAY_TO_MOVE].active) {
         obj_set_model(gMarioObject, MODEL_MARIO);
         mario_update_shadow();
