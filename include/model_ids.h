@@ -33,10 +33,11 @@
 #define MODEL_MEDUSA_HEAD                      0x117
 #define MODEL_THWOMP_BETA                      0x118
 #define MODEL_CREAM                            0x119
-#define MODEL_ETHEL_THE_CAT                    0x120
-#define MODEL_ETHEL_THE_CAT_LOAF               0x121
-#define MODEL_BETAH_MARIO_ICON                 0x122
-#define MODEL_MONEYBAG                         0x123
+#define MODEL_ETHEL_THE_CAT                    0x11A
+#define MODEL_ETHEL_THE_CAT_LOAF               0x11B
+#define MODEL_BETAH_MARIO_ICON                 0x11C
+#define MODEL_MONEYBAG                         0x11D
+#define MODEL_KING_BOBOMB                      0x11E       // king_bobomb_geo
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
 #define MODEL_LEVEL_GEOMETRY_03                0x03
@@ -359,7 +360,6 @@
 // group 3
 #define MODEL_WATER_BOMB                  0x54        // water_bomb_geo
 #define MODEL_WATER_BOMB_SHADOW           0x55        // water_bomb_shadow_geo
-#define MODEL_KING_BOBOMB                 0x56        // king_bobomb_geo
 
 // group 4
 #define MODEL_MANTA_RAY                   0x54        // manta_seg5_geo_05008D14

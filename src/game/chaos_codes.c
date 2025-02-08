@@ -607,6 +607,33 @@ void chaos_dab(void) {
     disable_current_code();
 }
 
+void chaos_spawn_king_bobomb(void) {
+    Vec3f pos;
+    pos[0] = gMarioState->pos[0] + 400 * sins(gMarioState->faceAngle[1]);
+    pos[1] = gMarioState->pos[1] + 100;
+    pos[2] = gMarioState->pos[2] + 400 * coss(gMarioState->faceAngle[1]);
+    struct Surface *floor;
+    find_floor(pos[0], pos[1], pos[2], &floor);
+    if (floor == NULL) {
+        u8 attemptCounter = 0;
+        while (floor == NULL && attemptCounter < 10) {
+            pos[1] += 150;
+            find_floor(pos[0], pos[1], pos[2], &floor);
+            attemptCounter++;
+        }
+    }
+    if (floor != NULL) {
+        struct Object *boss;
+
+        boss = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KING_BOBOMB, bhvKingBobomb);
+        
+        boss->oPosX = pos[0];
+        boss->oPosY = pos[1];
+        boss->oPosZ = pos[2];
+    }
+    disable_current_code();
+}
+
 void chaos_wdw_water(void) {
     if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
         gCurrentChaosTable[gCurrentChaosID].active = TRUE;
@@ -849,6 +876,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Hurricane", chaos_generic, 30, 15, 20, 0,  /*ignore these*/ 0, 0},
     {"Mario Dabs", chaos_dab, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Swap Coins with Moneybags", chaos_moneybags, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
+    {"Spawn King BobOmb", chaos_spawn_king_bobomb, 20, 1, 2, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

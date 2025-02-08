@@ -35,3 +35,4 @@
 #include "betah_mario_icon/geo.inc.c"
 #include "moneybag/geo.inc.c"
 #include "levels/rr/flying_carpet/geo.inc.c"
+#include "king_bobomb/geo.inc.c"
