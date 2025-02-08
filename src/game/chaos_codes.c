@@ -670,6 +670,26 @@ void chaos_spawn_carpet(void) {
     disable_current_code();
 }
 
+void chaos_spawn_armstrong(void) {
+    Vec3f pos;
+    pos[0] = gMarioState->pos[0] + 3500 * sins(gMarioState->faceAngle[1]);
+    pos[1] = gMarioState->pos[1];
+    pos[2] = gMarioState->pos[2] + 3500 * coss(gMarioState->faceAngle[1]);
+
+    struct Object *armstrong;
+    armstrong = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_ARMSTRONG_FRAME_1, bhvArmstrong);
+    armstrong->oDrawingDistance = 30000;
+    armstrong->oFaceAngleYaw = 0;
+    armstrong->oFaceAngleRoll = 0;
+    armstrong->oFaceAnglePitch = 0;
+    armstrong->oMoveAngleYaw = 0;
+    armstrong->oPosX = pos[0];
+    armstrong->oPosY = pos[1];
+    armstrong->oPosZ = pos[2];
+
+    disable_current_code();
+}
+
 void chaos_wdw_water(void) {
     if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
         gCurrentChaosTable[gCurrentChaosID].active = TRUE;
@@ -915,6 +935,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Spawn King BobOmb", chaos_spawn_king_bobomb, 20, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Spawn Bowser", chaos_spawn_bowser, 5, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Carpet", chaos_spawn_carpet, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Armstrong", chaos_spawn_armstrong, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

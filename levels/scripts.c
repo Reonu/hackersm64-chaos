@@ -135,6 +135,10 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_BOMB_CHILD_OBJ,   bowser_bomb_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_NO_SHADOW,        bowser_geo_no_shadow),
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_SMOKE,            bowser_impact_smoke_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_ARMSTRONG_FRAME_1,       armstrong_frame_1_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_ARMSTRONG_FRAME_2,       armstrong_frame_2_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_ARMSTRONG_FRAME_3,       armstrong_frame_3_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_ARMSTRONG_IDLE,          armstrong_idle_geo),
 #ifdef IA8_30FPS_COINS
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN,             silver_coin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN_NO_SHADOW,   silver_coin_no_shadow_geo),

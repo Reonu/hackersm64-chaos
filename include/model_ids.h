@@ -46,6 +46,10 @@
 #define MODEL_BOWSER_BOMB_CHILD_OBJ            0x124        // bowser_bomb_geo - Spawns as a chill object in bowser's behavior command, causing an explosion if it touches a bomb
 #define MODEL_BOWSER_BOMB                      0x125        // bowser_bomb_geo
 #define MODEL_RR_FLYING_CARPET                 0x126       // rr_geo_000848
+#define MODEL_ARMSTRONG_FRAME_1                0x127
+#define MODEL_ARMSTRONG_FRAME_2                0x128
+#define MODEL_ARMSTRONG_FRAME_3                0x129
+#define MODEL_ARMSTRONG_IDLE                   0x12A
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
 #define MODEL_LEVEL_GEOMETRY_03                0x03

@@ -92,3 +92,7 @@
 #include "impact_smoke/model.inc.c"
 #include "bomb/model.inc.c"
 #include "yellow_sphere/model.inc.c"
+#include "armstrong_frame_1/model.inc.c"
+#include "armstrong_frame_2/model.inc.c"
+#include "armstrong_frame_3/model.inc.c"
+#include "armstrong_idle/model.inc.c"

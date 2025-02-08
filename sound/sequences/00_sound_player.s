@@ -24,6 +24,7 @@ seq_startchannel 7, .channel7
 seq_startchannel 8, .channel38
 seq_startchannel 9, .channel59
 seq_startchannel 10, .channel_NEW
+seq_startchannel 11, .channel_NEW_2
 .seq_loop:
 seq_delay 20000
 seq_jump .seq_loop
@@ -8020,6 +8021,28 @@ sound_ref .sound_engine
 sound_ref .sound_nuke
 sound_ref .sound_oiiaoiia
 sound_ref .sound_pizza_tower_taunt
+sound_ref .sound_armstrong_scream
+sound_ref .sound_armstrong_omelettes
+
+.sound_armstrong_omelettes:
+chan_setbank 11
+chan_setinstr 13
+chan_setlayer 0, .layer_armstrong_omelettes
+chan_end
+
+.layer_armstrong_omelettes:
+layer_note1 39, 0x1b3, 127
+layer_end
+
+.sound_armstrong_scream:
+chan_setbank 11
+chan_setinstr 12
+chan_setlayer 0, .layer_armstrong_scream
+chan_end
+
+.layer_armstrong_scream:
+layer_note1 39, 0x43, 127
+layer_end
 
 .sound_pizza_tower_taunt:
 chan_setbank 11
@@ -8139,6 +8162,31 @@ chan_end
 
 .layer_snowball_lets_do_this:
 layer_note1 39, 0x8d, 127
+layer_end
+
+
+.channel_NEW_2:
+chan_largenoteson
+chan_setinstr 0
+chan_setpanmix 127
+chan_setnotepriority 14
+chan_setval 0
+chan_iowriteval 5
+chan_stereoheadseteffects 1
+chan_setdyntable .channel_NEW_2_table
+chan_jump .main_loop_023589
+
+.channel_NEW_2_table:
+sound_ref .sound_has_to_be_this_way
+
+.sound_has_to_be_this_way:
+chan_setbank 12
+chan_setinstr 0
+chan_setlayer 0, .layer_has_to_be_this_way
+chan_end
+
+.layer_has_to_be_this_way:
+layer_note1 39, 0x981, 127
 layer_end
 
 .align 2, 0

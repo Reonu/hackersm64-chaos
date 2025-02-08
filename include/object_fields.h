@@ -1354,4 +1354,8 @@ os16112*/
 #define /*0x10C*/ oCustomCarpetGoalY                                     OBJECT_FIELD_F32(0x21)
 #define /*0x110*/ oCustomCarpetGoalZ                                     OBJECT_FIELD_F32(0x22)
 
+#define /*0x108*/ oArmstrongGoalX                                     OBJECT_FIELD_F32(0x20)
+#define /*0x10C*/ oArmstrongGoalY                                     OBJECT_FIELD_F32(0x21)
+#define /*0x110*/ oArmstrongGoalZ                                     OBJECT_FIELD_F32(0x22)
+
 #endif // OBJECT_FIELDS_H

@@ -37,6 +37,7 @@ enum SoundBank {
     SOUND_BANK_GENERAL2,
     SOUND_BANK_OBJ2,
     SOUND_BANK_NEW,
+    SOUND_BANK_NEW_2,
     SOUND_BANK_COUNT
 };
 
@@ -607,4 +608,7 @@ enum SoundBank {
 #define SOUND_NEW_NUKE_EXPLOSION                                  SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x09, 0xFF, SOUND_DISCRETE)
 #define SOUND_NEW_OIIAOIIA                                        SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x0A, 0xFE, SOUND_DISCRETE)
 #define SOUND_NEW_PIZZA_TOWER_TAUNT                               SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x0B, 0xFF, SOUND_DISCRETE)
+#define SOUND_NEW_ARMSTRONG_SCREAM                                SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x0C, 0xFF, SOUND_DISCRETE)
+#define SOUND_NEW_ARMSTRONG_OMELETTES                             SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x0D, 0xFF, SOUND_DISCRETE)
+#define SOUND_NEW_2_HAS_TO_BE_THIS_WAY                            SOUND_ARG_LOAD(SOUND_BANK_NEW_2, 0x00, 0xFF, SOUND_DISCRETE)
 #endif // SOUNDS_H

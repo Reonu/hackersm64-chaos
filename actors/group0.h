@@ -639,4 +639,12 @@ extern const GeoLayout bowser_1_yellow_sphere_geo[];
 extern const Gfx yellow_sphere_seg6_dl_0601F388[];
 extern const Gfx yellow_sphere_seg6_dl_0601F3C0[];
 
+#include "armstrong_frame_1/geo_header.h"
+
+#include "armstrong_frame_2/geo_header.h"
+
+#include "armstrong_frame_3/geo_header.h"
+
+#include "armstrong_idle/geo_header.h"
+
 #endif

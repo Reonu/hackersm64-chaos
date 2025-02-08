@@ -42,3 +42,8 @@
 #include "yellow_sphere/geo.inc.c"
 #include "bomb/geo.inc.c"
 #include "impact_smoke/geo.inc.c"
+
+#include "armstrong_frame_1/geo.inc.c"
+#include "armstrong_frame_2/geo.inc.c"
+#include "armstrong_frame_3/geo.inc.c"
+#include "armstrong_idle/geo.inc.c"

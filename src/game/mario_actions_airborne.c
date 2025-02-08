@@ -2080,6 +2080,21 @@ s32 act_special_triple_jump(struct MarioState *m) {
     return FALSE;
 }
 
+s32 act_rekt_by_armstrong(struct MarioState *m) {
+    if (m->actionTimer == 0) {
+        play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_FALL_SOUND_PLAYED);
+    }
+
+    if (m->actionTimer < 15) {
+        m->vel[1] = 60.f;
+        m->forwardVel = -100.f;
+    }
+
+    common_air_knockback_step(m, ACT_HARD_BACKWARD_AIR_KB, ACT_HARD_BACKWARD_GROUND_KB, MARIO_ANIM_GENERAL_FALL, m->forwardVel);
+    m->actionTimer++;
+    return FALSE;
+}
+
 s32 check_common_airborne_cancels(struct MarioState *m) {
     if (m->pos[1] < m->waterLevel - 100) {
         return set_water_plunge_action(m);
@@ -2155,6 +2170,7 @@ s32 mario_execute_airborne_action(struct MarioState *m) {
         case ACT_RIDING_HOOT:          cancel = act_riding_hoot(m);          break;
         case ACT_TOP_OF_POLE_JUMP:     cancel = act_top_of_pole_jump(m);     break;
         case ACT_VERTICAL_WIND:        cancel = act_vertical_wind(m);        break;
+        case ACT_REKT_BY_ARMSTRONG:    cancel = act_rekt_by_armstrong(m);    break;
     }
     /* clang-format on */
 

@@ -566,3 +566,4 @@ extern const BehaviorScript bhvMedusaHead[];
 extern const BehaviorScript bhvCream[];
 extern const BehaviorScript bhvEthelTheCat[];
 extern const BehaviorScript bhvCustomCarpet[];
+extern const BehaviorScript bhvArmstrong[];
