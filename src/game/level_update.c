@@ -629,6 +629,8 @@ s16 music_unchanged_through_warp(s16 arg) {
     return unchanged;
 }
 
+extern u8 gRR2Checkpoint;
+
 /**
  * Set the current warp type and destination level/area/node.
  */
@@ -643,6 +645,10 @@ void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 warpFlags)
         sWarpDest.type = WARP_TYPE_CHANGE_AREA;
     } else {
         sWarpDest.type = WARP_TYPE_SAME_AREA;
+    }
+
+    if (destWarpNode == 0x3A) {
+        gRR2Checkpoint = FALSE;
     }
 
     sWarpDest.levelNum = destLevel;
