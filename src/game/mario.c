@@ -2137,6 +2137,10 @@ void init_mario(void) {
 
     gMarioState->invincTimer = 0;
 
+    #ifdef TEST_LEVEL
+    gFlipMarioOnce = 0;
+    #endif
+
     carpet_init();
 
     if (save_file_get_flags()
