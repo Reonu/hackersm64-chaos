@@ -717,6 +717,12 @@ void chaos_thi_bowling_balls(void) {
     current_code_update_timer();
 }
 
+void chaos_jrb_dried_up(void) {
+    gEnvironmentRegions[6] = -10000;
+    play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(4, SEQ_LEVEL_HOT), 0);
+    disable_current_code();
+}
+
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -782,6 +788,10 @@ ChaosCode gBoBChaosTable[] = {
     {"BoB Water Bombs", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"BoB Koopa Storm", chaos_bob_koopa_storm, 100, 5, 10, 0,   /*ignore these*/ 0, 0},
     {"BoB Nuke Omb", chaos_bob_nuke_omb, 100, 5, 10, 0,   /*ignore these*/ 0, 0},
+};
+
+ChaosCode gJRBChaosTable[] = {
+    {"JRB Dried Up", chaos_jrb_dried_up, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gTTCChaosTable[] = {
@@ -858,6 +868,9 @@ ChaosCode *chaos_level_table(s32 levelID, s32 *size) {
     case LEVEL_BOB:
         *size = sizeof(gBoBChaosTable) / sizeof(ChaosCode);
         return gBoBChaosTable;
+    case LEVEL_JRB:
+        *size = sizeof(gJRBChaosTable) / sizeof(ChaosCode);
+        return gJRBChaosTable;
     case LEVEL_LLL:
         *size = sizeof(gLLLChaosTable) / sizeof(ChaosCode);
         return gLLLChaosTable;

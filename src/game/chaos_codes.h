@@ -68,6 +68,10 @@ enum BoBChaosNames {
     BOB_CHAOS_NUKE_OMB
 };
 
+enum JRBChaosNames {
+    JRB_CHAOS_DRIED_UP
+};
+
 enum LLLChaosNames {
     LLL_CHAOS_SUPER_BURNING,
 };
