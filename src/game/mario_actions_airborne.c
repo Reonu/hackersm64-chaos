@@ -401,12 +401,36 @@ u32 common_air_action_step(struct MarioState *m, u32 landAction, s32 animation, 
             break;
 
         case AIR_STEP_LANDED:
-            if (!check_fall_damage_or_get_stuck(m, ACT_HARD_BACKWARD_GROUND_KB)) {
-                set_mario_action(m, landAction, 0);
+            if (gChaosCodeTable[GLOBAL_CHAOS_BOUNCY_MARIO].active) {
+
+                if (gMarioState->vel[1] > -25.0f || m->actionArg >= 3) {
+                    set_mario_action(m, landAction, 0);
+                    break;
+                }
+                m->actionArg++;
+                if (gMarioState->vel[1] > 0.0f) {
+                    gMarioState->vel[1] *= -1.0f;
+                }
+                play_sound(SOUND_GENERAL_CRAZY_BOX_BOING_FAST, gMarioState->marioObj->header.gfx.cameraToObject);
+                gMarioState->vel[1] *= -0.66f;
+                if (gMarioState->vel[1] < 10.0f) {
+                    gMarioState->vel[1] = 10.0f;
+                }
+            } else {
+                if (!check_fall_damage_or_get_stuck(m, ACT_HARD_BACKWARD_GROUND_KB)) {
+                    set_mario_action(m, landAction, 0);
+                }
             }
             break;
 
         case AIR_STEP_HIT_WALL:
+            if (gChaosCodeTable[GLOBAL_CHAOS_BOUNCY_MARIO].active) {
+                play_sound(SOUND_GENERAL_CRAZY_BOX_BOING_FAST, gMarioState->marioObj->header.gfx.cameraToObject);
+                gMarioState->faceAngle[1] += 0x8000;
+                gMarioState->moveYaw += 0x8000;
+                gMarioState->forwardVel += 8.0f;
+                break;
+            }
             set_mario_animation(m, animation);
 
             if (m->forwardVel > 16.0f) {
@@ -778,7 +802,27 @@ s32 act_dive(struct MarioState *m) {
             break;
 
         case AIR_STEP_LANDED:
-            if (should_get_stuck_in_ground(m) && m->faceAngle[0] == -DEGREES(60)) {
+            if (gChaosCodeTable[GLOBAL_CHAOS_BOUNCY_MARIO].active) {
+
+                if (gMarioState->vel[1] > -25.0f || m->actionArg >= 3) {
+                    if (m->heldObj == NULL) {
+                        set_mario_action(m, ACT_DIVE_SLIDE, 0);
+                    } else {
+                        set_mario_action(m, ACT_DIVE_PICKING_UP, 0);
+                    }
+                        break;
+                    }
+                m->actionArg++;
+                if (gMarioState->vel[1] > 0.0f) {
+                    gMarioState->vel[1] *= -1.0f;
+                }
+                play_sound(SOUND_GENERAL_CRAZY_BOX_BOING_FAST, gMarioState->marioObj->header.gfx.cameraToObject);
+                gMarioState->vel[1] *= -0.66f;
+                if (gMarioState->vel[1] < 10.0f) {
+                    gMarioState->vel[1] = 10.0f;
+                }
+            } else {
+                if (should_get_stuck_in_ground(m) && m->faceAngle[0] == -DEGREES(60)) {
 #if ENABLE_RUMBLE
                 queue_rumble_data(5, 80);
 #endif
@@ -792,10 +836,21 @@ s32 act_dive(struct MarioState *m) {
                     set_mario_action(m, ACT_DIVE_PICKING_UP, 0);
                 }
             }
+            }
+            break;
+            
             m->faceAngle[0] = 0;
             break;
 
+        
         case AIR_STEP_HIT_WALL:
+            if (gChaosCodeTable[GLOBAL_CHAOS_BOUNCY_MARIO].active) {
+                play_sound(SOUND_GENERAL_CRAZY_BOX_BOING_FAST, gMarioState->marioObj->header.gfx.cameraToObject);
+                gMarioState->faceAngle[1] += 0x8000;
+                gMarioState->moveYaw += 0x8000;
+                gMarioState->forwardVel += 8.0f;
+                break;
+            }
             mario_bonk_reflection(m, TRUE);
             m->faceAngle[0] = 0;
 
