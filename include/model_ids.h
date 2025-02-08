@@ -50,6 +50,7 @@
 #define MODEL_ARMSTRONG_FRAME_2                0x128
 #define MODEL_ARMSTRONG_FRAME_3                0x129
 #define MODEL_ARMSTRONG_IDLE                   0x12A
+#define MODEL_YELLOW_SPHERE                    0x12B        // yellow_sphere_geo
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
 #define MODEL_LEVEL_GEOMETRY_03                0x03
@@ -359,7 +360,6 @@
 // first set of actor bins (0x54-0x63)
 // group 1
 #define MODEL_BULLET_BILL                 0x54        // bullet_bill_geo
-#define MODEL_YELLOW_SPHERE               0x55        // yellow_sphere_geo
 #define MODEL_HOOT                        0x56        // hoot_geo
 #define MODEL_YOSHI_EGG                   0x57        // yoshi_egg_geo
 
