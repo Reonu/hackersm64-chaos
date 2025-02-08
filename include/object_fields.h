@@ -1350,4 +1350,8 @@ os16112*/
 #define           oOldScaleZ                                    OBJECT_FIELD_F32(0x54)
 #define           oOldCollisionDistance                         OBJECT_FIELD_F32(0x55)
 
+#define /*0x108*/ oCustomCarpetGoalX                                     OBJECT_FIELD_F32(0x20)
+#define /*0x10C*/ oCustomCarpetGoalY                                     OBJECT_FIELD_F32(0x21)
+#define /*0x110*/ oCustomCarpetGoalZ                                     OBJECT_FIELD_F32(0x22)
+
 #endif // OBJECT_FIELDS_H

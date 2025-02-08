@@ -553,6 +553,8 @@ void bhv_volcano_trap_loop(void);
 void bhv_chao_loop(void);
 void bhv_ethel_the_cat_init(void);
 void bhv_ethel_the_cat_loop(void);
+void bhv_custom_carpet_init(void);
+void bhv_custom_carpet_loop(void);
 
 void bhv_spring_init(void);
 void bhv_spring_loop(void);

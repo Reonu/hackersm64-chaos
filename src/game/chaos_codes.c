@@ -665,6 +665,11 @@ void chaos_spawn_bowser(void) {
     disable_current_code();
 }
 
+void chaos_spawn_carpet(void) {
+    spawn_object_relative(0, 0, 0, 0, gMarioObject, MODEL_RR_FLYING_CARPET, bhvCustomCarpet);
+    disable_current_code();
+}
+
 void chaos_wdw_water(void) {
     if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
         gCurrentChaosTable[gCurrentChaosID].active = TRUE;
@@ -909,6 +914,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Swap Coins with Moneybags", chaos_moneybags, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Spawn King BobOmb", chaos_spawn_king_bobomb, 20, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Spawn Bowser", chaos_spawn_bowser, 5, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Carpet", chaos_spawn_carpet, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {

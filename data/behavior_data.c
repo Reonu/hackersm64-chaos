@@ -6349,3 +6349,15 @@ const BehaviorScript bhvEthelTheCat[] = {
         CALL_NATIVE(bhv_ethel_the_cat_loop),
     END_LOOP(),    
 };
+
+const BehaviorScript bhvCustomCarpet[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    SET_HOME(),
+    LOAD_COLLISION_DATA(rr_seg7_collision_flying_carpet),
+    CALL_NATIVE(bhv_custom_carpet_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_custom_carpet_loop),
+    END_LOOP(),    
+};

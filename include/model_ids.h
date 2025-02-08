@@ -45,6 +45,7 @@
 #define MODEL_BOWSER_NO_SHADOW                 0x123        // bowser_geo_no_shadow
 #define MODEL_BOWSER_BOMB_CHILD_OBJ            0x124        // bowser_bomb_geo - Spawns as a chill object in bowser's behavior command, causing an explosion if it touches a bomb
 #define MODEL_BOWSER_BOMB                      0x125        // bowser_bomb_geo
+#define MODEL_RR_FLYING_CARPET                 0x126       // rr_geo_000848
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
 #define MODEL_LEVEL_GEOMETRY_03                0x03
@@ -199,7 +200,6 @@
 
 // rr
 #define MODEL_RR_SLIDING_PLATFORM                 0x36        // rr_geo_0008C0
-#define MODEL_RR_FLYING_CARPET                    0xe6        // rr_geo_000848
 #define MODEL_RR_OCTAGONAL_PLATFORM               0x38        // rr_geo_0008A8
 #define MODEL_RR_ROTATING_BRIDGE_PLATFORM         0x39        // rr_geo_000878
 #define MODEL_RR_TRIANGLE_PLATFORM                0x3A        // rr_geo_0008D8 - unused
