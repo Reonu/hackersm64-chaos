@@ -728,10 +728,18 @@ s32 perform_air_step(struct MarioState *m, u32 stepArg) {
 
     set_mario_wall(m, NULL);
 
+    f32 marioVelX = m->vel[0];
+    f32 marioVelZ = m->vel[2];
+
+    if (gChaosCodeTable[GLOBAL_CHAOS_INVERTED_FVEL_MAG].active) {
+        marioVelX *= -10;
+        marioVelZ *= -10;
+    }
+
     for (i = 0; i < 4; i++) {
-        intendedPos[0] = m->pos[0] + m->vel[0] / numSteps;
+        intendedPos[0] = m->pos[0] + marioVelX / numSteps;
         intendedPos[1] = m->pos[1] + m->vel[1] / numSteps;
-        intendedPos[2] = m->pos[2] + m->vel[2] / numSteps;
+        intendedPos[2] = m->pos[2] + marioVelZ / numSteps;
 
         quarterStepResult = perform_air_quarter_step(m, intendedPos, stepArg);
 
