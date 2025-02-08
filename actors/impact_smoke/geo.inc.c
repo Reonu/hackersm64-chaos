@@ -1,4 +1,5 @@
 // 0x0D000BB8 / 0BFC
+#include "actors/group0.h"
 const GeoLayout bowser_impact_smoke_geo[] = {
    GEO_NODE_START(),
    GEO_OPEN_NODE(),

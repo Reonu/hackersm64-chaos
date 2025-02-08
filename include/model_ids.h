@@ -38,6 +38,13 @@
 #define MODEL_BETAH_MARIO_ICON                 0x11C
 #define MODEL_MONEYBAG                         0x11D
 #define MODEL_KING_BOBOMB                      0x11E       // king_bobomb_geo
+#define MODEL_BOWSER                           0x11F        // bowser_geo
+#define MODEL_BOWSER_SMOKE                     0x120        // bowser_impact_smoke_geo
+#define MODEL_BOWSER_FLAMES                    0x121        // bowser_flames_geo
+#define MODEL_BOWSER_WAVE                      0x122        // invisible_bowser_accessory_geo
+#define MODEL_BOWSER_NO_SHADOW                 0x123        // bowser_geo_no_shadow
+#define MODEL_BOWSER_BOMB_CHILD_OBJ            0x124        // bowser_bomb_geo - Spawns as a chill object in bowser's behavior command, causing an explosion if it touches a bomb
+#define MODEL_BOWSER_BOMB                      0x125        // bowser_bomb_geo
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
 #define MODEL_LEVEL_GEOMETRY_03                0x03
@@ -420,12 +427,6 @@
 
 // second set of actor bins, (0x64-0x73)
 // group 12
-#define MODEL_BOWSER                      0x64        // bowser_geo
-#define MODEL_BOWSER_BOMB_CHILD_OBJ       0x65        // bowser_bomb_geo - Spawns as a chill object in bowser's behavior command, causing an explosion if it touches a bomb
-#define MODEL_BOWSER_SMOKE                0x66        // bowser_impact_smoke_geo
-#define MODEL_BOWSER_FLAMES               0x67        // bowser_flames_geo
-#define MODEL_BOWSER_WAVE                 0x68        // invisible_bowser_accessory_geo
-#define MODEL_BOWSER_NO_SHADOW            0x69        // bowser_geo_no_shadow
 
 // group 13
 #define MODEL_BUB                         0x64        // cheep_cheep_geo
@@ -523,7 +524,6 @@
 #define MODEL_WF_TUMBLING_BRIDGE_PART     0xB0        // wf_geo_000AB0
 #define MODEL_WF_LARGE_BOMP               0xB1        // wf_geo_000A40
 #define MODEL_WF_TUMBLING_BRIDGE          0xB2        // wf_geo_000AC8
-#define MODEL_BOWSER_BOMB                 0xB3        // bowser_bomb_geo
 #define MODEL_WATER_MINE                  0xB3        // water_mine_geo
 #define MODEL_BOWLING_BALL                0xB4        // bowling_ball_geo
 #define MODEL_TRAMPOLINE                  0xB5        // springboard_top_geo (unused)
