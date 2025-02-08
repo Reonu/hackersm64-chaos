@@ -1,3 +1,5 @@
+#include "actors/group0.h"
+#include "game/area.h"
 // bowser.inc.c
 
 /**
@@ -1701,7 +1703,12 @@ void bhv_bowser_init(void) {
     // Start camera event, this event is not defined so maybe
     // the "start arena" cutscene was originally called this way
     cur_obj_start_cam_event(o, CAM_EVENT_BOWSER_INIT);
-    o->oAction = BOWSER_ACT_WAIT;
+    if (gCurrLevelNum == LEVEL_BOWSER_1 || gCurrLevelNum == LEVEL_BOWSER_2 || gCurrLevelNum == LEVEL_BOWSER_3) {
+        o->oAction = BOWSER_ACT_WAIT;
+    } else{
+        o->oAction = BOWSER_ACT_CHARGE_MARIO;
+    }
+    
     // Set eyes status
     o->oBowserEyesTimer = 0;
     o->oBowserEyesShut = FALSE;

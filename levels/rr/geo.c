@@ -33,7 +33,6 @@
 #include "levels/rr/areas/1/19/geo.inc.c"
 #include "levels/rr/areas/1/20/geo.inc.c"
 #include "levels/rr/areas/1/21/geo.inc.c"
-#include "levels/rr/flying_carpet/geo.inc.c"
 #include "levels/rr/swinging_platform/geo.inc.c"
 #include "levels/rr/rotating_bridge_platform/geo.inc.c"
 #include "levels/rr/cruiser_wing/geo.inc.c"

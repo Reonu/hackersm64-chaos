@@ -69,24 +69,19 @@ Gfx *geo_exec_inside_castle_light(s32 callContext, struct GraphNode *node, UNUSE
 }
 #undef NUM_STARS_REQUIRED_FOR_WING_CAP_LIGHT
 
-/**
- * Update static timer variables that control the flying carpets' ripple effect.
- */
-Gfx *geo_exec_flying_carpet_timer_update(s32 callContext, UNUSED struct GraphNode *node, UNUSED Mat4 mtx) {
-    if (callContext != GEO_CONTEXT_RENDER) {
-        sFlyingCarpetRippleTimer = 0;
-        sPrevAreaTimer = gAreaUpdateCounter - 1;
-        sCurAreaTimer = gAreaUpdateCounter;
-        gFlyingCarpetState = FLYING_CARPET_IDLE;
-    } else {
-        sPrevAreaTimer = sCurAreaTimer;
-        sCurAreaTimer = gAreaUpdateCounter;
-        if (sPrevAreaTimer != sCurAreaTimer) {
-            sFlyingCarpetRippleTimer += 0x400;
-        }
-    }
+void carpet_init(void) {
+    sFlyingCarpetRippleTimer = 0;
+    sPrevAreaTimer = gAreaUpdateCounter - 1;
+    sCurAreaTimer = gAreaUpdateCounter;
+    gFlyingCarpetState = FLYING_CARPET_IDLE;
+}
 
-    return NULL;
+void carpet_update(void) {
+    sPrevAreaTimer = sCurAreaTimer;
+    sCurAreaTimer = gAreaUpdateCounter;
+    if (sPrevAreaTimer != sCurAreaTimer) {
+        sFlyingCarpetRippleTimer += 0x400;
+    }
 }
 
 /**

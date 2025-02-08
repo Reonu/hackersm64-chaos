@@ -61,9 +61,9 @@ static const LevelScript goto_debug_level_select[6];
 const LevelScript level_main_scripts_entry[] = {
     LOAD_YAY0(          /*seg*/ SEGMENT_GROUP0_YAY0,   _group0_yay0SegmentRomStart,  _group0_yay0SegmentRomEnd),
     LOAD_YAY0(          /*seg*/ SEGMENT_COMMON1_YAY0, _common1_yay0SegmentRomStart, _common1_yay0SegmentRomEnd),
-    LOAD_RAW_WITH_CODE( /*seg*/ SEGMENT_GROUP0_GEO,     _group0_geoSegmentRomStart,   _group0_geoSegmentRomEnd,  _group0_geoSegmentBssStart,  _group0_geoSegmentBssEnd),
-    LOAD_RAW_WITH_CODE( /*seg*/ SEGMENT_COMMON1_GEO,   _common1_geoSegmentRomStart,  _common1_geoSegmentRomEnd, _common1_geoSegmentBssStart, _common1_geoSegmentBssEnd),
-    LOAD_RAW_WITH_CODE( /*seg*/ SEGMENT_BEHAVIOR_DATA,    _behaviorSegmentRomStart,     _behaviorSegmentRomEnd,   _behaviorSegmentBssStart,     _behaviorSegmentBssEnd),
+    LOAD_RAW( /*seg*/ SEGMENT_GROUP0_GEO,     _group0_geoSegmentRomStart,   _group0_geoSegmentRomEnd),
+    LOAD_RAW( /*seg*/ SEGMENT_COMMON1_GEO,   _common1_geoSegmentRomStart,  _common1_geoSegmentRomEnd),
+    LOAD_RAW( /*seg*/ SEGMENT_BEHAVIOR_DATA,    _behaviorSegmentRomStart,     _behaviorSegmentRomEnd),
     ALLOC_LEVEL_POOL(),
     LOAD_MODEL_FROM_GEO(MODEL_MARIO,                   mario_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SMOKE,                   smoke_geo),
@@ -123,6 +123,24 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_SHADOW_MARIO,            shadow_mario_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SPRING,                  spring_geo),
     LOAD_MODEL_FROM_GEO(MODEL_KOOPA_SHELL,             koopa_shell_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_ETHEL_THE_CAT,           cat_normal_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_ETHEL_THE_CAT_LOAF,      cat_loaf_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BETAH_MARIO_ICON,        betah_mario_icon_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_MONEYBAG,                moneybag_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_RR_FLYING_CARPET,        rr_geo_000848), 
+    LOAD_MODEL_FROM_GEO(MODEL_BOWSER,                  bowser_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BOWSER_BOMB,             bowser_bomb_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BOWSER_FLAMES,           bowser_flames_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BOWSER_WAVE,             invisible_bowser_accessory_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BOWSER_BOMB_CHILD_OBJ,   bowser_bomb_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BOWSER_NO_SHADOW,        bowser_geo_no_shadow),
+    LOAD_MODEL_FROM_GEO(MODEL_BOWSER_SMOKE,            bowser_impact_smoke_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_ARMSTRONG_FRAME_1,       armstrong_frame_1_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_ARMSTRONG_FRAME_2,       armstrong_frame_2_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_ARMSTRONG_FRAME_3,       armstrong_frame_3_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_ARMSTRONG_IDLE,          armstrong_idle_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_KING_BOBOMB,             king_bobomb_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_YELLOW_SPHERE,           yellow_sphere_geo),
 #ifdef IA8_30FPS_COINS
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN,             silver_coin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN_NO_SHADOW,   silver_coin_no_shadow_geo),
@@ -215,7 +233,6 @@ const LevelScript script_func_global_1[] = {
 
 const LevelScript script_func_global_2[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BULLET_BILL,             bullet_bill_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_YELLOW_SPHERE,           yellow_sphere_geo),
     LOAD_MODEL_FROM_GEO(MODEL_HOOT,                    hoot_geo),
     LOAD_MODEL_FROM_GEO(MODEL_YOSHI_EGG,               yoshi_egg_geo),
     RETURN(),
@@ -231,7 +248,6 @@ const LevelScript script_func_global_3[] = {
 const LevelScript script_func_global_4[] = {
     LOAD_MODEL_FROM_GEO(MODEL_WATER_BOMB,              water_bomb_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WATER_BOMB_SHADOW,       water_bomb_shadow_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_KING_BOBOMB,             king_bobomb_geo),
     RETURN(),
 };
 
@@ -305,17 +321,6 @@ const LevelScript script_func_global_12[] = {
     RETURN(),
 };
 
-const LevelScript script_func_global_13[] = {
-    LOAD_MODEL_FROM_GEO(MODEL_BOWSER,                  bowser_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_BOWSER_BOMB_CHILD_OBJ,   bowser_bomb_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_BOWSER_BOMB,             bowser_bomb_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_BOWSER_SMOKE,            bowser_impact_smoke_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_BOWSER_FLAMES,           bowser_flames_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_BOWSER_WAVE,             invisible_bowser_accessory_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_BOWSER_NO_SHADOW,        bowser_geo_no_shadow),
-    RETURN(),
-};
-
 const LevelScript script_func_global_14[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BUB,                     bub_geo),
     LOAD_MODEL_FROM_GEO(MODEL_TREASURE_CHEST_BASE,     treasure_chest_base_geo),
@@ -333,7 +338,6 @@ const LevelScript script_func_global_15[] = {
     LOAD_MODEL_FROM_GEO(MODEL_WHOMP,                   whomp_geo),
     LOAD_MODEL_FROM_GEO(MODEL_KOOPA_WITH_SHELL,        koopa_with_shell_geo),
     LOAD_MODEL_FROM_GEO(MODEL_KOOPA_WITHOUT_SHELL,     koopa_without_shell_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_METALLIC_BALL,           metallic_ball_geo),
     LOAD_MODEL_FROM_GEO(MODEL_KOOPA_FLAG,              koopa_flag_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WOODEN_POST,             wooden_post_geo),
     RETURN(),
@@ -350,7 +354,6 @@ const LevelScript script_func_global_16[] = {
 const LevelScript script_func_global_17[] = {
     LOAD_MODEL_FROM_GEO(MODEL_CHILL_BULLY,             chilly_chief_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BIG_CHILL_BULLY,         chilly_chief_big_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_MONEYBAG,                moneybag_geo),
     RETURN(),
 };
 

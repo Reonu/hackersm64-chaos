@@ -321,10 +321,17 @@ static void level_cmd_change_area_skybox(void) {
     sCurrentCmd = CMD_NEXT;
 }
 
+u8 gRR2Checkpoint = 0;
+
 static void level_cmd_init_level(void) {
     init_graph_node_start(NULL, (struct GraphNodeStart *) &gObjParentGraphNode);
     clear_objects();
     clear_areas();
+    if (gCurrLevelNum == LEVEL_RR2) {
+        gRR2Checkpoint = TRUE;
+    } else if (gCurrLevelNum != LEVEL_CASTLE && gCurrLevelNum != LEVEL_CASTLE_COURTYARD && gCurrLevelNum != LEVEL_CASTLE_GROUNDS) {
+        gRR2Checkpoint = FALSE;
+    }
     main_pool_push_state();
     for (u8 clearPointers = 0; clearPointers < AREA_COUNT; clearPointers++) {
         gAreaSkyboxStart[clearPointers] = 0;
@@ -579,12 +586,20 @@ static void level_cmd_create_painting_warp_node(void) {
             }
         }
 
+        s32 destLevel = CMD_GET(u8, 3) + CMD_GET(u8, 6);
+        if (gCurrLevelNum == LEVEL_CASTLE) {
+            if (gRR2Checkpoint && destLevel == LEVEL_RR) {
+                destLevel = LEVEL_RR2;
+            }
+        }
+
         node = &gAreas[sCurrAreaIndex].paintingWarpNodes[CMD_GET(u8, 2)];
 
         node->id = 1;
-        node->destLevel = CMD_GET(u8, 3) + CMD_GET(u8, 6);
+        node->destLevel = destLevel;
         node->destArea = CMD_GET(u8, 4);
         node->destNode = CMD_GET(u8, 5);
+
     }
 
     sCurrentCmd = CMD_NEXT;

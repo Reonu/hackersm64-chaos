@@ -52,6 +52,7 @@ u8 gChaoTutorial;
 u8 gChaoTutorialCameraMoved;
 u8 gFlipMarioOnce = 1;
 u8 gCreamHasTalked;
+u8 gInActSelect;
 u16 gFlameCounter;
 u16 gChuckyaCounter;
 #ifdef VANILLA_STYLE_CUSTOM_DEBUG

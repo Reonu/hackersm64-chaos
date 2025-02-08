@@ -6338,3 +6338,37 @@ const BehaviorScript bhvCream[] = {
         CALL_NATIVE(bhv_bobomb_buddy_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvEthelTheCat[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SCALE(/*Unused*/ 0, /*Field*/ 8),
+    SET_HOME(),
+    CALL_NATIVE(bhv_ethel_the_cat_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_ethel_the_cat_loop),
+    END_LOOP(),    
+};
+
+const BehaviorScript bhvCustomCarpet[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    SET_HOME(),
+    LOAD_COLLISION_DATA(rr_seg7_collision_flying_carpet),
+    CALL_NATIVE(bhv_custom_carpet_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_custom_carpet_loop),
+    END_LOOP(),    
+};
+
+const BehaviorScript bhvArmstrong[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    SET_HOME(),
+    CALL_NATIVE(bhv_armstrong_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_armstrong_loop),
+    END_LOOP(),    
+};

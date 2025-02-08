@@ -33,6 +33,23 @@
 #define MODEL_MEDUSA_HEAD                      0x117
 #define MODEL_THWOMP_BETA                      0x118
 #define MODEL_CREAM                            0x119
+#define MODEL_ETHEL_THE_CAT                    0x11A
+#define MODEL_ETHEL_THE_CAT_LOAF               0x11B
+#define MODEL_BETAH_MARIO_ICON                 0x11C
+#define MODEL_MONEYBAG                         0x11D
+#define MODEL_KING_BOBOMB                      0x11E       // king_bobomb_geo
+#define MODEL_BOWSER                           0x11F        // bowser_geo
+#define MODEL_BOWSER_SMOKE                     0x120        // bowser_impact_smoke_geo
+#define MODEL_BOWSER_FLAMES                    0x121        // bowser_flames_geo
+#define MODEL_BOWSER_WAVE                      0x122        // invisible_bowser_accessory_geo
+#define MODEL_BOWSER_NO_SHADOW                 0x123        // bowser_geo_no_shadow
+#define MODEL_BOWSER_BOMB_CHILD_OBJ            0x124        // bowser_bomb_geo - Spawns as a chill object in bowser's behavior command, causing an explosion if it touches a bomb
+#define MODEL_BOWSER_BOMB                      0x125        // bowser_bomb_geo
+#define MODEL_RR_FLYING_CARPET                 0x126       // rr_geo_000848
+#define MODEL_ARMSTRONG_FRAME_1                0x127
+#define MODEL_ARMSTRONG_FRAME_2                0x128
+#define MODEL_ARMSTRONG_FRAME_3                0x129
+#define MODEL_ARMSTRONG_IDLE                   0x12A
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
 #define MODEL_LEVEL_GEOMETRY_03                0x03
@@ -187,7 +204,6 @@
 
 // rr
 #define MODEL_RR_SLIDING_PLATFORM                 0x36        // rr_geo_0008C0
-#define MODEL_RR_FLYING_CARPET                    0x37        // rr_geo_000848
 #define MODEL_RR_OCTAGONAL_PLATFORM               0x38        // rr_geo_0008A8
 #define MODEL_RR_ROTATING_BRIDGE_PLATFORM         0x39        // rr_geo_000878
 #define MODEL_RR_TRIANGLE_PLATFORM                0x3A        // rr_geo_0008D8 - unused
@@ -355,7 +371,6 @@
 // group 3
 #define MODEL_WATER_BOMB                  0x54        // water_bomb_geo
 #define MODEL_WATER_BOMB_SHADOW           0x55        // water_bomb_shadow_geo
-#define MODEL_KING_BOBOMB                 0x56        // king_bobomb_geo
 
 // group 4
 #define MODEL_MANTA_RAY                   0x54        // manta_seg5_geo_05008D14
@@ -416,12 +431,6 @@
 
 // second set of actor bins, (0x64-0x73)
 // group 12
-#define MODEL_BOWSER                      0x64        // bowser_geo
-#define MODEL_BOWSER_BOMB_CHILD_OBJ       0x65        // bowser_bomb_geo - Spawns as a chill object in bowser's behavior command, causing an explosion if it touches a bomb
-#define MODEL_BOWSER_SMOKE                0x66        // bowser_impact_smoke_geo
-#define MODEL_BOWSER_FLAMES               0x67        // bowser_flames_geo
-#define MODEL_BOWSER_WAVE                 0x68        // invisible_bowser_accessory_geo
-#define MODEL_BOWSER_NO_SHADOW            0x69        // bowser_geo_no_shadow
 
 // group 13
 #define MODEL_BUB                         0x64        // cheep_cheep_geo
@@ -445,7 +454,6 @@
 // group 16
 #define MODEL_CHILL_BULLY                 0x64        // chilly_chief_geo
 #define MODEL_BIG_CHILL_BULLY             0x65        // chilly_chief_big_geo
-#define MODEL_MONEYBAG                    0x66        // moneybag_geo
 
 // group 17
 #define MODEL_SWOOP                       0x64        // swoop_geo
@@ -520,7 +528,6 @@
 #define MODEL_WF_TUMBLING_BRIDGE_PART     0xB0        // wf_geo_000AB0
 #define MODEL_WF_LARGE_BOMP               0xB1        // wf_geo_000A40
 #define MODEL_WF_TUMBLING_BRIDGE          0xB2        // wf_geo_000AC8
-#define MODEL_BOWSER_BOMB                 0xB3        // bowser_bomb_geo
 #define MODEL_WATER_MINE                  0xB3        // water_mine_geo
 #define MODEL_BOWLING_BALL                0xB4        // bowling_ball_geo
 #define MODEL_TRAMPOLINE                  0xB5        // springboard_top_geo (unused)

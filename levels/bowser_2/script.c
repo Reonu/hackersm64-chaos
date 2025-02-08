@@ -11,6 +11,7 @@
 #include "levels/scripts.h"
 
 #include "actors/common1.h"
+#include "actors/group0.h"
 
 #include "make_const_nonconst.h"
 #include "levels/bowser_2/header.h"
@@ -34,7 +35,6 @@ const LevelScript level_bowser_2_entry[] = {
     LOAD_RAW(         /*seg*/ 0x0D, _group12_geoSegmentRomStart, _group12_geoSegmentRomEnd),
     ALLOC_LEVEL_POOL(),
     MARIO(/*model*/ MODEL_MARIO, /*behParam*/ 0x00000001, /*beh*/ bhvMario),
-    JUMP_LINK(script_func_global_13),
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_2_TILTING_ARENA, bowser_2_geo_000170),
 
     AREA(/*index*/ 1, bowser_2_geo_000188),

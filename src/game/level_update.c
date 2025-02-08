@@ -629,6 +629,8 @@ s16 music_unchanged_through_warp(s16 arg) {
     return unchanged;
 }
 
+extern u8 gRR2Checkpoint;
+
 /**
  * Set the current warp type and destination level/area/node.
  */
@@ -643,6 +645,10 @@ void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 warpFlags)
         sWarpDest.type = WARP_TYPE_CHANGE_AREA;
     } else {
         sWarpDest.type = WARP_TYPE_SAME_AREA;
+    }
+
+    if (destWarpNode == 0x3A) {
+        gRR2Checkpoint = FALSE;
     }
 
     sWarpDest.levelNum = destLevel;
@@ -955,7 +961,7 @@ void update_hud_values(void) {
 #endif
         COND_BIT((gCurrCourseNum >= COURSE_MIN), gHudDisplay.flags, HUD_DISPLAY_FLAG_COIN_COUNT);
 
-        if (gHudDisplay.coins < gMarioState->numCoins) {
+        if (gHudDisplay.coins != gMarioState->numCoins) {
             if (gGlobalTimer & 1) {
                 u32 coinSound;
                 if (gMarioState->action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER)) {
@@ -964,7 +970,12 @@ void update_hud_values(void) {
                     coinSound = SOUND_GENERAL_COIN;
                 }
 
-                gHudDisplay.coins++;
+                if (gMarioState->numCoins < gHudDisplay.coins) {
+                    gHudDisplay.coins--;
+                } else {
+                    gHudDisplay.coins++;
+                }
+
                 play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
             }
         }

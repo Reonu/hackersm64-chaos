@@ -1883,6 +1883,8 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     vec3f_get_dist_and_angle(gMarioState->prevPos, gMarioState->pos, &gMarioState->moveSpeed, &gMarioState->movePitch, &gMarioState->moveYaw);
     vec3f_get_lateral_dist(gMarioState->prevPos, gMarioState->pos, &gMarioState->lateralSpeed);
     vec3f_copy(gMarioState->prevPos, gMarioState->pos);
+    
+    gInActSelect = 0;
 
     if (gChaosCodeTable[GLOBAL_CHAOS_PAY_TO_MOVE].active) {
         obj_set_model(gMarioObject, MODEL_MARIO);
@@ -2122,6 +2124,8 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     return ACTIVE_PARTICLE_NONE;
 }
 
+void carpet_init(void);
+
 /**************************************************
  *                  INITIALIZATION                *
  **************************************************/
@@ -2132,6 +2136,12 @@ void init_mario(void) {
     gMarioState->framesSinceB = 0xFF;
 
     gMarioState->invincTimer = 0;
+
+    #ifdef TEST_LEVEL
+    gFlipMarioOnce = 0;
+    #endif
+
+    carpet_init();
 
     if (save_file_get_flags()
         & (SAVE_FLAG_CAP_ON_GROUND | SAVE_FLAG_CAP_ON_KLEPTO | SAVE_FLAG_CAP_ON_UKIKI

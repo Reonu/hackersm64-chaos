@@ -120,6 +120,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_XLU_SURF,
         [LAYER_TRANSPARENT] = G_RM_AA_XLU_SURF,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_XLU_SURF,
+        [LAYER_ETHEL] = G_RM_AA_OPA_SURF,
     } },
     [RENDER_ZB] = { {
         [LAYER_FORCE] = G_RM_ZB_OPA_SURF,
@@ -137,6 +138,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_ZB_XLU_DECAL,
         [LAYER_TRANSPARENT] = G_RM_AA_ZB_XLU_SURF,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_ZB_XLU_INTER,
+        [LAYER_ETHEL] = G_RM_AA_ZB_OPA_SURF,
     } } };
 
 /* Rendermode settings for cycle 2 for all 13 layers. */
@@ -157,6 +159,7 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_XLU_SURF2,
         [LAYER_TRANSPARENT] = G_RM_AA_XLU_SURF2,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_XLU_SURF2,
+        [LAYER_ETHEL] = G_RM_AA_OPA_SURF2,
     } },
     [RENDER_ZB] = { {
         [LAYER_FORCE] = G_RM_ZB_OPA_SURF2,
@@ -174,6 +177,7 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_ZB_XLU_DECAL2,
         [LAYER_TRANSPARENT] = G_RM_AA_ZB_XLU_SURF2,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_ZB_XLU_INTER2,
+        [LAYER_ETHEL] = G_RM_AA_ZB_OPA_SURF2,
     } } };
 
 ALIGNED16 struct GraphNodeRoot *gCurGraphNodeRoot = NULL;
@@ -1322,6 +1326,8 @@ void react_clear_zb(void) {
     gDisplayListHead = tempGfxHead;
 }
 
+void carpet_update(void);
+
 /**
  * Process a root node. This is the entry point for processing the scene graph.
  * The root node itself sets up the viewport, then all its children are processed
@@ -1338,6 +1344,8 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
         } else {
             repeat = 0;
         }
+
+        carpet_update();
 
         gDisplayListHeap = alloc_only_pool_init(main_pool_available() - sizeof(struct AllocOnlyPool), MEMORY_POOL_LEFT);
         for (int i = 0; i <= repeat; i++) {

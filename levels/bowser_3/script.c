@@ -11,6 +11,7 @@
 #include "levels/scripts.h"
 
 #include "actors/common1.h"
+#include "actors/group0.h"
 
 #include "make_const_nonconst.h"
 #include "levels/bowser_3/header.h"
@@ -42,7 +43,6 @@ const LevelScript level_bowser_3_entry[] = {
     LOAD_YAY0(/*seg*/ 0x0A, _bits_skybox_yay0SegmentRomStart, _bits_skybox_yay0SegmentRomEnd),
     ALLOC_LEVEL_POOL(),
     MARIO(/*model*/ MODEL_MARIO, /*behParam*/ 0x00000001, /*beh*/ bhvMario),
-    JUMP_LINK(script_func_global_13),
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_3_FALLING_PLATFORM_1,  bowser_3_geo_000290),
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_3_FALLING_PLATFORM_2,  bowser_3_geo_0002A8),
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_3_FALLING_PLATFORM_3,  bowser_3_geo_0002C0),

@@ -17,6 +17,7 @@
 #include "surface_terrains.h"
 #include "rumble_init.h"
 #include "game/spawn_sound.h"
+#include "game/print.h"
 
 s32 check_common_idle_cancels(struct MarioState *m) {
     mario_drop_held_object(m);
@@ -1081,6 +1082,33 @@ s32 check_common_stationary_cancels(struct MarioState *m) {
     return FALSE;
 }
 
+s32 act_dab(struct MarioState *m) {
+    u16 anim;
+    m->marioObj->header.gfx.angle[1] = gCamera->yaw;
+    if (m->actionTimer++ == 1) {
+        anim = random_u16() % 3;
+        switch (anim) {
+            case 0:
+                anim = MARIO_ANIM_CUSTOM_DAB;
+                break;
+            case 1:
+                anim = MARIO_ANIM_CUSTOM_POSE_2;
+                break;
+            case 2:
+                anim = MARIO_ANIM_CUSTOM_POSE_3;
+                break;
+        }
+        play_sound(SOUND_NEW_PIZZA_TOWER_TAUNT, m->marioObj->header.gfx.cameraToObject);
+        set_custom_mario_animation(m, anim);
+        gMarioState->marioObj->header.gfx.animInfo.animFrame = 0;
+    } else if (m->actionTimer > 15) {
+        return drop_and_set_mario_action(m, ACT_IDLE, 0);
+    } else {
+        gMarioState->marioObj->header.gfx.animInfo.animFrame = 0;
+    }
+    return FALSE;
+}
+
 s32 mario_execute_stationary_action(struct MarioState *m) {
     s32 cancel;
 
@@ -1130,6 +1158,7 @@ s32 mario_execute_stationary_action(struct MarioState *m) {
         case ACT_BRAKING_STOP:            cancel = act_braking_stop(m);                     break;
         case ACT_BUTT_SLIDE_STOP:         cancel = act_butt_slide_stop(m);                  break;
         case ACT_HOLD_BUTT_SLIDE_STOP:    cancel = act_hold_butt_slide_stop(m);             break;
+        case ACT_DAB:                     cancel = act_dab(m);                              break;
         default:                          cancel = TRUE;                                    break;
     }
     /* clang-format on */

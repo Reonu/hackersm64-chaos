@@ -73,7 +73,20 @@ void chaos_cannon(void) {
 
 // Not final, just there to have a different func
 void chaos_trip(void) {
-    gMarioState->action = ACT_HARD_BACKWARD_GROUND_KB;
+    if ((gMarioState->action & ACT_FLAG_SWIMMING) == 0) {
+        gMarioState->action = ACT_HARD_BACKWARD_GROUND_KB;
+    }
+    gChaosCodeTable[gCurrentChaosID].timer = 0;
+    gChaosCodeTable[gCurrentChaosID].active = FALSE;
+}
+
+
+void chaos_spinflower(void) {
+    if ((gMarioState->action & ACT_FLAG_SWIMMING) == 0) {
+        play_sound(SOUND_MARIO_TWIRL_BOUNCE, gGlobalSoundSource);
+        gMarioState->action = ACT_TWIRLING;
+        gMarioState->vel[1] = 300.0f;
+    }
     gChaosCodeTable[gCurrentChaosID].timer = 0;
     gChaosCodeTable[gCurrentChaosID].active = FALSE;
 }
@@ -219,6 +232,14 @@ void chaos_ccm_rocks_from_volcano(void) {
         spawn_object_relative(0, x, 1000, z + 250, gMarioState->marioObj, MODEL_CCM_ROCK_VOLCANO, bhvRockVolcano);
     }
     current_code_update_timer();
+}
+
+void chaos_ccm_spawn_penguins(void) {
+    gCurrentChaosTable[gCurrentChaosID].active = TRUE;
+    if (gCurrentChaosTable[gCurrentChaosID].timer % 20 == 0) {
+        spawn_object_relative(0, 0, 300, 0, gMarioState->marioObj, MODEL_PENGUIN, bhvSmallPenguin);
+    }
+    current_code_update_timer();    
 }
 
 void chaos_randomize_coin_colors(void) {
@@ -538,6 +559,137 @@ void chaos_random_jump(void) {
     }
 }
 
+void chaos_ethel(void) {
+    static u8 started = 0;
+    Vec3f pos;
+    pos[0] = gCamera->pos[0] - 1000 * sins(gCamera->yaw);
+    pos[1] = gCamera->pos[1];
+    pos[2] = gCamera->pos[2] - 1000 * coss(gCamera->yaw);
+    struct Object *ethel;
+    if (!started) {
+        ethel = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_ETHEL_THE_CAT, bhvEthelTheCat);
+        started = 1;
+        ethel->oPosX = pos[0];
+        ethel->oPosY = pos[1];
+        ethel->oPosZ = pos[2];
+        ethel->oFaceAngleYaw = 0;
+        ethel->oFaceAngleRoll = 0;
+        ethel->oFaceAnglePitch = 0;
+    } else {
+        if (gChaosCodeTable[GLOBAL_CHAOS_ETHEL_THE_CAT].timer == 1) {
+            started = 0;
+            disable_current_code();
+            return;
+        }
+    }
+    current_code_update_timer();
+}
+
+void chaos_moneybags(void) {
+    int i;
+    for (i = 0; i < OBJECT_POOL_CAPACITY; i++) {
+        struct Object *curObj = &gObjectPool[i];
+        if (curObj == NULL) {
+            break;
+        }
+        if (curObj->behavior == (segmented_to_virtual(bhvYellowCoin))) {
+            if (random_u16() % 3 == 1) {
+                spawn_object_relative(0, 0, -25, 0, curObj, MODEL_YELLOW_COIN, bhvMoneybagHidden);
+                mark_obj_for_deletion(curObj);
+            }
+        }
+    }    
+    disable_current_code();
+}   
+
+void chaos_dab(void) {
+    drop_and_set_mario_action(gMarioState, ACT_DAB, 0);
+    disable_current_code();
+}
+
+void chaos_spawn_king_bobomb(void) {
+    Vec3f pos;
+    pos[0] = gMarioState->pos[0] + 400 * sins(gMarioState->faceAngle[1]);
+    pos[1] = gMarioState->pos[1] + 100;
+    pos[2] = gMarioState->pos[2] + 400 * coss(gMarioState->faceAngle[1]);
+    struct Surface *floor;
+    find_floor(pos[0], pos[1], pos[2], &floor);
+    if (floor == NULL) {
+        u8 attemptCounter = 0;
+        while (floor == NULL && attemptCounter < 10) {
+            pos[1] += 150;
+            find_floor(pos[0], pos[1], pos[2], &floor);
+            attemptCounter++;
+        }
+    }
+    if (floor != NULL) {
+        struct Object *boss;
+
+        boss = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KING_BOBOMB, bhvKingBobomb);
+        
+        boss->oPosX = pos[0];
+        boss->oPosY = pos[1];
+        boss->oPosZ = pos[2];
+    }
+    disable_current_code();
+}
+void chaos_spawn_bowser(void) {
+    Vec3f pos;
+    pos[0] = gMarioState->pos[0] + 400 * sins(gMarioState->faceAngle[1]);
+    pos[1] = gMarioState->pos[1] + 100;
+    pos[2] = gMarioState->pos[2] + 400 * coss(gMarioState->faceAngle[1]);
+    struct Surface *floor;
+    find_floor(pos[0], pos[1], pos[2], &floor);
+    if (floor == NULL) {
+        u8 attemptCounter = 0;
+        while (floor == NULL && attemptCounter < 10) {
+            pos[1] += 150;
+            find_floor(pos[0], pos[1], pos[2], &floor);
+            attemptCounter++;
+        }
+    }
+    if (floor != NULL) {
+        struct Object *bowser;
+
+        bowser = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_BOWSER, bhvBowser);
+        
+        bowser->oPosX = pos[0];
+        bowser->oPosY = pos[1];
+        bowser->oPosZ = pos[2];
+
+        bowser->oFaceAngleYaw += DEGREES(180);
+        bowser->oMoveAngleYaw += DEGREES(180);
+
+        bowser->oAction = BOWSER_ACT_CHARGE_MARIO;
+    }
+    disable_current_code();
+}
+
+void chaos_spawn_carpet(void) {
+    spawn_object_relative(0, 0, 0, 0, gMarioObject, MODEL_RR_FLYING_CARPET, bhvCustomCarpet);
+    disable_current_code();
+}
+
+void chaos_spawn_armstrong(void) {
+    Vec3f pos;
+    pos[0] = gMarioState->pos[0] + 3500 * sins(gMarioState->faceAngle[1]);
+    pos[1] = gMarioState->pos[1];
+    pos[2] = gMarioState->pos[2] + 3500 * coss(gMarioState->faceAngle[1]);
+
+    struct Object *armstrong;
+    armstrong = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_ARMSTRONG_FRAME_1, bhvArmstrong);
+    armstrong->oDrawingDistance = 30000;
+    armstrong->oFaceAngleYaw = 0;
+    armstrong->oFaceAngleRoll = 0;
+    armstrong->oFaceAnglePitch = 0;
+    armstrong->oMoveAngleYaw = 0;
+    armstrong->oPosX = pos[0];
+    armstrong->oPosY = pos[1];
+    armstrong->oPosZ = pos[2];
+
+    disable_current_code();
+}
+
 void chaos_wdw_water(void) {
     if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
         gCurrentChaosTable[gCurrentChaosID].active = TRUE;
@@ -727,23 +879,23 @@ ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Trip", chaos_trip, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
-    {"Upside Down Camera", chaos_upside_down_camera, 100, 10, 20, CODEFLAG_CAMERA,   /*ignore these*/ 0, 0},
+    {"Upside Down Camera", chaos_upside_down_camera, 75, 10, 20, CODEFLAG_CAMERA,   /*ignore these*/ 0, 0},
     {"Model None Mario", chaos_generic, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
-    {"Retro Vision", chaos_retro, 100, 15, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
-    {"Blur Vision", chaos_blur, 100, 20, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
+    {"Retro Vision", chaos_retro, 50, 15, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
+    {"Blur Vision", chaos_blur, 30, 20, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
     {"Mario Kart", chaos_mario_kart, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Pay to Move", chaos_pay_to_move, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Tank Controls", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Invert Controls", chaos_generic, 100, 20, 30, 0,   /*ignore these*/ 0, 0},
-    {"Dim Lights", chaos_generic, 100, 30, 60, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
+    {"Dim Lights", chaos_generic, 30, 30, 60, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Law Metre", chaos_lawmetre, 100, 60, 90, 0,   /*ignore these*/ 0, 0},
     {"Tiny Mario", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"Billboard Mario", chaos_generic, 100, 20, 35, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Very Slippery", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
-    {"All Quicksand", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"All Quicksand", chaos_generic, 80, 25, 40, 0,   /*ignore these*/ 0, 0},
     {"Mario Sounds Scream", chaos_generic, 100, 15, 30, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Randomize Coin Colors", chaos_generic, 100, 30, 45, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
-    {"Coin Cutscenes", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
+    {"Coin Cutscenes", chaos_generic, 100, 30, 45, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"All jumps are triple", chaos_generic, 100, 15, 45, 0,   /*ignore these*/ 0, 0},
     {"Delete Nearby Objects", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Invert Dive and Kick", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
@@ -752,7 +904,7 @@ ChaosCode gChaosCodeTable[] = {
     {"No Speed Cap", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Super Jumps", chaos_generic, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
     {"Heave Ho Chaser", chaos_heave_ho_chaser, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
-    {"Strong Punch KB", chaos_generic, 100, 45, 90, 0,   /*ignore these*/ 0, 0},
+    {"Strong Punch KB", chaos_generic, 100, 45, 90, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Automatic Wallkicks", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Chain Chomp", chaos_chain_chomp, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Thwomp", chaos_thwomp, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
@@ -761,6 +913,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Weird Audio", chaos_generic, 100, 30, 45, CODEFLAG_AUDIO,   /*ignore these*/ 0, 0},
     {"Swap Positions", chaos_swap_positions, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
     {"Billboard Everything", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Bouncy Mario", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Fast Enemies", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Bilerp", chaos_generic, 100, 30, 60, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Random Cap", chaos_random_cap, 100, 0, 0, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
@@ -768,6 +921,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Koopa Shell", chaos_koopa_shell, 100, 0, 0, 0,  /*ignore these*/ 0, 0},
     {"Squish Mario", chaos_squish_mario, 100, 4, 8, 0,  /*ignore these*/ 0, 0},
     {"Ortho Cam", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Random Spin", chaos_spinflower, 100, 0, 0, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Long Jump GP", chaos_next_long_jump_gp, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Random Jump", chaos_random_jump, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Mario Random Bank", chaos_generic, 100, 30, 60, CODEFLAG_AUDIO,  /*ignore these*/ 0, 0},
@@ -776,12 +930,27 @@ ChaosCode gChaosCodeTable[] = {
     {"All Ceilings Hangable", chaos_generic, 100, 60, 120, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Sudden Reonu Spring", chaos_spring, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Amp", chaos_amp, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
+    {"Coins Remove Coins", chaos_generic, 75, 20, 30, 0,  /*ignore these*/ 0, 0},
     {"Random object scale", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"Objects flee Mario", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Ethel the Cat", chaos_ethel, 100, 14, 15, 0,  /*ignore these*/ 0, 0}, // the code lasts for the duration of time the cat takes to despawn, do not change
+    {"Mario Gravitation", chaos_generic, 60, 20, 30, 0,  /*ignore these*/ 0, 0},
+    {"Hurricane", chaos_generic, 30, 15, 20, 0,  /*ignore these*/ 0, 0},
+    {"Mario Dabs", chaos_dab, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
+    {"Swap Coins with Moneybags", chaos_moneybags, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
+    {"Spawn King BobOmb", chaos_spawn_king_bobomb, 20, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Spawn Bowser", chaos_spawn_bowser, 5, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Carpet", chaos_spawn_carpet, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Armstrong", chaos_spawn_armstrong, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
     {"CCM Volcano Rocks", chaos_ccm_rocks_from_volcano, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"CCM Spawn Penguins", chaos_ccm_spawn_penguins, 100, 5, 7, 0,   /*ignore these*/ 0, 0},
+};
+
+ChaosCode gWFChaosTable[] = {
+    {"WF Betah Invasion", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gBoBChaosTable[] = {
@@ -871,6 +1040,9 @@ ChaosCode *chaos_level_table(s32 levelID, s32 *size) {
     case LEVEL_JRB:
         *size = sizeof(gJRBChaosTable) / sizeof(ChaosCode);
         return gJRBChaosTable;
+    case LEVEL_WF:
+        *size = sizeof(gWFChaosTable) / sizeof(ChaosCode);
+        return gWFChaosTable;        
     case LEVEL_LLL:
         *size = sizeof(gLLLChaosTable) / sizeof(ChaosCode);
         return gLLLChaosTable;

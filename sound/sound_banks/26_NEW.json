@@ -60,6 +60,26 @@
       "release_rate": 208,
       "envelope": "envelope0",
       "sound": "nuke_explosion"
+    },
+    "inst_oiiaoiia": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "oiiaoiia"
+    },
+    "inst_pizza_tower_taunt": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "pizza_tower_taunt"
+    },
+    "inst_armstrong_scream": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "armstrong_scream"
+    },
+    "inst_armstrong_omelettes": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "armstrong_omelettes"
     }
   },
   "instrument_list": [
@@ -72,6 +92,10 @@
     "inst_funi4",
     "inst_welcome_to_mario_kart",
     "inst_engine",
-    "inst_nuke_explosion"
+    "inst_nuke_explosion",
+    "inst_oiiaoiia",
+    "inst_pizza_tower_taunt",
+    "inst_armstrong_scream",
+    "inst_armstrong_omelettes"
   ]
 }

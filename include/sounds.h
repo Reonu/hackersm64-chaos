@@ -37,6 +37,7 @@ enum SoundBank {
     SOUND_BANK_GENERAL2,
     SOUND_BANK_OBJ2,
     SOUND_BANK_NEW,
+    SOUND_BANK_NEW_2,
     SOUND_BANK_COUNT
 };
 
@@ -597,12 +598,17 @@ enum SoundBank {
 
 #define SOUND_NEW_SNOWBALL_LETS_DO_THIS                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x00, 0xFF, SOUND_DISCRETE)
 #define SOUND_NEW_SNOWBALL_SCREAM                                 SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x01, 0xFF, SOUND_DISCRETE)
-#define SOUND_NEW_FIVERUPEES                                      SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x02, 0xFF, SOUND_DISCRETE)
-#define SOUND_NEW_FUNI1                                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x03, 0xFF, SOUND_DISCRETE)
-#define SOUND_NEW_FUNI2                                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x04, 0xFF, SOUND_DISCRETE)
-#define SOUND_NEW_FUNI3                                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x05, 0xFF, SOUND_DISCRETE)
-#define SOUND_NEW_FUNI4                                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x06, 0xFF, SOUND_DISCRETE)
-#define SOUND_NEW_WELCOME_TO_MARIO_KART                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x07, 0xFF, SOUND_DISCRETE)
-#define SOUND_NEW_ENGINE                                          SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x08, 0xFF, SOUND_DISCRETE)
+#define SOUND_NEW_FIVERUPEES                                      SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x02, 0xFD, SOUND_DISCRETE)
+#define SOUND_NEW_FUNI1                                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x03, 0xFD, SOUND_DISCRETE)
+#define SOUND_NEW_FUNI2                                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x04, 0xFD, SOUND_DISCRETE)
+#define SOUND_NEW_FUNI3                                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x05, 0xFD, SOUND_DISCRETE)
+#define SOUND_NEW_FUNI4                                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x06, 0xFD, SOUND_DISCRETE)
+#define SOUND_NEW_WELCOME_TO_MARIO_KART                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x07, 0xFD, SOUND_DISCRETE)
+#define SOUND_NEW_ENGINE                                          SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x08, 0xFD, SOUND_DISCRETE)
 #define SOUND_NEW_NUKE_EXPLOSION                                  SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x09, 0xFF, SOUND_DISCRETE)
+#define SOUND_NEW_OIIAOIIA                                        SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x0A, 0xFE, SOUND_DISCRETE)
+#define SOUND_NEW_PIZZA_TOWER_TAUNT                               SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x0B, 0xFF, SOUND_DISCRETE)
+#define SOUND_NEW_ARMSTRONG_SCREAM                                SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x0C, 0xFF, SOUND_DISCRETE)
+#define SOUND_NEW_ARMSTRONG_OMELETTES                             SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x0D, 0xFF, SOUND_DISCRETE)
+#define SOUND_NEW_2_HAS_TO_BE_THIS_WAY                            SOUND_ARG_LOAD(SOUND_BANK_NEW_2, 0x00, 0xFF, SOUND_DISCRETE)
 #endif // SOUNDS_H
