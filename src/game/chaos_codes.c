@@ -942,6 +942,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Spawn Bowser", chaos_spawn_bowser, 5, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Carpet", chaos_spawn_carpet, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Armstrong", chaos_spawn_armstrong, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Inverted Fvel Mag", chaos_generic, 100, 15, 30, 0,  /*ignore these*/ 0, 0},
 };
 
 ChaosCode gCCMChaosTable[] = {
