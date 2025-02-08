@@ -407,6 +407,7 @@ Gfx *geo_act_selector_strings(s16 callContext, UNUSED struct GraphNode *node, UN
 s32 lvl_init_act_selector_values_and_stars(UNUSED s32 arg, UNUSED s32 unused) {
     u8 stars = save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum));
 
+    gInActSelect = 1;
     sLoadedActNum = 0;
     sInitSelectedActNum = 0;
     sVisibleStars = 0;

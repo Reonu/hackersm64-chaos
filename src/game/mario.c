@@ -1883,6 +1883,8 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     vec3f_get_dist_and_angle(gMarioState->prevPos, gMarioState->pos, &gMarioState->moveSpeed, &gMarioState->movePitch, &gMarioState->moveYaw);
     vec3f_get_lateral_dist(gMarioState->prevPos, gMarioState->pos, &gMarioState->lateralSpeed);
     vec3f_copy(gMarioState->prevPos, gMarioState->pos);
+    
+    gInActSelect = 0;
 
     if (gChaosCodeTable[GLOBAL_CHAOS_PAY_TO_MOVE].active) {
         obj_set_model(gMarioObject, MODEL_MARIO);

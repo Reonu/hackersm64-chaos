@@ -54,6 +54,7 @@ extern u8 gChaoTutorial;
 extern u8 gChaoTutorialCameraMoved;
 extern u8 gFlipMarioOnce;
 extern u8 gCreamHasTalked;
+extern u8 gInActSelect;
 extern u16 gFlameCounter;
 extern u16 gChuckyaCounter;
 #ifdef VANILLA_STYLE_CUSTOM_DEBUG
