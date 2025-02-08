@@ -30,7 +30,7 @@ void bhv_armstrong_chase_mario(void) {
     o->oPosY = o->oArmstrongGoalY;
 
     if (dist <= 200.f) {
-        if (o->oDistanceToMario < 300.f) {
+        if (o->oDistanceToMario < 500.f) {
             gMarioState->action = ACT_REKT_BY_ARMSTRONG;
             gMarioState->marioObj->oFaceAngleYaw = o->oAngleToMario + DEGREES(180);
             gMarioState->marioObj->oMoveAngleYaw = o->oAngleToMario + DEGREES(180);
