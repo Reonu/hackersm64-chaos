@@ -332,29 +332,23 @@ Stars.\n\
 Bwa ha ha!"))
 
 DEFINE_DIALOG(DIALOG_030, 1, 6, 30, 200, _("\
-Hello! The Lakitu Bros.,\n\
-cutting in with a live\n\
-update on Mario's\n\
-progress. He's about to\n\
-learn a technique for\n\
-sneaking up on enemies.\n\
-The trick is this: He has\n\
-to walk very slowly in\n\
-order to walk quietly.\n\
-\n\
-\n\
-\n\
-And wrapping up filming\n\
-techniques reported on\n\
-earlier, you can take a\n\
-look around using [C]> and\n\
-[C]<. Press [C]| to view the\n\
-action from a distance.\n\
-When you can't move the\n\
-camera any farther, the\n\
-buzzer will sound. This is\n\
-the Lakitu Bros.,\n\
-signing off."))
+BETA. BETA!!! BETA!!!\n\
+BETA!!! BETA!!! BETA!!!\n\
+BETa????? betahahH!!!\n\
+BETA!!!!!!!!!!!!!!!!!!!\n\
+BETA? BETA!!!!!!!!!!!!\n\
+BETA! BETA! BETA! BETA!\n\
+HOW BETA STAR????????\n\
+HOW BULLY 1 HORN??????\n\
+HOW BETA BULLY 2??????\n\
+HOW BETA BULLY 3??????\n\
+BETAA!!!!!!!!!!!!!!!!!!\n\
+PLEASE HOW BETA STAR\n\
+I DOWNLOADED\n\
+HACKERSM64 WHAT DO I\n\
+WITH THE ZIP FILE.\n\
+PLEASE I DONT\n\
+KNOW HOW TO OPEN IT"))
 
 DEFINE_DIALOG(DIALOG_031, 1, 5, 30, 200, _("\
 No way! You beat me...\n\
