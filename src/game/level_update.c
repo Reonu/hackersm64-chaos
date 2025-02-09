@@ -729,6 +729,8 @@ void initiate_painting_warp(void) {
     }
 }
 
+extern OSViMode VI;
+
 /**
  * If there is not already a delayed warp, schedule one. The source node is
  * based on the warp operation and sometimes Mario's used object.
@@ -845,6 +847,13 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
 
             case WARP_OP_CREDITS_START:
                 sDelayedWarpTimer = 30;
+                s32 size;
+                s32 isRetro = gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
+                chaos_clear_global();
+                if (isRetro) {
+                    gChaosCodeTable[GLOBAL_CHAOS_RETRO].active = TRUE;
+                    gChaosCodeTable[GLOBAL_CHAOS_RETRO].timer = 1;
+                }
                 gChaosOffOverride = TRUE;
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, sDelayedWarpTimer, 0x00, 0x00, 0x00);
                 break;

@@ -1103,6 +1103,13 @@ void chaos_clear_level(ChaosCode *table, s32 size) {
     }
 }
 
+void chaos_clear_global(void) {
+    for (int i = 0; i < sizeof(gChaosCodeTable) / sizeof(ChaosCode); i++) {
+        gChaosCodeTable[i].active = 0;
+        gChaosCodeTable[i].timer = 0;
+    }
+}
+
 void global_chaos_code_handler(void) {
     update_chaos_code_effects();
 
