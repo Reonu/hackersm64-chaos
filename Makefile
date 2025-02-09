@@ -5,7 +5,7 @@ include util.mk
 # Default target
 default: all
 
-TARGET_STRING := superbetarecreation
+TARGET_STRING := ChaoGarden64
 
 # Preprocessor definitions
 DEFINES :=
@@ -92,7 +92,7 @@ FIXLIGHTS ?= 1
 
 DEBUG_MAP_STACKTRACE_FLAG := -D DEBUG_MAP_STACKTRACE
 
-TARGET := superbetarecreation
+TARGET := ChaoGarden64
 
 
 # GRUCODE - selects which RSP microcode to use.
