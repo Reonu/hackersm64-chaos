@@ -1129,7 +1129,7 @@ void global_chaos_code_handler(void) {
         } else {
             goto tryAgain;
         }
-        if (gCurrentChaosTable[gPrevChosenCode].flags == CODEFLAG_MINOR) {
+        if (gCurrentChaosTable[gPrevChosenCode].flags == CODEFLAG_MINOR || gCurrentChaosTable[gPrevChosenCode].flags == CODEFLAG_AUDIO) {
             nextGlobalCodeTimer = (random_u16() % 200);
         } else {
             nextGlobalCodeTimer = 150 + (random_u16() % 600);
