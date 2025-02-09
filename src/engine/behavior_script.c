@@ -916,7 +916,7 @@ void cur_obj_update(void) {
         }
     }
 
-    if (gCurrLevelNum != LEVEL_CASTLE && gMarioObject) {
+    if (gMarioObject) {
         if (gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
             Vec3f d;
             d[0] = o->oPosX - gMarioObject->oPosX;
