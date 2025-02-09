@@ -487,16 +487,16 @@ void display_and_vsync(void) {
                 if (++sRenderingFramebuffer == 3) {
                     sRenderingFramebuffer = 0;
                 }
-            } else if (gChaosCodeTable[GLOBAL_CHAOS_RETRO].active == FALSE) {
+            } else if (gChaosCodeTable[GLOBAL_CHAOS_BLUR].active == FALSE) {
+                sRenderedFramebuffer = 0;
+                sRenderingFramebuffer = 0;
+            } else {
                 sRenderedFramebuffer ^= 1;
                 sRenderingFramebuffer ^= 1;
                 if (sRenderedFramebuffer == sRenderingFramebuffer) {
                     sRenderingFramebuffer ^= 1;
                 }
-            } else if (gChaosCodeTable[GLOBAL_CHAOS_BLUR].active == FALSE) {
-                sRenderedFramebuffer = 0;
-                sRenderingFramebuffer = 0;
-    }
+            }
     gGlobalTimer++;
 }
 
