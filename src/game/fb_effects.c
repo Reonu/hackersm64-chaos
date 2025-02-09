@@ -254,6 +254,7 @@ void render_motion_blur(void) {
     render_tiled_screen_effect((u8 *)gFramebuffers[sRenderedFramebuffer], gScreenWidth, gScreenHeight, G_CYC_1CYCLE);
 
     gDPSetColorDither(gDisplayListHead++, G_CD_MAGICSQ);
+    gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
 }
 
