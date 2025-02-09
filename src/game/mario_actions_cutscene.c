@@ -2522,15 +2522,39 @@ static void end_peach_cutscene_run_to_castle(struct MarioState *m) {
 
     m->marioObj->header.gfx.pos[1] = end_obj_set_visual_pos(m->marioObj);
 
-    if ((m->actionState == ACT_STATE_END_PEACH_CUTSCENE_RUN_TO_CASTLE_WALK_LOOK_UP) && is_anim_past_end(m)) {
-        m->actionState  = ACT_STATE_END_PEACH_CUTSCENE_RUN_TO_CASTLE_LOOK_BACK_RUN;
+    
+
+    if (m->actionTimer < 95) {
+        if ((m->actionState == ACT_STATE_END_PEACH_CUTSCENE_RUN_TO_CASTLE_WALK_LOOK_UP) && is_anim_past_end(m)) {
+            m->actionState  = ACT_STATE_END_PEACH_CUTSCENE_RUN_TO_CASTLE_LOOK_BACK_RUN;
+        }
     }
 
     if (m->actionTimer == 95) {
+        m->actionState = 0;
+    Vec3f pos;
+        struct Object *armstrong;
+        pos[0] = gMarioState->pos[0] + 3500 * sins(gMarioState->faceAngle[1]);
+        pos[1] = gMarioState->pos[1];
+        pos[2] = gMarioState->pos[2] + 3500 * coss(gMarioState->faceAngle[1]);
+        armstrong = spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_ARMSTRONG_FRAME_1, bhvArmstrong);
+        armstrong->oDrawingDistance = 30000;
+        armstrong->oFaceAngleYaw = 0;
+        armstrong->oFaceAngleRoll = 0;
+        armstrong->oFaceAnglePitch = 0;
+        armstrong->oMoveAngleYaw = 0;
+        armstrong->oPosX = pos[0];
+        armstrong->oPosY = pos[1];
+        armstrong->oPosZ = pos[2];
         set_cutscene_message(160, 227, 0, 40);
 #ifndef VERSION_JP
         play_sound(SOUND_PEACH_MARIO2, sEndPeachObj->header.gfx.cameraToObject);
 #endif
+    }
+    f32 dist;
+    struct Object *armstrong = cur_obj_find_nearest_object_with_behavior(bhvArmstrong, &dist);
+    if (armstrong && dist < 500.0f && m->actionState != 64) {
+        m->actionState = 64;
     }
     if (m->actionTimer == 389) {
         advance_cutscene_step(m);

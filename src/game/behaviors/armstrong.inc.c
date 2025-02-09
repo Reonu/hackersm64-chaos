@@ -6,6 +6,7 @@
 #include "game/sound_init.h"
 #include "engine/math_util.h"
 #include "audio/external.h"
+#include "engine/graph_node.h"
 
 enum ArmstrongActions {
     ARMSTRONG_ACT_CHASE_MARIO,
@@ -16,8 +17,11 @@ void bhv_armstrong_init(void) {
     o->oArmstrongGoalX = gMarioState->pos[0];
     o->oArmstrongGoalY = gMarioState->pos[1];
     o->oArmstrongGoalZ = gMarioState->pos[2];
-    seq_player_fade_to_target_volume(SEQ_PLAYER_LEVEL, 1, 0);
-    cur_obj_play_sound_2(SOUND_NEW_2_HAS_TO_BE_THIS_WAY);
+    if (gMarioState->action != ACT_END_PEACH_CUTSCENE) {
+        seq_player_fade_to_target_volume(SEQ_PLAYER_LEVEL, 1, 0);
+        cur_obj_play_sound_2(SOUND_NEW_2_HAS_TO_BE_THIS_WAY);
+        cur_obj_scale(0.8f);
+    }
 }
 
 void bhv_armstrong_chase_mario(void) {
@@ -34,9 +38,14 @@ void bhv_armstrong_chase_mario(void) {
 
     if (dist <= 200.f || o->oDistanceToMario < 500.f) {
         if (o->oDistanceToMario < 500.f) {
-            gMarioState->action = ACT_REKT_BY_ARMSTRONG;
-            gMarioState->marioObj->oFaceAngleYaw = o->oAngleToMario + DEGREES(180);
-            gMarioState->marioObj->oMoveAngleYaw = o->oAngleToMario + DEGREES(180);
+            if (gMarioState->action == ACT_END_PEACH_CUTSCENE) {
+                spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_EXPLOSION, bhvExplosion);
+                obj_set_model(gMarioState->marioObj, MODEL_NONE);
+            } else {
+                gMarioState->action = ACT_REKT_BY_ARMSTRONG;
+                gMarioState->marioObj->oFaceAngleYaw = o->oAngleToMario + DEGREES(180);
+                gMarioState->marioObj->oMoveAngleYaw = o->oAngleToMario + DEGREES(180);
+            }
         }
         o->oAction = ARMSTRONG_ACT_IDLE;
     }
@@ -52,7 +61,9 @@ void bhv_armstrong_act_idle(void) {
     }
     
     if (o->oTimer > 120) {
-        seq_player_fade_to_normal_volume(SEQ_PLAYER_LEVEL, 1);
+        if (gMarioState->action != ACT_END_PEACH_CUTSCENE) {
+            seq_player_fade_to_normal_volume(SEQ_PLAYER_LEVEL, 1);
+        }
         mark_obj_for_deletion(o);
     }
 }

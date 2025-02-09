@@ -1909,6 +1909,11 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         obj_set_model(gMarioObject, MODEL_MARIO_BILLBOARD);
     } else {
         obj_set_model(gMarioObject, MODEL_MARIO);
+        if (gMarioState->action == ACT_END_PEACH_CUTSCENE) {
+            if (gMarioState->actionState == 64 && gMarioState->actionTimer > 95) {
+                obj_set_model(gMarioObject, MODEL_NONE);
+            }
+        }
     }
 
     
