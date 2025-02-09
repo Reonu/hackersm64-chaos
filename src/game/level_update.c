@@ -113,7 +113,7 @@ struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_CCM, 2, 34, 25, { -5464, 6656, -6575 }, credits04 },
     { LEVEL_BBH, 1, 1, 60, { 257, 1922, 2580 }, credits05 },
     { LEVEL_HMC, 1, -15, 123, { -6469, 1616, -6054 }, credits06 },
-    { LEVEL_THI, 3, 17, -32, { 508, 1024, 1942 }, credits07 },
+    { LEVEL_THI, 3, 17, -32, { -885, 938, 958 }, credits07 },
     { LEVEL_LLL, 2, 33, 124, { -73, 82, -1467 }, credits08 },
     { LEVEL_SSL, 1, 65, 98, { -5906, 1024, -2576 }, credits09 },
     { LEVEL_DDD, 1, 50, 47, { -4884, -4607, -272 }, credits10 },

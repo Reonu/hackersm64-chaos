@@ -10529,10 +10529,10 @@ struct CutsceneSplinePoint sBbhCreditsSplinePositions[] = {
 };
 
 struct CutsceneSplinePoint sBbhCreditsSplineFocus[] = {
-    { 1, 50, { 1160, 263, 1958 } },
-    { 2, 50, { 1034, 472, 2436 } },
-    { 3, 50, { 1915, 1833, 2688 } },
-    { -1, 50, { 2134, 2316, 2742 } }
+    { 1, 50, { 144, -1, -3238 } },
+    { 2, 50, { 144, -1, -3238 } },
+    { 3, 50, { 144, -1, -3238 } },
+    { -1, 50, { 144, -1, -3238 } }
 };
 
 struct CutsceneSplinePoint sHmcCreditsSplinePositions[] = {
@@ -10552,15 +10552,15 @@ struct CutsceneSplinePoint sHmcCreditsSplineFocus[] = {
 };
 
 struct CutsceneSplinePoint sThiWigglerCreditsSplinePositions[] = {
-    { 1, 0, { -1411, 2474, -1276 } },
-    { 2, 0, { -1606, 2479, -434 } },
-    { -1, 0, { -1170, 2122, 1337 } }
+    { 1, 0, { -941, 1649, -851 } },
+    { 2, 0, { -1071, 1653, -289 } },
+    { -1, 0, { -780, 1415, 891 } }
 };
 
 struct CutsceneSplinePoint sThiWigglerCreditsSplineFocus[] = {
-    { 1, 50, { -1053, 2512, -928 } },
-    { 2, 50, { -1234, 2377, -114 } },
-    { -1, 50, { -758, 2147, 1054 } }
+    { 1, 50, { -702, 1675, -619 } },
+    { 2, 50, { -823, 1585, -76 } },
+    { -1, 50, { -505, 1431, 703 } }
 };
 
 struct CutsceneSplinePoint sVolcanoCreditsSplinePositions[] = {
@@ -10666,7 +10666,7 @@ struct CutsceneSplinePoint sTtmCreditsSplineFocus[] = {
 };
 
 struct CutsceneSplinePoint sThiHugeCreditsSplinePositions[] = {
-    { 0, 0, { 6990, -1000, -4858 } },
+    { 0, 0, { 6990 , -1000, -4858 } },
     { 0, 0, { 7886, -1055, 2878 } },
     { 0, 0, { 1952, -1481, 10920 } },
     { 0, 0, { -1684, -219, 2819 } },
