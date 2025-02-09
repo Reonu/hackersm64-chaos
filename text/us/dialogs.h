@@ -280,7 +280,9 @@ Princess Toadstool"))
 
 DEFINE_DIALOG(DIALOG_021, 1, 2, 95, 200, _("\
 lmao jk\n\
-Welcome to CBT64"))
+Welcome to\n\
+Chaos Based Torture 64\n\
+(CBT64)"))
 
 DEFINE_DIALOG(DIALOG_022, 1, 2, 95, 200, _("\
 You need a key to open\n\
