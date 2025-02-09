@@ -278,7 +278,7 @@ a cake for you.\n\
 Yours truly--\n\
 Princess Toadstool"))
 
-DEFINE_DIALOG(DIALOG_021, 1, 2, 95, 200, _("\
+DEFINE_DIALOG(DIALOG_021, 1, 4, 95, 200, _("\
 lmao jk\n\
 Welcome to\n\
 Chaos Based Torture 64\n\
