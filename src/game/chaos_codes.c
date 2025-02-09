@@ -881,7 +881,7 @@ void chaos_jrb_dried_up(void) {
 
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
-    {"Fall Damage", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Fall Damage", chaos_generic, 40, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Trip", chaos_trip, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Upside Down Camera", chaos_upside_down_camera, 75, 10, 20, CODEFLAG_CAMERA,   /*ignore these*/ 0, 0},
     {"Model None Mario", chaos_generic, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
@@ -1006,7 +1006,7 @@ ChaosCode gTHIChaosTable[] = {
 
 ChaosCode gHMCChaosTable[] = {
     {"HMC Random Boulder", chaos_hmc_boulder, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
-    {"HMC Boulders Face Mario", chaos_generic, 100, 15, 45, 0,   /*ignore these*/ 0, 0},
+    {"HMC Boulders Face Mario", chaos_generic, 100, 15, 45, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"HMC Random Door Warps", chaos_generic, 100, 40, 70, 0,   /*ignore these*/ 0, 0},
 };
 

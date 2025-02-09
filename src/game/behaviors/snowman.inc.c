@@ -138,7 +138,7 @@ void snowmans_bottom_spawn_star_after_death(void) {
     cur_obj_disable_rendering();
     if (o->oTimer == 0) {
         spawn_mist_particles();
-        spawn_default_star(o->oPosX, o->oPosY + 400, o->oPosZ);
+        spawn_snowball_star(o->oPosX, o->oPosY + 400, o->oPosZ);
     }
 
     if (o->oTimer > 200) {
