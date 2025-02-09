@@ -905,7 +905,7 @@ void cur_obj_update(void) {
     }
 
     // Calculate the angle from the object to Mario.
-    if ((objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active || gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) && (gMarioObject != NULL)) {
+    if ((objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO || gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active || gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) && (gMarioObject != NULL) && !gInActSelect) {
         o->oAngleToMario = obj_angle_to_object(o, gMarioObject);
     }
 
