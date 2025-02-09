@@ -28,7 +28,11 @@
 
 s32 nextGlobalCodeTimer = 150;
 u32 gCurrentChaosID;
+#ifdef DISABLE_CHAOS_BY_DEFAULT
 u8 gDisableChaos = TRUE; // Debug only
+#else
+u8 gDisableChaos = FALSE;
+#endif
 u8 gChaosOffOverride = FALSE; // Use this one for non debug overrides.
 u8 gSpamAd;
 u8 gPovActive;
