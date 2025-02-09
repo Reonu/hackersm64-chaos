@@ -631,9 +631,13 @@ void geo_process_camera(struct GraphNodeCamera *node) {
             gMarioHeadPos[1] = gMarioState->pos[1] + 100.0f;
             gMarioHeadPos[2] = gMarioState->pos[2];
         }
+        s32 angleAdd = 0;
+        if (gMarioState->action == ACT_END_PEACH_CUTSCENE) {
+            angleAdd += 0x4800;
+        }
         f32 tempSin = coss(gMarioState->marioObj->header.gfx.angle[2] + gMarioHeadRot[2]);
-        pos[0] = gMarioHeadPos[0] + (150.0f * tempSin) * sins(gMarioState->marioObj->header.gfx.angle[1] + flipdir + gMarioHeadRot[1]);
-        pos[2] = gMarioHeadPos[2] + (150.0f * tempSin) * coss(gMarioState->marioObj->header.gfx.angle[1] + flipdir + gMarioHeadRot[1]);
+        pos[0] = gMarioHeadPos[0] + (150.0f * tempSin) * sins(gMarioState->marioObj->header.gfx.angle[1] + flipdir + gMarioHeadRot[1] + angleAdd);
+        pos[2] = gMarioHeadPos[2] + (150.0f * tempSin) * coss(gMarioState->marioObj->header.gfx.angle[1] + flipdir + gMarioHeadRot[1] + angleAdd);
         pos[1] = gMarioHeadPos[1] + 25.0f + (100.0f * -sins(gMarioState->marioObj->header.gfx.angle[2] + gMarioHeadRot[2]));
         focus[0] = gMarioHeadPos[0];
         focus[1] = gMarioHeadPos[1] + 25.0f;
@@ -1386,15 +1390,17 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
                 make_viewport_clip_rect(viewport[i]);
             }
 
-            if (b != NULL) {
-                clear_framebuffer(clearColor);
-                make_viewport_clip_rect(b);
-                *viewport[i] = *b;
-            }
+            if (i == 0) {
+                if (b != NULL) {
+                    clear_framebuffer(clearColor);
+                    make_viewport_clip_rect(b);
+                    *viewport[i] = *b;
+                }
 
-            else if (c != NULL) {
-                clear_framebuffer(clearColor);
-                make_viewport_clip_rect(c);
+                else if (c != NULL) {
+                    clear_framebuffer(clearColor);
+                    make_viewport_clip_rect(c);
+                }
             }
 
             mtxf_identity(gMatStack[gMatStackIndex]);

@@ -786,6 +786,8 @@ void setup_game_memory(void) {
     load_segment_decompress(SEGMENT_SEGMENT2, _segment2_mio0SegmentRomStart, _segment2_mio0SegmentRomEnd);
 }
 
+extern struct MarioState *gMarioState;
+
 /**
  * Main game loop thread. Runs forever as long as the game continues.
  */
@@ -835,6 +837,10 @@ void thread5_game_loop(UNUSED void *arg) {
             block_until_rumble_pak_free();
 #endif
             osContStartReadDataEx(&gSIEventMesgQueue);
+        }
+
+        if (gPlayer1Controller->buttonPressed & L_TRIG) {
+            //level_trigger_warp(gMarioState, 23);
         }
 
         audio_game_loop_tick();

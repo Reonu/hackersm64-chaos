@@ -2070,6 +2070,12 @@ static void end_peach_cutscene_mario_landing(struct MarioState *m) {
     }
 }
 
+void ending_chaos(s32 id) {
+    s32 size;
+    chaos_level_table(LEVEL_CASTLE, &size);
+    chaos_enable(gChaosCodeTable, id, size);
+}
+
 // raise hand animation, lower hand animation, do some special effects
 static void end_peach_cutscene_summon_jumbo_star(struct MarioState *m) {
     set_mario_animation(m, m->actionState == 0 ? MARIO_ANIM_CREDITS_RAISE_HAND
@@ -2079,6 +2085,7 @@ static void end_peach_cutscene_summon_jumbo_star(struct MarioState *m) {
         m->actionState  = ACT_STATE_END_PEACH_CUTSCENE_SUMMON_JUMBO_STAR_LOWER_HAND;
     }
     if (m->actionTimer == 90) {
+        ending_chaos(GLOBAL_CHAOS_CHUCKYA_ON_OBJECT_DELETION);
         play_cutscene_music(SEQUENCE_ARGS(0, SEQ_EVENT_CUTSCENE_ENDING));
     }
     if (m->actionTimer == 255) {
@@ -2141,6 +2148,7 @@ static void end_peach_cutscene_spawn_peach(struct MarioState *m) {
     }
 
     if (m->actionTimer == TIMER_DESCEND_PEACH) {
+        ending_chaos(GLOBAL_CHAOS_SQUISH_MARIO);
         advance_cutscene_step(m);
     }
     // probably added sounds later and missed the previous >= 40 check
@@ -2168,6 +2176,17 @@ static void end_peach_cutscene_descend_peach(struct MarioState *m) {
 
     if ((sEndPeachObj->oPosY -= m->actionState / 10) <= 907.0f) {
         sEndPeachObj->oPosY = 906.0f;
+    }
+
+    if (m->actionTimer == 300) {
+        gChaosCodeTable[GLOBAL_CHAOS_CHUCKYA_ON_OBJECT_DELETION].timer = 0;
+        gChaosCodeTable[GLOBAL_CHAOS_CHUCKYA_ON_OBJECT_DELETION].active = FALSE;
+        gChaosCodeTable[GLOBAL_CHAOS_SQUISH_MARIO].timer = 0;
+        gChaosCodeTable[GLOBAL_CHAOS_SQUISH_MARIO].active = FALSE;
+    }
+
+    if (m->actionTimer == 550) {
+        ending_chaos(GLOBAL_CHAOS_THWOMP);
     }
 
     play_sound(SOUND_AIR_PEACH_TWINKLE, sEndPeachObj->header.gfx.cameraToObject);
@@ -2260,6 +2279,7 @@ static void end_peach_cutscene_dialog_1(struct MarioState *m) {
             set_cutscene_message(160, 227, 0, 30);
 #ifndef VERSION_JP
             seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 40);
+            ending_chaos(GLOBAL_CHAOS_BILLBOARD_MARIO);
             play_sound(SOUND_PEACH_MARIO, sEndPeachObj->header.gfx.cameraToObject);
 #endif
             break;
@@ -2277,6 +2297,8 @@ static void end_peach_cutscene_dialog_1(struct MarioState *m) {
             break;
 
         case END_PEACH_CUTSCENE_DIALOG_1_TIME_8:
+            gChaosCodeTable[GLOBAL_CHAOS_BILLBOARD_MARIO].timer = 0;
+            gChaosCodeTable[GLOBAL_CHAOS_BILLBOARD_MARIO].active = FALSE;
             advance_cutscene_step(m);
             break;
     }
@@ -2314,6 +2336,9 @@ static void end_peach_cutscene_dialog_2(struct MarioState *m) {
 
     switch (m->actionTimer) {
         case END_PEACH_CUTSCENE_DIALOG_2_TIME_1:
+            sEndLeftToadObj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+            spawn_object_relative(0, 0, 0, 0, sEndLeftToadObj, MODEL_EXPLOSION, bhvExplosion);
+            //obj_mark_for_deletion(sEndLeftToadObj);
             set_cutscene_message(160, 227, 2, 30);
 #ifndef VERSION_JP
             play_sound(SOUND_PEACH_THANKS_TO_YOU, sEndPeachObj->header.gfx.cameraToObject);
@@ -2405,6 +2430,10 @@ static void end_peach_cutscene_kiss_from_peach(struct MarioState *m) {
 static void end_peach_cutscene_star_dance(struct MarioState *m) {
     s32 animFrame = set_mario_animation(m, MARIO_ANIM_CREDITS_PEACE_SIGN);
 
+    if (animFrame == 15) {
+        ending_chaos(GLOBAL_CHAOS_LIVE_MARIO_REACTION);
+    }
+
     if (animFrame == 77) {
         cutscene_put_cap_on(m);
     }
@@ -2433,6 +2462,8 @@ static void end_peach_cutscene_star_dance(struct MarioState *m) {
             break;
 
         case 142:
+            gChaosCodeTable[GLOBAL_CHAOS_LIVE_MARIO_REACTION].timer = 0;
+            gChaosCodeTable[GLOBAL_CHAOS_LIVE_MARIO_REACTION].active = FALSE;
             advance_cutscene_step(m);
             break;
     }
@@ -2451,6 +2482,7 @@ static void end_peach_cutscene_dialog_3(struct MarioState *m) {
 
     switch (m->actionTimer) {
         case 1:
+            ending_chaos(GLOBAL_CHAOS_TINY_MARIO);
             sEndPeachAnimation = PEACH_ANIM_0;
             sEndToadAnims[END_TOAD_INDEX_WEST] = TOAD_ANIM_WEST_WAVE_THEN_TURN;
             sEndToadAnims[END_TOAD_INDEX_EAST] = TOAD_ANIM_EAST_NOD_THEN_TURN;
@@ -2459,6 +2491,11 @@ static void end_peach_cutscene_dialog_3(struct MarioState *m) {
 #ifndef VERSION_JP
             play_sound(SOUND_PEACH_BAKE_A_CAKE, sEndPeachObj->header.gfx.cameraToObject);
 #endif
+            break;
+
+        case 40:
+            sEndRightToadObj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+            spawn_object_relative(0, 0, 0, 0, sEndRightToadObj, MODEL_EXPLOSION, bhvExplosion);
             break;
 
         case 55:
@@ -2502,6 +2539,8 @@ static void end_peach_cutscene_run_to_castle(struct MarioState *m) {
 
 static void end_peach_cutscene_fade_out(struct MarioState *m) {
     if (m->actionState == ACT_STATE_END_PEACH_CUTSCENE_FADE_OUT_WARP) {
+        gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].timer = 0;
+        gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active = FALSE;
         level_trigger_warp(m, WARP_OP_CREDITS_NEXT);
         gPaintingMarioYEntry = 1500.0f; // ensure medium water level in WDW credits cutscene
         m->actionState = ACT_STATE_END_PEACH_CUTSCENE_FADE_OUT_END;
