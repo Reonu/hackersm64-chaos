@@ -137,6 +137,12 @@ struct Object *spawn_star(struct Object *starObj, f32 x, f32 y, f32 z) {
     return starObj;
 }
 
+void spawn_snowball_star(f32 x, f32 y, f32 z) {
+    struct Object *starObj = NULL;
+    starObj = spawn_star(starObj, x, y, z);
+    starObj->oBehParams = 0x04000000;
+}
+
 void spawn_default_star(f32 x, f32 y, f32 z) {
     struct Object *starObj = NULL;
     starObj = spawn_star(starObj, x, y, z);
