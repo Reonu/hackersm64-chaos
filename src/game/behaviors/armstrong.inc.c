@@ -20,7 +20,6 @@ void bhv_armstrong_init(void) {
     if (gMarioState->action != ACT_END_PEACH_CUTSCENE) {
         seq_player_fade_to_target_volume(SEQ_PLAYER_LEVEL, 1, 0);
         cur_obj_play_sound_2(SOUND_NEW_2_HAS_TO_BE_THIS_WAY);
-        cur_obj_scale(0.8f);
     }
 }
 
