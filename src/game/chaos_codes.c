@@ -1029,9 +1029,14 @@ void chaos_enable(ChaosCode *table, s32 codeID, s32 tableSize) {
 
 u16 gPrevChosenCode;
 
-void add_global_chaos_code(ChaosCode *table, s32 tableSize) {
+int add_global_chaos_code(ChaosCode *table, s32 tableSize) {
     gPrevChosenCode = random_u16() % tableSize;
-    chaos_enable(table, gPrevChosenCode, tableSize);
+    if (table[gPrevChosenCode].active) {
+        return 1;
+    } else {
+        chaos_enable(table, gPrevChosenCode, tableSize);
+        return 0;
+    }
 }
 
 ChaosCode *chaos_level_table(s32 levelID, s32 *size) {
@@ -1136,7 +1141,10 @@ void global_chaos_code_handler(void) {
             size = sizeof(gChaosCodeTable) / sizeof(ChaosCode);
         }
         if ((random_u16() % 100) <= gCurrentChaosTable->probability) {
-            add_global_chaos_code(gCurrentChaosTable, size);
+            s32 error = add_global_chaos_code(gCurrentChaosTable, size);
+            if (error) {
+                goto tryAgain;
+            }
         } else {
             goto tryAgain;
         }
