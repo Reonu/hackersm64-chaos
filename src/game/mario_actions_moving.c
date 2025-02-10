@@ -491,7 +491,7 @@ void update_walking_speed(struct MarioState *m) {
 
     targetSpeed = m->intendedMag < maxTargetSpeed ? m->intendedMag : maxTargetSpeed;
     if (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
-        targetSpeed += m->forwardVel / 20.0f;
+        targetSpeed = maxTargetSpeed;
     }
     if (m->quicksandDepth > 10.0f) {
         targetSpeed *= 6.25f / m->quicksandDepth;
@@ -516,7 +516,12 @@ void update_walking_speed(struct MarioState *m) {
             m->forwardVel += 1.1f * mul;
         } else if (m->forwardVel <= targetSpeed) {
             // If accelerating
-            m->forwardVel += 1.1f - m->forwardVel / 43.0f;
+            if (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
+                m->forwardVel += m->forwardVel * 0.05f;
+            }
+            else {
+                m->forwardVel += 1.1f - m->forwardVel / 43.0f;
+            }
         } else if (m->floor->normal.y >= 0.95f) {
             m->forwardVel -= 1.0f * mul;
         }
