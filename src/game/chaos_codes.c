@@ -319,6 +319,9 @@ void chaos_thwomp(void) {
 }
 
 void chaos_spring(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     if (gMarioState->vel[1] < 0) {
         struct Object *spring = spawn_object_relative(0, 0, -100, 0, gMarioState->marioObj, MODEL_SPRING, bhvSpring);
         u16 color = random_u16() % 3;
@@ -488,6 +491,9 @@ void chaos_random_cap(void) {
             script = bhvWingCap;
         break;
         case 1:
+            if (gCurrCreditsEntry) {
+                return;
+            }
             capFlag = MARIO_METAL_CAP;
             script = bhvMetalCap;
         break;
@@ -813,6 +819,9 @@ void chaos_bob_nuke_omb(void) {
 }
 
 void chaos_sl_swap_mario_xz(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     f32 marioX = gMarioState->pos[0];
     gMarioState->pos[0] = gMarioState->pos[2];
     gMarioState->pos[2] = marioX;
@@ -821,6 +830,9 @@ void chaos_sl_swap_mario_xz(void) {
 
 void chaos_sl_pharaoh_curse(void) {
 
+    if (gCurrCreditsEntry) {
+        return;
+    }
     if (buffer_code_until_grounded_out_of_water()) {
         if (gCurrentChaosTable[gCurrentChaosID].timer > 900) {
             gCurrentChaosTable[gCurrentChaosID].timer = 900;

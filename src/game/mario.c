@@ -1819,6 +1819,10 @@ void mario_update_hitbox_and_cap_model(struct MarioState *m) {
         m->marioObj->hitboxHeight = 160.0f;
     }
 
+    if (gCurrCreditsEntry) {
+        m->marioObj->hitboxHeight = 1.0f;
+    }
+
     if ((m->flags & MARIO_TELEPORTING) && (m->fadeWarpOpacity != MODEL_STATE_MASK)) {
         bodyState->modelState &= ~MODEL_STATE_MASK;
         bodyState->modelState |= (MODEL_STATE_ALPHA | m->fadeWarpOpacity);
@@ -2054,7 +2058,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         if (
             (gMarioState->controller->buttonDown & U_JPAD) &&
             !(gMarioState->controller->buttonDown & L_TRIG)
-         && (sPPDebugPage != PUPPYPRINT_PAGE_CHAOS || !fDebug)) {
+         && (sPPDebugPage != PUPPYPRINT_PAGE_CHAOS || !fDebug) && gCurrCreditsEntry == NULL) {
             set_camera_mode(gMarioState->area->camera, CAMERA_MODE_8_DIRECTIONS, 1);
             set_mario_action(gMarioState, ACT_DEBUG_FREE_MOVE, 0);
         }
@@ -2072,14 +2076,16 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         mario_reset_bodystate(gMarioState);
         update_mario_inputs(gMarioState);
 
+        if (gCurrCreditsEntry == NULL) {
 #ifdef PUPPYCAM
         if (!(gPuppyCam.flags & PUPPYCAM_BEHAVIOUR_FREE)) {
 #endif
-        mario_handle_special_floors(gMarioState);
+            mario_handle_special_floors(gMarioState);
 #ifdef PUPPYCAM
         }
 #endif
-        mario_process_interactions(gMarioState);
+            mario_process_interactions(gMarioState);
+        }
 
         // If Mario is OOB, stop executing actions.
         if (gMarioState->floor == NULL) {

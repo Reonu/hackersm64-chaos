@@ -28,6 +28,7 @@
 #include "sound_init.h"
 #include "rumble_init.h"
 #include "game/chaos_codes.h"
+#include "main.h"
 
 static struct Object *sIntroWarpPipeObj;
 static struct Object *sEndPeachObj;
@@ -2634,10 +2635,10 @@ static s32 act_end_peach_cutscene(struct MarioState *m) {
 
     m->actionTimer++;
 
-    sEndCutsceneVp.vp.vscale[0] = SCREEN_WIDTH  * 2;
-    sEndCutsceneVp.vp.vscale[1] = SCREEN_HEIGHT * 1.5f;
-    sEndCutsceneVp.vp.vtrans[0] = SCREEN_WIDTH  * 2;
-    sEndCutsceneVp.vp.vtrans[1] = SCREEN_HEIGHT * 2;
+    sEndCutsceneVp.vp.vscale[0] = gScreenWidth  * 2;
+    sEndCutsceneVp.vp.vscale[1] = gScreenHeight * 1.5f;
+    sEndCutsceneVp.vp.vtrans[0] = gScreenWidth  * 2;
+    sEndCutsceneVp.vp.vtrans[1] = gScreenHeight * 2;
     override_viewport_and_clip(NULL, &sEndCutsceneVp, 0, 0, 0);
 
     return FALSE;
@@ -2671,15 +2672,15 @@ static s32 act_credits_cutscene(struct MarioState *m) {
             m->actionState += 2;
         }
 
-        s32 width = m->actionState * (SCREEN_WIDTH * 2) / 100;
-        s32 height = m->actionState * (SCREEN_HEIGHT * 2) / 100;
+        s32 width = m->actionState * (gScreenWidth * 2) / 100;
+        s32 height = m->actionState * (gScreenHeight * 2) / 100;
 
-        sEndCutsceneVp.vp.vscale[0] = (SCREEN_WIDTH * 2) - width;
-        sEndCutsceneVp.vp.vscale[1] = (SCREEN_HEIGHT * 2) - height;
+        sEndCutsceneVp.vp.vscale[0] = (gScreenWidth * 2) - width;
+        sEndCutsceneVp.vp.vscale[1] = (gScreenHeight * 2) - height;
         sEndCutsceneVp.vp.vtrans[0] =
-            (gCurrCreditsEntry->actNum & (1 << 4) ? width : -width) * 56 / 100 + (SCREEN_WIDTH  * 2);
+            (gCurrCreditsEntry->actNum & (1 << 4) ? width : -width) * 56 / 100 + (gScreenWidth  * 2);
         sEndCutsceneVp.vp.vtrans[1] =
-            (gCurrCreditsEntry->actNum & (1 << 5) ? height : -height) * 66 / 100 + (SCREEN_HEIGHT * 2);
+            (gCurrCreditsEntry->actNum & (1 << 5) ? height : -height) * 66 / 100 + (gScreenHeight * 2);
 
         override_viewport_and_clip(&sEndCutsceneVp, 0, 0, 0, 0);
     }
