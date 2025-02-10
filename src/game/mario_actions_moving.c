@@ -394,12 +394,12 @@ void update_kart_speed(struct MarioState *m) {
         maxTargetSpeed = 4000.0f;
     }
     else if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
-        maxTargetSpeed = 350.0f;
+        maxTargetSpeed = 500.0f;
     } else {
-        maxTargetSpeed = 350.0f;
+        maxTargetSpeed = 500.0f;
     }
 
-    targetSpeed = m->intendedMag * 2.0f;
+    targetSpeed = m->intendedMag * 2.5f;
     if (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         targetSpeed += m->forwardVel / 20.0f;
     }
@@ -1356,13 +1356,13 @@ s32 act_riding_kart(struct MarioState *m) {
         //    return set_mario_action(m, ACT_RIDING_SHELL_JUMP, 0);
         //}
 
-        if (m->input & INPUT_Z_PRESSED) {
+        /*if (m->input & INPUT_Z_PRESSED) {
             mario_stop_riding_object(m);
             if (m->forwardVel < 24.0f) {
                 mario_set_forward_vel(m, 24.0f);
             }
             return set_mario_action(m, ACT_CROUCH_SLIDE, 0);
-        }
+        }*/
 
         update_kart_speed(m);
         //set_mario_animation(m, m->actionArg == 0 ? MARIO_ANIM_START_RIDING_SHELL : MARIO_ANIM_RIDING_SHELL);
