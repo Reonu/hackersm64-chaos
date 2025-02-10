@@ -842,7 +842,8 @@ void thread5_game_loop(UNUSED void *arg) {
         }
         #ifdef ENABLE_CREDITS_WITH_L
         if (gPlayer1Controller->buttonPressed & L_TRIG) {
-            level_trigger_warp(gMarioState, 23);
+                level_trigger_warp(gMarioState, 23);
+                gDisableChaos = FALSE;
             }
         #endif
 
