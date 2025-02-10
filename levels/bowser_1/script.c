@@ -17,6 +17,15 @@
 #include "make_const_nonconst.h"
 #include "levels/bowser_1/header.h"
 
+
+static const LevelScript script_func_local_1[] = {
+    OBJECT(/*model*/ MODEL_BOWSER_BOMB,                  /*pos*/ 2949, 589, 0, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvBowserBomb),
+    OBJECT(/*model*/ MODEL_BOWSER_BOMB,                  /*pos*/ 0, 589,  -2949, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvBowserBomb),
+    OBJECT(/*model*/ MODEL_BOWSER_BOMB,                  /*pos*/     0, 589,  2949, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvBowserBomb),
+    OBJECT(/*model*/ MODEL_BOWSER_BOMB,                  /*pos*/  -2949, 589,  0, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvBowserBomb),
+    RETURN(),
+};
+
 const LevelScript level_bowser_1_entry[] = {
     INIT_LEVEL(),
     LOAD_YAY0(/*seg*/ 0x07, _bowser_1_segment_7SegmentRomStart, _bowser_1_segment_7SegmentRomEnd),
@@ -27,6 +36,7 @@ const LevelScript level_bowser_1_entry[] = {
 
     AREA(/*index*/ 1, bowser_1_geo_0000D0),
         OBJECT(/*model*/ MODEL_NONE, /*pos*/ 0, 1307, 0, /*angle*/ 0, 180, 0, /*behParam*/ 0x000A0000, /*beh*/ bhvSpinAirborneCircleWarp),
+        JUMP_LINK(script_func_local_1),
         WARP_NODE(/*id*/ 0x0A, /*destLevel*/ LEVEL_BOWSER_1, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
         WARP_NODE(/*id*/ 0xF0, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x01, /*destNode*/ 0x24, /*flags*/ WARP_NO_CHECKPOINT),
         WARP_NODE(/*id*/ 0xF1, /*destLevel*/ LEVEL_BITDW, /*destArea*/ 0x01, /*destNode*/ 0x0C, /*flags*/ WARP_NO_CHECKPOINT),
