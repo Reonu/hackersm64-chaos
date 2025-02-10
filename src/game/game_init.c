@@ -795,6 +795,9 @@ extern s16 level_trigger_warp(struct MarioState *m, s32 warpOp);
  */
 void thread5_game_loop(UNUSED void *arg) {
     setup_game_memory();
+#ifdef ENABLE_CREDITS_WITH_L
+    static u8 creditsTriggered = 0;
+#endif
 #if ENABLE_RUMBLE
     init_rumble_pak_scheduler_queue();
 #endif
@@ -841,9 +844,10 @@ void thread5_game_loop(UNUSED void *arg) {
             osContStartReadDataEx(&gSIEventMesgQueue);
         }
         #ifdef ENABLE_CREDITS_WITH_L
-        if (gPlayer1Controller->buttonPressed & L_TRIG) {
+        if (gPlayer1Controller->buttonPressed & L_TRIG && !creditsTriggered) {
                 level_trigger_warp(gMarioState, 23);
                 gDisableChaos = FALSE;
+                creditsTriggered = 1;
             }
         #endif
 
