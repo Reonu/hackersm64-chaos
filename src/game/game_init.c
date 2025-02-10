@@ -787,7 +787,9 @@ void setup_game_memory(void) {
 }
 
 extern struct MarioState *gMarioState;
-
+#ifdef ENABLE_CREDITS_WITH_L
+extern s16 level_trigger_warp(struct MarioState *m, s32 warpOp);
+#endif
 /**
  * Main game loop thread. Runs forever as long as the game continues.
  */
@@ -838,10 +840,11 @@ void thread5_game_loop(UNUSED void *arg) {
 #endif
             osContStartReadDataEx(&gSIEventMesgQueue);
         }
-
+        #ifdef ENABLE_CREDITS_WITH_L
         if (gPlayer1Controller->buttonPressed & L_TRIG) {
-            //level_trigger_warp(gMarioState, 23);
-        }
+            level_trigger_warp(gMarioState, 23);
+            }
+        #endif
 
         audio_game_loop_tick();
         select_gfx_pool();
