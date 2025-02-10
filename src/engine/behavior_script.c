@@ -921,10 +921,9 @@ void cur_obj_update(void) {
         }
     }
 
-    if (gMarioObject && gCurrLevelNum != LEVEL_CASTLE_GROUNDS) {
+    if (gMarioObject && gCurrLevelNum != LEVEL_CASTLE_GROUNDS && gCurrLevelNum != LEVEL_PSS) {
         if (gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
-            if (o->behavior != segmented_to_virtual(bhvDoorWarp)
-            && gCurrLevelNum != LEVEL_PSS) {
+            if (o->behavior != segmented_to_virtual(bhvDoorWarp)) {
                 Vec3f d;
                 d[0] = o->oPosX - gMarioObject->oPosX;
                     d[1] = -o->oPosY + gMarioObject->oPosY;
