@@ -80,7 +80,6 @@ const GeoLayout shadow_mario_RightHand_OPEN_Armature[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, shadow_mario_002_switch_option_LHandOption1_000_displaylist_003__ROPEN_mesh_layer_1),
-		GEO_HELD_OBJECT(0, 0, 0, 0, geo_switch_mario_hand_grab_pos),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -185,7 +184,6 @@ const GeoLayout shadow_mario_002_switch_opt0_001_switch_opt1_jump_shadow_mario_R
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, shadow_mario_002_switch_option_LHandOption1_000_displaylist_003__ROPEN_mesh_layer_1),
-		GEO_HELD_OBJECT(0, 0, 0, 0, geo_switch_mario_hand_grab_pos),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -418,7 +416,6 @@ const GeoLayout shadow_mario_002_switch_opt0_001_switch_opt2_jump_shadow_mario_R
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, shadow_mario_002_switch_option_LHandOption1_000_displaylist_003__ROPEN_mesh_layer_1_mat_override_metal_v3_001_0),
-		GEO_HELD_OBJECT(0, 0, 0, 0, geo_switch_mario_hand_grab_pos),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -530,7 +527,6 @@ const GeoLayout shadow_mario_002_switch_opt0_001_switch_opt2[] = {
 												GEO_NODE_START(),
 												GEO_OPEN_NODE(),
 													GEO_DISPLAY_LIST(LAYER_OPAQUE, shadow_mario_000_displaylist_004_Rhand_mesh_layer_1_mat_override_metal_v3_001_0),
-													GEO_HELD_OBJECT(0, 0, 0, 0, geo_switch_mario_hand_grab_pos),
 												GEO_CLOSE_NODE(),
 												GEO_BRANCH(1, shadow_mario_002_switch_opt0_001_switch_opt2_jump_shadow_mario_RightHand_OPEN_Armature),
 												GEO_BRANCH(1, shadow_mario_002_switch_opt0_001_switch_opt2_jump_shadow_mario_RightHand_PEACE_Armature),
@@ -604,7 +600,6 @@ const GeoLayout shadow_mario_002_switch_opt0_001_switch_opt3_jump_shadow_mario_R
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, shadow_mario_002_switch_option_LHandOption1_000_displaylist_003__ROPEN_mesh_layer_1_mat_override_metal_v3_001_0),
-		GEO_HELD_OBJECT(0, 0, 0, 0, geo_switch_mario_hand_grab_pos),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -716,7 +711,6 @@ const GeoLayout shadow_mario_002_switch_opt0_001_switch_opt3[] = {
 												GEO_NODE_START(),
 												GEO_OPEN_NODE(),
 													GEO_DISPLAY_LIST(LAYER_TRANSPARENT, shadow_mario_000_displaylist_004_Rhand_mesh_layer_1_mat_override_metal_v3_001_0),
-													GEO_HELD_OBJECT(0, 0, 0, 0, geo_switch_mario_hand_grab_pos),
 												GEO_CLOSE_NODE(),
 												GEO_BRANCH(1, shadow_mario_002_switch_opt0_001_switch_opt3_jump_shadow_mario_RightHand_OPEN_Armature),
 												GEO_BRANCH(1, shadow_mario_002_switch_opt0_001_switch_opt3_jump_shadow_mario_RightHand_PEACE_Armature),
@@ -923,7 +917,6 @@ const GeoLayout shadow_mario_geo[] = {
 																		GEO_NODE_START(),
 																		GEO_OPEN_NODE(),
 																			GEO_DISPLAY_LIST(LAYER_OPAQUE, shadow_mario_000_displaylist_004_Rhand_mesh_layer_1),
-																			GEO_HELD_OBJECT(0, 0, 0, 0, geo_switch_mario_hand_grab_pos),
 																		GEO_CLOSE_NODE(),
 																		GEO_BRANCH(1, shadow_mario_RightHand_OPEN_Armature),
 																		GEO_BRANCH(1, shadow_mario_RightHand_PEACE_Armature),
