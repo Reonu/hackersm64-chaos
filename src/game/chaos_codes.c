@@ -77,6 +77,9 @@ void chaos_cannon(void) {
 
 // Not final, just there to have a different func
 void chaos_trip(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     if ((gMarioState->action & ACT_FLAG_SWIMMING) == 0) {
         gMarioState->action = ACT_HARD_BACKWARD_GROUND_KB;
     }
@@ -124,6 +127,9 @@ void chaos_upside_down_camera(void) {
 }
 
 void chaos_mario_kart(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     if (buffer_code_until_grounded_out_of_water()) {
         if (gMarioState->action != ACT_RIDING_KART) {
             spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
@@ -254,6 +260,9 @@ void chaos_randomize_coin_colors(void) {
 }
 
 void chaos_ad(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     if (gChaosCodeTable[gCurrentChaosID].active == FALSE) {
         gChaosCodeTable[gCurrentChaosID].active = TRUE;
         gSpamAd = random_u16() % 5;
@@ -263,6 +272,9 @@ void chaos_ad(void) {
 }
 
 void chaos_heave_ho_chaser(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     struct Object *heaveho = spawn_object_relative(0, 0, 900, 0, gMarioState->marioObj, MODEL_HEAVE_HO, bhvHeaveHo);
     heaveho->oSuperHeaveHo = 1;
     heaveho->oHeaveHoLifeTimer = gChaosCodeTable[gCurrentChaosID].timer;
@@ -525,6 +537,9 @@ void chaos_random_cap(void) {
 u32 attack_object(struct Object *obj, s32 interaction);
 
 void chaos_koopa_shell(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     struct Object *obj =
         spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KOOPA_SHELL, bhvKoopaShell);
     gMarioState->interactObj = obj;
@@ -675,6 +690,9 @@ void chaos_spawn_carpet(void) {
 }
 
 void chaos_spawn_armstrong(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     Vec3f pos;
     pos[0] = gMarioState->pos[0] + 3500 * sins(gMarioState->faceAngle[1]);
     pos[1] = gMarioState->pos[1];
@@ -728,6 +746,9 @@ void chaos_wdw_water(void) {
 }
 
 void chaos_lll_super_burning(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     gMarioState->marioObj->oMarioBurnTimer = 100;
     if (buffer_code_until_grounded_out_of_water()) {
         if (gMarioState->action != ACT_BURNING_GROUND && gMarioState->action != ACT_BURNING_JUMP && gMarioState->action != ACT_BURNING_FALL) {
@@ -763,6 +784,9 @@ void chaos_bob_koopa_storm(void) {
 }
 
 void chaos_bob_nuke_omb(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     if (gCurrentChaosTable[gCurrentChaosID].active == TRUE) {
         gMarioState->action = ACT_DEATH_ON_STOMACH;
         set_mario_animation(gMarioState, MARIO_ANIM_DYING_ON_STOMACH);
@@ -1152,6 +1176,10 @@ void global_chaos_code_handler(void) {
             nextGlobalCodeTimer = (random_u16() % 150);
         } else {
             nextGlobalCodeTimer = 150 + (random_u16() % 500);
+        }
+        
+        if (gCurrCreditsEntry) {
+            nextGlobalCodeTimer /= 8;
         }
     }
 }

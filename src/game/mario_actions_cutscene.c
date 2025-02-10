@@ -2565,6 +2565,8 @@ static void end_peach_cutscene_fade_out(struct MarioState *m) {
     if (m->actionState == ACT_STATE_END_PEACH_CUTSCENE_FADE_OUT_WARP) {
         gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].timer = 0;
         gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active = FALSE;
+        gChaosOffOverride = FALSE;
+        gDisableChaos = FALSE;
         level_trigger_warp(m, WARP_OP_CREDITS_NEXT);
         gPaintingMarioYEntry = 1500.0f; // ensure medium water level in WDW credits cutscene
         m->actionState = ACT_STATE_END_PEACH_CUTSCENE_FADE_OUT_END;
