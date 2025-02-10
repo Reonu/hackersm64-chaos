@@ -845,11 +845,14 @@ void cur_obj_update(void) {
         }
     }
     
-    if (o->oNuked >= 2) {
-        mark_obj_for_deletion(o);
-    } else if (o->oNuked >= 1) {
-        o->oNuked++;
+    if (o->behavior != segmented_to_virtual(bhvDoorWarp)) {
+        if (o->oNuked >= 2) {
+            mark_obj_for_deletion(o);
+        } else if (o->oNuked >= 1) {
+            o->oNuked++;
+        }
     }
+
 
     if (gChaosCodeTable[GLOBAL_CHAOS_RANDOMIZE_COIN_COLORS].active) {
         if (cur_obj_has_model(MODEL_YELLOW_COIN) || 
@@ -910,13 +913,15 @@ void cur_obj_update(void) {
     }
 
     if (gMarioObject && gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) {
-        if (o->oDistanceToMario < 500.0f) {
-            o->oPosX -= sins(o->oAngleToMario) * 40.0f;
-            o->oPosZ -= coss(o->oAngleToMario) * 40.0f;
+        if (o->behavior != segmented_to_virtual(bhvDoorWarp)) {
+            if (o->oDistanceToMario < 500.0f) {
+                o->oPosX -= sins(o->oAngleToMario) * 40.0f;
+                o->oPosZ -= coss(o->oAngleToMario) * 40.0f;
+            }
         }
     }
 
-    if (gMarioObject) {
+    if (gMarioObject && gCurrLevelNum != LEVEL_CASTLE_GROUNDS) {
         if (gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
             Vec3f d;
             d[0] = o->oPosX - gMarioObject->oPosX;
