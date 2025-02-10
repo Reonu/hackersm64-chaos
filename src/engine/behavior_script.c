@@ -845,7 +845,8 @@ void cur_obj_update(void) {
         }
     }
     
-    if (o->behavior != segmented_to_virtual(bhvDoorWarp)) {
+    if (o->behavior != segmented_to_virtual(bhvDoorWarp)
+        && o->behavior != segmented_to_virtual(bhvStaticObject)) {
         if (o->oNuked >= 2) {
             mark_obj_for_deletion(o);
         } else if (o->oNuked >= 1) {
@@ -923,7 +924,8 @@ void cur_obj_update(void) {
 
     if (gMarioObject && gCurrLevelNum != LEVEL_CASTLE_GROUNDS && gCurrLevelNum != LEVEL_PSS) {
         if (gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
-            if (o->behavior != segmented_to_virtual(bhvDoorWarp)) {
+            if (o->behavior != segmented_to_virtual(bhvDoorWarp)
+                && o->behavior != segmented_to_virtual(bhvStaticObject)) {
                 Vec3f d;
                 d[0] = o->oPosX - gMarioObject->oPosX;
                     d[1] = -o->oPosY + gMarioObject->oPosY;
