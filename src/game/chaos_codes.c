@@ -89,6 +89,9 @@ void chaos_trip(void) {
 
 
 void chaos_spinflower(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     if ((gMarioState->action & ACT_FLAG_SWIMMING) == 0) {
         play_sound(SOUND_MARIO_TWIRL_BOUNCE, gGlobalSoundSource);
         gMarioState->action = ACT_TWIRLING;
@@ -571,6 +574,9 @@ void chaos_next_long_jump_gp(void) {
 }
 
 void chaos_random_jump(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     if (!((gMarioState->action & ACT_GROUP_MASK) >= ACT_GROUP_AIRBORNE && (gMarioState->action & ACT_GROUP_MASK) < (ACT_HOLD_JUMP & ACT_ID_MASK))) {
         gMarioState->action = ACT_SIDE_FLIP;
         gMarioState->vel[1] = 48.0f;
@@ -842,6 +848,9 @@ void chaos_sl_pharaoh_curse(void) {
 }
 
 void chaos_ssl_insta_snow(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     if (buffer_code_until_grounded_out_of_water()) {
         play_sound(SOUND_MARIO_OOOF2, gMarioState->marioObj->header.gfx.cameraToObject);
         gMarioState->particleFlags |= PARTICLE_MIST_CIRCLE;

@@ -38,7 +38,7 @@
 #include "config.h"
 
 // TODO: Make these ifdefs better
-const char *credits01[] = { "1GAME DIRECTOR", "SHIGERU MIYAMOTO" };
+const char *credits01[] = { "3PEOPLE TO BLAME", "COWQUACK", "FAZANA", "REONU" };
 const char *credits02[] = { "2ASSISTANT DIRECTORS", "YOSHIAKI KOIZUMI", "TAKASHI TEZUKA" };
 const char *credits03[] = { "2SYSTEM PROGRAMMERS", "YASUNARI NISHIDA", "YOSHINORI TANIMOTO" };
 const char *credits04[] = { "3PROGRAMMERS", "HAJIME YAJIMA", "DAIKI IWAMOTO", "TOSHIO IWAWAKI" };
