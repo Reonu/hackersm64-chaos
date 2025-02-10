@@ -1470,7 +1470,9 @@ void update_mario_geometry_inputs(struct MarioState *m) {
         }
 
     } else {
-        level_trigger_warp(m, WARP_OP_DEATH);
+        if (gCurrCreditsEntry == NULL) {
+            level_trigger_warp(m, WARP_OP_DEATH);
+        }
     }
 }
 
@@ -2107,6 +2109,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                 case ACT_GROUP_OBJECT:     inLoop = mario_execute_object_action(gMarioState);     break;
             }
         }
+        credits_unfuck();
 
         sink_mario_in_quicksand(gMarioState);
         squish_mario_model(gMarioState);

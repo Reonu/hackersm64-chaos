@@ -1617,7 +1617,7 @@ s32 act_lava_boost(struct MarioState *m) {
         }
     }
 
-    if (m->health < 0x100) {
+    if (m->health < 0x100 && gCurrCreditsEntry == NULL) {
         level_trigger_warp(m, WARP_OP_DEATH);
     }
 

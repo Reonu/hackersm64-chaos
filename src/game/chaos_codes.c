@@ -77,9 +77,6 @@ void chaos_cannon(void) {
 
 // Not final, just there to have a different func
 void chaos_trip(void) {
-    if (gCurrCreditsEntry) {
-        return;
-    }
     if ((gMarioState->action & ACT_FLAG_SWIMMING) == 0) {
         gMarioState->action = ACT_HARD_BACKWARD_GROUND_KB;
     }
@@ -89,9 +86,6 @@ void chaos_trip(void) {
 
 
 void chaos_spinflower(void) {
-    if (gCurrCreditsEntry) {
-        return;
-    }
     if ((gMarioState->action & ACT_FLAG_SWIMMING) == 0) {
         play_sound(SOUND_MARIO_TWIRL_BOUNCE, gGlobalSoundSource);
         gMarioState->action = ACT_TWIRLING;
@@ -130,9 +124,6 @@ void chaos_upside_down_camera(void) {
 }
 
 void chaos_mario_kart(void) {
-    if (gCurrCreditsEntry) {
-        return;
-    }
     if (buffer_code_until_grounded_out_of_water()) {
         if (gMarioState->action != ACT_RIDING_KART) {
             spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KART, bhvKartController);
@@ -192,6 +183,9 @@ void chaos_wdw_heaveho(void) {
 }
 
 void chaos_enemypov(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
         gCurrentChaosTable[gCurrentChaosID].active = TRUE;
         gPovEnemy = NULL; 
@@ -275,9 +269,6 @@ void chaos_ad(void) {
 }
 
 void chaos_heave_ho_chaser(void) {
-    if (gCurrCreditsEntry) {
-        return;
-    }
     struct Object *heaveho = spawn_object_relative(0, 0, 900, 0, gMarioState->marioObj, MODEL_HEAVE_HO, bhvHeaveHo);
     heaveho->oSuperHeaveHo = 1;
     heaveho->oHeaveHoLifeTimer = gChaosCodeTable[gCurrentChaosID].timer;
@@ -319,9 +310,6 @@ void chaos_thwomp(void) {
 }
 
 void chaos_spring(void) {
-    if (gCurrCreditsEntry) {
-        return;
-    }
     if (gMarioState->vel[1] < 0) {
         struct Object *spring = spawn_object_relative(0, 0, -100, 0, gMarioState->marioObj, MODEL_SPRING, bhvSpring);
         u16 color = random_u16() % 3;
@@ -491,9 +479,6 @@ void chaos_random_cap(void) {
             script = bhvWingCap;
         break;
         case 1:
-            if (gCurrCreditsEntry) {
-                return;
-            }
             capFlag = MARIO_METAL_CAP;
             script = bhvMetalCap;
         break;
@@ -546,9 +531,6 @@ void chaos_random_cap(void) {
 u32 attack_object(struct Object *obj, s32 interaction);
 
 void chaos_koopa_shell(void) {
-    if (gCurrCreditsEntry) {
-        return;
-    }
     struct Object *obj =
         spawn_object_relative(0, 0, 0, 0, gMarioState->marioObj, MODEL_KOOPA_SHELL, bhvKoopaShell);
     gMarioState->interactObj = obj;
@@ -580,9 +562,6 @@ void chaos_next_long_jump_gp(void) {
 }
 
 void chaos_random_jump(void) {
-    if (gCurrCreditsEntry) {
-        return;
-    }
     if (!((gMarioState->action & ACT_GROUP_MASK) >= ACT_GROUP_AIRBORNE && (gMarioState->action & ACT_GROUP_MASK) < (ACT_HOLD_JUMP & ACT_ID_MASK))) {
         gMarioState->action = ACT_SIDE_FLIP;
         gMarioState->vel[1] = 48.0f;
@@ -758,9 +737,6 @@ void chaos_wdw_water(void) {
 }
 
 void chaos_lll_super_burning(void) {
-    if (gCurrCreditsEntry) {
-        return;
-    }
     gMarioState->marioObj->oMarioBurnTimer = 100;
     if (buffer_code_until_grounded_out_of_water()) {
         if (gMarioState->action != ACT_BURNING_GROUND && gMarioState->action != ACT_BURNING_JUMP && gMarioState->action != ACT_BURNING_FALL) {
@@ -796,9 +772,6 @@ void chaos_bob_koopa_storm(void) {
 }
 
 void chaos_bob_nuke_omb(void) {
-    if (gCurrCreditsEntry) {
-        return;
-    }
     if (gCurrentChaosTable[gCurrentChaosID].active == TRUE) {
         gMarioState->action = ACT_DEATH_ON_STOMACH;
         set_mario_animation(gMarioState, MARIO_ANIM_DYING_ON_STOMACH);
@@ -819,9 +792,6 @@ void chaos_bob_nuke_omb(void) {
 }
 
 void chaos_sl_swap_mario_xz(void) {
-    if (gCurrCreditsEntry) {
-        return;
-    }
     f32 marioX = gMarioState->pos[0];
     gMarioState->pos[0] = gMarioState->pos[2];
     gMarioState->pos[2] = marioX;
@@ -829,10 +799,6 @@ void chaos_sl_swap_mario_xz(void) {
 }
 
 void chaos_sl_pharaoh_curse(void) {
-
-    if (gCurrCreditsEntry) {
-        return;
-    }
     if (buffer_code_until_grounded_out_of_water()) {
         if (gCurrentChaosTable[gCurrentChaosID].timer > 900) {
             gCurrentChaosTable[gCurrentChaosID].timer = 900;
@@ -860,9 +826,6 @@ void chaos_sl_pharaoh_curse(void) {
 }
 
 void chaos_ssl_insta_snow(void) {
-    if (gCurrCreditsEntry) {
-        return;
-    }
     if (buffer_code_until_grounded_out_of_water()) {
         play_sound(SOUND_MARIO_OOOF2, gMarioState->marioObj->header.gfx.cameraToObject);
         gMarioState->particleFlags |= PARTICLE_MIST_CIRCLE;

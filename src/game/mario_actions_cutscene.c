@@ -113,7 +113,7 @@ s32 get_credits_str_width(char *str) {
  * by the value of lineHeight.
  */
 void print_displaying_credits_entry(void) {
-    if (sDispCreditsEntry != NULL) {
+    if (sDispCreditsEntry != NULL && gCurrCreditsEntry) {
         char **currStrPtr = (char **) sDispCreditsEntry->string;
         char *titleStr = *currStrPtr++;
         s16 numLines = *titleStr++ - '0';
@@ -691,7 +691,7 @@ s32 act_fall_after_star_grab(struct MarioState *m) {
 
 s32 common_death_handler(struct MarioState *m, s32 animation, s32 frameToDeathWarp) {
     s32 animFrame = set_mario_animation(m, animation);
-    if (animFrame == frameToDeathWarp) {
+    if (animFrame == frameToDeathWarp && gCurrCreditsEntry == NULL) {
         level_trigger_warp(m, WARP_OP_DEATH);
     }
     m->marioBodyState->eyeState = MARIO_EYES_DEAD;
@@ -755,7 +755,7 @@ s32 act_quicksand_death(struct MarioState *m) {
         if (m->quicksandDepth >= 100.0f) {
             play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_ACTION_SOUND_PLAYED);
         }
-        if ((m->quicksandDepth += 5.0f) >= 180.0f) {
+        if ((m->quicksandDepth += 5.0f) >= 180.0f && gCurrCreditsEntry == NULL) {
             level_trigger_warp(m, WARP_OP_DEATH);
             m->actionState = ACT_STATE_QUICKSAND_DEATH_DEAD;
         }
@@ -773,7 +773,7 @@ s32 act_eaten_by_bubba(struct MarioState *m) {
     m->breath = 0xFF;
 #endif
     m->health = 0xFF;
-    if (m->actionTimer++ == 60) {
+    if (m->actionTimer++ == 60 && gCurrCreditsEntry == NULL) {
         level_trigger_warp(m, WARP_OP_DEATH);
     }
     return FALSE;
@@ -1598,7 +1598,7 @@ s32 act_squished(struct MarioState *m) {
             m->actionTimer++;
             if (m->actionTimer >= 15) {
                 // 1 unit of health
-                if (m->health < 0x100) {
+                if (m->health < 0x100 && gCurrCreditsEntry == NULL) {
                     level_trigger_warp(m, WARP_OP_DEATH);
                     // woosh, he's gone!
                     set_mario_action(m, ACT_DISAPPEARED, 0);
@@ -1637,7 +1637,7 @@ s32 act_squished(struct MarioState *m) {
     }
 
     // squished for more than 10 seconds, so kill Mario
-    if (m->actionArg++ > 300) {
+    if (m->actionArg++ > 300 && gCurrCreditsEntry == NULL) {
         // 0 units of health
         m->health = 0x00FF;
         m->hurtCounter = 0;
@@ -2648,6 +2648,56 @@ static s32 act_end_peach_cutscene(struct MarioState *m) {
 #define TIMER_CREDITS_PROGRESS  90
 #define TIMER_CREDITS_WARP     204
 
+s32 gCreditsTimer = 0;
+s32 gCreditsState = -1;
+extern struct CreditsEntry sCreditsSequence[];
+
+void credits_unfuck(void) {
+    if (gCurrCreditsEntry == NULL || gCurrCreditsEntry == &sCreditsSequence[21] || (gCreditsState == -1 && gCreditsTimer == 0)) {
+        return;
+    }
+    struct MarioState *m = gMarioState;
+    s32 state;
+    if (gCreditsTimer >= TIMER_CREDITS_SHOW) {
+        if (gCreditsState < 40 && gCreditsState != -1) {
+            gCreditsState += 2;
+        }
+        state = gCreditsState;
+        if (state == -1) {
+            state = 40;
+        }
+
+        s32 width = state * (gScreenWidth * 2) / 100;
+        s32 height = state * (gScreenHeight * 2) / 100;
+
+        sEndCutsceneVp.vp.vscale[0] = (gScreenWidth * 2) - width;
+        sEndCutsceneVp.vp.vscale[1] = (gScreenHeight * 2) - height;
+        sEndCutsceneVp.vp.vtrans[0] =
+            (gCurrCreditsEntry->actNum & (1 << 4) ? width : -width) * 56 / 100 + (gScreenWidth  * 2);
+        sEndCutsceneVp.vp.vtrans[1] =
+            (gCurrCreditsEntry->actNum & (1 << 5) ? height : -height) * 66 / 100 + (gScreenHeight * 2);
+
+        override_viewport_and_clip(&sEndCutsceneVp, 0, 0, 0, 0);
+    }
+
+    if (gCreditsTimer == TIMER_CREDITS_PROGRESS) {
+        reset_cutscene_msg_fade();
+    }
+
+    if (gCreditsTimer >= TIMER_CREDITS_PROGRESS) {
+        sDispCreditsEntry = gCurrCreditsEntry;
+    }
+
+    if (gCreditsTimer == TIMER_CREDITS_WARP + 19) {
+        gCreditsTimer = 0;
+    }
+
+    if (gCreditsTimer++ == TIMER_CREDITS_WARP) {
+        level_trigger_warp(m, WARP_OP_CREDITS_NEXT);
+        gCreditsState = -1;
+    }
+}
+
 static s32 act_credits_cutscene(struct MarioState *m) {
     m->statusForCamera->cameraEvent = CAM_EVENT_START_CREDITS;
     // checks if Mario is underwater (JRB, DDD, SA, etc.)
@@ -2667,34 +2717,9 @@ static s32 act_credits_cutscene(struct MarioState *m) {
         }
     }
 
-    if (m->actionTimer >= TIMER_CREDITS_SHOW) {
-        if (m->actionState < 40) {
-            m->actionState += 2;
-        }
-
-        s32 width = m->actionState * (gScreenWidth * 2) / 100;
-        s32 height = m->actionState * (gScreenHeight * 2) / 100;
-
-        sEndCutsceneVp.vp.vscale[0] = (gScreenWidth * 2) - width;
-        sEndCutsceneVp.vp.vscale[1] = (gScreenHeight * 2) - height;
-        sEndCutsceneVp.vp.vtrans[0] =
-            (gCurrCreditsEntry->actNum & (1 << 4) ? width : -width) * 56 / 100 + (gScreenWidth  * 2);
-        sEndCutsceneVp.vp.vtrans[1] =
-            (gCurrCreditsEntry->actNum & (1 << 5) ? height : -height) * 66 / 100 + (gScreenHeight * 2);
-
-        override_viewport_and_clip(&sEndCutsceneVp, 0, 0, 0, 0);
-    }
-
-    if (m->actionTimer == TIMER_CREDITS_PROGRESS) {
-        reset_cutscene_msg_fade();
-    }
-
-    if (m->actionTimer >= TIMER_CREDITS_PROGRESS) {
-        sDispCreditsEntry = gCurrCreditsEntry;
-    }
-
-    if (m->actionTimer++ == TIMER_CREDITS_WARP) {
-        level_trigger_warp(m, WARP_OP_CREDITS_NEXT);
+    if (m->actionTimer++ == 0) {
+        gCreditsTimer = 0;
+        gCreditsState = 0;
     }
 
     m->marioObj->header.gfx.angle[1] += (gCurrCreditsEntry->actNum & 0xC0) << 8;
