@@ -241,6 +241,9 @@ void load_area(s32 index) {
         gCurrAreaIndex = gCurrentArea->index;
         main_pool_pop_state();
         main_pool_push_state();
+        gPovActive = FALSE;
+        gChaosCodeTable[GLOBAL_CHAOS_ENEMY_POV].active = FALSE;
+        gChaosCodeTable[GLOBAL_CHAOS_ENEMY_POV].timer = 0;
         s32 size;
         ChaosCode *table = chaos_level_table(gCurrLevelNum, &size);
         if (table != gPrevLevelTable) {
