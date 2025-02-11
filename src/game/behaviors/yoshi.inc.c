@@ -158,9 +158,9 @@ void yoshi_give_present_loop(void) {
         gMarioState->numLives++;
     }
 #else*/
-    play_sound(SOUND_GENERAL_COLLECT_1UP, gGlobalSoundSource);
-    gSpecialTripleJump = TRUE;
-    o->oAction = YOSHI_ACT_WALK_JUMP_OFF_ROOF;
+    //play_sound(SOUND_GENERAL_COLLECT_1UP, gGlobalSoundSource);
+    //gSpecialTripleJump = TRUE;
+    //o->oAction = YOSHI_ACT_WALK_JUMP_OFF_ROOF;
     return;
 //#endif
 }

@@ -1389,19 +1389,11 @@ I'll be waiting!\n\
 Gwa ha ha ha!"))
 
 DEFINE_DIALOG(DIALOG_121, 1, 5, 30, 200, _("\
-Nooo! It can't be!\n\
-You've really beaten me,\n\
-Mario?!! I gave those\n\
-troops power, but now\n\
-it's fading away!\n\
-Arrgghh! I can see peace\n\
-returning to the world! I\n\
-can't stand it! Hmmm...\n\
-It's not over yet...\n\
-\n\
-C'mon troops! Let's watch\n\
-the ending together!\n\
-Bwa ha ha!"))
+what do you even\n\
+want with peach its\n\
+not like you can\n\
+get an errection\n\
+anyways"))
 
 DEFINE_DIALOG(DIALOG_122, 1, 4, 30, 200, _("\
 The Black Hole\n\
@@ -1505,35 +1497,18 @@ disqualified! Next time,\n\
 play fair!"))
 
 DEFINE_DIALOG(DIALOG_133, 1, 6, 30, 200, _("\
-Am I glad to see you! The\n\
-Princess...and I...and,\n\
-well, everybody...we're all\n\
-trapped inside the castle\n\
-walls.\n\
+I got here late today\n\
+apparently, something\n\
+big happened, but I\n\
+don't know what.\n\
 \n\
-Bowser has stolen the\n\
-castle's Stars, and he's\n\
-using their power to\n\
-create his own world in\n\
-the paintings and walls.\n\
 \n\
-Please recover the Power\n\
-Stars! As you find them,\n\
-you can use their power\n\
-to open the doors that\n\
-Bowser has sealed.\n\
-\n\
-There are four rooms on\n\
-the first floor. Start in\n\
-the one with the painting\n\
-of Bomb Omb inside. It's\n\
-the only room that Bowser\n\
-hasn't sealed.\n\
-When you collect eight\n\
-Power Stars, you'll be\n\
-able to open the door\n\
-with the big star. The\n\
-Princess must be inside!"))
+Haven't seen anybody\n\
+else, was it a bank\n\
+holiday and I didn't\n\
+notice? I'll be so\n\
+mad, I could've been\n\
+at home playing SM64."))
 
 DEFINE_DIALOG(DIALOG_134, 1, 5, 30, 200, _("\
 The names of the Stars\n\
@@ -1640,21 +1615,15 @@ Left: Black Hole\n\
 Arrow: You are here"))
 
 DEFINE_DIALOG(DIALOG_141, 1, 5, 150, 200, _("\
-You've recovered one of\n\
-the stolen Power Stars!\n\
-Now you can open some of\n\
-the sealed doors in the\n\
-castle.\n\
-Try the Princess's room\n\
-on the second floor and\n\
-the room with the\n\
-painting of Whomp's\n\
-Fortress on Floor 1.\n\
-Bowser's troops are still\n\
-gaining power, so you\n\
-can't give up. Save us,\n\
-Mario! Keep searching for\n\
-Stars!"))
+Power stars are really\n\
+important. They are used\n\
+to unlock doors that have\n\
+been sealed by bow bow.\n\
+\n\
+Collect more to open more\n\
+doors. Also check the \n\
+lost and found, I'm sick\n\
+of finding them there."))
 
 DEFINE_DIALOG(DIALOG_142, 1, 5, 150, 200, _("\
 You've recovered three\n\
@@ -1667,55 +1636,26 @@ to help with this one,\n\
 they can't count that high."))
 
 DEFINE_DIALOG(DIALOG_143, 1, 6, 150, 200, _("\
-You've recovered eight of\n\
-the Power Stars! Now you\n\
-can open the door with\n\
-the big Star! But Bowser\n\
-is just ahead...can you\n\
-hear the Princess calling?"))
+kill bowser he's stupid"))
 
-DEFINE_DIALOG(DIALOG_144, 1, 6, 150, 200, _("\
-You've recovered 30\n\
-Power Stars! Now you can\n\
-open the door with the\n\
-big Star! But before you\n\
-move on, how's it going\n\
-otherwise?\n\
-Did you pound the two\n\
-columns down? You didn't\n\
-lose your hat, did you?\n\
-If you did, you'll have to\n\
-stomp on the condor to\n\
-get it back!\n\
-They say that Bowser has\n\
-sneaked out of the sea\n\
-and into the underground.\n\
-Have you finally\n\
-cornered him?"))
+DEFINE_DIALOG(DIALOG_144, 1, 3, 150, 200, _("\
+You've unlocked DDD!\n\
+My favourite course!\n\
+Yay! :D"))
 
-DEFINE_DIALOG(DIALOG_145, 1, 6, 150, 200, _("\
-You've recovered 50\n\
-Power Stars! Now you can\n\
-open the Star Door on the\n\
-third floor. Bowser's\n\
-there, you know.\n\
+DEFINE_DIALOG(DIALOG_145, 1, 5, 150, 200, _("\
+its pretty funny the\n\
+game reminds you to\n\
+get the caps unlocked\n\
+here.\n\
 \n\
-Oh! You've found all of\n\
-the Cap Switches, haven't\n\
-you? Red, green and blue?\n\
-The Caps you get from the\n\
-colored blocks are really\n\
-helpful.\n\
-Hurry along, now. The\n\
-third floor is just ahead."))
+btw have you unlocked\n\
+all the cap switches?"))
 
 DEFINE_DIALOG(DIALOG_146, 1, 6, 150, 200, _("\
-You've found 70 Power\n\
-Stars! The mystery of the\n\
-endless stairs is solved,\n\
-thanks to you--and is\n\
-Bowser ever upset! Now,\n\
-on to the final bout!"))
+you don't have to\n\
+BLJ up the stairs\n\
+anymore"))
 
 DEFINE_DIALOG(DIALOG_147, 1, 5, 30, 200, _("\
 Are you using the Cap\n\
@@ -1797,20 +1737,11 @@ bugging me! I think I'll\n\
 blow it!"))
 
 DEFINE_DIALOG(DIALOG_154, 1, 5, 30, 200, _("\
-Hold on to your hat! If\n\
-you lose it, you'll be\n\
-easily injured. If you\n\
-lose it, look for it in the\n\
-course where you lost it.\n\
-Speaking of lost, the\n\
-Princess is still stuck in\n\
-the walls somewhere.\n\
-Please help, Mario!\n\
-\n\
-Oh, you know that there\n\
-are secret worlds in the\n\
-walls as well as in the\n\
-paintings, right?"))
+If you lose your hat,\n\
+you take extra damage\n\
+because of how cringe\n\
+everybody thinks you\n\
+look. Don't lose it!"))
 
 DEFINE_DIALOG(DIALOG_155, 1, 6, 30, 200, _("\
 Thanks to the power of\n\
@@ -1890,29 +1821,13 @@ Enjoy!!!"
 #endif
 
 DEFINE_DIALOG(DIALOG_161, 1, 4, 30, 200, _("\
-Mario!!!\n\
-It that really you???\n\
-It has been so long since\n\
-our last adventure!\n\
-They told me that I might\n\
-see you if I waited here,\n\
-but I'd just about given\n\
-up hope!\n\
-Is it true? Have you\n\
-really beaten Bowser? And\n\
-restored the Stars to the\n\
-castle?\n\
-And saved the Princess?\n\
-I knew you could do it!\n\
-Now I have a very special\n\
-message for you.\n\
-『Thanks for playing Super\n\
-Mario 64! This is the\n\
-end of the game, but not\n\
-the end of the fun." \
-KEEP_ON_PLAYING "』\n\
+Wow you actually\n\
+took the time to\n\
+come talk to me?\n\
 \n\
-The Super Mario 64 Team"))
+neat. anyway ima\n\
+softlock your game\n\
+now lmao bye"))
 
 DEFINE_DIALOG(DIALOG_162, 1, 4, 30, 200, _("\
 No, no, no! Not you\n\
@@ -1929,31 +1844,11 @@ all. Now, I must be off.\n\
 Owww! Let me go!"))
 
 DEFINE_DIALOG(DIALOG_163, 1, 5, 30, 200, _("\
-Noooo! You've really\n\
-beaten me this time,\n\
-Mario! I can't stand\n\
-losing to you!\n\
-\n\
-My troops...worthless!\n\
-They've turned over all\n\
-the Power Stars! What?!\n\
-There are 117 in all???\n\
-\n\
-Amazing! There were some\n\
-in the castle that I\n\
-missed??!!\n\
-\n\
-\n\
-Now I see peace\n\
-returning to the world...\n\
-Oooo! I really hate that!\n\
-I can't watch--\n\
-I'm outta here!\n\
-Just you wait until next\n\
-time. Until then, keep\n\
-that Control Stick\n\
-smokin'!\n\
-Buwaa ha ha!"))
+what do you even\n\
+want with peach its\n\
+not like you can\n\
+get an errection\n\
+anyways"))
 
 DEFINE_DIALOG(DIALOG_164, 1, 4, 30, 200, _("\
 Mario! What's up, pal?\n\
@@ -1970,11 +1865,10 @@ Ready...set...\n\
 //Go//// Don't Go"))
 
 DEFINE_DIALOG(DIALOG_165, 1, 5, 30, 200, _("\
-I take no responsibility\n\
-whatsoever for those who\n\
-get dizzy and pass out\n\
-from running around\n\
-this post."))
+Is this a wooden post\n\
+or a poundable pole?\n\
+Please help my family\n\
+is starving."))
 
 DEFINE_DIALOG(DIALOG_166, 1, 4, 30, 200, _("\
 I'll be back soon.\n\
