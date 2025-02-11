@@ -593,9 +593,9 @@ Hi! I'll prepare the\n\
 cannon for you!"))
 
 DEFINE_DIALOG(DIALOG_048, 1, 4, 30, 200, _("\
-Snow Mountain Summit\n\
-Watch for slippery\n\
-conditions! Please enter\n\
+Hot Mountain summit\n\
+Watch for volcanic\n\
+rocks! Please enter\n\
 the cottage first."))
 
 DEFINE_DIALOG(DIALOG_049, 1, 5, 30, 200, _("\
@@ -707,7 +707,7 @@ beak...) I just can't\n\
 remember where I left\n\
 her.\n\
 Let's see...I stopped\n\
-for herring and ice cubes,\n\
+for herring and lava cubes,\n\
 then I...oohh! I just\n\
 don't know!"))
 
@@ -758,9 +758,9 @@ the edge of the water to\n\
 jump out."))
 
 DEFINE_DIALOG(DIALOG_061, 1, 4, 30, 200, _("\
-BRRR! Frostbite Danger!\n\
-Do not swim here.\n\
-I'm serious.\n\
+BRRR! Warm Water!\n\
+You can swim here.\n\
+Lmao.\n\
 /--The Penguin"))
 
 DEFINE_DIALOG(DIALOG_062, 1, 3, 30, 200, _("\
