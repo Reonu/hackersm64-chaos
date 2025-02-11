@@ -1624,6 +1624,7 @@ s32 act_hold_butt_slide(struct MarioState *m) {
 }
 
 s32 act_crouch_slide(struct MarioState *m) {
+    f32 minSpeed = gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active ? 5.f : 10.f;
     if (m->input & INPUT_ABOVE_SLIDE) {
         return set_mario_action(m, ACT_BUTT_SLIDE, 0);
     }
@@ -1631,7 +1632,7 @@ s32 act_crouch_slide(struct MarioState *m) {
     if (m->actionTimer < 30) {
         m->actionTimer++;
         if (m->input & INPUT_A_PRESSED) {
-            if (m->forwardVel > 10.0f) {
+            if (m->forwardVel > minSpeed) {
                 if (gChaosCodeTable[GLOBAL_CHAOS_NEXT_LONG_JUMP_GP].active) {
                     return set_mario_action(m, ACT_GROUND_POUND, 0);
                 }
@@ -1644,7 +1645,7 @@ s32 act_crouch_slide(struct MarioState *m) {
     }
 
     if (m->input & INPUT_B_PRESSED) {
-        if (m->forwardVel >= 10.0f) {
+        if (m->forwardVel >= minSpeed) {
             return set_mario_action(m, ACT_SLIDE_KICK, 0);
         } else {
             return set_mario_action(m, ACT_MOVE_PUNCHING, 0x9);

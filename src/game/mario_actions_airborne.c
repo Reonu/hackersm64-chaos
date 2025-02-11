@@ -101,11 +101,12 @@ s32 check_fall_damage(struct MarioState *m, u32 hardFallAction) {
 }
 
 s32 check_kick_or_dive_in_air(struct MarioState *m) {
+    f32 minSpeed = gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active ? 9.f : 28.f;
     if (m->input & INPUT_B_PRESSED) {
         if (gChaosCodeTable[GLOBAL_CHAOS_INVERT_DIVE_AND_KICK].active) {
-            return set_mario_action(m, m->forwardVel > 28.0f ? ACT_JUMP_KICK : ACT_DIVE, 0);
+            return set_mario_action(m, m->forwardVel > minSpeed ? ACT_JUMP_KICK : ACT_DIVE, 0);
         } else {
-            return set_mario_action(m, m->forwardVel > 28.0f ? ACT_DIVE : ACT_JUMP_KICK, 0);
+            return set_mario_action(m, m->forwardVel > minSpeed ? ACT_DIVE : ACT_JUMP_KICK, 0);
         }
     }
     return FALSE;
