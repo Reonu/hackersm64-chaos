@@ -47,3 +47,4 @@
 #include "armstrong_frame_2/geo.inc.c"
 #include "armstrong_frame_3/geo.inc.c"
 #include "armstrong_idle/geo.inc.c"
+#include "mario_none/geo.inc.c"

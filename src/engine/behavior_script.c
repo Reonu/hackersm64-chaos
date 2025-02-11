@@ -828,15 +828,15 @@ void cur_obj_update(void) {
 
     if (gMarioObject && !gInActSelect && gChaosCodeTable[GLOBAL_CHAOS_NO_MODEL_IS_MARIO].active && gCurrCreditsEntry == NULL && gCurrLevelNum != LEVEL_BOWSER_1 && gCurrLevelNum != LEVEL_BOWSER_2 && gCurrLevelNum != LEVEL_BOWSER_3) {
         if (!cur_obj_has_behavior(segmented_to_virtual(bhvMario))) {
-            if (cur_obj_has_model(MODEL_NONE) || cur_obj_has_model(MODEL_MARIO) || (cur_obj_has_model(MODEL_MARIO_BILLBOARD))) {
+            if (cur_obj_has_model(MODEL_NONE) || cur_obj_has_model(MODEL_MARIO_NONE) || (cur_obj_has_model(MODEL_MARIO_BILLBOARD))) {
                 if (gChaosCodeTable[GLOBAL_CHAOS_BILLBOARD_MARIO].active) {
                     cur_obj_set_model(MODEL_MARIO_BILLBOARD);
                 } else {
-                    cur_obj_set_model(MODEL_MARIO);
+                    cur_obj_set_model(MODEL_MARIO_NONE);
                 }
             }
         }
-    } else if ((cur_obj_has_model(MODEL_MARIO_BILLBOARD) || cur_obj_has_model(MODEL_MARIO)) && (!cur_obj_has_behavior(segmented_to_virtual(bhvMario)))) {
+    } else if ((cur_obj_has_model(MODEL_MARIO_BILLBOARD) || cur_obj_has_model(MODEL_MARIO_NONE)) && (!cur_obj_has_behavior(segmented_to_virtual(bhvMario)))) {
         cur_obj_set_model(MODEL_NONE);
     }
 

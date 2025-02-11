@@ -50,6 +50,7 @@
 #define MODEL_ARMSTRONG_FRAME_2                0x128
 #define MODEL_ARMSTRONG_FRAME_3                0x129
 #define MODEL_ARMSTRONG_IDLE                   0x12A
+#define MODEL_MARIO_NONE                       0x12B
 /* Various static level geometry, the geo layout differs but terrain object presets treat them the same.*/
 
 #define MODEL_LEVEL_GEOMETRY_03                0x03

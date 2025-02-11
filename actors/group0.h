@@ -647,4 +647,6 @@ extern const Gfx yellow_sphere_seg6_dl_0601F3C0[];
 
 #include "armstrong_idle/geo_header.h"
 
+#include "mario_none/geo_header.h"
+
 #endif
