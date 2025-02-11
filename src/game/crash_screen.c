@@ -326,6 +326,8 @@ void draw_assert(UNUSED OSThread *thread) {
     osWritebackDCacheAll();
 }
 
+extern s32 sCurrentModel;
+
 void draw_crash_screen(OSThread *thread) {
     __OSThreadContext *tc = &thread->context;
 
@@ -363,6 +365,7 @@ void draw_crash_screen(OSThread *thread) {
     if (updateBuffer) {
         crash_screen_draw_rect(25, 8, 270, 12);
         crash_screen_print(30, 10, "Page:%02d                L/Z: Left   R: Right", crashPage);
+        crash_screen_print(30, 240 - 16, "Model: %d %X", sCurrentModel, sCurrentModel);
         switch (crashPage) {
             case PAGE_CONTEXT:    draw_crash_context(thread, cause); break;
 #ifdef PUPPYPRINT_DEBUG
