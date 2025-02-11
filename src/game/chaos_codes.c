@@ -947,7 +947,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Amp", chaos_amp, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Coins Remove Coins", chaos_generic, 75, 20, 30, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Random object scale", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
-    {"Objects flee Mario", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Objects flee Mario", chaos_generic, 100, 25, 50, 0,  /*ignore these*/ 0, 0},
     {"Ethel the Cat", chaos_ethel, 100, 14, 15, 0,  /*ignore these*/ 0, 0}, // the code lasts for the duration of time the cat takes to despawn, do not change
     {"Mario Gravitation", chaos_generic, 30, 20, 30, 0,  /*ignore these*/ 0, 0},
     {"Hurricane", chaos_generic, 20, 15, 20, 0,  /*ignore these*/ 0, 0},
