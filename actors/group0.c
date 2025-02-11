@@ -96,3 +96,4 @@
 #include "armstrong_frame_2/model.inc.c"
 #include "armstrong_frame_3/model.inc.c"
 #include "armstrong_idle/model.inc.c"
+#include "mario_none/model.inc.c"

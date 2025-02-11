@@ -140,6 +140,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_ARMSTRONG_FRAME_3,       armstrong_frame_3_geo),
     LOAD_MODEL_FROM_GEO(MODEL_ARMSTRONG_IDLE,          armstrong_idle_geo),
     LOAD_MODEL_FROM_GEO(MODEL_KING_BOBOMB,             king_bobomb_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_MARIO_NONE,              mario_none_geo),
 #ifdef IA8_30FPS_COINS
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN,             silver_coin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN_NO_SHADOW,   silver_coin_no_shadow_geo),
