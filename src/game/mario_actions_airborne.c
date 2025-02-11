@@ -822,6 +822,7 @@ s32 act_dive(struct MarioState *m) {
                 if (gMarioState->vel[1] < 10.0f) {
                     gMarioState->vel[1] = 10.0f;
                 }
+                break;
             } else {
                 if (should_get_stuck_in_ground(m) && m->faceAngle[0] == -DEGREES(60)) {
 #if ENABLE_RUMBLE
@@ -838,7 +839,6 @@ s32 act_dive(struct MarioState *m) {
                 }
             }
             }
-            break;
             
             m->faceAngle[0] = 0;
             break;
