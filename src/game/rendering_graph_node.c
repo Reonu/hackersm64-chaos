@@ -1421,6 +1421,7 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
     #endif
 
         }
+        gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, gScreenWidth, gScreenHeight);
         main_pool_free(gDisplayListHeap);
         if (gChaosCodeTable[GLOBAL_CHAOS_DIM_LIGHTS].active) {
             prepare_blank_box();
