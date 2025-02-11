@@ -951,7 +951,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Mario Dabs", chaos_dab, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Swap Coins with Moneybags", chaos_moneybags, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Spawn King BobOmb", chaos_spawn_king_bobomb, 20, 1, 2, 0,  /*ignore these*/ 0, 0},
-    {"Spawn Bowser", chaos_spawn_bowser, 5, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Spawn Bowser", chaos_spawn_bowser, 15, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Carpet", chaos_spawn_carpet, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Armstrong", chaos_spawn_armstrong, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Inverted Fvel Mag", chaos_generic, 100, 15, 30, 0,  /*ignore these*/ 0, 0},
