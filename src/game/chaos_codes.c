@@ -922,7 +922,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Strong Punch KB", chaos_generic, 100, 45, 90, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Automatic Wallkicks", chaos_generic, 100, 30, 60, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Chain Chomp", chaos_chain_chomp, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
-    {"Thwomp", chaos_thwomp, 100, 0, 0, 0,   /*ignore these*/ CODEFLAG_MINOR, 0},
+    {"Thwomp", chaos_thwomp, 100, 0, 0, CODEFLAG_MINOR, /*ignore these*/ 0, 0},
     {"Yellow Block on Jump", chaos_yellow_block, 100, 30, 60, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Mirror Ghost", chaos_mirrorghost, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Weird Audio", chaos_generic, 100, 30, 45, CODEFLAG_AUDIO,   /*ignore these*/ 0, 0},
