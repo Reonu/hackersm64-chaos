@@ -15,6 +15,7 @@
 #include "graph_node.h"
 #include "surface_collision.h"
 #include "src/game/chaos_codes.h"
+#include "game/level_update.h"
 
 // Macros for retrieving arguments from behavior scripts.
 #define BHV_CMD_GET_1ST_U8(index)     (u8)((gCurBhvCommand[index] >> 24) & 0xFF) // unused
@@ -825,7 +826,7 @@ void cur_obj_update(void) {
         o->oDrawingDistance = 50000;
     }
 
-    if (gMarioObject && !gInActSelect && gChaosCodeTable[GLOBAL_CHAOS_NO_MODEL_IS_MARIO].active && gCurrLevelNum != LEVEL_BOWSER_1 && gCurrLevelNum != LEVEL_BOWSER_2 && gCurrLevelNum != LEVEL_BOWSER_3) {
+    if (gMarioObject && !gInActSelect && gChaosCodeTable[GLOBAL_CHAOS_NO_MODEL_IS_MARIO].active && gCurrCreditsEntry == NULL && gCurrLevelNum != LEVEL_BOWSER_1 && gCurrLevelNum != LEVEL_BOWSER_2 && gCurrLevelNum != LEVEL_BOWSER_3) {
         if (!cur_obj_has_behavior(segmented_to_virtual(bhvMario))) {
             if (cur_obj_has_model(MODEL_NONE) || cur_obj_has_model(MODEL_MARIO) || (cur_obj_has_model(MODEL_MARIO_BILLBOARD))) {
                 if (gChaosCodeTable[GLOBAL_CHAOS_BILLBOARD_MARIO].active) {
