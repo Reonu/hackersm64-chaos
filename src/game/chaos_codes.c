@@ -976,7 +976,7 @@ ChaosCode gBoBChaosTable[] = {
 };
 
 ChaosCode gJRBChaosTable[] = {
-    {"JRB Dried Up", chaos_jrb_dried_up, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"JRB Dried Up", chaos_jrb_dried_up, 20, 20, 35, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gTTCChaosTable[] = {
