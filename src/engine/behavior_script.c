@@ -847,7 +847,8 @@ void cur_obj_update(void) {
     }
     
     if (o->behavior != segmented_to_virtual(bhvDoorWarp)
-        && o->behavior != segmented_to_virtual(bhvStaticObject)) {
+        && o->behavior != segmented_to_virtual(bhvStaticObject)
+        && o->behavior != segmented_to_virtual(bhvWarp)) {
         if (o->oNuked >= 2) {
             mark_obj_for_deletion(o);
         } else if (o->oNuked >= 1) {
