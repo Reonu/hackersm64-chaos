@@ -1042,7 +1042,7 @@ u16 gPrevChosenCode;
 
 int add_global_chaos_code(ChaosCode *table, s32 tableSize) {
     gPrevChosenCode = random_u16() % tableSize;
-    if (table[gPrevChosenCode].active) {
+    if (table[gPrevChosenCode].active || (random_u16() % 100) > gCurrentChaosTable->probability) {
         return 1;
     } else {
         chaos_enable(table, gPrevChosenCode, tableSize);
@@ -1151,12 +1151,8 @@ void global_chaos_code_handler(void) {
             gCurrentChaosTable = gChaosCodeTable;
             size = sizeof(gChaosCodeTable) / sizeof(ChaosCode);
         }
-        if ((random_u16() % 100) <= gCurrentChaosTable->probability) {
-            s32 error = add_global_chaos_code(gCurrentChaosTable, size);
-            if (error) {
-                goto tryAgain;
-            }
-        } else {
+        s32 error = add_global_chaos_code(gCurrentChaosTable, size);
+        if (error) {
             goto tryAgain;
         }
         if (gCurrentChaosTable[gPrevChosenCode].flags == CODEFLAG_MINOR || gCurrentChaosTable[gPrevChosenCode].flags == CODEFLAG_AUDIO) {
