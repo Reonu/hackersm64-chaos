@@ -907,7 +907,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Tiny Mario", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"Billboard Mario", chaos_generic, 100, 20, 35, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Very Slippery", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
-    {"All Quicksand", chaos_generic, 80, 25, 40, 0,   /*ignore these*/ 0, 0},
+    {"All Quicksand", chaos_generic, 40, 25, 40, 0,   /*ignore these*/ 0, 0},
     {"Mario Sounds Scream", chaos_generic, 100, 15, 30, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Randomize Coin Colors", chaos_generic, 100, 30, 45, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Coin Cutscenes", chaos_generic, 100, 30, 45, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
