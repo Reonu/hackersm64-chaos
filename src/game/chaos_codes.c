@@ -217,6 +217,9 @@ void chaos_enemypov(void) {
     }
 
     if (gPovActive) {
+        if (gPovEnemy) {
+            gPovEnemy->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+        }
         if (!(gPovEnemy->activeFlags & ACTIVE_FLAG_ACTIVE)) {
             gCurrentChaosTable[gCurrentChaosID].active = FALSE;
             gCurrentChaosTable[gCurrentChaosID].timer = 0;
