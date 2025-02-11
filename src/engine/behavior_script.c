@@ -916,7 +916,9 @@ void cur_obj_update(void) {
     }
 
     if (gMarioObject && gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) {
-        if (o->behavior != segmented_to_virtual(bhvDoorWarp)) {
+        if (o->behavior != segmented_to_virtual(bhvDoorWarp)
+            && o->behavior != segmented_to_virtual(bhvStaticObject)
+            && o->behavior != segmented_to_virtual(bhvWarp)) {
             if (o->oDistanceToMario < 500.0f) {
                 o->oPosX -= sins(o->oAngleToMario) * 40.0f;
                 o->oPosZ -= coss(o->oAngleToMario) * 40.0f;
