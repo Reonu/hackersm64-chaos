@@ -369,7 +369,6 @@ u8 gCarpetExit = 0;
 void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 warpFlags);
 
 void platform_rise_forever(void) {
-    gChaosOffOverride = TRUE;
     switch (gCurrActNum) {
     case 1: 
         o->oPosY += 5.0f;
@@ -378,7 +377,6 @@ void platform_rise_forever(void) {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 60, 255, 255, 255);
         }
         if (o->oPosY > 19500) {
-            gChaosOffOverride = FALSE;
             initiate_warp(LEVEL_RR2, 0x01, 0x0A, 0x0);
             // Warp to next level
         }
@@ -398,7 +396,6 @@ void platform_rise_forever(void) {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 60, 255, 255, 255);
         }
         if (o->oPosY > 15500) {
-            gChaosOffOverride = FALSE;
             initiate_warp(LEVEL_RR2, 0x01, 0x0A, 0x0);
             // Warp to next level
         }
@@ -414,7 +411,6 @@ void platform_rise_forever(void) {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 60, 255, 255, 255);
         }
         if (o->oPosX < -4300) {
-            gChaosOffOverride = FALSE;
             initiate_warp(LEVEL_RR2, 0x01, 0x0A, 0x0);
             // Warp to next level
         }
@@ -428,7 +424,6 @@ void platform_rise_forever(void) {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 60, 255, 255, 255);
         }
         if (o->oAngleVelYaw > 0x1000) {
-            gChaosOffOverride = FALSE;
             initiate_warp(LEVEL_RR2, 0x01, 0x0A, 0x0);
         }
         break;

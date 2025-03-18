@@ -1134,7 +1134,8 @@ void global_chaos_code_handler(void) {
     update_chaos_code_effects();
 
     
-    if (gDisableChaos || gChaosOffOverride || gCurrLevelNum == LEVEL_CHAO_GARDEN) {
+    if (gDisableChaos || gChaosOffOverride || gCurrLevelNum == LEVEL_CHAO_GARDEN || gCurrLevelNum == LEVEL_RR) {
+        chaos_clear_global();
         return;
     }
 
