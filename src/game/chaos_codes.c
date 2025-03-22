@@ -183,6 +183,9 @@ void chaos_wdw_heaveho(void) {
 }
 
 void chaos_enemypov(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     if (gCurrentChaosTable[gCurrentChaosID].active == FALSE) {
         gCurrentChaosTable[gCurrentChaosID].active = TRUE;
         gPovEnemy = NULL; 
@@ -214,6 +217,9 @@ void chaos_enemypov(void) {
     }
 
     if (gPovActive) {
+        if (gPovEnemy) {
+            gPovEnemy->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+        }
         if (!(gPovEnemy->activeFlags & ACTIVE_FLAG_ACTIVE)) {
             gCurrentChaosTable[gCurrentChaosID].active = FALSE;
             gCurrentChaosTable[gCurrentChaosID].timer = 0;
@@ -254,6 +260,9 @@ void chaos_randomize_coin_colors(void) {
 }
 
 void chaos_ad(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     if (gChaosCodeTable[gCurrentChaosID].active == FALSE) {
         gChaosCodeTable[gCurrentChaosID].active = TRUE;
         gSpamAd = random_u16() % 5;
@@ -675,6 +684,9 @@ void chaos_spawn_carpet(void) {
 }
 
 void chaos_spawn_armstrong(void) {
+    if (gCurrCreditsEntry) {
+        return;
+    }
     Vec3f pos;
     pos[0] = gMarioState->pos[0] + 3500 * sins(gMarioState->faceAngle[1]);
     pos[1] = gMarioState->pos[1];
@@ -790,7 +802,6 @@ void chaos_sl_swap_mario_xz(void) {
 }
 
 void chaos_sl_pharaoh_curse(void) {
-
     if (buffer_code_until_grounded_out_of_water()) {
         if (gCurrentChaosTable[gCurrentChaosID].timer > 900) {
             gCurrentChaosTable[gCurrentChaosID].timer = 900;
@@ -881,10 +892,10 @@ void chaos_jrb_dried_up(void) {
 
 ChaosCode gChaosCodeTable[] = {
     {"Cannon", chaos_cannon, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
-    {"Fall Damage", chaos_generic, 40, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Fall Damage", chaos_generic, 30, 10, 20, 0,   /*ignore these*/ 0, 0},
     {"Trip", chaos_trip, 100, 0, 0, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Upside Down Camera", chaos_upside_down_camera, 75, 10, 20, CODEFLAG_CAMERA,   /*ignore these*/ 0, 0},
-    {"Model None Mario", chaos_generic, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
+    {"Model None Mario", chaos_generic, 100, 10, 20, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Retro Vision", chaos_retro, 50, 15, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
     {"Blur Vision", chaos_blur, 30, 20, 30, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
     {"Mario Kart", chaos_mario_kart, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
@@ -896,12 +907,12 @@ ChaosCode gChaosCodeTable[] = {
     {"Tiny Mario", chaos_generic, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
     {"Billboard Mario", chaos_generic, 100, 20, 35, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Very Slippery", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
-    {"All Quicksand", chaos_generic, 80, 25, 40, 0,   /*ignore these*/ 0, 0},
+    {"All Quicksand", chaos_generic, 40, 20, 30, 0,   /*ignore these*/ 0, 0},
     {"Mario Sounds Scream", chaos_generic, 100, 15, 30, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Randomize Coin Colors", chaos_generic, 100, 30, 45, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Coin Cutscenes", chaos_generic, 100, 30, 45, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"All jumps are triple", chaos_generic, 100, 15, 45, 0,   /*ignore these*/ 0, 0},
-    {"Delete Nearby Objects", chaos_generic, 40, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Delete Nearby Objects", chaos_generic, 65, 10, 20, 0,   /*ignore these*/ 0, 0},
     {"Invert Dive and Kick", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Live Mario Reaction", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
     {"Ad Spam", chaos_ad, 100, 0, 0, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
@@ -909,9 +920,9 @@ ChaosCode gChaosCodeTable[] = {
     {"Super Jumps", chaos_generic, 100, 10, 20, 0,   /*ignore these*/ 0, 0},
     {"Heave Ho Chaser", chaos_heave_ho_chaser, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Strong Punch KB", chaos_generic, 100, 45, 90, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
-    {"Automatic Wallkicks", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"Automatic Wallkicks", chaos_generic, 100, 30, 60, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Chain Chomp", chaos_chain_chomp, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
-    {"Thwomp", chaos_thwomp, 100, 0, 0, 0,   /*ignore these*/ 0, 0},
+    {"Thwomp", chaos_thwomp, 100, 0, 0, CODEFLAG_MINOR, /*ignore these*/ 0, 0},
     {"Yellow Block on Jump", chaos_yellow_block, 100, 30, 60, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Mirror Ghost", chaos_mirrorghost, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
     {"Weird Audio", chaos_generic, 100, 30, 45, CODEFLAG_AUDIO,   /*ignore these*/ 0, 0},
@@ -934,16 +945,16 @@ ChaosCode gChaosCodeTable[] = {
     {"All Ceilings Hangable", chaos_generic, 100, 60, 120, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Sudden Reonu Spring", chaos_spring, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Amp", chaos_amp, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
-    {"Coins Remove Coins", chaos_generic, 75, 20, 30, 0,  /*ignore these*/ 0, 0},
+    {"Coins Remove Coins", chaos_generic, 75, 20, 30, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Random object scale", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
-    {"Objects flee Mario", chaos_generic, 60, 15, 35, 0,  /*ignore these*/ 0, 0},
+    {"Objects flee Mario", chaos_generic, 100, 25, 50, 0,  /*ignore these*/ 0, 0},
     {"Ethel the Cat", chaos_ethel, 100, 14, 15, 0,  /*ignore these*/ 0, 0}, // the code lasts for the duration of time the cat takes to despawn, do not change
-    {"Mario Gravitation", chaos_generic, 35, 20, 30, 0,  /*ignore these*/ 0, 0},
+    {"Mario Gravitation", chaos_generic, 30, 20, 30, 0,  /*ignore these*/ 0, 0},
     {"Hurricane", chaos_generic, 20, 15, 20, 0,  /*ignore these*/ 0, 0},
     {"Mario Dabs", chaos_dab, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Swap Coins with Moneybags", chaos_moneybags, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Spawn King BobOmb", chaos_spawn_king_bobomb, 20, 1, 2, 0,  /*ignore these*/ 0, 0},
-    {"Spawn Bowser", chaos_spawn_bowser, 5, 1, 2, 0,  /*ignore these*/ 0, 0},
+    {"Spawn Bowser", chaos_spawn_bowser, 10, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Carpet", chaos_spawn_carpet, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Armstrong", chaos_spawn_armstrong, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Inverted Fvel Mag", chaos_generic, 100, 15, 30, 0,  /*ignore these*/ 0, 0},
@@ -955,7 +966,11 @@ ChaosCode gCCMChaosTable[] = {
 };
 
 ChaosCode gWFChaosTable[] = {
+<<<<<<< HEAD
     {"WF Betah Invasion", chaos_generic, 25, 30, 60, 0,   /*ignore these*/ 0, 0},
+=======
+    {"WF Betah Invasion", chaos_generic, 60, 15, 45, 0,   /*ignore these*/ 0, 0},
+>>>>>>> c1e835b8f217d0674cc63a21fda8bb0891f6cbf8
 };
 
 ChaosCode gBoBChaosTable[] = {
@@ -965,7 +980,7 @@ ChaosCode gBoBChaosTable[] = {
 };
 
 ChaosCode gJRBChaosTable[] = {
-    {"JRB Dried Up", chaos_jrb_dried_up, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"JRB Dried Up", chaos_jrb_dried_up, 20, 20, 35, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gTTCChaosTable[] = {
@@ -1031,7 +1046,7 @@ u16 gPrevChosenCode;
 
 int add_global_chaos_code(ChaosCode *table, s32 tableSize) {
     gPrevChosenCode = random_u16() % tableSize;
-    if (table[gPrevChosenCode].active) {
+    if (table[gPrevChosenCode].active || (random_u16() % 100) > gCurrentChaosTable->probability) {
         return 1;
     } else {
         chaos_enable(table, gPrevChosenCode, tableSize);
@@ -1123,7 +1138,8 @@ void global_chaos_code_handler(void) {
     update_chaos_code_effects();
 
     
-    if (gDisableChaos || gChaosOffOverride || gCurrLevelNum == LEVEL_CHAO_GARDEN) {
+    if (gDisableChaos || gChaosOffOverride || gCurrLevelNum == LEVEL_CHAO_GARDEN || gCurrLevelNum == LEVEL_RR) {
+        chaos_clear_global();
         return;
     }
 
@@ -1140,18 +1156,18 @@ void global_chaos_code_handler(void) {
             gCurrentChaosTable = gChaosCodeTable;
             size = sizeof(gChaosCodeTable) / sizeof(ChaosCode);
         }
-        if ((random_u16() % 100) <= gCurrentChaosTable->probability) {
-            s32 error = add_global_chaos_code(gCurrentChaosTable, size);
-            if (error) {
-                goto tryAgain;
-            }
-        } else {
+        s32 error = add_global_chaos_code(gCurrentChaosTable, size);
+        if (error) {
             goto tryAgain;
         }
         if (gCurrentChaosTable[gPrevChosenCode].flags == CODEFLAG_MINOR || gCurrentChaosTable[gPrevChosenCode].flags == CODEFLAG_AUDIO) {
             nextGlobalCodeTimer = (random_u16() % 150);
         } else {
             nextGlobalCodeTimer = 150 + (random_u16() % 500);
+        }
+        
+        if (gCurrCreditsEntry) {
+            nextGlobalCodeTimer /= 8;
         }
     }
 }

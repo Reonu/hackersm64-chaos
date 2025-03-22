@@ -564,6 +564,7 @@ void print_credits_string(s16 x, s16 y, const u8 *str) {
                 G_TX_CLAMP, 3, G_TX_NOLOD, G_TX_CLAMP, 3, G_TX_NOLOD);
     gDPSetTileSize(gDisplayListHead++, G_TX_RENDERTILE, 0, 0, (8 - 1) << G_TEXTURE_IMAGE_FRAC, (8 - 1) << G_TEXTURE_IMAGE_FRAC);
 
+    s32 retro = gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
     while (str[strPos] != GLOBAR_CHAR_TERMINATOR) {
         switch (str[strPos]) {
             case GLOBAL_CHAR_SPACE:
@@ -574,8 +575,8 @@ void print_credits_string(s16 x, s16 y, const u8 *str) {
                 gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, fontLUT[str[strPos]]);
                 gDPLoadSync(gDisplayListHead++);
                 gDPLoadBlock(gDisplayListHead++, G_TX_LOADTILE, 0, 0, 8 * 8 - 1, CALC_DXT(8, G_IM_SIZ_16b_BYTES));
-                gSPTextureRectangle(gDisplayListHead++, curX << 2, curY << 2, (curX + 8) << 2,
-                                    (curY + 8) << 2, G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
+                gSPTextureRectangle(gDisplayListHead++, (curX >> retro) << 2, (curY >> retro) << 2, ((curX + 8) >> retro) << 2,
+                                    ((curY + 8) >> retro) << 2, G_TX_RENDERTILE, 0, 0, (1 << retro) << 10, (1 << retro) << 10);
                 curX += 7;
                 break;
         }
@@ -1932,8 +1933,7 @@ s32 render_pause_courses_and_castle(void) {
             render_pause_red_coins();
 #ifndef DISABLE_EXIT_COURSE
 #ifdef EXIT_COURSE_WHILE_MOVING
-            if ((gMarioStates[0].action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER | ACT_FLAG_PAUSE_EXIT))
-             || (gMarioStates[0].pos[1] <= gMarioStates[0].floorHeight)) {
+            if (gCurrLevelNum != LEVEL_RR) {
 #else
             if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT && gCarpetExit == 0) {
 #endif

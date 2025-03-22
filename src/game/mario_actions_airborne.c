@@ -101,11 +101,12 @@ s32 check_fall_damage(struct MarioState *m, u32 hardFallAction) {
 }
 
 s32 check_kick_or_dive_in_air(struct MarioState *m) {
+    f32 minSpeed = gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active ? 9.f : 28.f;
     if (m->input & INPUT_B_PRESSED) {
         if (gChaosCodeTable[GLOBAL_CHAOS_INVERT_DIVE_AND_KICK].active) {
-            return set_mario_action(m, m->forwardVel > 28.0f ? ACT_JUMP_KICK : ACT_DIVE, 0);
+            return set_mario_action(m, m->forwardVel > minSpeed ? ACT_JUMP_KICK : ACT_DIVE, 0);
         } else {
-            return set_mario_action(m, m->forwardVel > 28.0f ? ACT_DIVE : ACT_JUMP_KICK, 0);
+            return set_mario_action(m, m->forwardVel > minSpeed ? ACT_DIVE : ACT_JUMP_KICK, 0);
         }
     }
     return FALSE;
@@ -821,6 +822,7 @@ s32 act_dive(struct MarioState *m) {
                 if (gMarioState->vel[1] < 10.0f) {
                     gMarioState->vel[1] = 10.0f;
                 }
+                break;
             } else {
                 if (should_get_stuck_in_ground(m) && m->faceAngle[0] == -DEGREES(60)) {
 #if ENABLE_RUMBLE
@@ -837,7 +839,6 @@ s32 act_dive(struct MarioState *m) {
                 }
             }
             }
-            break;
             
             m->faceAngle[0] = 0;
             break;
@@ -1617,7 +1618,7 @@ s32 act_lava_boost(struct MarioState *m) {
         }
     }
 
-    if (m->health < 0x100) {
+    if (m->health < 0x100 && gCurrCreditsEntry == NULL) {
         level_trigger_warp(m, WARP_OP_DEATH);
     }
 

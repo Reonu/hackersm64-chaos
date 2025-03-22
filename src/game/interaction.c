@@ -786,6 +786,9 @@ u32 interact_water_ring(struct MarioState *m, UNUSED u32 interactType, struct Ob
 u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     u32 starIndex;
     u32 starGrabAction = ACT_STAR_DANCE_EXIT;
+    if (gCurrCreditsEntry) {
+        return FALSE;
+    }
 #ifdef NON_STOP_STARS
  #ifdef KEYS_EXIT_LEVEL
     u32 noExit = !obj_has_model(obj, MODEL_BOWSER_KEY);
@@ -896,6 +899,10 @@ u32 interact_bbh_entrance(struct MarioState *m, UNUSED u32 interactType, struct 
 u32 interact_warp(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     u32 action;
 
+    if (gCurrCreditsEntry) {
+        return FALSE;
+    }
+
     if (obj->oInteractionSubtype & INT_SUBTYPE_FADING_WARP) {
         action = m->action;
 
@@ -942,6 +949,11 @@ u32 interact_warp(struct MarioState *m, UNUSED u32 interactType, struct Object *
 
 u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     u32 doorAction = ACT_UNINITIALIZED;
+
+    if (gCurrCreditsEntry) {
+        return FALSE;
+    }
+
 #ifndef UNLOCK_ALL
     u32 saveFlags = save_file_get_flags();
     s16 warpDoorId = (obj->oBehParams >> 24);
@@ -1945,6 +1957,10 @@ void pss_end_slide(struct MarioState *m) {
 
 void mario_handle_special_floors(struct MarioState *m) {
     if ((m->action & ACT_GROUP_MASK) == ACT_GROUP_CUTSCENE) {
+        return;
+    }
+
+    if (gCurrCreditsEntry) {
         return;
     }
 

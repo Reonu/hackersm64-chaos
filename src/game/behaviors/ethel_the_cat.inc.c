@@ -1,6 +1,7 @@
 #include "game/spawn_sound.h"
 #include "game/camera.h"
 #include "game/print.h"
+#include "audio/external.h"
 
 #define FRAME_FIRST_MEME 47
 #define FRAME_SECOND_IDLE 93
@@ -34,6 +35,7 @@ enum EthelActions {
 
 void bhv_ethel_the_cat_init(void) {
     cur_obj_play_sound_2(SOUND_NEW_OIIAOIIA);
+    seq_player_fade_to_target_volume(SEQ_PLAYER_LEVEL, 1, 0);
 }
 
 void bhv_ethel_act_idle(void) {

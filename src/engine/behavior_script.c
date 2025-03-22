@@ -15,6 +15,7 @@
 #include "graph_node.h"
 #include "surface_collision.h"
 #include "src/game/chaos_codes.h"
+#include "game/level_update.h"
 
 // Macros for retrieving arguments from behavior scripts.
 #define BHV_CMD_GET_1ST_U8(index)     (u8)((gCurBhvCommand[index] >> 24) & 0xFF) // unused
@@ -825,17 +826,17 @@ void cur_obj_update(void) {
         o->oDrawingDistance = 50000;
     }
 
-    if (gChaosCodeTable[GLOBAL_CHAOS_NO_MODEL_IS_MARIO].active && gCurrLevelNum != LEVEL_BOWSER_1 && gCurrLevelNum != LEVEL_BOWSER_2 && gCurrLevelNum != LEVEL_BOWSER_3) {
+    if (gMarioObject && !gInActSelect && gChaosCodeTable[GLOBAL_CHAOS_NO_MODEL_IS_MARIO].active && gCurrCreditsEntry == NULL && gCurrLevelNum != LEVEL_BOWSER_1 && gCurrLevelNum != LEVEL_BOWSER_2 && gCurrLevelNum != LEVEL_BOWSER_3) {
         if (!cur_obj_has_behavior(segmented_to_virtual(bhvMario))) {
-            if (cur_obj_has_model(MODEL_NONE) || cur_obj_has_model(MODEL_MARIO) || (cur_obj_has_model(MODEL_MARIO_BILLBOARD))) {
+            if (cur_obj_has_model(MODEL_NONE) || cur_obj_has_model(MODEL_MARIO_NONE) || (cur_obj_has_model(MODEL_MARIO_BILLBOARD))) {
                 if (gChaosCodeTable[GLOBAL_CHAOS_BILLBOARD_MARIO].active) {
                     cur_obj_set_model(MODEL_MARIO_BILLBOARD);
                 } else {
-                    cur_obj_set_model(MODEL_MARIO);
+                    cur_obj_set_model(MODEL_MARIO_NONE);
                 }
             }
         }
-    } else if ((cur_obj_has_model(MODEL_MARIO_BILLBOARD) || cur_obj_has_model(MODEL_MARIO)) && (!cur_obj_has_behavior(segmented_to_virtual(bhvMario)))) {
+    } else if ((cur_obj_has_model(MODEL_MARIO_BILLBOARD) || cur_obj_has_model(MODEL_MARIO_NONE)) && (!cur_obj_has_behavior(segmented_to_virtual(bhvMario)))) {
         cur_obj_set_model(MODEL_NONE);
     }
 
@@ -845,11 +846,16 @@ void cur_obj_update(void) {
         }
     }
     
-    if (o->oNuked >= 2) {
-        mark_obj_for_deletion(o);
-    } else if (o->oNuked >= 1) {
-        o->oNuked++;
+    if (o->behavior != segmented_to_virtual(bhvDoorWarp)
+        && o->behavior != segmented_to_virtual(bhvStaticObject)
+        && o->behavior != segmented_to_virtual(bhvWarp)) {
+        if (o->oNuked >= 2) {
+            mark_obj_for_deletion(o);
+        } else if (o->oNuked >= 1) {
+            o->oNuked++;
+        }
     }
+
 
     if (gChaosCodeTable[GLOBAL_CHAOS_RANDOMIZE_COIN_COLORS].active) {
         if (cur_obj_has_model(MODEL_YELLOW_COIN) || 
@@ -910,42 +916,49 @@ void cur_obj_update(void) {
     }
 
     if (gMarioObject && gChaosCodeTable[GLOBAL_CHAOS_OBJECTS_FLEE_MARIO].active) {
-        if (o->oDistanceToMario < 500.0f) {
-            o->oPosX -= sins(o->oAngleToMario) * 40.0f;
-            o->oPosZ -= coss(o->oAngleToMario) * 40.0f;
+        if (o->behavior != segmented_to_virtual(bhvDoorWarp)
+            && o->behavior != segmented_to_virtual(bhvStaticObject)
+            && o->behavior != segmented_to_virtual(bhvWarp)) {
+            if (o->oDistanceToMario < 500.0f) {
+                o->oPosX -= sins(o->oAngleToMario) * 40.0f;
+                o->oPosZ -= coss(o->oAngleToMario) * 40.0f;
+            }
         }
     }
 
-    if (gMarioObject) {
+    if (gMarioObject && gCurrLevelNum != LEVEL_CASTLE_GROUNDS && gCurrLevelNum != LEVEL_PSS) {
         if (gChaosCodeTable[GLOBAL_CHAOS_MARIO_GRAVITATION].active || gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
-            Vec3f d;
-            d[0] = o->oPosX - gMarioObject->oPosX;
-                d[1] = -o->oPosY + gMarioObject->oPosY;
-                d[2] = o->oPosZ - gMarioObject->oPosZ;
-            if (o->oGravitationalMarioPullSpeed > 0) {
-                o->oMoveAnglePitch = approach_s32_symmetric(o->oMoveAnglePitch, atan2s(sqrtf(sqr(d[0]) + sqr(d[2])), d[1]), 0x100);
-                o->oMoveAngleYaw = approach_s32_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x200);
-            }
-
-            f32 approachValue;
-            if (gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
-                approachValue = 1500 * (1 / CLAMP(sqrtf(o->oDistanceToMario*0.3f), 1, 63000));
-            }
-            else {
-                approachValue = 1500 * (1 / CLAMP(sqrtf(o->oDistanceToMario*4.0f), 1, 30000));
-            }
-
-            o->oGravitationalMarioPullSpeed = approach_f32_symmetric(o->oGravitationalMarioPullSpeed, approachValue, 10);
-
-            if (o->oGravitationalMarioPullSpeed > 500) {
-                o->oGravitationalMarioPullSpeed = -o->oGravitationalMarioPullSpeed;
-            }
-
-            o->oPosX += o->oGravitationalMarioPullSpeed * sins(o->oMoveAngleYaw);
-            o->oPosZ += o->oGravitationalMarioPullSpeed * coss(o->oMoveAngleYaw);
-
-            if (o->oDistanceToMario < 1000) {
-                o->oPosY = approach_f32_symmetric(o->oPosY, gMarioObject->oPosY, 50);
+            if (o->behavior != segmented_to_virtual(bhvDoorWarp)
+                && o->behavior != segmented_to_virtual(bhvStaticObject)) {
+                Vec3f d;
+                d[0] = o->oPosX - gMarioObject->oPosX;
+                    d[1] = -o->oPosY + gMarioObject->oPosY;
+                    d[2] = o->oPosZ - gMarioObject->oPosZ;
+                if (o->oGravitationalMarioPullSpeed > 0) {
+                    o->oMoveAnglePitch = approach_s32_symmetric(o->oMoveAnglePitch, atan2s(sqrtf(sqr(d[0]) + sqr(d[2])), d[1]), 0x100);
+                    o->oMoveAngleYaw = approach_s32_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x200);
+                }
+    
+                f32 approachValue;
+                if (gChaosCodeTable[GLOBAL_CHAOS_HURRICANE].active) {
+                    approachValue = 1500 * (1 / CLAMP(sqrtf(o->oDistanceToMario*0.3f), 1, 63000));
+                }
+                else {
+                    approachValue = 1500 * (1 / CLAMP(sqrtf(o->oDistanceToMario*4.0f), 1, 30000));
+                }
+    
+                o->oGravitationalMarioPullSpeed = approach_f32_symmetric(o->oGravitationalMarioPullSpeed, approachValue, 10);
+    
+                if (o->oGravitationalMarioPullSpeed > 500) {
+                    o->oGravitationalMarioPullSpeed = -o->oGravitationalMarioPullSpeed;
+                }
+    
+                o->oPosX += o->oGravitationalMarioPullSpeed * sins(o->oMoveAngleYaw);
+                o->oPosZ += o->oGravitationalMarioPullSpeed * coss(o->oMoveAngleYaw);
+    
+                if (o->oDistanceToMario < 1000) {
+                    o->oPosY = approach_f32_symmetric(o->oPosY, gMarioObject->oPosY, 50);
+                }
             }
         }
     }

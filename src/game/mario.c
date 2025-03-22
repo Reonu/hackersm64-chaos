@@ -1470,7 +1470,9 @@ void update_mario_geometry_inputs(struct MarioState *m) {
         }
 
     } else {
-        level_trigger_warp(m, WARP_OP_DEATH);
+        if (gCurrCreditsEntry == NULL) {
+            level_trigger_warp(m, WARP_OP_DEATH);
+        }
     }
 }
 
@@ -1578,6 +1580,11 @@ void set_submerged_cam_preset_and_spawn_bubbles(struct MarioState *m) {
  */
 void update_mario_health(struct MarioState *m) {
     s32 terrainIsSnow;
+
+    if (gCurrCreditsEntry) {
+        m->health = 0x880;
+        return;
+    }
 
     if (m->health >= 0x100) {
         // When already healing or hurting Mario, Mario's HP is not changed any more here.
@@ -1812,6 +1819,10 @@ void mario_update_hitbox_and_cap_model(struct MarioState *m) {
         m->marioObj->hitboxHeight = 100.0f;
     } else {
         m->marioObj->hitboxHeight = 160.0f;
+    }
+
+    if (gCurrCreditsEntry) {
+        m->marioObj->hitboxHeight = 1.0f;
     }
 
     if ((m->flags & MARIO_TELEPORTING) && (m->fadeWarpOpacity != MODEL_STATE_MASK)) {
@@ -2049,7 +2060,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         if (
             (gMarioState->controller->buttonDown & U_JPAD) &&
             !(gMarioState->controller->buttonDown & L_TRIG)
-         && (sPPDebugPage != PUPPYPRINT_PAGE_CHAOS || !fDebug)) {
+         && (sPPDebugPage != PUPPYPRINT_PAGE_CHAOS || !fDebug) && gCurrCreditsEntry == NULL) {
             set_camera_mode(gMarioState->area->camera, CAMERA_MODE_8_DIRECTIONS, 1);
             set_mario_action(gMarioState, ACT_DEBUG_FREE_MOVE, 0);
         }
@@ -2067,14 +2078,16 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         mario_reset_bodystate(gMarioState);
         update_mario_inputs(gMarioState);
 
+        if (gCurrCreditsEntry == NULL) {
 #ifdef PUPPYCAM
         if (!(gPuppyCam.flags & PUPPYCAM_BEHAVIOUR_FREE)) {
 #endif
-        mario_handle_special_floors(gMarioState);
+            mario_handle_special_floors(gMarioState);
 #ifdef PUPPYCAM
         }
 #endif
-        mario_process_interactions(gMarioState);
+            mario_process_interactions(gMarioState);
+        }
 
         // If Mario is OOB, stop executing actions.
         if (gMarioState->floor == NULL) {
@@ -2096,6 +2109,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                 case ACT_GROUP_OBJECT:     inLoop = mario_execute_object_action(gMarioState);     break;
             }
         }
+        credits_unfuck();
 
         sink_mario_in_quicksand(gMarioState);
         squish_mario_model(gMarioState);

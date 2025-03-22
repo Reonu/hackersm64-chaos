@@ -416,6 +416,10 @@ Gfx *geo_mario_head_rotation(s32 callContext, struct GraphNode *node, UNUSED Mat
     struct MarioBodyState *bodyState = &gBodyStates[asGenerated->parameter];
     s32 action = bodyState->action;
 
+    if (gCurGraphNodeObjectNode != gMarioObject) {
+        return NULL;
+    }
+
     if (callContext == GEO_CONTEXT_RENDER) {
         struct GraphNodeRotation *rotNode = (struct GraphNodeRotation *) node->next;
         struct Camera *camera = gCurGraphNodeCamera->config.camera;

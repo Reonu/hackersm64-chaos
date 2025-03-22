@@ -133,9 +133,10 @@ void slide_bonk(struct MarioState *m, u32 fastAction, u32 slowAction) {
 }
 
 s32 set_triple_jump_action(struct MarioState *m, UNUSED u32 action, UNUSED u32 actionArg) {
+    f32 minSpeed = gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active ? 7.f : 20.f;
     if (m->flags & MARIO_WING_CAP) {
         return set_mario_action(m, ACT_FLYING_TRIPLE_JUMP, 0);
-    } else if ((m->forwardVel > 20.0f) || gChaosCodeTable[GLOBAL_CHAOS_ALL_JUMPS_TRIPLE].active) {
+    } else if ((m->forwardVel > minSpeed) || gChaosCodeTable[GLOBAL_CHAOS_ALL_JUMPS_TRIPLE].active) {
         return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
     } else {
         return set_mario_action(m, ACT_JUMP, 0);
@@ -394,12 +395,12 @@ void update_kart_speed(struct MarioState *m) {
         maxTargetSpeed = 4000.0f;
     }
     else if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
-        maxTargetSpeed = 350.0f;
+        maxTargetSpeed = 500.0f;
     } else {
-        maxTargetSpeed = 350.0f;
+        maxTargetSpeed = 500.0f;
     }
 
-    targetSpeed = m->intendedMag * 2.0f;
+    targetSpeed = m->intendedMag * 2.5f;
     if (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
         targetSpeed += m->forwardVel / 20.0f;
     }
@@ -491,7 +492,7 @@ void update_walking_speed(struct MarioState *m) {
 
     targetSpeed = m->intendedMag < maxTargetSpeed ? m->intendedMag : maxTargetSpeed;
     if (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
-        targetSpeed += m->forwardVel / 20.0f;
+        targetSpeed = maxTargetSpeed;
     }
     if (m->quicksandDepth > 10.0f) {
         targetSpeed *= 6.25f / m->quicksandDepth;
@@ -516,7 +517,12 @@ void update_walking_speed(struct MarioState *m) {
             m->forwardVel += 1.1f * mul;
         } else if (m->forwardVel <= targetSpeed) {
             // If accelerating
-            m->forwardVel += 1.1f - m->forwardVel / 43.0f;
+            if (gChaosCodeTable[GLOBAL_CHAOS_NO_SPEED_CAP].active) {
+                m->forwardVel += m->forwardVel * 0.05f;
+            }
+            else {
+                m->forwardVel += 1.1f - m->forwardVel / 43.0f;
+            }
         } else if (m->floor->normal.y >= 0.95f) {
             m->forwardVel -= 1.0f * mul;
         }
@@ -1356,13 +1362,13 @@ s32 act_riding_kart(struct MarioState *m) {
         //    return set_mario_action(m, ACT_RIDING_SHELL_JUMP, 0);
         //}
 
-        if (m->input & INPUT_Z_PRESSED) {
+        /*if (m->input & INPUT_Z_PRESSED) {
             mario_stop_riding_object(m);
             if (m->forwardVel < 24.0f) {
                 mario_set_forward_vel(m, 24.0f);
             }
             return set_mario_action(m, ACT_CROUCH_SLIDE, 0);
-        }
+        }*/
 
         update_kart_speed(m);
         //set_mario_animation(m, m->actionArg == 0 ? MARIO_ANIM_START_RIDING_SHELL : MARIO_ANIM_RIDING_SHELL);
@@ -1619,6 +1625,7 @@ s32 act_hold_butt_slide(struct MarioState *m) {
 }
 
 s32 act_crouch_slide(struct MarioState *m) {
+    f32 minSpeed = gChaosCodeTable[GLOBAL_CHAOS_TINY_MARIO].active ? 5.f : 10.f;
     if (m->input & INPUT_ABOVE_SLIDE) {
         return set_mario_action(m, ACT_BUTT_SLIDE, 0);
     }
@@ -1626,7 +1633,7 @@ s32 act_crouch_slide(struct MarioState *m) {
     if (m->actionTimer < 30) {
         m->actionTimer++;
         if (m->input & INPUT_A_PRESSED) {
-            if (m->forwardVel > 10.0f) {
+            if (m->forwardVel > minSpeed) {
                 if (gChaosCodeTable[GLOBAL_CHAOS_NEXT_LONG_JUMP_GP].active) {
                     return set_mario_action(m, ACT_GROUND_POUND, 0);
                 }
@@ -1639,7 +1646,7 @@ s32 act_crouch_slide(struct MarioState *m) {
     }
 
     if (m->input & INPUT_B_PRESSED) {
-        if (m->forwardVel >= 10.0f) {
+        if (m->forwardVel >= minSpeed) {
             return set_mario_action(m, ACT_SLIDE_KICK, 0);
         } else {
             return set_mario_action(m, ACT_MOVE_PUNCHING, 0x9);

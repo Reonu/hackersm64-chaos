@@ -927,7 +927,7 @@ static s32 act_drowning(struct MarioState *m) {
         case ACT_STATE_DROWNING_EYES_DEAD:
             set_mario_animation(m, MARIO_ANIM_DROWNING_PART2);
             m->marioBodyState->eyeState = MARIO_EYES_DEAD;
-            if (m->marioObj->header.gfx.animInfo.animFrame == 30) {
+            if (m->marioObj->header.gfx.animInfo.animFrame == 30 && gCurrCreditsEntry == NULL) {
                 level_trigger_warp(m, WARP_OP_DEATH);
             }
             break;
@@ -947,7 +947,7 @@ static s32 act_water_death(struct MarioState *m) {
     m->marioBodyState->eyeState = MARIO_EYES_DEAD;
 
     set_mario_animation(m, MARIO_ANIM_WATER_DYING);
-    if (set_mario_animation(m, MARIO_ANIM_WATER_DYING) == 35) {
+    if (set_mario_animation(m, MARIO_ANIM_WATER_DYING) == 35 && gCurrCreditsEntry == NULL) {
         level_trigger_warp(m, WARP_OP_DEATH);
     }
 
@@ -1056,7 +1056,7 @@ static s32 act_caught_in_whirlpool(struct MarioState *m) {
 
     if ((marioObj->oMarioWhirlpoolPosY += m->vel[1]) < 0.0f) {
         marioObj->oMarioWhirlpoolPosY = 0.0f;
-        if (distance < 16.1f && m->actionTimer++ == 16) {
+        if (distance < 16.1f && m->actionTimer++ == 16 && gCurrCreditsEntry == NULL) {
             level_trigger_warp(m, WARP_OP_DEATH);
         }
     }

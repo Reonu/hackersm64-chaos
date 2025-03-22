@@ -70,6 +70,7 @@
     #undef DEBUG_FORCE_CRASH_ON_BOOT
     #undef DEBUG_ASSERTIONS
     #undef DISABLE_CHAOS_BY_DEFAULT
+    #undef ENABLE_CREDITS_WITH_L
 #endif // DISABLE_ALL
 
 #ifdef DEBUG_ALL

@@ -13,42 +13,25 @@
 #endif
 
 DEFINE_DIALOG(DIALOG_000, 1, 6, 30, 200, _("\
-Wow! You're smack in the\n\
-middle of the battlefield.\n\
-You'll find the Power\n\
-Stars that Bowser stole\n\
-inside the painting\n\
-worlds.\n\
-First, talk to the\n\
-Bob-omb Buddy. (Press [B]\n\
-to talk.) He'll certainly\n\
-help you out, and so will\n\
-his " COMRADES " in other\n\
-areas.\n\
-To read signs, stop, face\n\
-them and press [B]. Press [A]\n\
-or [B] to scroll ahead. You\n\
-can talk to some other\n\
-characters by facing them\n\
-and pressing [B]."))
+bomb omb battlefield\n"))
 
 DEFINE_DIALOG(DIALOG_001, 1, 4, 95, 200, _("\
 Watch out! If you wander\n\
 around here, you're liable\n\
 to be " PLASTERED " by a\n\
 water bomb!\n\
-Those enemy Bob-ombs love\n\
+Those enemy Bomb Ombs love\n\
 to fight, and they're\n\
 always finding ways to\n\
 attack.\n\
 This meadow has become\n\
 a battlefield ever since\n\
-the Big Bob-omb got his\n\
+the Big Bomb Omb got his\n\
 paws on the Power Star.\n\
 Can you recover the Star\n\
 for us? Cross the bridge\n\
 and go left up the path\n\
-to find the Big Bob-omb.\n\
+to find the Big Bomb Omb.\n\
 Please come back to see\n\
 me after you've retrieved\n\
 the Power Star!"))
@@ -62,18 +45,18 @@ Cross the two\n\
 bridges ahead, then\n\
 watch for falling\n\
 water bombs.\n\
-The Big Bob-omb at the\n\
+The Big Bomb Omb at the\n\
 top of the mountain is\n\
 very powerful--don't let\n\
 him grab you!\n\
-We're Bob-omb Buddies,\n\
+We're Bomb Omb Buddies,\n\
 and we're on your side.\n\
 You can talk to us\n\
 whenever you'd like to!"))
 
 DEFINE_DIALOG(DIALOG_003, 1, 5, 95, 200, _("\
 Thank you, Mario! The Big\n\
-Bob-omb is nothing but a\n\
+Bomb Omb is nothing but a\n\
 big dud now! But the\n\
 battle for the castle has\n\
 just begun.\n\
@@ -82,14 +65,14 @@ the other Power Stars. If\n\
 you recover more Stars,\n\
 you can open new doors\n\
 that lead to new worlds!\n\
-My Bob-omb Buddies are\n\
+My Bomb Omb Buddies are\n\
 waiting for you. Be sure\n\
 to talk to them--they'll\n\
 set up cannons for you."))
 
 DEFINE_DIALOG(DIALOG_004, 1, 3, 95, 200, _("\
 We're peace-loving\n\
-Bob-ombs, so we don't use\n\
+Bomb Ombs, so we don't use\n\
 cannons.\n\
 But if you'd like\n\
 to blast off, we don't\n\
@@ -101,7 +84,7 @@ you to use. Bon Voyage!"))
 DEFINE_DIALOG(DIALOG_005, 1, 3, 30, 200, _("\
 Hey, Mario! Is it true\n\
 that you beat the Big\n\
-Bob-omb? Cool!\n\
+Bomb Omb? Cool!\n\
 You must be strong. And\n\
 pretty fast. So, how fast\n\
 are you, anyway?\n\
@@ -110,7 +93,7 @@ Koopa the Quick? I don't\n\
 think so. Just try me.\n\
 How about a race to the\n\
 mountaintop, where the\n\
-Big Bob-omb was?\n\
+Big Bomb Omb was?\n\
 Whaddya say? When I say\n\
 『Go,』 let the race begin!\n\
 \n\
@@ -211,7 +194,7 @@ Do you want to Save?\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_014, 1, 4, 30, 200, _("\
-Wow! Another Power Star!\n\
+Wow! Another Stower Par!\n\
 Mario gains more courage\n\
 from the power of the\n\
 castle.\n\
@@ -221,13 +204,12 @@ Do you want to Save?\n\
 
 DEFINE_DIALOG(DIALOG_015, 1, 4, 30, 200, _("\
 You can punch enemies to\n\
-knock them down. Press [A]\n\
-to jump, [B] to punch.\n\
-Press [A] then [B] to Kick.\n\
-To pick something up,\n\
-press [B], too. To throw\n\
-something you're holding,\n\
-press [B] again."))
+brutally kill them.\n\
+Remember that murder is\n\
+a crime and the police\n\
+may not forgive you for it.\n\
+Be prepared if it comes to\n\
+that."))
 
 DEFINE_DIALOG(DIALOG_016, 1, 3, 30, 200, _("\
 Hop on the shiny shell and\n\
@@ -235,7 +217,7 @@ ride wherever you want to\n\
 go! Shred those enemies!"))
 
 DEFINE_DIALOG(DIALOG_017, 1, 4, 30, 200, _("\
-I'm the Big Bob-omb, lord\n\
+I'm the Big Bomb Omb, lord\n\
 of all blasting matter,\n\
 king of ka-booms the\n\
 world over!\n\
@@ -261,14 +243,12 @@ this royal turf? I think\n\
 that you cannot!"))
 
 DEFINE_DIALOG(DIALOG_018, 1, 4, 30, 200, _("\
-I'm sleeping because...\n\
-...I'm sleepy. I don't\n\
-like being disturbed.\n\
-Please walk quietly."))
+If you wake me up I will\n\
+aim for the balls.\n\
+I have work early tomorrow"))
 
 DEFINE_DIALOG(DIALOG_019, 1, 2, 30, 200, _("\
-Shhh! Please walk\n\
-quietly in the hallway!"))
+No running in the halls."))
 
 DEFINE_DIALOG(DIALOG_020, 1, 6, 95, 150, _("\
 Dear Mario:\n\
@@ -285,8 +265,7 @@ Chaos Based Torture 64\n\
 (CBT64)"))
 
 DEFINE_DIALOG(DIALOG_022, 1, 2, 95, 200, _("\
-You need a key to open\n\
-this door."))
+the door lock!!!"))
 
 DEFINE_DIALOG(DIALOG_023, 1, 3, 95, 200, _("\
 This key doesn't fit!\n\
@@ -294,42 +273,42 @@ Maybe it's for the\n\
 basement..."))
 
 DEFINE_DIALOG(DIALOG_024, 1, 5, 95, 200, _("\
-You need Star power to\n\
-open this door. Recover a\n\
-Power Star from an enemy\n\
-inside one of the castle's\n\
-paintings."))
+If you've ever played\n\
+a 3D mario before,\n\
+you'll know you need a\n\
+star in order to open\n\
+this door."))
 
 DEFINE_DIALOG(DIALOG_025, 1, 4, 95, 200, _("\
 It takes the power of\n\
-3 Stars to open this\n\
+3 Bars to open this\n\
 door. You need [%] more\n\
-Stars."))
+Bars."))
 
 DEFINE_DIALOG(DIALOG_026, 1, 4, 95, 200, _("\
 It takes the power of\n\
-8 Stars to open this\n\
+8 Cars to open this\n\
 door. You need [%] more\n\
-Stars."))
+Cars."))
 
 DEFINE_DIALOG(DIALOG_027, 1, 4, 95, 200, _("\
 It takes the power of\n\
-30 Stars to open this\n\
+30 Fars to open this\n\
 door. You need [%] more\n\
-Stars."))
+Fars."))
 
 DEFINE_DIALOG(DIALOG_028, 1, 4, 95, 200, _("\
 It takes the power of\n\
-50 Stars to open this\n\
-door. You need [%] more\n\
-Stars."))
+50 Grenades to open\n\
+this door. You need [%]\n\
+more Grenades."))
 
 DEFINE_DIALOG(DIALOG_029, 1, 5, 95, 200, _("\
 To open the door that\n\
 leads to the 『endless』\n\
 stairs, you need 70\n\
 Stars.\n\
-Bwa ha ha!"))
+nerd"))
 
 DEFINE_DIALOG(DIALOG_030, 1, 6, 30, 200, _("\
 BETA. BETA!!! BETA!!!\n\
@@ -478,7 +457,7 @@ opens."))
 DEFINE_DIALOG(DIALOG_039, 1, 4, 30, 200, _("\
 No visitors allowed,\n\
 by decree of\n\
-the Big Bob-omb\n\
+the Big Bomb Omb\n\
 \n\
 I shall never surrender my\n\
 Stars, for they hold the\n\
@@ -495,12 +474,12 @@ perhaps one hint:\n\
 Heed the Star names at\n\
 the beginning of the\n\
 course.\n\
-//--The Big Bob-omb"))
+//--The Big Bomb Omb"))
 
 DEFINE_DIALOG(DIALOG_040, 1, 3, 30, 200, _("\
-Warning!\n\
-Cold, Cold Crevasse\n\
-Below!"))
+If you fall off,\n\
+you are not entitled\n\
+for health insurance."))
 
 DEFINE_DIALOG(DIALOG_041, 1, 3, 30, 200, _("\
 I win! You lose!\n\
@@ -562,40 +541,18 @@ That's it for now. Press\n\
 bye byyyyyyeeee!"))
 
 DEFINE_DIALOG(DIALOG_046, 1, 5, 30, 200, _("\
-You have to master three\n\
-important jumping\n\
-techniques.\n\
-First try the Triple Jump.\n\
-\n\
-Run fast, then jump three\n\
-times, one, two, three.\n\
-If you time the jumps\n\
-right, you'll hop, skip,\n\
-then jump really high.\n\
-Next, go for distance\n\
-with the Long Jump. Run,\n\
-press [Z] to crouch then [A]\n\
-to jump really far.\n\
-\n\
-To do the Wall Kick, press\n\
-[A] to jump at a wall, then\n\
-jump again when you hit\n\
-the wall.\n\
-\n\
-Got that? Triple Jump,\n\
-Long Jump, Wall Kick.\n\
-Practice, practice,\n\
-practice. You don't stand\n\
-a chance without them."))
+Sorry if you wanted\n\
+to learn how to triple\n\
+jump, you have to\n\
+google it."))
 
 DEFINE_DIALOG(DIALOG_047, 1, 2, 95, 200, _("\
-Hi! I'll prepare the\n\
-cannon for you!"))
+Quagmire!"))
 
 DEFINE_DIALOG(DIALOG_048, 1, 4, 30, 200, _("\
-Snow Mountain Summit\n\
-Watch for slippery\n\
-conditions! Please enter\n\
+Hot Mountain summit\n\
+Watch for volcanic\n\
+rocks! Please enter\n\
 the cottage first."))
 
 DEFINE_DIALOG(DIALOG_049, 1, 5, 30, 200, _("\
@@ -707,7 +664,7 @@ beak...) I just can't\n\
 remember where I left\n\
 her.\n\
 Let's see...I stopped\n\
-for herring and ice cubes,\n\
+for herring and lava cubes,\n\
 then I...oohh! I just\n\
 don't know!"))
 
@@ -758,9 +715,9 @@ the edge of the water to\n\
 jump out."))
 
 DEFINE_DIALOG(DIALOG_061, 1, 4, 30, 200, _("\
-BRRR! Frostbite Danger!\n\
-Do not swim here.\n\
-I'm serious.\n\
+BRRR! Warm Water!\n\
+You can swim here.\n\
+Lmao.\n\
 /--The Penguin"))
 
 DEFINE_DIALOG(DIALOG_062, 1, 3, 30, 200, _("\
@@ -1267,27 +1224,17 @@ all 8 Red Coins, the Star\n\
 will appear here."))
 
 DEFINE_DIALOG(DIALOG_105, 1, 3, 95, 200, _("\
-Ready for blastoff! Come\n\
-on, hop into the cannon!\n\
-\n\
-You can reach the Star on\n\
-the floating island by\n\
-using the four cannons.\n\
-Use the Control Stick to\n\
-aim, then press [A] to fire.\n\
-\n\
-If you're handy, you can\n\
-grab on to trees or poles\n\
-to land."))
+Sorry i wanted a\n\
+callback"))
 
 DEFINE_DIALOG(DIALOG_106, 1, 2, 95, 200, _("\
-Ready for blastoff! Come\n\
-on, hop into the cannon!"))
+Sorry i wanted a\n\
+callback"))
 
 DEFINE_DIALOG(DIALOG_107, 1, 3, 95, 200, _("\
 Ghosts...\n\
 ...don't...\n\
-...DIE!\n\
+...POOP!\n\
 Heh, heh, heh!\n\
 Can you get out of here...\n\
 ...alive?"))
@@ -1319,10 +1266,7 @@ body? Please! I'll follow\n\
 you if you do!"))
 
 DEFINE_DIALOG(DIALOG_111, 1, 4, 95, 200, _("\
-Perfect! What a great\n\
-new body! Here--this is a\n\
-present for you. It's sure\n\
-to warm you up."))
+you should never see this message :)"))
 
 DEFINE_DIALOG(DIALOG_112, 1, 4, 30, 200, _("\
 Collect as many coins as\n\
@@ -1375,7 +1319,7 @@ DEFINE_DIALOG(DIALOG_116, 1, 5, 95, 200, _("\
 Whaaa....Whaaat?\n\
 Can it be that a\n\
 pipsqueak like you has\n\
-defused the Bob-omb\n\
+defused the Bomb Omb\n\
 king????\n\
 You might be fast enough\n\
 to ground me, but you'll\n\
@@ -1393,16 +1337,117 @@ from the menu. For now,\n\
 farewell."))
 
 DEFINE_DIALOG(DIALOG_117, 1, 1, 95, 200, _("\
-Who...walk...here?\n\
-Who...break...seal?\n\
-Wake..ancient..ones?\n\
-We no like light...\n\
-Rrrrummbbble...\n\
-We no like...intruders!\n\
-Now battle...\n\
-...hand...\n\
-...to...\n\
-...hand!"))
+Wouldn't it be funny\n\
+if this dialog was\n\
+so long that \n\
+a code triggers while\n\
+you read it\n\
+likely killing you?\n\
+anyways I'm going\n\
+to count to 100\n\
+now\n\
+1\n\
+2\n\
+3\n\
+4\n\
+5\n\
+6\n\
+7\n\
+8\n\
+9\n\
+10\n\
+11\n\
+12\n\
+13\n\
+14\n\
+15\n\
+16\n\
+17\n\
+18\n\
+19\n\
+20\n\
+21\n\
+22\n\
+23\n\
+24\n\
+25\n\
+26\n\
+27\n\
+28\n\
+29\n\
+30\n\
+31\n\
+32\n\
+33\n\
+34\n\
+35\n\
+36\n\
+37\n\
+38\n\
+39\n\
+40\n\
+41\n\
+42\n\
+43\n\
+44\n\
+45\n\
+46\n\
+47\n\
+48\n\
+49\n\
+50\n\
+51\n\
+52\n\
+53\n\
+54\n\
+55\n\
+56\n\
+57\n\
+58\n\
+59\n\
+60\n\
+61\n\
+62\n\
+63\n\
+64\n\
+65\n\
+66\n\
+67\n\
+68\n\
+69\n\
+70\n\
+71\n\
+72\n\
+73\n\
+74\n\
+75\n\
+76\n\
+77\n\
+78\n\
+79\n\
+80\n\
+81\n\
+82\n\
+83\n\
+84\n\
+85\n\
+86\n\
+87\n\
+88\n\
+89\n\
+90\n\
+91\n\
+92\n\
+93\n\
+94\n\
+95\n\
+96\n\
+97\n\
+98\n\
+99\n\
+100\n\
+Oh wow you're\n\
+still alive?"))
 
 DEFINE_DIALOG(DIALOG_118, 1, 6, 95, 200, _("\
 Grrrrumbbble!\n\
@@ -1445,19 +1490,11 @@ I'll be waiting!\n\
 Gwa ha ha ha!"))
 
 DEFINE_DIALOG(DIALOG_121, 1, 5, 30, 200, _("\
-Nooo! It can't be!\n\
-You've really beaten me,\n\
-Mario?!! I gave those\n\
-troops power, but now\n\
-it's fading away!\n\
-Arrgghh! I can see peace\n\
-returning to the world! I\n\
-can't stand it! Hmmm...\n\
-It's not over yet...\n\
-\n\
-C'mon troops! Let's watch\n\
-the ending together!\n\
-Bwa ha ha!"))
+what do you even\n\
+want with peach its\n\
+not like you can\n\
+get an errection\n\
+anyways"))
 
 DEFINE_DIALOG(DIALOG_122, 1, 4, 30, 200, _("\
 The Black Hole\n\
@@ -1561,35 +1598,18 @@ disqualified! Next time,\n\
 play fair!"))
 
 DEFINE_DIALOG(DIALOG_133, 1, 6, 30, 200, _("\
-Am I glad to see you! The\n\
-Princess...and I...and,\n\
-well, everybody...we're all\n\
-trapped inside the castle\n\
-walls.\n\
+I got here late today\n\
+apparently, something\n\
+big happened, but I\n\
+don't know what.\n\
 \n\
-Bowser has stolen the\n\
-castle's Stars, and he's\n\
-using their power to\n\
-create his own world in\n\
-the paintings and walls.\n\
 \n\
-Please recover the Power\n\
-Stars! As you find them,\n\
-you can use their power\n\
-to open the doors that\n\
-Bowser has sealed.\n\
-\n\
-There are four rooms on\n\
-the first floor. Start in\n\
-the one with the painting\n\
-of Bob-omb inside. It's\n\
-the only room that Bowser\n\
-hasn't sealed.\n\
-When you collect eight\n\
-Power Stars, you'll be\n\
-able to open the door\n\
-with the big star. The\n\
-Princess must be inside!"))
+Haven't seen anybody\n\
+else, was it a bank\n\
+holiday and I didn't\n\
+notice? I'll be so\n\
+mad, I could've been\n\
+at home playing SM64."))
 
 DEFINE_DIALOG(DIALOG_134, 1, 5, 30, 200, _("\
 The names of the Stars\n\
@@ -1696,21 +1716,15 @@ Left: Black Hole\n\
 Arrow: You are here"))
 
 DEFINE_DIALOG(DIALOG_141, 1, 5, 150, 200, _("\
-You've recovered one of\n\
-the stolen Power Stars!\n\
-Now you can open some of\n\
-the sealed doors in the\n\
-castle.\n\
-Try the Princess's room\n\
-on the second floor and\n\
-the room with the\n\
-painting of Whomp's\n\
-Fortress on Floor 1.\n\
-Bowser's troops are still\n\
-gaining power, so you\n\
-can't give up. Save us,\n\
-Mario! Keep searching for\n\
-Stars!"))
+Power stars are really\n\
+important. They are used\n\
+to unlock doors that have\n\
+been sealed by bow bow.\n\
+\n\
+Collect more to open more\n\
+doors. Also check the \n\
+lost and found, I'm sick\n\
+of finding them there."))
 
 DEFINE_DIALOG(DIALOG_142, 1, 5, 150, 200, _("\
 You've recovered three\n\
@@ -1718,62 +1732,31 @@ Power Stars! Now you can\n\
 open any door with a 3\n\
 on its star.\n\
 \n\
-You can come and go from\n\
-the open courses as you\n\
-please. The enemies ahead\n\
-are even meaner, so be\n\
-careful!"))
+Fazana had to get Reonu\n\
+to help with this one,\n\
+they can't count that high."))
 
 DEFINE_DIALOG(DIALOG_143, 1, 6, 150, 200, _("\
-You've recovered eight of\n\
-the Power Stars! Now you\n\
-can open the door with\n\
-the big Star! But Bowser\n\
-is just ahead...can you\n\
-hear the Princess calling?"))
+kill bowser he's stupid"))
 
-DEFINE_DIALOG(DIALOG_144, 1, 6, 150, 200, _("\
-You've recovered 30\n\
-Power Stars! Now you can\n\
-open the door with the\n\
-big Star! But before you\n\
-move on, how's it going\n\
-otherwise?\n\
-Did you pound the two\n\
-columns down? You didn't\n\
-lose your hat, did you?\n\
-If you did, you'll have to\n\
-stomp on the condor to\n\
-get it back!\n\
-They say that Bowser has\n\
-sneaked out of the sea\n\
-and into the underground.\n\
-Have you finally\n\
-cornered him?"))
+DEFINE_DIALOG(DIALOG_144, 1, 3, 150, 200, _("\
+You've unlocked DDD!\n\
+My favourite course!\n\
+Yay! :D"))
 
-DEFINE_DIALOG(DIALOG_145, 1, 6, 150, 200, _("\
-You've recovered 50\n\
-Power Stars! Now you can\n\
-open the Star Door on the\n\
-third floor. Bowser's\n\
-there, you know.\n\
+DEFINE_DIALOG(DIALOG_145, 1, 5, 150, 200, _("\
+its pretty funny the\n\
+game reminds you to\n\
+get the caps unlocked\n\
+here.\n\
 \n\
-Oh! You've found all of\n\
-the Cap Switches, haven't\n\
-you? Red, green and blue?\n\
-The Caps you get from the\n\
-colored blocks are really\n\
-helpful.\n\
-Hurry along, now. The\n\
-third floor is just ahead."))
+btw have you unlocked\n\
+all the cap switches?"))
 
 DEFINE_DIALOG(DIALOG_146, 1, 6, 150, 200, _("\
-You've found 70 Power\n\
-Stars! The mystery of the\n\
-endless stairs is solved,\n\
-thanks to you--and is\n\
-Bowser ever upset! Now,\n\
-on to the final bout!"))
+you don't have to\n\
+BLJ up the stairs\n\
+anymore"))
 
 DEFINE_DIALOG(DIALOG_147, 1, 5, 30, 200, _("\
 Are you using the Cap\n\
@@ -1798,18 +1781,10 @@ Cap, blue for the Vanish\n\
 Cap."))
 
 DEFINE_DIALOG(DIALOG_148, 1, 6, 30, 200, _("\
-Snowman Mountain ahead.\n\
+Sandman Mountain ahead.\n\
 Keep out! And don't try\n\
 the Triple Jump over the\n\
-ice block shooter.\n\
-\n\
-\n\
-If you fall into the\n\
-freezing pond, your power\n\
-decreases quickly, and\n\
-you won't recover\n\
-automatically.\n\
-//--The Snowman"))
+block shooter."))
 
 DEFINE_DIALOG(DIALOG_149, 1, 3, 30, 200, _("\
 Welcome to\n\
@@ -1863,20 +1838,11 @@ bugging me! I think I'll\n\
 blow it!"))
 
 DEFINE_DIALOG(DIALOG_154, 1, 5, 30, 200, _("\
-Hold on to your hat! If\n\
-you lose it, you'll be\n\
-easily injured. If you\n\
-lose it, look for it in the\n\
-course where you lost it.\n\
-Speaking of lost, the\n\
-Princess is still stuck in\n\
-the walls somewhere.\n\
-Please help, Mario!\n\
-\n\
-Oh, you know that there\n\
-are secret worlds in the\n\
-walls as well as in the\n\
-paintings, right?"))
+If you lose your hat,\n\
+you take extra damage\n\
+because of how cringe\n\
+everybody thinks you\n\
+look. Don't lose it!"))
 
 DEFINE_DIALOG(DIALOG_155, 1, 6, 30, 200, _("\
 Thanks to the power of\n\
@@ -1906,10 +1872,10 @@ the big hand!"))
 DEFINE_DIALOG(DIALOG_157, 1, 5, 30, 200, _("\
 Watch out! Don't let\n\
 yourself be swallowed by\n\
-quicksand.\n\
+snow.\n\
 \n\
 \n\
-If you sink into the sand,\n\
+If you sink into the snow,\n\
 you won't be able to\n\
 jump, and if your head\n\
 goes under, you'll be\n\
@@ -1956,29 +1922,13 @@ Enjoy!!!"
 #endif
 
 DEFINE_DIALOG(DIALOG_161, 1, 4, 30, 200, _("\
-Mario!!!\n\
-It that really you???\n\
-It has been so long since\n\
-our last adventure!\n\
-They told me that I might\n\
-see you if I waited here,\n\
-but I'd just about given\n\
-up hope!\n\
-Is it true? Have you\n\
-really beaten Bowser? And\n\
-restored the Stars to the\n\
-castle?\n\
-And saved the Princess?\n\
-I knew you could do it!\n\
-Now I have a very special\n\
-message for you.\n\
-『Thanks for playing Super\n\
-Mario 64! This is the\n\
-end of the game, but not\n\
-the end of the fun." \
-KEEP_ON_PLAYING "』\n\
+Wow you actually\n\
+took the time to\n\
+come talk to me?\n\
 \n\
-The Super Mario 64 Team"))
+neat. anyway ima\n\
+softlock your game\n\
+now lmao bye"))
 
 DEFINE_DIALOG(DIALOG_162, 1, 4, 30, 200, _("\
 No, no, no! Not you\n\
@@ -1995,31 +1945,11 @@ all. Now, I must be off.\n\
 Owww! Let me go!"))
 
 DEFINE_DIALOG(DIALOG_163, 1, 5, 30, 200, _("\
-Noooo! You've really\n\
-beaten me this time,\n\
-Mario! I can't stand\n\
-losing to you!\n\
-\n\
-My troops...worthless!\n\
-They've turned over all\n\
-the Power Stars! What?!\n\
-There are 117 in all???\n\
-\n\
-Amazing! There were some\n\
-in the castle that I\n\
-missed??!!\n\
-\n\
-\n\
-Now I see peace\n\
-returning to the world...\n\
-Oooo! I really hate that!\n\
-I can't watch--\n\
-I'm outta here!\n\
-Just you wait until next\n\
-time. Until then, keep\n\
-that Control Stick\n\
-smokin'!\n\
-Buwaa ha ha!"))
+what do you even\n\
+want with peach its\n\
+not like you can\n\
+get an errection\n\
+anyways"))
 
 DEFINE_DIALOG(DIALOG_164, 1, 4, 30, 200, _("\
 Mario! What's up, pal?\n\
@@ -2036,11 +1966,10 @@ Ready...set...\n\
 //Go//// Don't Go"))
 
 DEFINE_DIALOG(DIALOG_165, 1, 5, 30, 200, _("\
-I take no responsibility\n\
-whatsoever for those who\n\
-get dizzy and pass out\n\
-from running around\n\
-this post."))
+Is this a wooden post\n\
+or a poundable pole?\n\
+Please help my family\n\
+is starving."))
 
 DEFINE_DIALOG(DIALOG_166, 1, 4, 30, 200, _("\
 I'll be back soon.\n\

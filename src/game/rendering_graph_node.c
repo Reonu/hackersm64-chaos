@@ -63,6 +63,7 @@ f32 sAspectRatio;
 s32 sRenderPass;
 Vec3f gMarioHeadPos;
 Vec3s gMarioHeadRot;
+s32 sCurrentModel;
 
 struct GlobalFog gGlobalFog = {
     0xA1,
@@ -501,7 +502,7 @@ void geo_process_perspective(struct GraphNodePerspective *node) {
         // With low fovs, coordinate overflow can occur more easily. This slightly reduces precision only while zoomed in.
         f32 scale = node->fov < 28.0f ? remap(MAX(node->fov, 15), 15, 28, 0.5f, 1.0f): 1.0f;
         if (gChaosCodeTable[GLOBAL_CHAOS_ORTHO_CAM].active) {
-            guOrtho(mtx, -360.0f * sAspectRatio, 360.0f * sAspectRatio, -360.0f, 360.0f, node->near / WORLD_SCALE, node->far / WORLD_SCALE, 4.0f);
+            guOrtho(mtx, -360.0f * sAspectRatio, 360.0f * sAspectRatio, -360.0f, 360.0f, node->near / WORLD_SCALE, node->far / WORLD_SCALE, 10.0f);
         }
         else {  
             guPerspective(mtx, &perspNorm, node->fov, sAspectRatio, node->near / WORLD_SCALE, node->far / WORLD_SCALE, scale);
@@ -1119,7 +1120,7 @@ void geo_process_object(struct Object *node) {
         s32 noThrowMatrix = (node->header.gfx.throwMatrix == NULL);
         // Maintain throw matrix pointer if the game is paused as it won't be updated.
         Mat4 *oldThrowMatrix = (sCurrPlayMode == PLAY_MODE_PAUSED) ? node->header.gfx.throwMatrix : NULL;
-
+        sCurrentModel = obj_get_model_id(node);
         // If the throw matrix is null and the object is invisible, there is no need
         // to update billboarding, scale, rotation, etc. 
         // This still updates translation since it is needed for sound.
@@ -1338,6 +1339,7 @@ void carpet_update(void);
  * to set up the projection and draw display lists.
  */
 void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) {
+    sCurrentModel = -1;
     if (node->node.flags & GRAPH_RENDER_ACTIVE) {
         Mtx *initialMatrix;
         Vp *viewport[2];
@@ -1421,6 +1423,7 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
     #endif
 
         }
+        gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, gScreenWidth, gScreenHeight);
         main_pool_free(gDisplayListHeap);
         if (gChaosCodeTable[GLOBAL_CHAOS_DIM_LIGHTS].active) {
             prepare_blank_box();
@@ -1432,4 +1435,5 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
             render_fb_effects();
         }
     }
+    sCurrentModel = -1;
 }

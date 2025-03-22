@@ -16,6 +16,7 @@
 #include "rendering_graph_node.h"
 #include "save_file.h"
 #include "segment2.h"
+#include "chaos_codes.h"
 
 /**
  * @file geo_misc.c
@@ -154,6 +155,13 @@ Gfx *geo_exec_cake_end_screen(s32 callContext, struct GraphNode *node, UNUSED Ma
     struct GraphNodeGenerated *generatedNode = (struct GraphNodeGenerated *) node;
     Gfx *displayList = NULL;
     Gfx *displayListHead = NULL;
+                s32 isRetro = gChaosCodeTable[GLOBAL_CHAOS_RETRO].active;
+                chaos_clear_global();
+                if (isRetro) {
+                    gChaosCodeTable[GLOBAL_CHAOS_RETRO].active = TRUE;
+                    gChaosCodeTable[GLOBAL_CHAOS_RETRO].timer = 1;
+                }
+                gChaosOffOverride = TRUE;
 
     if (callContext == GEO_CONTEXT_RENDER) {
         displayList = alloc_display_list(3 * sizeof(*displayList));
