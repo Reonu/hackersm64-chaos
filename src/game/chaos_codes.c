@@ -966,11 +966,7 @@ ChaosCode gCCMChaosTable[] = {
 };
 
 ChaosCode gWFChaosTable[] = {
-<<<<<<< HEAD
     {"WF Betah Invasion", chaos_generic, 25, 30, 60, 0,   /*ignore these*/ 0, 0},
-=======
-    {"WF Betah Invasion", chaos_generic, 60, 15, 45, 0,   /*ignore these*/ 0, 0},
->>>>>>> c1e835b8f217d0674cc63a21fda8bb0891f6cbf8
 };
 
 ChaosCode gBoBChaosTable[] = {
