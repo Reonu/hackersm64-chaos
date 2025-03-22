@@ -901,7 +901,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Randomize Coin Colors", chaos_generic, 100, 30, 45, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"Coin Cutscenes", chaos_generic, 100, 30, 45, CODEFLAG_MINOR,   /*ignore these*/ 0, 0},
     {"All jumps are triple", chaos_generic, 100, 15, 45, 0,   /*ignore these*/ 0, 0},
-    {"Delete Nearby Objects", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
+    {"Delete Nearby Objects", chaos_generic, 40, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Invert Dive and Kick", chaos_generic, 100, 15, 30, 0,   /*ignore these*/ 0, 0},
     {"Live Mario Reaction", chaos_generic, 100, 30, 45, 0,   /*ignore these*/ 0, 0},
     {"Ad Spam", chaos_ad, 100, 0, 0, CODEFLAG_SCREEN,   /*ignore these*/ 0, 0},
@@ -928,7 +928,7 @@ ChaosCode gChaosCodeTable[] = {
     {"Random Spin", chaos_spinflower, 100, 0, 0, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Long Jump GP", chaos_next_long_jump_gp, 100, 1, 2, 0,  /*ignore these*/ 0, 0},
     {"Random Jump", chaos_random_jump, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
-    {"Mario Random Bank", chaos_generic, 100, 30, 60, CODEFLAG_AUDIO,  /*ignore these*/ 0, 0},
+    {"Mario Random Bank", chaos_generic, 70, 15, 30, CODEFLAG_AUDIO,  /*ignore these*/ 0, 0},
     {"Chuckya on Object Deletion", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
     {"FoV based on fvel", chaos_generic, 100, 30, 60, CODEFLAG_CAMERA,  /*ignore these*/ 0, 0},
     {"All Ceilings Hangable", chaos_generic, 100, 60, 120, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
@@ -936,10 +936,10 @@ ChaosCode gChaosCodeTable[] = {
     {"Amp", chaos_amp, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Coins Remove Coins", chaos_generic, 75, 20, 30, 0,  /*ignore these*/ 0, 0},
     {"Random object scale", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
-    {"Objects flee Mario", chaos_generic, 100, 30, 60, 0,  /*ignore these*/ 0, 0},
+    {"Objects flee Mario", chaos_generic, 60, 15, 35, 0,  /*ignore these*/ 0, 0},
     {"Ethel the Cat", chaos_ethel, 100, 14, 15, 0,  /*ignore these*/ 0, 0}, // the code lasts for the duration of time the cat takes to despawn, do not change
-    {"Mario Gravitation", chaos_generic, 60, 20, 30, 0,  /*ignore these*/ 0, 0},
-    {"Hurricane", chaos_generic, 30, 15, 20, 0,  /*ignore these*/ 0, 0},
+    {"Mario Gravitation", chaos_generic, 35, 20, 30, 0,  /*ignore these*/ 0, 0},
+    {"Hurricane", chaos_generic, 20, 15, 20, 0,  /*ignore these*/ 0, 0},
     {"Mario Dabs", chaos_dab, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Swap Coins with Moneybags", chaos_moneybags, 100, 1, 2, CODEFLAG_MINOR,  /*ignore these*/ 0, 0},
     {"Spawn King BobOmb", chaos_spawn_king_bobomb, 20, 1, 2, 0,  /*ignore these*/ 0, 0},
@@ -950,12 +950,12 @@ ChaosCode gChaosCodeTable[] = {
 };
 
 ChaosCode gCCMChaosTable[] = {
-    {"CCM Volcano Rocks", chaos_ccm_rocks_from_volcano, 100, 20, 35, 0,   /*ignore these*/ 0, 0},
-    {"CCM Spawn Penguins", chaos_ccm_spawn_penguins, 100, 5, 7, 0,   /*ignore these*/ 0, 0},
+    {"CCM Volcano Rocks", chaos_ccm_rocks_from_volcano, 80, 20, 35, 0,   /*ignore these*/ 0, 0},
+    {"CCM Spawn Penguins", chaos_ccm_spawn_penguins, 80, 5, 7, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gWFChaosTable[] = {
-    {"WF Betah Invasion", chaos_generic, 100, 30, 60, 0,   /*ignore these*/ 0, 0},
+    {"WF Betah Invasion", chaos_generic, 25, 30, 60, 0,   /*ignore these*/ 0, 0},
 };
 
 ChaosCode gBoBChaosTable[] = {
